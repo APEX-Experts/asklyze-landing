@@ -37,6 +37,18 @@ export const metadata: Metadata = {
             "Transform your Oracle APEX into an intelligent analytics center.",
         type: "website",
     },
+    icons: {
+        icon: [
+            {
+                url: "/favicon-light.png",
+                media: "(prefers-color-scheme: light)",
+            },
+            {
+                url: "/favicon-dark.png",
+                media: "(prefers-color-scheme: dark)",
+            },
+        ],
+    },
 };
 
 export async function generateStaticParams() {
