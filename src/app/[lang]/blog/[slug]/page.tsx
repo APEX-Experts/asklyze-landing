@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <div className="max-w-4xl mx-auto text-center">
                     <span className="inline-block px-3 py-1 bg-coral-100 text-coral-600 rounded-full text-sm font-medium mb-4">
-                        {category}
+                        {dict.blog.topics[category as keyof typeof dict.blog.topics] || category}
                     </span>
                     <h1 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 leading-tight">
                         {post.title}

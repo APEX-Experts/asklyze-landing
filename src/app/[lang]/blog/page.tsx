@@ -137,7 +137,7 @@ export default async function BlogPage({
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {posts.map((post, index) => (
-                            <BlogCard key={post.id} post={post} delay={index * 0.1} />
+                            <BlogCard key={post.id} post={post} delay={index * 0.1} dict={dict.blog} />
                         ))}
                     </div>
 

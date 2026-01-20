@@ -9,9 +9,10 @@ import { User, Calendar } from "lucide-react";
 interface BlogCardProps {
     post: BlogPost;
     delay?: number;
+    dict: any;
 }
 
-export default function BlogCard({ post, delay = 0 }: BlogCardProps) {
+export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -29,7 +30,7 @@ export default function BlogCard({ post, delay = 0 }: BlogCardProps) {
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#ff705a] uppercase tracking-wide">
-                    {post.category}
+                    {dict.topics[post.category as keyof typeof dict.topics] || post.category}
                 </div>
             </div>
 
