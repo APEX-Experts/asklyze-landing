@@ -53,6 +53,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     // Based on schema, author is group-group, category is select (string).
     const authorName = post.author?.name || 'Unknown Author'
     const authorImage = post.author?.image || null
+    const authorJobTitle = post.author?.jobTitle || null
     const category = post.category || 'General'
 
     return (
@@ -82,6 +83,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         )}
                         <div className="text-left">
                             <p className="text-navy-900 font-medium">{authorName}</p>
+                            {authorJobTitle && <p className="text-slate-400 text-xs">{authorJobTitle}</p>}
                             <p className="text-slate-500 text-sm">
                                 {new Date(post.publishedDate).toLocaleDateString('en-US', {
                                     year: 'numeric',

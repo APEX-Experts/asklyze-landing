@@ -65,6 +65,7 @@ export default async function BlogPage({
         author: {
             name: doc.author?.name || 'Unknown',
             image: doc.author?.image || 'https://i.pravatar.cc/150?u=unknown',
+            jobTitle: doc.author?.jobTitle,
         },
         date: new Date(doc.publishedDate).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
         image: doc.image,

@@ -39,7 +39,10 @@ export default function BlogCard({ post, delay = 0 }: BlogCardProps) {
                 <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
                     <div className="flex items-center gap-1">
                         <User size={14} className="text-[#ff705a]" />
-                        <span>{post.author.name}</span>
+                        <div className="flex flex-col">
+                            <span className="font-medium">{post.author.name}</span>
+                            {post.author.jobTitle && <span className="text-[10px] opacity-70 leading-none">{post.author.jobTitle}</span>}
+                        </div>
                     </div>
                     <div className="flex items-center gap-1">
                         <Calendar size={14} className="text-[#ff705a]" />

@@ -42,6 +42,11 @@ export const Posts: CollectionConfig = {
                     type: 'text', // Simple URL for now to match current mock data style
                     label: 'Author Avatar URL',
                 },
+                {
+                    name: 'jobTitle',
+                    type: 'text',
+                    label: 'Author Job Title',
+                },
             ],
         },
         {

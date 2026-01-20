@@ -7,6 +7,7 @@ export interface BlogPost {
     author: {
         name: string;
         image: string;
+        jobTitle?: string;
     };
     date: string;
     image: string;
