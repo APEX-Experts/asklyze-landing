@@ -70,6 +70,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         {post.title}
                     </h1>
 
+                    <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500 mb-8 border-b border-slate-100 pb-8">
+                        <Link href={`/${lang}`} className="hover:text-coral-500 transition-colors">{dict.blog.breadcrumbHome}</Link>
+                        <span>•</span>
+                        <Link href={`/${lang}/blog`} className="hover:text-coral-500 transition-colors">{dict.blog.breadcrumbBlog}</Link>
+                        <span>•</span>
+                        <Link
+                            href={`/${lang}/blog?topic=${category}`}
+                            className="hover:text-coral-500 transition-colors"
+                        >
+                            {dict.blog.topics[category as keyof typeof dict.blog.topics] || category}
+                        </Link>
+                    </div>
+
                     <div className="flex items-center justify-center space-x-4 mb-4">
                         {authorImage && (
                             <div className="relative w-12 h-12 rounded-full overflow-hidden bg-slate-200">
