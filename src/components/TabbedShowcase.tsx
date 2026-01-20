@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface TabbedShowcaseProps {
     dict: {
@@ -15,13 +15,6 @@ interface TabbedShowcaseProps {
 export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
     const [activeTab, setActiveTab] = useState(0);
 
-    const [barHeights, setBarHeights] = useState<number[]>([]);
-
-    // Generate random heights on client-side only to prevent hydration mismatch
-    useEffect(() => {
-        // eslint-disable-next-line
-        setBarHeights(Array.from({ length: 30 }, () => Math.random() * 100 + 20));
-    }, []);
 
     return (
         <section className="relative pt-[100px] pb-[200px] overflow-hidden">

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X, Cloud, Server } from "lucide-react";
+import { Check, Cloud, Server } from "lucide-react";
 
 interface PricingProps {
     dict: {

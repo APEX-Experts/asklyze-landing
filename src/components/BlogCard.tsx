@@ -9,7 +9,9 @@ import { User, Calendar } from "lucide-react";
 interface BlogCardProps {
     post: BlogPost;
     delay?: number;
-    dict: any;
+    dict: {
+        topics: Record<string, string>;
+    };
 }
 
 export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
