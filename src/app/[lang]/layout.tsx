@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, Vazirmatn } from "next/font/google";
 import "../globals.css";
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -37,6 +38,13 @@ export const metadata: Metadata = {
             "Transform your Oracle APEX into an intelligent analytics center.",
         type: "website",
     },
+    alternates: {
+        canonical: "https://asklyze.com/en",
+        languages: {
+            'en': 'https://asklyze.com/en',
+            'ar': 'https://asklyze.com/ar',
+        },
+    },
     icons: {
         icon: [
             {
@@ -66,6 +74,9 @@ export default async function RootLayout({
     const isArabic = lang === "ar";
     return (
         <html lang={lang} dir={isArabic ? "rtl" : "ltr"} className={`${playfair.variable} ${inter.variable} ${vazirmatn.variable}`} suppressHydrationWarning>
+            <head>
+                <SchemaMarkup lang={lang} />
+            </head>
             <body
                 style={{
                     fontFamily: isArabic ? "var(--font-vazirmatn), system-ui, sans-serif" : "var(--font-inter), system-ui, sans-serif",
