@@ -14,6 +14,7 @@ interface HeroProps {
         description: string;
         getStarted: string;
         watchDemo: string;
+        watchDemoUrl: string;
         statTables: string;
         statCharts: string;
         statResponse: string;
@@ -243,7 +244,7 @@ export default function Hero({ dict }: HeroProps) {
             <VideoModal
                 isOpen={isVideoModalOpen}
                 onClose={() => setIsVideoModalOpen(false)}
-                videoSrc="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4"
+                videoSrc={dict.watchDemoUrl}
             />
         </section>
     );
