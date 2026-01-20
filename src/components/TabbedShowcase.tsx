@@ -128,7 +128,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                         ) : activeTab === 3 ? (
                             <div className="w-full h-full bg-black">
                                 <video
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.dev/step4.mp4"
+                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step4.mp4"
                                     autoPlay
                                     loop
                                     muted
