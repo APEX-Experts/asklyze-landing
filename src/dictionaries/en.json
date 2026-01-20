@@ -1,0 +1,248 @@
+{
+    "navbar": {
+        "home": "Home",
+        "features": "Features",
+        "pricing": "Pricing",
+        "blog": "Blog",
+        "contact": "Contact",
+        "getStarted": "Get Started"
+    },
+    "hero": {
+        "badge": "🚀 The Future of Data Analytics for Oracle APEX",
+        "titleBeforeSpan": "Transform Oracle APEX into an",
+        "titleSpan": "AI-Powered Analytics Hub",
+        "description": "True Data Democratization. Zero Data Movement. Move from Manual SQL to Natural Language in seconds.",
+        "getStarted": "Get Started",
+        "watchDemo": "Watch Demo",
+        "statTables": "Tables",
+        "statCharts": "Charts",
+        "statResponse": "Response",
+        "cardQuerySuccess": "Query Success",
+        "cardResponseTime": "1.2s response time",
+        "cardDataSovereignty": "Data Sovereignty"
+    },
+    "workingProcess": {
+        "title": "Working Process",
+        "subtitle": "How does Asklyze work?",
+        "step1Title": "1. Whitelist Tables",
+        "step1Desc": "Define your safe scope. Select schemas and tables to expose to AI (supporting 1000+ tables).",
+        "step2Title": "2. Build Metadata",
+        "step2Desc": "Automatic relationship analysis. The engine identifies Foreign Keys and optimizes joins automatically.",
+        "step3Title": "3. AI Context",
+        "step3Desc": "Generate intelligent descriptions. Give the AI business context beyond just technical table names."
+    },
+    "contact": {
+        "locationTitle": "Our Location",
+        "locationLines": [
+            "Washington Fulton Street,",
+            "Suite 640 New York, NY 10010"
+        ],
+        "emailTitle": "Email Us",
+        "callTitle": "Call Us",
+        "followTitle": "Follow Us",
+        "followDesc": "Stay connected with us on social media for updates and news."
+    },
+    "contactHero": {
+        "title": "Get in Touch",
+        "desc": "Have questions about ASKLYZE? Our team of Oracle APEX and AI experts is ready to help you transform your data strategy."
+    },
+    "featureGrid": {
+        "tag": "Our Features",
+        "title": "Why Choose ASKLYZE",
+        "desc": "Transform Oracle APEX into an AI-powered analytics center with our simple 3-step setup process and enterprise-grade features.",
+        "features": [
+            {
+                "title": "Natural Language to SQL",
+                "desc": "Bridge the technical gap. Move from manual SQL coding to natural language questions for instant insights."
+            },
+            {
+                "title": "Zero Data Movement",
+                "desc": "Logic executes locally via our native Plugin. Your sensitive data never leaves your Oracle environment."
+            },
+            {
+                "title": "Enterprise Security",
+                "desc": "Integrated with Oracle VPD and Row-Level Security. Compliance is built-in, not an afterthought."
+            },
+            {
+                "title": "Flexible Deployment",
+                "desc": "Choose On-Premise for sovereignty or SaaS via ORDS for scalability. Supports Oracle 19c & 23ai."
+            },
+            {
+                "title": "Smart Visualization",
+                "desc": "22+ chart types with ECharts. Combo charts, multi-series support, and AI-generated narratives."
+            },
+            {
+                "title": "Intent Detection",
+                "desc": "Advanced NLP tags queries as REPORT, ANALYTICS, or TRENDING to deliver the perfect response format."
+            }
+        ]
+    },
+    "contentSplit": {
+        "section1": {
+            "title": "Native APEX Integration.",
+            "desc": "Built as a native Plugin that executes queries locally. We bridge the gap between complex database structures and executive decision-making without moving a single byte of data.",
+            "cta": "Try It Live",
+            "badgeTitle": "Plug & Play",
+            "badgeTime": "In 0.5 seconds"
+        },
+        "section2": {
+            "title": "Audit & Compliance.",
+            "desc": "Every query is logged in the ASKLYZE_AI_QUERY_STORE. Use these logs for performance monitoring, compliance auditing, and refining AI responses over time.",
+            "cta": "Learn More",
+            "features": [
+                "Zero Data Movement",
+                "Role-Based Access Control",
+                "24/7 Enterprise Support"
+            ]
+        }
+    },
+    "tabbedShowcase": {
+        "tag": "Unified Analytics",
+        "title": "Everything you need to master your data",
+        "tabs": [
+            "Ask your question",
+            "AI Data Generation",
+            "Dashboard Builder",
+            "Customize Dashboard"
+        ],
+        "dashboard": "Dashboard"
+    },
+    "testimonials": {
+        "tag": "Testimonial",
+        "title": "What our client say about us",
+        "list": [
+            {
+                "text": "The natural language query feature helped our non-technical staff get insights immediately. It's truly a game changer for Oracle APEX.",
+                "name": "Sarah Jenkins",
+                "role": "Data Analyst"
+            },
+            {
+                "text": "We integrated ASKLYZE with our Oracle APEX apps in under an hour. The security features are top-notch and comply with our enterprise standards.",
+                "name": "Michael Chen",
+                "role": "CTO"
+            },
+            {
+                "text": "Fantastic tools and excellent support. The zero data movement architecture gave us the confidence to use AI with our sensitive data.",
+                "name": "Desmond Eagle",
+                "role": "IT Director"
+            }
+        ]
+    },
+    "faq": {
+        "tag": "Frequently Ask Question",
+        "title": "Want to ask something from us?",
+        "cta": "Explore Forum",
+        "categories": [
+            "Service",
+            "General",
+            "Technical",
+            "Security"
+        ],
+        "list": [
+            {
+                "question": "How is ASKLYZE deployed?",
+                "answer": "We offer two models: 'On-Premise' for complete data sovereignty (ideal for government/banking) and 'SaaS' via ORDS for rapid deployment in multi-tenant environments."
+            },
+            {
+                "question": "Is it compatible with my Oracle version?",
+                "answer": "Yes, ASKLYZE is fully compatible with Oracle 19c and ready for the advanced capabilities of Oracle 23ai, ensuring long-term infrastructure sustainability."
+            },
+            {
+                "question": "Does my data leave the server?",
+                "answer": "Absolutely not. Our 'Zero Data Movement' architecture ensures that the AI acts only as a logic layer. Usage data is processed, but your core business data remains 100% within your local Oracle environment."
+            },
+            {
+                "question": "Can it handle complex pricing/queries?",
+                "answer": "Yes. The 'Intent Detection' engine categorizes queries (Report, Analytics, Trending) and supports advanced logic like Year-over-Year growth and complex join conditions."
+            }
+        ]
+    },
+    "pricing": {
+        "tag": "Pricing Plans",
+        "title": "Choose Your Deployment",
+        "desc": "Flexible options for every enterprise. Cloud for convenience, On-Premise for complete control.",
+        "cta": "Get Started",
+        "recommended": "RECOMMENDED",
+        "trustNote": "All plans include Oracle Partnership support • 30-day money-back guarantee",
+        "plans": [
+            {
+                "name": "Cloud Plan",
+                "price": "$499",
+                "period": "/month",
+                "desc": "Perfect for growing teams",
+                "features": [
+                    "Natural Language to SQL Engine",
+                    "22+ Visualization Types",
+                    "Automatic AI Updates",
+                    "Auto-Scaling Infrastructure",
+                    "Arabic & English Support",
+                    "24/7 Priority Support",
+                    "On-Premise Deployment",
+                    "Custom Oracle Integration"
+                ]
+            },
+            {
+                "name": "On-Premise Plan",
+                "price": "$2,999",
+                "period": "/year",
+                "desc": "Enterprise data sovereignty",
+                "features": [
+                    "Natural Language to SQL Engine",
+                    "22+ Visualization Types",
+                    "Complete Data Sovereignty",
+                    "Oracle 19c & 23ai Compatible",
+                    "Arabic & English Support",
+                    "Row-Level Security (VPD)",
+                    "Local Infrastructure Control",
+                    "Custom Oracle Integration"
+                ]
+            }
+        ]
+    },
+    "gradientCTA": {
+        "title": "Experience the Future of Oracle APEX Analytics",
+        "desc": "Join hundreds of forward-thinking companies that are democratizing data access with ASKLYZE.",
+        "cta": "Free Consultation"
+    },
+    "footer": {
+        "company": "Company",
+        "services": "Services",
+        "digitalExperience": "Digital Experience",
+        "address": "Our Address",
+        "nycOffice": "Lavaca Street, Suite 24, Road Apt New York, USA",
+        "links": {
+            "features": "Features",
+            "dashboard": "Dashboard & Tool",
+            "portfolio": "Our Portfolio",
+            "about": "About Us",
+            "contact": "Get In Touch"
+        },
+        "rights": "All Rights Reserved Design by",
+        "bottomLinks": {
+            "privacy": "Privacy & Policy",
+            "faq": "Faq",
+            "terms": "Terms"
+        }
+    },
+    "blog": {
+        "title": "Latest News",
+        "titleHighlight": "News",
+        "description": "Insights, updates, and thoughts on AI, Oracle APEX, and the future of data analytics.",
+        "breadcrumbHome": "Home",
+        "breadcrumbBlog": "Blog",
+        "noPosts": "No posts found",
+        "inTopic": "in",
+        "adminLinkText": "Go to Admin",
+        "adminLinkPrefix": "to create one.",
+        "backToBlog": "Back to Blog",
+        "topics": {
+            "All": "All",
+            "Tutorial": "Tutorial",
+            "Industry Trends": "Industry Trends",
+            "Features": "Features",
+            "Security": "Security",
+            "Case Study": "Case Study",
+            "Product Update": "Product Update"
+        }
+    }
+}
