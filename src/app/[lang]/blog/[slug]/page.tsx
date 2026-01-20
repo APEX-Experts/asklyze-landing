@@ -22,9 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     if (!posts.docs.length) return { title: "Post Not Found" };
     const post = posts.docs[0];
+    const { lang } = await params;
+    const title = lang === 'ar' && post.titleAr ? post.titleAr : post.title;
 
     return {
-        title: `${post.title} | ASKLYZE Blog`,
+        title: `${title} | ASKLYZE Blog`,
         description: post.excerpt || `Read ${post.title} on the ASKLYZE blog.`,
     };
 }
@@ -36,6 +38,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
     const result = await payload.find({
         collection: 'posts',
+        locale: lang as 'en' | 'ar',
         where: {
             slug: {
                 equals: slug,
@@ -53,8 +56,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     // Based on schema, author is group-group, category is select (string).
     const authorName = post.author?.name || 'Unknown Author'
     const authorImage = post.author?.image || null
-    const authorJobTitle = post.author?.jobTitle || null
+    const authorJobTitle = lang === 'ar' && post.author?.jobTitleAr ? post.author?.jobTitleAr : (post.author?.jobTitle || null)
     const category = post.category || 'General'
+    const displayTitle = lang === 'ar' && post.titleAr ? post.titleAr : post.title
+    const displayContent = lang === 'ar' && post.contentAr ? post.contentAr : post.content
 
     return (
         <main className="min-h-screen bg-slate-50">
@@ -67,7 +72,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         {dict.blog.topics[category as keyof typeof dict.blog.topics] || category}
                     </span>
                     <h1 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 leading-tight">
-                        {post.title}
+                        {displayTitle}
                     </h1>
 
                     <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500 mb-8 border-b border-slate-100 pb-8">
@@ -98,7 +103,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             <p className="text-navy-900 font-medium">{authorName}</p>
                             {authorJobTitle && <p className="text-slate-400 text-xs">{authorJobTitle}</p>}
                             <p className="text-slate-500 text-sm">
-                                {new Date(post.publishedDate).toLocaleDateString('en-US', {
+                                {new Date(post.publishedDate).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
                                     year: 'numeric',
                                     month: 'long',
                                     day: 'numeric'
@@ -126,8 +131,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Content Body */}
             <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 prose prose-lg prose-slate prose-headings:text-navy-900 prose-a:text-coral-500">
-                {post.content && (
-                    <RichText data={post.content} />
+                {displayContent && (
+                    <RichText data={displayContent} />
                 )}
             </article>
 

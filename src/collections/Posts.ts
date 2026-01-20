@@ -12,6 +12,11 @@ export const Posts: CollectionConfig = {
             required: true,
         },
         {
+            name: 'titleAr',
+            label: 'Title (Arabic)',
+            type: 'text',
+        },
+        {
             name: 'slug',
             type: 'text',
             admin: {
@@ -47,6 +52,11 @@ export const Posts: CollectionConfig = {
                     type: 'text',
                     label: 'Author Job Title',
                 },
+                {
+                    name: 'jobTitleAr',
+                    type: 'text',
+                    label: 'Author Job Title (Arabic)',
+                },
             ],
         },
         {
@@ -74,7 +84,17 @@ export const Posts: CollectionConfig = {
             required: true,
         },
         {
+            name: 'excerptAr',
+            label: 'Excerpt (Arabic)',
+            type: 'textarea',
+        },
+        {
             name: 'content',
+            type: 'richText',
+        },
+        {
+            name: 'contentAr',
+            label: 'Content (Arabic)',
             type: 'richText',
         },
     ],

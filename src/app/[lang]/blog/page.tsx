@@ -56,6 +56,7 @@ export default async function BlogPage({
         sort: '-publishedDate',
         limit,
         page: currentPage,
+        locale: lang,
         where: selectedTopic ? {
             category: {
                 equals: selectedTopic
@@ -73,15 +74,15 @@ export default async function BlogPage({
     const posts: BlogPost[] = postsResult.docs.map((doc: any) => ({
         id: doc.id,
         slug: doc.slug,
-        title: doc.title,
-        excerpt: doc.excerpt,
+        title: lang === 'ar' && doc.titleAr ? doc.titleAr : doc.title,
+        excerpt: lang === 'ar' && doc.excerptAr ? doc.excerptAr : doc.excerpt,
         category: doc.category,
         author: {
             name: doc.author?.name || 'Unknown',
             image: doc.author?.image || 'https://i.pravatar.cc/150?u=unknown',
-            jobTitle: doc.author?.jobTitle,
+            jobTitle: lang === 'ar' && doc.author?.jobTitleAr ? doc.author?.jobTitleAr : doc.author?.jobTitle,
         },
-        date: new Date(doc.publishedDate).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
+        date: new Date(doc.publishedDate).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
         image: doc.image,
     }))
 
