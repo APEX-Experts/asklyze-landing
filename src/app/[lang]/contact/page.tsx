@@ -1,12 +1,17 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import ContactHero from "@/components/ContactHero";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
-export const metadata = {
-    title: "Contact Us - ASKLYZE",
-    description: "Get in touch with the ASKLYZE team. We'd love to hear from you and answer any questions you may have.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
+    return {
+        title: dict.metadata.contact.title,
+        description: dict.metadata.contact.description,
+    };
+}
 
 import { getDictionary } from "@/get-dictionary";
 

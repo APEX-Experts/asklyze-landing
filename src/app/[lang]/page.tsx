@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeatureGrid from "@/components/FeatureGrid";
@@ -10,6 +11,15 @@ import GradientCTA from "@/components/GradientCTA";
 import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
+    return {
+        title: dict.metadata.home.title,
+        description: dict.metadata.home.description,
+    };
+}
 
 export default async function Home({ params }: { params: Promise<{ lang: "en" | "ar" }> }) {
     const { lang } = await params;

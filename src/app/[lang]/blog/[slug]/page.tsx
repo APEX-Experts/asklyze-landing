@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,9 +8,26 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
+export const dynamic = 'force-dynamic'
+
 import { getDictionary } from "@/get-dictionary";
 
-export const dynamic = 'force-dynamic'
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const payload = await getPayload({ config });
+    const posts = await payload.find({
+        collection: "posts",
+        where: { slug: { equals: slug } },
+    });
+
+    if (!posts.docs.length) return { title: "Post Not Found" };
+    const post = posts.docs[0];
+
+    return {
+        title: `${post.title} | ASKLYZE Blog`,
+        description: post.excerpt || `Read ${post.title} on the ASKLYZE blog.`,
+    };
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string; lang: string }> }) {
     const { slug, lang } = await params

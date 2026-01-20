@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogCard from "@/components/BlogCard";
@@ -9,6 +10,15 @@ import { BlogPost } from "@/types/blog";
 export const dynamic = 'force-dynamic'
 
 import { getDictionary } from "@/get-dictionary";
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
+    const { lang } = await params;
+    const dict = await getDictionary(lang);
+    return {
+        title: dict.metadata.blog.title,
+        description: dict.metadata.blog.description,
+    };
+}
 
 export default async function BlogPage({
     searchParams,

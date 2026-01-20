@@ -244,5 +244,19 @@
             "Case Study": "Case Study",
             "Product Update": "Product Update"
         }
+    },
+    "metadata": {
+        "home": {
+            "title": "ASKLYZE | AI-Powered Analytics for Oracle APEX",
+            "description": "Transform Oracle APEX into an intelligent analytics center. Natural language queries, instant insights, zero data movement."
+        },
+        "blog": {
+            "title": "AI & Oracle APEX Insights | ASKLYZE Blog",
+            "description": "Insights, tutorials, and ecosystem updates on the intersection of AI, Oracle APEX, and the future of data analytics."
+        },
+        "contact": {
+            "title": "Contact Us | ASKLYZE - Get Expert Help",
+            "description": "Get in touch with the ASKLYZE team for expert guidance on AI-powered analytics and data sovereignty."
+        }
     }
 }
