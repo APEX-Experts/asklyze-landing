@@ -11,11 +11,25 @@ export const dynamic = 'force-dynamic'
 
 import { getDictionary } from "@/get-dictionary";
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
+export async function generateMetadata({
+    params,
+    searchParams
+}: {
+    params: Promise<{ lang: "en" | "ar" }>,
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}): Promise<Metadata> {
     const { lang } = await params;
+    const { topic } = await searchParams;
     const dict = await getDictionary(lang);
+
+    let title = dict.metadata.blog.title;
+    if (typeof topic === 'string' && topic !== 'All') {
+        const localizedTopic = dict.blog.topics[topic as keyof typeof dict.blog.topics] || topic;
+        title = `${localizedTopic} | ${dict.metadata.blog.title}`;
+    }
+
     return {
-        title: dict.metadata.blog.title,
+        title,
         description: dict.metadata.blog.description,
     };
 }
@@ -106,7 +120,17 @@ export default async function BlogPage({
                         <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500">
                             <Link href={`/${lang}`} className="hover:text-[#ff705a] transition-colors">{dict.blog.breadcrumbHome}</Link>
                             <span>•</span>
-                            <span className="text-[#ff705a]">{dict.blog.breadcrumbBlog}</span>
+                            <Link href={`/${lang}/blog`} className={`${!selectedTopic ? 'text-[#ff705a]' : 'hover:text-[#ff705a] transition-colors'}`}>
+                                {dict.blog.breadcrumbBlog}
+                            </Link>
+                            {selectedTopic && selectedTopic !== 'All' && (
+                                <>
+                                    <span>•</span>
+                                    <span className="text-[#ff705a]">
+                                        {dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}
+                                    </span>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
