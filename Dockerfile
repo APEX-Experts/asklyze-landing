@@ -4,7 +4,7 @@
 # =======================================
 # Stage 1: Dependencies
 # =======================================
-FROM node:20-alpine AS deps
+FROM node:22.17.0-alpine AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
 
@@ -20,7 +20,7 @@ RUN pnpm install --frozen-lockfile
 # =======================================
 # Stage 2: Builder
 # =======================================
-FROM node:20-alpine AS builder
+FROM node:22.17.0-alpine AS builder
 WORKDIR /app
 
 # Install pnpm
@@ -42,7 +42,7 @@ RUN pnpm build
 # =======================================
 # Stage 3: Runner (Production)
 # =======================================
-FROM node:20-alpine AS runner
+FROM node:22.17.0-alpine AS runner
 WORKDIR /app
 
 # Install pnpm
