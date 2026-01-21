@@ -26,4 +26,8 @@ export default buildConfig({
     },
   }),
   sharp,
+  localization: {
+    locales: ["en", "ar"],
+    defaultLocale: "en",
+  }
 });

@@ -24,7 +24,7 @@ export async function GET() {
                 title: post.title,
                 slug: post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
                 excerpt: post.excerpt,
-                category: post.category as 'Analytics' | 'AI' | 'Enterprise', // Explicitly cast to allowed options
+                category: post.category as "Tutorial" | "Industry Trends" | "Features" | "Security" | "Case Study" | "Product Update", // Explicitly cast to allowed options
                 publishedDate: new Date(post.date).toISOString(),
                 image: post.image,
                 author: {

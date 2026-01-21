@@ -27,7 +27,7 @@ const seed = async () => {
                     title: post.title,
                     slug: post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
                     excerpt: post.excerpt,
-                    category: post.category as 'Analytics' | 'AI' | 'Enterprise',
+                    category: post.category as "Tutorial" | "Industry Trends" | "Features" | "Security" | "Case Study" | "Product Update",
                     publishedDate: new Date(post.date).toISOString(),
                     image: post.image,
                     author: {
