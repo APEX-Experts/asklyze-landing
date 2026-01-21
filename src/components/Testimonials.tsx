@@ -83,14 +83,14 @@ export default function Testimonials({ dict }: TestimonialsProps) {
                     {/* Navigation Arrows */}
                     <button
                         onClick={prev}
-                        className="absolute top-1/2 -left-4 md:-left-16 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg"
+                        className="absolute top-1/2 -left-2 md:-left-16 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 md:bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg z-20"
                     >
                         <ChevronLeft size={24} />
                     </button>
 
                     <button
                         onClick={next}
-                        className="absolute top-1/2 -right-4 md:-right-16 -translate-y-1/2 w-10 h-10 rounded-full bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg"
+                        className="absolute top-1/2 -right-2 md:-right-16 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 md:bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg z-20"
                     >
                         <ChevronRight size={24} />
                     </button>

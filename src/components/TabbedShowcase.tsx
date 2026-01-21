@@ -17,7 +17,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
 
     return (
-        <section className="relative pt-[100px] pb-[200px] overflow-hidden">
+        <section className="relative pt-[60px] md:pt-[100px] pb-[120px] md:pb-[200px] overflow-hidden">
             {/* Orange Gradient Background */}
             <div
                 className="absolute inset-0 z-0"
@@ -62,7 +62,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-white -mb-[150px]"
+                    className="relative max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-white -mb-[100px] md:-mb-[150px] mx-4 md:mx-auto"
                 >
                     {/* Dashboard Header Mockup */}
                     <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
