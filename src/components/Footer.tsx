@@ -133,7 +133,7 @@ export default function Footer({ dict }: FooterProps) {
                 {/* Footer Bottom */}
                 <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#6a7695]">
                     <p>
-                        © {new Date().getFullYear()} {dict.rights} <span className="text-[#ff705a]">PixelSigns</span>
+                        © {new Date().getFullYear()} {dict.rights}
                     </p>
                     <div className="flex gap-6">
                         <a href={`/${currentLocale}#privacy`} className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
