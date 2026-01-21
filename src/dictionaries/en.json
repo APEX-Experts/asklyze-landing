@@ -35,8 +35,8 @@
     "contact": {
         "locationTitle": "Our Location",
         "locationLines": [
-            "Washington Fulton Street,",
-            "Suite 640 New York, NY 10010"
+            "Office No. 43-44 - Al Fahidi",
+            "Dubai Bur Dubai, UAE"
         ],
         "emailTitle": "Email Us",
         "callTitle": "Call Us",
@@ -210,7 +210,7 @@
         "services": "Services",
         "digitalExperience": "Digital Experience",
         "address": "Our Address",
-        "nycOffice": "Lavaca Street, Suite 24, Road Apt New York, USA",
+        "nycOffice": "Office No. 43-44 - Al Fahidi Dubai Bur Dubai, UAE",
         "links": {
             "features": "Features",
             "dashboard": "Dashboard & Tool",
