@@ -1,21 +1,27 @@
 import type { NextConfig } from "next";
 
-import { withPayload } from '@payloadcms/next/withPayload'
+import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
       {
-        protocol: 'http',
-        hostname: '**',
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
       },
+      // Add your CDN or image hosting domains here
+      // Example:
+      // {
+      //   protocol: 'https',
+      //   hostname: 'your-cdn-domain.com',
+      // },
     ],
   },
 };
 
-export default withPayload(nextConfig)
+export default withPayload(nextConfig);

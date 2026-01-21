@@ -45,3 +45,11 @@ next-env.d.ts
 *.db-journal
 *.db-shm
 *.db-wal
+
+# deployment
+data/
+media/
+deploy/.env
+
+# docker
+docker-compose.override.yml
