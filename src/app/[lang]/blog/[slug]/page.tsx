@@ -96,6 +96,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                     alt={authorName}
                                     fill
                                     className="object-cover"
+                                    unoptimized
                                 />
                             </div>
                         )}
@@ -124,6 +125,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             fill
                             className="object-cover"
                             priority
+                            unoptimized
                         />
                     </div>
                 </div>

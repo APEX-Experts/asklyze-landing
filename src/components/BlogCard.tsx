@@ -30,6 +30,7 @@ export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
                     alt={post.title}
                     fill
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    unoptimized
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#ff705a] uppercase tracking-wide">
                     {dict.topics[post.category as keyof typeof dict.topics] || post.category}

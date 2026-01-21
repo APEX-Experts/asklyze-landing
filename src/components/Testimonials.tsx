@@ -57,6 +57,7 @@ export default function Testimonials({ dict }: TestimonialsProps) {
                                     alt={list[current].name}
                                     fill
                                     className="object-cover"
+                                    unoptimized
                                 />
                             </div>
                         </div>
