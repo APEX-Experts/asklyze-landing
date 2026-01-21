@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.jsdelivr.net",
       },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+      },
       // Add your CDN or image hosting domains here
       // Example:
       // {

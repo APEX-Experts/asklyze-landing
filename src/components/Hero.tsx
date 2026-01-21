@@ -30,7 +30,7 @@ export default function Hero({ dict }: HeroProps) {
   return (
     <section
       className="hero-gradient"
-      style={{ minHeight: "100vh", paddingTop: "16px" }}
+      style={{ minHeight: "100vh", paddingTop: "120px" }}
     >
       <div className="w-full max-w-[95rem] mx-auto px-4 relative z-10">
         <div
@@ -53,11 +53,12 @@ export default function Hero({ dict }: HeroProps) {
               {dict.badge}
             </motion.span>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1]" style={{ color: "white" }}>
               {dict.titleBeforeSpan} <br />
               <span
                 className="font-extrabold"
                 style={{
+                  color: "white",
                   textShadow: "0 2px 10px rgba(0,0,0,0.1)",
                 }}
               >
@@ -65,7 +66,7 @@ export default function Hero({ dict }: HeroProps) {
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-white/90 max-w-xl mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-white/90 max-w-xl mb-8 leading-relaxed" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
               {dict.description}
             </p>
 
