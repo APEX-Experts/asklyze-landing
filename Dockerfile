@@ -66,9 +66,10 @@ COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 
-# Create directories for persistent data
+# Create directories for persistent data with proper permissions
 RUN mkdir -p /app/data /app/media && \
-    chown -R nextjs:nodejs /app/data /app/media
+    chown -R nextjs:nodejs /app/data /app/media && \
+    chmod 755 /app/data /app/media
 
 # Switch to non-root user
 USER nextjs
