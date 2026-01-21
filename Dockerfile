@@ -61,6 +61,8 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=builder /app/tsconfig.json ./tsconfig.json
+COPY --from=builder /app/src/payload.config.ts ./src/payload.config.ts
 
 # Copy Next.js build output
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
@@ -69,7 +71,8 @@ COPY --from=builder /app/node_modules ./node_modules
 # Create directories for persistent data with proper permissions
 RUN mkdir -p /app/data /app/media && \
     chown -R nextjs:nodejs /app/data /app/media && \
-    chmod 755 /app/data /app/media
+    chmod 755 /app/data /app/media && \
+    touch /app/data/payload-sqlite.db && \
 
 # Switch to non-root user
 USER nextjs

@@ -18,6 +18,7 @@ services:
       - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MAIL_FROM=${MAIL_FROM}
       - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-http://localhost:3000}
+      - PAYLOAD_CONFIG_PATH=/app/src/payload.config.ts
     volumes:
       # Persistent storage for SQLite database
       - ./data:/app/data
@@ -37,6 +38,16 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  migrate:
+    image: ghcr.io/apex-experts/asklyze-landing:latest
+    env_file:
+      - .env
+    environment:
+      - PAYLOAD_CONFIG_PATH=/app/src/payload.config.ts
+    command: npx payload migrate
+    networks:
+      - asklyze-network
 
 networks:
   asklyze-network:
