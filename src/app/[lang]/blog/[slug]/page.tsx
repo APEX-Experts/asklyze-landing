@@ -1,5 +1,5 @@
 import { getPayload } from 'payload'
-import config from '@payload-config'
+import config from '../../../../payload.config'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
@@ -14,7 +14,7 @@ import { getDictionary } from "@/get-dictionary";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const payload = await getPayload({ config });
+    const payload = await getPayload({ config: await config });
     const posts = await payload.find({
         collection: "posts",
         where: { slug: { equals: slug } },
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string; lang: string }> }) {
     const { slug, lang } = await params
     const dict = await getDictionary(lang);
-    const payload = await getPayload({ config })
+    const payload = await getPayload({ config: await config })
 
     const result = await payload.find({
         collection: 'posts',

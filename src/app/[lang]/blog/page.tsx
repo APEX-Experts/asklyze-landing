@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogCard from "@/components/BlogCard";
 import { getPayload } from 'payload'
-import config from '@payload-config'
+import config from '../../../payload.config'
 import Link from "next/link";
 import { BlogPost } from "@/types/blog";
 
@@ -48,7 +48,7 @@ export default async function BlogPage({
     const selectedTopic = typeof topicParam === 'string' ? topicParam : undefined
     const limit = 6
 
-    const payload = await getPayload({ config })
+    const payload = await getPayload({ config: await config })
 
     // Fetch results with optional category filter
     const postsResult = await payload.find({

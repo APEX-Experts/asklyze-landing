@@ -1,10 +1,10 @@
 import { getPayload } from 'payload'
-import config from '@payload-config'
+import config from '../../../payload.config'
 import { blogData } from '@/data/blogData'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-    const payload = await getPayload({ config })
+    const payload = await getPayload({ config: await config })
 
     // Check if posts exist
     const existingPosts = await payload.find({
