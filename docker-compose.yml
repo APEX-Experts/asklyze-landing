@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/apex-experts/asklyze-landing:latest
     container_name: asklyze-landing
     restart: unless-stopped
     ports:
