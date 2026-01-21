@@ -4,6 +4,7 @@
         "features": "Features",
         "pricing": "Pricing",
         "blog": "Blog",
+        "docs": "Docs",
         "contact": "Contact",
         "getStarted": "Get Started"
     },
@@ -167,35 +168,35 @@
         "trustNote": "All plans include Oracle Partnership support • 30-day money-back guarantee",
         "plans": [
             {
-                "name": "Cloud Plan",
-                "price": "$499",
-                "period": "/month",
-                "desc": "Perfect for growing teams",
+                "name": "Cloud Growth Plan",
+                "price": "$999",
+                "period": "/ Month",
+                "desc": "(or $9,990 / Year)",
                 "features": [
-                    "Natural Language to SQL Engine",
-                    "22+ Visualization Types",
-                    "Automatic AI Updates",
-                    "Auto-Scaling Infrastructure",
-                    "Arabic & English Support",
-                    "24/7 Priority Support",
-                    "On-Premise Deployment",
-                    "Custom Oracle Integration"
+                    "1 Database Instance",
+                    "Cloud-Hosted (SaaS)",
+                    "Unlimited Users & Schemas",
+                    "Unlimited Dashboards & Reports",
+                    "Unlimited Tables",
+                    "Standard SSL/Encryption",
+                    "Shared Infrastructure",
+                    "Email Support (24h)"
                 ]
             },
             {
-                "name": "On-Premise Plan",
-                "price": "$2,999",
-                "period": "/year",
-                "desc": "Enterprise data sovereignty",
+                "name": "Enterprise On-Premise",
+                "price": "$25,000",
+                "period": "/ Year",
+                "desc": "(Flat License Fee)",
                 "features": [
-                    "Natural Language to SQL Engine",
-                    "22+ Visualization Types",
-                    "Complete Data Sovereignty",
-                    "Oracle 19c & 23ai Compatible",
-                    "Arabic & English Support",
-                    "Row-Level Security (VPD)",
-                    "Local Infrastructure Control",
-                    "Custom Oracle Integration"
+                    "Unlimited Database Instances",
+                    "On-Premise (Your Servers)",
+                    "Unlimited Users & Schemas",
+                    "Unlimited Dashboards & Reports",
+                    "Unlimited Tables",
+                    "Row-Level Security (RLS)",
+                    "100% Data Sovereignty",
+                    "Priority Support & Account Manager"
                 ]
             }
         ]

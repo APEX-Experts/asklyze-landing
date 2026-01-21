@@ -361,11 +361,7 @@ p {
   justify-content: space-between;
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 35px;
-}
+/* Nav Links are handled via Tailwind utility classes */
 
 .nav-link {
   font-size: 15px;

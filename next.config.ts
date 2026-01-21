@@ -5,6 +5,7 @@ import { withPayload } from "@payloadcms/next/withPayload";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -26,12 +27,6 @@ const nextConfig: NextConfig = {
         hostname: "placehold.co",
         pathname: "/**",
       },
-      // Add your CDN or image hosting domains here
-      // Example:
-      // {
-      //   protocol: 'https',
-      //   hostname: 'your-cdn-domain.com',
-      // },
     ],
   },
 };

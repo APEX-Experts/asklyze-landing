@@ -71,7 +71,12 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 {dict.section1.desc}
                             </p>
 
-                            <a href="#demo" className="btn btn-primary bg-[#ff705a] border-[#ff705a] text-white hover:bg-[#ff8a78] hover:border-[#ff8a78]">
+                            <a
+                                href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-primary bg-[#ff705a] border-[#ff705a] text-white hover:bg-[#ff8a78] hover:border-[#ff8a78]"
+                            >
                                 {dict.section1.cta}
                             </a>
                         </motion.div>

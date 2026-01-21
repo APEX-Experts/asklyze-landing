@@ -73,7 +73,9 @@ export default function Hero({ dict }: HeroProps) {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
               <motion.a
-                href="#pricing"
+                href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn btn-white"

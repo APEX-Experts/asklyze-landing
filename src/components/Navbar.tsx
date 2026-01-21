@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, Home, Zap, CreditCard, Newspaper, FileText, Mail, ChevronRight } from "lucide-react";
 
 interface NavbarProps {
   dict: {
@@ -61,209 +61,260 @@ export default function Navbar({ dict }: NavbarProps) {
           <Image
             src={isSolid ? "/logo-dark.png" : "/logo-light.png"}
             alt="ASKLYZE"
-            width={140}
-            height={40}
-            className="h-10 w-auto transition-all duration-300"
+            width={120}
+            height={36}
+            className="h-9 w-auto object-contain transition-all duration-300"
             priority
           />
         </Link>
 
-        {/* Language Switcher */}
-        <div className="hidden md:flex items-center gap-2 ml-4">
-          <button
-            onClick={() => {
-              const newPath = pathname.replace(/^\/(en|ar)/, "/en");
-              window.location.href = newPath;
-            }}
-            className={`text-sm font-bold transition-colors ${pathname.startsWith("/en")
-              ? isSolid
-                ? "text-[#ff705a]"
-                : "text-white"
-              : isSolid
-                ? "text-gray-600 hover:text-[#ff705a]"
-                : "text-white/80 hover:text-white"
-              }`}
-            style={
-              !isSolid
-                ? { textShadow: "0 1px 2px rgba(0,0,0,0.45)" }
-                : undefined
-            }
-          >
-            EN
-          </button>
-          <span className={isSolid ? "text-gray-300" : "text-white/40"}>|</span>
-          <button
-            onClick={() => {
-              const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
-              window.location.href = newPath;
-            }}
-            className={`text-sm font-bold transition-colors ${pathname.startsWith("/ar")
-              ? isSolid
-                ? "text-[#ff705a]"
-                : "text-white"
-              : isSolid
-                ? "text-gray-600 hover:text-[#ff705a]"
-                : "text-white/80 hover:text-white"
-              }`}
-            style={
-              !isSolid
-                ? { textShadow: "0 1px 2px rgba(0,0,0,0.45)" }
-                : undefined
-            }
-          >
-            AR
-          </button>
-        </div>
+        {/* DESKTOP MENU - Completely hidden on mobile */}
+        <div className="hidden md:flex items-center gap-8">
+          {/* Nav Links */}
+          <div className="flex items-center gap-8">
+            {["home", "features", "pricing", "blog", "docs", "contact"].map((key) => {
+              const href =
+                key === "home"
+                  ? "/"
+                  : key === "blog"
+                    ? "/blog"
+                    : key === "docs"
+                      ? "https://docs.asklyze.ai/"
+                      : key === "contact"
+                        ? "/contact"
+                        : `#${key}`;
 
-        {/* Nav Links */}
-        <div className="nav-links hidden md:flex">
-          {["home", "features", "pricing", "blog", "contact"].map((key) => {
-            const href =
-              key === "home"
-                ? "/"
-                : key === "blog"
-                  ? "/blog"
-                  : key === "contact"
-                    ? "/contact"
-                    : `#${key}`;
-            return (
-              <Link
-                key={key}
-                href={getLocalizedHref(href)}
-                className="nav-link"
-                style={{
-                  color: isSolid ? "var(--color-heading)" : "white",
+              const isExternal = key === "docs";
+
+              const content = (
+                <span style={{ color: isSolid ? "var(--color-heading)" : "white" }}>
+                  {dict[key]}
+                </span>
+              );
+
+              return isExternal ? (
+                <a key={key} href={href} className="nav-link">
+                  {content}
+                </a>
+              ) : (
+                <Link key={key} href={getLocalizedHref(href)} className="nav-link">
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-4 border-l border-white/20 pl-4">
+            {/* Language Switcher */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  const newPath = pathname.replace(/^\/(en|ar)/, "/en");
+                  window.location.href = newPath;
                 }}
+                className={`text-sm font-bold transition-colors ${pathname.startsWith("/en")
+                  ? isSolid ? "text-[#ff705a]" : "text-white"
+                  : isSolid ? "text-gray-600 hover:text-[#ff705a]" : "text-white/80 hover:text-white"
+                  }`}
               >
-                {dict[key]}
-              </Link>
-            );
-          })}
+                EN
+              </button>
+              <span className={isSolid ? "text-gray-300" : "text-white/20"}>|</span>
+              <button
+                onClick={() => {
+                  const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
+                  window.location.href = newPath;
+                }}
+                className={`text-sm font-bold transition-colors ${pathname.startsWith("/ar")
+                  ? isSolid ? "text-[#ff705a]" : "text-white"
+                  : isSolid ? "text-gray-600 hover:text-[#ff705a]" : "text-white/80 hover:text-white"
+                  }`}
+              >
+                AR
+              </button>
+            </div>
+
+            {/* Desktop CTA */}
+            <motion.a
+              href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={isSolid ? "btn btn-primary" : "btn btn-outline"}
+              style={{
+                padding: "8px 20px",
+                fontSize: "13px",
+                borderColor: isSolid ? "var(--color-primary)" : "white",
+                color: "white",
+                background: isSolid ? "var(--color-primary)" : "transparent",
+              }}
+            >
+              {dict.getStarted}
+            </motion.a>
+          </div>
         </div>
 
-        {/* CTA Button - Desktop */}
-        <motion.a
-          href={`/${currentLocale}#contact`}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className={`hidden md:inline-flex ${isSolid ? "btn btn-primary" : "btn btn-outline"
-            }`}
-          style={{
-            padding: "10px 25px",
-            fontSize: "14px",
-            borderColor: isSolid ? "var(--color-primary)" : "white",
-            color: "white",
-            background: isSolid ? "var(--color-primary)" : "transparent",
-          }}
-        >
-          {dict.getStarted}
-        </motion.a>
-
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
-          className="md:hidden p-2"
           onClick={() => setIsOpen(!isOpen)}
-          style={{ color: isSolid ? "var(--color-heading)" : "white" }}
+          className="md:hidden p-2 -mr-2 flex items-center justify-center transition-colors focus:outline-none"
+          style={{
+            color: isSolid ? "var(--color-heading)" : "white",
+            zIndex: 1001
+          }}
+          aria-label="Toggle menu"
         >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+          {isOpen ? <X size={30} strokeWidth={2.5} /> : <Menu size={30} strokeWidth={2.5} />}
         </button>
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-50 bg-white md:hidden"
-              style={{ top: 0, height: "100vh" }}
-            >
-              <div className="flex flex-col h-full p-8">
-                <div className="flex justify-between items-center mb-12">
-                  <Link
-                    href={`/${currentLocale}`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Image
-                      src="/logo-dark.png"
-                      alt="ASKLYZE"
-                      width={140}
-                      height={40}
-                      className="h-10 w-auto"
-                    />
-                  </Link>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="p-2 text-gray-900"
-                  >
-                    <X size={28} />
-                  </button>
-                </div>
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsOpen(false)}
+                className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm md:hidden"
+              />
 
-                <div className="flex flex-col gap-6">
-                  {["home", "features", "pricing", "blog", "contact"].map(
-                    (key) => {
-                      const href =
-                        key === "home"
-                          ? "/"
-                          : key === "blog"
-                            ? "/blog"
-                            : key === "contact"
-                              ? "/contact"
-                              : `#${key}`;
-                      return (
-                        <Link
-                          key={key}
-                          href={getLocalizedHref(href)}
-                          onClick={() => setIsOpen(false)}
-                          className="text-2xl font-bold text-gray-900 hover:text-[#ff705a] transition-colors"
-                        >
-                          {dict[key]}
-                        </Link>
-                      );
-                    }
-                  )}
-                </div>
-
-                <div className="mt-auto pt-8 border-t border-gray-100">
-                  <Link
-                    href={`/${currentLocale}#contact`}
-                    onClick={() => setIsOpen(false)}
-                    className="btn btn-primary w-full text-center py-4 mb-8"
-                  >
-                    {dict.getStarted}
-                  </Link>
-
-                  <div className="flex items-center justify-center gap-6">
-                    <button
-                      onClick={() => {
-                        const newPath = pathname.replace(/^\/(en|ar)/, "/en");
-                        window.location.href = newPath;
-                      }}
-                      className={`flex items-center gap-2 font-bold px-4 py-2 rounded-lg ${pathname.startsWith("/en")
-                        ? "bg-[#ff705a] text-white"
-                        : "text-gray-600"
-                        }`}
+              {/* Drawer Container */}
+              <motion.div
+                initial={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className={`fixed top-0 bottom-0 z-[70] w-4/5 max-w-sm bg-white shadow-2xl md:hidden ${currentLocale === "ar" ? "left-0" : "right-0"
+                  }`}
+              >
+                <div className="flex flex-col h-full bg-white">
+                  {/* Drawer Header */}
+                  <div className="flex justify-between items-center p-6 border-b border-gray-100">
+                    <Link
+                      href={`/${currentLocale}`}
+                      onClick={() => setIsOpen(false)}
                     >
-                      <Globe size={18} /> English
-                    </button>
+                      <Image
+                        src="/logo-dark.png"
+                        alt="ASKLYZE"
+                        width={120}
+                        height={35}
+                        className="h-8 w-auto"
+                      />
+                    </Link>
                     <button
-                      onClick={() => {
-                        const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
-                        window.location.href = newPath;
-                      }}
-                      className={`flex items-center gap-2 font-bold px-4 py-2 rounded-lg ${pathname.startsWith("/ar")
-                        ? "bg-[#ff705a] text-white"
-                        : "text-gray-600"
-                        }`}
+                      onClick={() => setIsOpen(false)}
+                      className="p-2 text-gray-500 hover:text-gray-900 transition-colors"
                     >
-                      <Globe size={18} /> العربية
+                      <X size={24} />
                     </button>
                   </div>
+
+                  {/* Drawer Content - Scrollable */}
+                  <div className="flex-1 overflow-y-auto py-6 px-6">
+                    <div className="flex flex-col gap-1">
+                      {[
+                        { key: "home", icon: Home, href: "/" },
+                        { key: "features", icon: Zap, href: "#features" },
+                        { key: "pricing", icon: CreditCard, href: "#pricing" },
+                        { key: "blog", icon: Newspaper, href: "/blog" },
+                        { key: "docs", icon: FileText, href: "https://docs.asklyze.ai/", external: true },
+                        { key: "contact", icon: Mail, href: "/contact" },
+                      ].map((item, index) => {
+                        const isExternal = item.external;
+                        const content = (
+                          <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 + index * 0.05 }}
+                            className="flex items-center justify-between py-4 px-3 rounded-xl hover:bg-gray-50 transition-colors group"
+                          >
+                            <div className="flex items-center gap-4">
+                              <div className="p-2 rounded-lg bg-gray-50 text-gray-400 group-hover:bg-[#ff705a]/10 group-hover:text-[#ff705a] transition-colors">
+                                <item.icon size={20} />
+                              </div>
+                              <span className="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
+                                {dict[item.key]}
+                              </span>
+                            </div>
+                            <ChevronRight size={18} className="text-gray-300 group-hover:text-[#ff705a] transition-all transform group-hover:translate-x-1" />
+                          </motion.div>
+                        );
+
+                        return isExternal ? (
+                          <a
+                            key={item.key}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {content}
+                          </a>
+                        ) : (
+                          <Link
+                            key={item.key}
+                            href={getLocalizedHref(item.href)}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {content}
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-gray-100 flex flex-col gap-10">
+                      {/* CTA inside menu */}
+                      <div className="px-3">
+                        <a
+                          href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setIsOpen(false)}
+                          className="btn btn-primary w-full py-4 rounded-xl shadow-lg shadow-[#ff705a]/30 text-center"
+                          style={{ color: "white" }}
+                        >
+                          {dict.getStarted}
+                        </a>
+                      </div>
+
+                      <div className="px-3">
+                        <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                          {currentLocale === "ar" ? "اللغة" : "Language"}
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <button
+                            onClick={() => {
+                              const newPath = pathname.replace(/^\/(en|ar)/, "/en");
+                              window.location.href = newPath;
+                            }}
+                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/en")
+                              ? "bg-[#ff705a] border-[#ff705a] text-white shadow-md shadow-[#ff705a]/20"
+                              : "bg-gray-50 border-gray-100 text-gray-600 hover:border-gray-300"
+                              }`}
+                          >
+                            EN
+                          </button>
+                          <button
+                            onClick={() => {
+                              const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
+                              window.location.href = newPath;
+                            }}
+                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/ar")
+                              ? "bg-[#ff705a] border-[#ff705a] text-white shadow-md shadow-[#ff705a]/20"
+                              : "bg-gray-50 border-gray-100 text-gray-600 hover:border-gray-300"
+                              }`}
+                          >
+                            AR
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>
