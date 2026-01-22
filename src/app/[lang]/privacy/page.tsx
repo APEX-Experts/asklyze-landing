@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import PrivacyPolicyContent from "./PrivacyPolicyContent";
-import { Shield, Lock, Eye, Database, FileCheck, Globe } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -27,12 +26,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
         intro: "في ASKLYZE، خصوصيتك وأمن بياناتك هي أولويتنا القصوى. تشرح هذه السياسة كيفية التزامنا بحماية معلوماتك عبر بنية 'عدم نقل البيانات' (Zero Data Movement) الفريدة.",
         sections: [
             {
-                icon: Database,
+                iconKey: "Database",
                 title: "1. بنية عدم نقل البيانات",
                 content: "يعمل ASKLYZE على مبدأ أساسي: بياناتك لا تغادر بيئة Oracle الخاصة بك أبداً. يعمل محرك الذكاء الاصطناعي لدينا كطبقة منطقية فقط، حيث يترجم استعلامات اللغة الطبيعية إلى SQL، ولكن يتم تنفيذ جميع الاستعلامات محلياً داخل قاعدة بياناتك."
             },
             {
-                icon: Eye,
+                iconKey: "Eye",
                 title: "2. المعلومات التي نجمعها",
                 points: [
                     "**البيانات الوصفية**: معلومات المخطط وهياكل الجداول والعلاقات (لتحسين دقة الاستعلام)",
@@ -42,7 +41,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "3. المعلومات التي لا نجمعها",
                 points: [
                     "بيانات الأعمال الأولية أو الصفوف الفعلية من قاعدة بياناتك",
@@ -52,7 +51,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: FileCheck,
+                iconKey: "FileCheck",
                 title: "4. كيف نستخدم المعلومات",
                 points: [
                     "**معالجة الاستعلام**: لتحويل أسئلتك إلى استعلامات SQL دقيقة",
@@ -62,12 +61,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: Globe,
+                iconKey: "Globe",
                 title: "5. إقامة البيانات والسيادة",
                 content: "بالنسبة لعمليات النشر المحلية، تظل جميع البيانات داخل مراكز البيانات الخاصة بك. بالنسبة لعمليات نشر SaaS عبر ORDS، يتم معالجة البيانات الوصفية فقط، ونحن نلتزم بمتطلبات إقامة البيانات المحددة في اتفاقيتك."
             },
             {
-                icon: Lock,
+                iconKey: "Lock",
                 title: "6. الأمان والتشفير",
                 points: [
                     "تشفير HTTPS/TLS لجميع الاتصالات",
@@ -113,12 +112,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
         intro: "At ASKLYZE, your privacy and data security are our top priorities. This policy explains how we are committed to protecting your information through our unique 'Zero Data Movement' architecture.",
         sections: [
             {
-                icon: Database,
+                iconKey: "Database",
                 title: "1. Zero Data Movement Architecture",
                 content: "ASKLYZE operates on a fundamental principle: your data never leaves your Oracle environment. Our AI engine acts solely as a logic layer, translating natural language queries into SQL, but all query execution happens locally within your database."
             },
             {
-                icon: Eye,
+                iconKey: "Eye",
                 title: "2. Information We Collect",
                 points: [
                     "**Metadata**: Schema information, table structures, and relationships (for query optimization)",
@@ -128,7 +127,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "3. Information We Do NOT Collect",
                 points: [
                     "Raw business data or actual rows from your database",
@@ -138,7 +137,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: FileCheck,
+                iconKey: "FileCheck",
                 title: "4. How We Use Information",
                 points: [
                     "**Query Processing**: To convert your questions into accurate SQL queries",
@@ -148,12 +147,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
-                icon: Globe,
+                iconKey: "Globe",
                 title: "5. Data Residency and Sovereignty",
                 content: "For On-Premise deployments, all data remains within your data centers. For SaaS deployments via ORDS, only metadata is processed, and we comply with data residency requirements as specified in your agreement."
             },
             {
-                icon: Lock,
+                iconKey: "Lock",
                 title: "6. Security and Encryption",
                 points: [
                     "HTTPS/TLS encryption for all communications",

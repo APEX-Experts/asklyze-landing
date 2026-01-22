@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import DataSecurityContent from "./DataSecurityContent";
-import { Shield, Lock, Key, Server, ShieldCheck, Eye } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -27,7 +26,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
         intro: "يعتمد ASKLYZE على نهج متعدد الطبقات لأمن البيانات، مما يضمن بقاء بيانات Oracle الخاصة بك محمية في كل مرحلة من مراحل دورة حياة الاستعلام. من البنية الأساسية إلى أمن الذكاء الاصطناعي، نقوم بتنفيذ أفضل الممارسات في الصناعة لحماية أصولك الأكثر قيمة.",
         sections: [
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "1. بنية عدم نقل البيانات",
                 content: "مبدأنا الأساسي للأمان: بياناتك لا تغادر بيئة Oracle الخاصة بك أبداً. يعمل محرك الذكاء الاصطناعي لدينا كطبقة منطقية تترجم اللغة الطبيعية إلى SQL، ولكن يتم تنفيذ جميع الاستعلامات محلياً. يضمن هذا النهج المعماري عدم نقل بيانات الإنتاج الخام أبداً عبر الشبكة أو تخزينها خارجياً.",
                 points: [
@@ -38,7 +37,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Lock,
+                iconKey: "Lock",
                 title: "2. التشفير وأمن النقل",
                 content: "يتم تشفير جميع الاتصالات بين مكونات ASKLYZE باستخدام بروتوكولات متوافقة مع معايير الصناعة. نستخدم TLS 1.3 لجميع عمليات نقل البيانات، مما يضمن أنه حتى البيانات الوصفية محمية أثناء النقل.",
                 points: [
@@ -49,7 +48,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Key,
+                iconKey: "Key",
                 title: "3. التحكم في الوصول والمصادقة",
                 content: "يستخدم ASKLYZE التحكم في الوصول القائم على الأدوار (RBAC) متعدد الطبقات ويتكامل بسلاسة مع إطار أمان Oracle الحالي لديك، بما في ذلك VPD وRow-Level Security.",
                 points: [
@@ -60,7 +59,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Eye,
+                iconKey: "Eye",
                 title: "4. التدقيق والمراقبة",
                 content: "التسجيل الشامل والتدقيق في كل تفاعل مع ASKLYZE. يتم تخزين جميع سجلات الاستعلام في ASKLYZE_AI_QUERY_STORE داخل قاعدة بياناتك الخاصة لأغراض الامتثال والطب الشرعي.",
                 points: [
@@ -71,7 +70,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Server,
+                iconKey: "Server",
                 title: "5. أمن البنية التحتية",
                 content: "بالنسبة لعمليات النشر المستضافة على السحابة، نستخدم منصات معتمدة SOC 2 وISO 27001 مع تصحيح منتظم وعزل الشبكة واكتشاف التسلل. بالنسبة لعمليات النشر المحلية، ترث ASKLYZE وضع أمان البنية التحتية الخاصة بك.",
                 points: [
@@ -82,7 +81,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: ShieldCheck,
+                iconKey: "ShieldCheck",
                 title: "6. أمن الذكاء الاصطناعي ونماذج اللغة الكبيرة",
                 content: "يتم إرسال استعلامات الذكاء الاصطناعي الخاصة بنا إلى مزودي نماذج لغوية موثوقين (OpenAI، Anthropic) مع ضمانات صارمة. يتلقون فقط أسئلة اللغة الطبيعية المُجردة ومعلومات المخطط - لا توجد بيانات أولية أبداً.",
                 points: [
@@ -171,7 +170,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
         intro: "ASKLYZE employs a multi-layered approach to data security, ensuring your Oracle data remains protected at every stage of the query lifecycle. From infrastructure to AI security, we implement industry best practices to safeguard your most valuable assets.",
         sections: [
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "1. Zero Data Movement Architecture",
                 content: "Our foundational security principle: your data never leaves your Oracle environment. Our AI engine acts as a logic layer that translates natural language to SQL, but all query execution happens locally. This architectural approach ensures raw production data is never transmitted over the network or stored externally.",
                 points: [
@@ -182,7 +181,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Lock,
+                iconKey: "Lock",
                 title: "2. Encryption and Transport Security",
                 content: "All communication between ASKLYZE components is encrypted using industry-standard protocols. We use TLS 1.3 for all data transfers, ensuring that even metadata is protected in transit.",
                 points: [
@@ -193,7 +192,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Key,
+                iconKey: "Key",
                 title: "3. Access Control and Authentication",
                 content: "ASKLYZE uses multi-layered Role-Based Access Control (RBAC) and integrates seamlessly with your existing Oracle security framework, including VPD and Row-Level Security.",
                 points: [
@@ -204,7 +203,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Eye,
+                iconKey: "Eye",
                 title: "4. Audit and Monitoring",
                 content: "Comprehensive logging and auditing of every interaction with ASKLYZE. All query logs are stored in ASKLYZE_AI_QUERY_STORE within your own database for compliance and forensics purposes.",
                 points: [
@@ -215,7 +214,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: Server,
+                iconKey: "Server",
                 title: "5. Infrastructure Security",
                 content: "For cloud-hosted deployments, we use SOC 2 and ISO 27001 certified platforms with regular patching, network isolation, and intrusion detection. For On-Premise deployments, ASKLYZE inherits your infrastructure security posture.",
                 points: [
@@ -226,7 +225,7 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
                 ]
             },
             {
-                icon: ShieldCheck,
+                iconKey: "ShieldCheck",
                 title: "6. AI and LLM Security",
                 content: "Our AI queries are sent to trusted LLM providers (OpenAI, Anthropic) with strict safeguards. They receive only abstracted natural language questions and schema information - never raw data.",
                 points: [

@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import TermsConditionsContent from "./TermsConditionsContent";
-import { FileText, CreditCard, Shield, Scale, Users, AlertCircle } from "lucide-react";
 
 export default async function TermsConditions({ params }: { params: Promise<{ lang: "en" | "ar" }> }) {
     const { lang } = await params;
@@ -17,12 +16,12 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
         intro: "مرحباً بك في ASKLYZE. باستخدام خدماتنا، فإنك توافق على هذه الشروط. يرجى قراءتها بعناية.",
         sections: [
             {
-                icon: FileText,
+                iconKey: "FileText",
                 title: "1. قبول الشروط",
                 content: "من خلال الوصول أو استخدام ASKLYZE ('الخدمة')، فإنك توافق على الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي جزء من هذه الشروط، فلا يجوز لك استخدام الخدمة."
             },
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "2. ترخيص الخدمة",
                 points: [
                     "**النشر المحلي**: رخصة دائمة لعدد غير محدود من المستخدمين والمثيلات على خوادمك",
@@ -32,7 +31,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: Users,
+                iconKey: "Users",
                 title: "3. استخدام الخدمة",
                 points: [
                     "يجب أن يكون عمرك 18 عاماً أو أكبر لاستخدام ASKLYZE",
@@ -42,7 +41,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: AlertCircle,
+                iconKey: "AlertCircle",
                 title: "4. الاستخدامات المحظورة",
                 content: "يجب عدم استخدام ASKLYZE من أجل:",
                 points: [
@@ -54,7 +53,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: CreditCard,
+                iconKey: "CreditCard",
                 title: "6. الدفع والفوترة",
                 points: [
                     "**خطة السحابة**: 499 دولار/شهر أو 4,990 دولار/سنة (يتم إصدار الفواتير مقدماً)",
@@ -64,7 +63,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: Scale,
+                iconKey: "Scale",
                 title: "8. حدود المسؤولية",
                 content: "إلى أقصى حد يسمح به القانون:",
                 points: [
@@ -131,12 +130,12 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
         intro: "Welcome to ASKLYZE. By using our services, you agree to these terms. Please read them carefully.",
         sections: [
             {
-                icon: FileText,
+                iconKey: "FileText",
                 title: "1. Acceptance of Terms",
                 content: "By accessing or using ASKLYZE ('the Service'), you agree to be bound by these Terms and Conditions. If you disagree with any part of these terms, you may not use the Service."
             },
             {
-                icon: Shield,
+                iconKey: "Shield",
                 title: "2. Service License",
                 points: [
                     "**On-Premise**: Perpetual license for unlimited users and instances on your servers",
@@ -146,7 +145,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: Users,
+                iconKey: "Users",
                 title: "3. Use of Service",
                 points: [
                     "You must be 18 years or older to use ASKLYZE",
@@ -156,7 +155,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: AlertCircle,
+                iconKey: "AlertCircle",
                 title: "4. Prohibited Uses",
                 content: "You must not use ASKLYZE to:",
                 points: [
@@ -168,7 +167,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: CreditCard,
+                iconKey: "CreditCard",
                 title: "6. Payment and Billing",
                 points: [
                     "**Cloud Plan**: $499/month or $4,990/year (billed in advance)",
@@ -178,7 +177,7 @@ export default async function TermsConditions({ params }: { params: Promise<{ la
                 ]
             },
             {
-                icon: Scale,
+                iconKey: "Scale",
                 title: "8. Limitation of Liability",
                 content: "To the maximum extent permitted by law:",
                 points: [

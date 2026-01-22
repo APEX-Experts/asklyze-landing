@@ -1,7 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Lock, Key, Server, AlertTriangle, FileCheck, Eye, Fingerprint, Cloud, Users, Bell, ShieldCheck } from "lucide-react";
+import { Shield, Lock, Key, Server, Eye, ShieldCheck } from "lucide-react";
+
+const iconMap = {
+    Shield,
+    Lock,
+    Key,
+    Server,
+    Eye,
+    ShieldCheck,
+} as const;
 
 interface DataSecurityContentProps {
     lang: "en" | "ar";
@@ -46,7 +55,9 @@ export default function DataSecurityContent({ lang, isArabic, content }: DataSec
                     <div className="max-w-5xl mx-auto">
                         {/* Main Sections with Icons */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                            {content.sections.map((section: any, index: number) => (
+                            {content.sections.map((section: any, index: number) => {
+                                const Icon = iconMap[section.iconKey as keyof typeof iconMap];
+                                return (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
@@ -57,7 +68,7 @@ export default function DataSecurityContent({ lang, isArabic, content }: DataSec
                                 >
                                     <div className="flex items-start gap-4 mb-4">
                                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ff705a] to-[#ff9472] flex items-center justify-center flex-shrink-0">
-                                            <section.icon className="text-white" size={24} />
+                                            {Icon ? <Icon className="text-white" size={24} /> : null}
                                         </div>
                                         <h2 className="text-2xl font-bold text-[#2c234d] flex-1">{section.title}</h2>
                                     </div>
@@ -75,7 +86,8 @@ export default function DataSecurityContent({ lang, isArabic, content }: DataSec
                                         </ul>
                                     )}
                                 </motion.div>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {/* Additional Sections - Full Width */}
