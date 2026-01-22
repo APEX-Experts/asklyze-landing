@@ -112,7 +112,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                         {activeTab === 0 ? (
                             <div className="w-full h-full bg-black">
                                 <iframe
-                                    src="https://player.cloudinary.com/embed/?cloud_name=ddmoxgaxf&public_id=configuration-data_kwuxaj&player[autoplay]=true&player[muted]=true&player[loop]=true"
+                                    src="https://player.cloudinary.com/embed/?cloud_name=ddmoxgaxf&public_id=configuration-data_kwuxaj&player[autoplay]=true&player[muted]=true&player[loop]=true&player[controls]=false&source[title]=false&source[description]=false"
                                     width="640"
                                     height="360"
                                     style={{ height: "auto", width: "100%", aspectRatio: "640 / 360" }}
