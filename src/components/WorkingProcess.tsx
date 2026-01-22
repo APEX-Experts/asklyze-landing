@@ -12,6 +12,7 @@ interface Step {
     bg: string;
     image: string;
     video?: string;
+    iframeSrc?: string;
 }
 
 interface WorkingProcessProps {
@@ -36,7 +37,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
             color: "#ff705a",
             bg: "#ffece8",
             image: "/illustrations/data.svg",
-            video: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/tables.mp4"
+            iframeSrc: "https://player.cloudinary.com/embed/?cloud_name=ddmoxgaxf&public_id=configuration-data_kwuxaj"
         },
         {
             icon: Search,
@@ -72,6 +73,8 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                     {steps.map((step, index) => {
                         // Explicitly check for video existence to avoid TS issues or runtime ambiguity
                         const hasVideo = "video" in step && step.video;
+                        const hasIframe = "iframeSrc" in step && step.iframeSrc;
+                        const hasMedia = hasVideo || hasIframe;
 
                         return (
                             <motion.div
@@ -83,7 +86,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                 className="text-center group"
                             >
                                 {/* Illustration/Video Placeholder */}
-                                <div className={`mb-8 relative mx-auto flex items-center justify-center transition-all duration-300 ${hasVideo ? "w-full aspect-video" : "w-48 h-48"
+                                <div className={`mb-8 relative mx-auto flex items-center justify-center transition-all duration-300 ${hasMedia ? "w-full aspect-video" : "w-48 h-48"
                                     }`}>
                                     {/* Decorative Blob */}
                                     <div
@@ -92,7 +95,18 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                     />
                                     {/* Content Container */}
                                     <div className="relative z-10 w-full h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
-                                        {hasVideo && step.video ? (
+                                        {hasIframe && step.iframeSrc ? (
+                                            <iframe
+                                                src={step.iframeSrc}
+                                                width="640"
+                                                height="360"
+                                                style={{ height: "auto", width: "100%", aspectRatio: "640 / 360" }}
+                                                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                                                allowFullScreen
+                                                frameBorder="0"
+                                                title={`${step.title} video`}
+                                            />
+                                        ) : hasVideo && step.video ? (
                                             <OptimizedVideo
                                                 src={step.video}
                                                 className="w-full h-full object-contain"
@@ -107,7 +121,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                             <step.icon size={64} color={step.color} className="opacity-80" />
                                         )}
                                         {/* Mock illustration effect using CSS - only show if no video */}
-                                        {!hasVideo && (
+                                        {!hasMedia && (
                                             <div className="absolute inset-x-0 bottom-0 h-16 opacity-10" style={{ background: step.color }} />
                                         )}
                                     </div>
