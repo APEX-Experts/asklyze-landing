@@ -19,7 +19,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
     // Auto-transition through tabs with progress
     useEffect(() => {
-        const duration = 7000; // 7 seconds
+        const duration = 8000; // 8 seconds
         const startTime = Date.now();
 
         const progressInterval = setInterval(() => {
@@ -111,21 +111,21 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     <div className="bg-gray-50 min-h-[400px]">
                         {activeTab === 0 ? (
                             <div className="w-full h-full bg-black">
-                                <iframe
-                                    src="https://player.cloudinary.com/embed/?cloud_name=ddmoxgaxf&public_id=configuration-data_kwuxaj&player[autoplay]=true&player[muted]=true&player[loop]=true&player[controls]=false&source[title]=false&source[description]=false"
-                                    width="640"
-                                    height="360"
-                                    style={{ height: "auto", width: "100%", aspectRatio: "640 / 360" }}
-                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                                    allowFullScreen
-                                    frameBorder="0"
-                                    title="Data Configuration video"
+                                <OptimizedVideo
+                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/configuration-data.mp4"
+                                    className="w-full h-full max-h-[500px] object-cover"
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
                                 />
                             </div>
                         ) : activeTab === 1 ? (
                             <div className="w-full h-full bg-black">
                                 <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step2.mp4"
+                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Data-Generation.mp4"
                                     className="w-full h-full max-h-[500px] object-cover"
                                     autoPlay={true}
                                     loop={true}
@@ -138,7 +138,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                         ) : activeTab === 2 ? (
                             <div className="w-full h-full bg-black">
                                 <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step3.mp4"
+                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Dashboard-builder.mp4"
                                     className="w-full h-full max-h-[500px] object-cover"
                                     autoPlay={true}
                                     loop={true}
@@ -151,7 +151,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                         ) : activeTab === 3 ? (
                             <div className="w-full h-full bg-black">
                                 <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step4.mp4"
+                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Customize-Dashboard.mp4"
                                     className="w-full h-full max-h-[500px] object-cover"
                                     autoPlay={true}
                                     loop={true}
