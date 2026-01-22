@@ -295,7 +295,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                 <div className="container">
                     <div className="bg-gradient-to-br from-[#ff705a] to-[#ff9472] rounded-3xl p-10 md:p-14 text-white text-center shadow-xl">
                         <h2 className="!text-white text-3xl md:text-4xl font-bold mb-4">{content.cta.title}</h2>
-                        <p className="text-white max-w-2xl mx-auto mb-8">{content.cta.description}</p>
+                        <p className="!text-white max-w-2xl mx-auto mb-8">{content.cta.description}</p>
                         <a
                             href={`/${lang}/contact`}
                             className="btn btn-white inline-flex"
