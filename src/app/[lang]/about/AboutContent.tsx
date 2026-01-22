@@ -210,9 +210,9 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             viewport={{ once: true }}
                             className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100"
                         >
-                            <div className="flex items-center gap-4 mb-6">
+                            <div className="flex items-center gap-5 mb-6">
                                 <div
-                                    className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                                    className={`w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-md ring-2 ring-white/80 flex-shrink-0 ${
                                         founderImage
                                             ? "overflow-hidden bg-gray-100"
                                             : "bg-gradient-to-br from-[#ff705a] to-[#ff9472]"
@@ -224,9 +224,10 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                             alt={founderName || "Founder portrait"}
                                             className="w-full h-full object-cover"
                                             loading="lazy"
+                                            decoding="async"
                                         />
                                     ) : (
-                                        <span className="text-white text-xl font-bold">{founderInitials}</span>
+                                        <span className="text-white text-2xl font-bold">{founderInitials}</span>
                                     )}
                                 </div>
                                 <div>
@@ -258,23 +259,24 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     const memberImage = member?.image;
                                     return (
                                         <div key={index} className="bg-white rounded-2xl p-5 shadow-md border border-gray-100">
-                                            <div
-                                                className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
-                                                    memberImage
-                                                        ? "overflow-hidden bg-gray-100"
-                                                        : "bg-[#ffece8] text-[#ff705a] font-bold"
-                                                }`}
-                                            >
-                                                {memberImage ? (
-                                                    <img
-                                                        src={memberImage}
-                                                        alt={memberName || "Team member portrait"}
-                                                        className="w-full h-full object-cover"
-                                                        loading="lazy"
-                                                    />
-                                                ) : (
-                                                    <span>{memberInitials}</span>
-                                                )}
+                                        <div
+                                            className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-sm ring-2 ring-white/80 ${
+                                                memberImage
+                                                    ? "overflow-hidden bg-gray-100"
+                                                    : "bg-[#ffece8] text-[#ff705a] font-bold"
+                                            }`}
+                                        >
+                                            {memberImage ? (
+                                                <img
+                                                    src={memberImage}
+                                                    alt={memberName || "Team member portrait"}
+                                                    className="w-full h-full object-cover"
+                                                    loading="lazy"
+                                                    decoding="async"
+                                                />
+                                            ) : (
+                                                <span>{memberInitials}</span>
+                                            )}
                                             </div>
                                             <h4 className="text-lg font-bold text-[#2c234d]">{memberName}</h4>
                                             <p className="text-xs text-gray-500 mb-2">{member.role}</p>
