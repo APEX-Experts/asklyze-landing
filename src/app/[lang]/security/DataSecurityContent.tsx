@@ -12,6 +12,8 @@ const iconMap = {
     ShieldCheck,
 } as const;
 
+const formatPoint = (point: string) => point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
 interface DataSecurityContentProps {
     lang: "en" | "ar";
     isArabic: boolean;
@@ -80,7 +82,7 @@ export default function DataSecurityContent({ lang, isArabic, content }: DataSec
                                             {section.points.map((point: string, idx: number) => (
                                                 <li key={idx} className="text-gray-700 leading-relaxed flex items-start gap-3">
                                                     <span className="text-[#ff705a] mt-1 font-bold">•</span>
-                                                    <span dangerouslySetInnerHTML={{ __html: point }} />
+                                                    <span dangerouslySetInnerHTML={{ __html: formatPoint(point) }} />
                                                 </li>
                                             ))}
                                         </ul>
@@ -110,7 +112,7 @@ export default function DataSecurityContent({ lang, isArabic, content }: DataSec
                                                 {section.points.map((point: string, idx: number) => (
                                                     <li key={idx} className="text-gray-700 leading-relaxed flex items-start gap-3">
                                                         <span className="text-[#ff705a] mt-1 font-bold">•</span>
-                                                        <span dangerouslySetInnerHTML={{ __html: point }} />
+                                                    <span dangerouslySetInnerHTML={{ __html: formatPoint(point) }} />
                                                     </li>
                                                 ))}
                                             </ul>
