@@ -19,7 +19,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
     // Auto-transition through tabs with progress
     useEffect(() => {
-        const duration = 9000; // 9 seconds
+        const duration = 8000; // 8 seconds
         const startTime = Date.now();
 
         const progressInterval = setInterval(() => {
