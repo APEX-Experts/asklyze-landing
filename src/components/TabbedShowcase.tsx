@@ -111,15 +111,15 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     <div className="bg-gray-50 min-h-[400px]">
                         {activeTab === 0 ? (
                             <div className="w-full h-full bg-black">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/first1.mp4"
-                                    className="w-full h-full max-h-[500px] object-cover"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
+                                <iframe
+                                    src="https://player.cloudinary.com/embed/?cloud_name=ddmoxgaxf&public_id=configuration-data_kwuxaj"
+                                    width="640"
+                                    height="360"
+                                    style={{ height: "auto", width: "100%", aspectRatio: "640 / 360" }}
+                                    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                                    allowFullScreen
+                                    frameBorder="0"
+                                    title="Data Configuration video"
                                 />
                             </div>
                         ) : activeTab === 1 ? (
