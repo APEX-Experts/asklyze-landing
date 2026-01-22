@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
+import PrivacyPolicyContent from "./PrivacyPolicyContent";
+import { Shield, Lock, Eye, Database, FileCheck, Globe } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -20,14 +22,17 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
 
     const content = isArabic ? {
         title: "سياسة الخصوصية",
+        subtitle: "كيف نحمي بياناتك",
         lastUpdated: "آخر تحديث: يناير 2026",
         intro: "في ASKLYZE، خصوصيتك وأمن بياناتك هي أولويتنا القصوى. تشرح هذه السياسة كيفية التزامنا بحماية معلوماتك عبر بنية 'عدم نقل البيانات' (Zero Data Movement) الفريدة.",
         sections: [
             {
+                icon: Database,
                 title: "1. بنية عدم نقل البيانات",
                 content: "يعمل ASKLYZE على مبدأ أساسي: بياناتك لا تغادر بيئة Oracle الخاصة بك أبداً. يعمل محرك الذكاء الاصطناعي لدينا كطبقة منطقية فقط، حيث يترجم استعلامات اللغة الطبيعية إلى SQL، ولكن يتم تنفيذ جميع الاستعلامات محلياً داخل قاعدة بياناتك."
             },
             {
+                icon: Eye,
                 title: "2. المعلومات التي نجمعها",
                 points: [
                     "**البيانات الوصفية**: معلومات المخطط وهياكل الجداول والعلاقات (لتحسين دقة الاستعلام)",
@@ -37,6 +42,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: Shield,
                 title: "3. المعلومات التي لا نجمعها",
                 points: [
                     "بيانات الأعمال الأولية أو الصفوف الفعلية من قاعدة بياناتك",
@@ -46,6 +52,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: FileCheck,
                 title: "4. كيف نستخدم المعلومات",
                 points: [
                     "**معالجة الاستعلام**: لتحويل أسئلتك إلى استعلامات SQL دقيقة",
@@ -55,10 +62,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: Globe,
                 title: "5. إقامة البيانات والسيادة",
                 content: "بالنسبة لعمليات النشر المحلية، تظل جميع البيانات داخل مراكز البيانات الخاصة بك. بالنسبة لعمليات نشر SaaS عبر ORDS، يتم معالجة البيانات الوصفية فقط، ونحن نلتزم بمتطلبات إقامة البيانات المحددة في اتفاقيتك."
             },
             {
+                icon: Lock,
                 title: "6. الأمان والتشفير",
                 points: [
                     "تشفير HTTPS/TLS لجميع الاتصالات",
@@ -66,7 +75,9 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                     "التحكم في الوصول القائم على الأدوار (RBAC)",
                     "تدقيق شامل في ASKLYZE_AI_QUERY_STORE"
                 ]
-            },
+            }
+        ],
+        additionalSections: [
             {
                 title: "7. مشاركة البيانات والجهات الخارجية",
                 content: "نحن لا نبيع أو نشارك أو نكشف عن بياناتك لأطراف ثالثة. مقدمو خدمات الذكاء الاصطناعي لدينا (OpenAI، Anthropic) يتلقون فقط استعلامات مجردة ومعلومات المخطط - لا توجد بيانات أولية أبداً."
@@ -97,14 +108,17 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
         }
     } : {
         title: "Privacy Policy",
+        subtitle: "How We Protect Your Data",
         lastUpdated: "Last Updated: January 2026",
         intro: "At ASKLYZE, your privacy and data security are our top priorities. This policy explains how we are committed to protecting your information through our unique 'Zero Data Movement' architecture.",
         sections: [
             {
+                icon: Database,
                 title: "1. Zero Data Movement Architecture",
                 content: "ASKLYZE operates on a fundamental principle: your data never leaves your Oracle environment. Our AI engine acts solely as a logic layer, translating natural language queries into SQL, but all query execution happens locally within your database."
             },
             {
+                icon: Eye,
                 title: "2. Information We Collect",
                 points: [
                     "**Metadata**: Schema information, table structures, and relationships (for query optimization)",
@@ -114,6 +128,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: Shield,
                 title: "3. Information We Do NOT Collect",
                 points: [
                     "Raw business data or actual rows from your database",
@@ -123,6 +138,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: FileCheck,
                 title: "4. How We Use Information",
                 points: [
                     "**Query Processing**: To convert your questions into accurate SQL queries",
@@ -132,10 +148,12 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                 ]
             },
             {
+                icon: Globe,
                 title: "5. Data Residency and Sovereignty",
                 content: "For On-Premise deployments, all data remains within your data centers. For SaaS deployments via ORDS, only metadata is processed, and we comply with data residency requirements as specified in your agreement."
             },
             {
+                icon: Lock,
                 title: "6. Security and Encryption",
                 points: [
                     "HTTPS/TLS encryption for all communications",
@@ -143,7 +161,9 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
                     "Role-Based Access Control (RBAC)",
                     "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
                 ]
-            },
+            }
+        ],
+        additionalSections: [
             {
                 title: "7. Data Sharing and Third Parties",
                 content: "We do not sell, share, or disclose your data to third parties. Our AI service providers (OpenAI, Anthropic) receive only abstracted queries and schema information - never raw data."
@@ -177,44 +197,7 @@ export default async function PrivacyPolicy({ params }: { params: Promise<{ lang
     return (
         <>
             <Navbar dict={dict.navbar} />
-            <main className="min-h-screen bg-gray-50">
-                <div className="container mx-auto px-4 py-24">
-                    <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
-                        <h1 className="text-4xl md:text-5xl font-bold text-[#2c234d] mb-4">{content.title}</h1>
-                        <p className="text-sm text-gray-500 mb-8">{content.lastUpdated}</p>
-
-                        <p className="text-lg text-gray-700 leading-relaxed mb-12">{content.intro}</p>
-
-                        <div className="space-y-8">
-                            {content.sections.map((section, index) => (
-                                <div key={index} className="border-l-4 border-[#ff705a] pl-6">
-                                    <h2 className="text-2xl font-bold text-[#2c234d] mb-4">{section.title}</h2>
-                                    {section.content && (
-                                        <p className="text-gray-700 leading-relaxed mb-4">{section.content}</p>
-                                    )}
-                                    {section.points && (
-                                        <ul className="space-y-3">
-                                            {section.points.map((point, idx) => (
-                                                <li key={idx} className="text-gray-700 leading-relaxed flex items-start gap-3">
-                                                    <span className="text-[#ff705a] mt-1">•</span>
-                                                    <span dangerouslySetInnerHTML={{ __html: point }} />
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))}
-
-                            <div className="bg-[#faebe8] rounded-xl p-8 mt-12">
-                                <h2 className="text-2xl font-bold text-[#2c234d] mb-4">{content.contact.title}</h2>
-                                <p className="text-gray-700 mb-4">{content.contact.content}</p>
-                                <p className="text-[#ff705a] font-semibold mb-2">{content.contact.email}</p>
-                                <p className="text-gray-600 text-sm">{content.contact.address}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+            <PrivacyPolicyContent lang={lang} isArabic={isArabic} content={content} />
             <Footer dict={dict.footer} />
         </>
     );

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
+import DataSecurityContent from "./DataSecurityContent";
+import { Shield, Lock, Key, Server, ShieldCheck, Eye } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
     const { lang } = await params;
@@ -20,348 +22,298 @@ export default async function DataSecurity({ params }: { params: Promise<{ lang:
 
     const content = isArabic ? {
         title: "أمن البيانات",
+        subtitle: "الحماية الشاملة للبيانات",
         lastUpdated: "آخر تحديث: يناير 2026",
-        intro: "في ASKLYZE، الأمان ليس ميزة - إنه الأساس. بنية 'عدم نقل البيانات' الخاصة بنا تضمن أن بياناتك الحساسة لا تغادر بيئة Oracle الخاصة بك أبداً، مما يوفر أمناً وامتثالاً لا مثيل لهما.",
+        intro: "يعتمد ASKLYZE على نهج متعدد الطبقات لأمن البيانات، مما يضمن بقاء بيانات Oracle الخاصة بك محمية في كل مرحلة من مراحل دورة حياة الاستعلام. من البنية الأساسية إلى أمن الذكاء الاصطناعي، نقوم بتنفيذ أفضل الممارسات في الصناعة لحماية أصولك الأكثر قيمة.",
         sections: [
             {
-                title: "1. بنية عدم نقل البيانات (Zero Data Movement)",
-                content: "مبدأنا الأساسي في الأمان بسيط ولكنه قوي: بياناتك تبقى في مكانها. يعمل ASKLYZE كطبقة ذكاء فوق قاعدة بيانات Oracle الخاصة بك، حيث يترجم الاستعلامات باللغة الطبيعية إلى SQL دون أن يلمس أو ينقل بياناتك الأولية.",
+                icon: Shield,
+                title: "1. بنية عدم نقل البيانات",
+                content: "مبدأنا الأساسي للأمان: بياناتك لا تغادر بيئة Oracle الخاصة بك أبداً. يعمل محرك الذكاء الاصطناعي لدينا كطبقة منطقية تترجم اللغة الطبيعية إلى SQL، ولكن يتم تنفيذ جميع الاستعلامات محلياً. يضمن هذا النهج المعماري عدم نقل بيانات الإنتاج الخام أبداً عبر الشبكة أو تخزينها خارجياً.",
                 points: [
-                    "**لا يوجد استخراج للبيانات**: البيانات الأولية لا تغادر قاعدة البيانات الخاصة بك أبداً",
-                    "**التنفيذ المحلي**: جميع الاستعلامات تعمل محلياً داخل Oracle Database الخاص بك",
-                    "**البيانات الوصفية فقط**: يعالج محرك الذكاء الاصطناعي فقط معلومات المخطط، وليس البيانات الفعلية",
-                    "**الامتثال حسب التصميم**: يفي بطبيعته بمتطلبات إقامة البيانات والسيادة"
+                    "**معالجة محلية للبيانات**: يتم تنفيذ جميع استعلامات SQL داخل قاعدة بيانات Oracle الخاصة بك",
+                    "**عدم وجود تخزين خارجي**: لا توجد بيانات أولية مُخزنة على خوادم ASKLYZE",
+                    "**نقل بيانات وصفية فقط**: يتم إرسال معلومات المخطط فقط لتحسين الاستعلام",
+                    "**عزل تام**: كل عميل يعمل في بيئة معزولة تماماً"
                 ]
             },
             {
-                title: "2. التشفير وأمان النقل",
+                icon: Lock,
+                title: "2. التشفير وأمن النقل",
+                content: "يتم تشفير جميع الاتصالات بين مكونات ASKLYZE باستخدام بروتوكولات متوافقة مع معايير الصناعة. نستخدم TLS 1.3 لجميع عمليات نقل البيانات، مما يضمن أنه حتى البيانات الوصفية محمية أثناء النقل.",
                 points: [
-                    "**TLS 1.3**: تشفير HTTPS/TLS القياسي في الصناعة لجميع الاتصالات",
-                    "**التشفير من النهاية إلى النهاية**: جميع البيانات المنقولة مشفرة في النقل",
-                    "**تكامل Oracle ORDS**: اتصالات آمنة عبر Oracle REST Data Services",
-                    "**تثبيت الشهادة**: تحقق صارم من شهادة SSL/TLS",
-                    "**لا توجد بيانات نصية عادية**: لا يتم نقل أي بيانات حساسة بدون تشفير"
+                    "**TLS 1.3**: أحدث معايير التشفير لجميع اتصالات HTTPS",
+                    "**تثبيت الشهادة**: حماية من هجمات الوسيط (MITM)",
+                    "**التشفير الشامل**: من متصفح المستخدم إلى قاعدة بيانات Oracle",
+                    "**تدوير المفاتيح الآمن**: التحديث التلقائي لمفاتيح التشفير"
                 ]
             },
             {
+                icon: Key,
                 title: "3. التحكم في الوصول والمصادقة",
+                content: "يستخدم ASKLYZE التحكم في الوصول القائم على الأدوار (RBAC) متعدد الطبقات ويتكامل بسلاسة مع إطار أمان Oracle الحالي لديك، بما في ذلك VPD وRow-Level Security.",
                 points: [
-                    "**التحكم في الوصول القائم على الأدوار (RBAC)**: صلاحيات دقيقة بناءً على أدوار المستخدمين",
-                    "**تكامل Oracle VPD**: دعم كامل لـ Virtual Private Database",
-                    "**الأمان على مستوى الصف (RLS)**: يحترم سياسات RLS الموجودة في Oracle",
-                    "**المصادقة الموحدة (SSO)**: التكامل مع LDAP وActive Directory وOAuth",
-                    "**المصادقة متعددة العوامل (MFA)**: دعم اختياري لـ MFA للحسابات ذات الامتياز",
-                    "**إدارة الجلسات**: انتهاء صلاحية آمن للجلسات وإلغاء الرموز المميزة"
+                    "**المصادقة متعددة العوامل (MFA)**: دعم TOTP وSMS وOTP القائمة على البريد الإلكتروني",
+                    "**تكامل SSO**: SAML 2.0 وOpenID Connect للمؤسسات",
+                    "**Oracle VPD**: احترام سياسات الأمان على مستوى الصف الموجودة",
+                    "**التحكم في الوصول القائم على الأدوار**: أذونات دقيقة لكل مستخدم وفريق"
                 ]
             },
             {
+                icon: Eye,
                 title: "4. التدقيق والمراقبة",
-                content: "يوفر ASKLYZE قدرات تدقيق شاملة لتتبع الأمان والامتثال:",
+                content: "التسجيل الشامل والتدقيق في كل تفاعل مع ASKLYZE. يتم تخزين جميع سجلات الاستعلام في ASKLYZE_AI_QUERY_STORE داخل قاعدة بياناتك الخاصة لأغراض الامتثال والطب الشرعي.",
                 points: [
-                    "**ASKLYZE_AI_QUERY_STORE**: جدول تدقيق محلي يسجل جميع الاستعلامات والأنشطة",
-                    "**سجلات نشاط المستخدم**: تتبع كامل لمن سأل ماذا ومتى",
-                    "**تدقيق SQL المُنشأ**: جميع استعلامات SQL المُنشأة مسجلة للمراجعة",
-                    "**تنبيهات الأمان**: إشعارات فورية لأنماط الوصول المشبوهة",
-                    "**تقارير الامتثال**: سجلات جاهزة للتدقيق لمتطلبات SOC 2 وISO 27001",
-                    "**الاحتفاظ بالسجلات**: سجلات قابلة للتكوين وفقاً لسياسات مؤسستك"
+                    "**تسجيل كامل للاستعلام**: من يسأل ماذا ومتى ومن أين",
+                    "**تتبع توليد SQL**: سجل كامل للتدقيق لترجمة الذكاء الاصطناعي",
+                    "**التنبيهات الأمنية**: إشعارات فورية لأنماط الوصول غير العادية",
+                    "**الاحتفاظ القابل للتكوين**: سياسات الاحتفاظ بالسجلات وفقاً لمتطلبات الامتثال الخاصة بك"
                 ]
             },
             {
-                title: "5. أمان البنية التحتية",
+                icon: Server,
+                title: "5. أمن البنية التحتية",
+                content: "بالنسبة لعمليات النشر المستضافة على السحابة، نستخدم منصات معتمدة SOC 2 وISO 27001 مع تصحيح منتظم وعزل الشبكة واكتشاف التسلل. بالنسبة لعمليات النشر المحلية، ترث ASKLYZE وضع أمان البنية التحتية الخاصة بك.",
                 points: [
-                    "**عزل الشبكة**: نشر VPC لعمليات نشر SaaS",
-                    "**إعدادات الجدار الناري**: تصفية صارمة لحركة المرور الداخلة والخارجة",
-                    "**اكتشاف التسلل**: المراقبة في الوقت الفعلي للأنشطة الشاذة",
-                    "**إدارة التصحيحات**: تحديثات أمان منتظمة ومحددة زمنياً",
-                    "**خطة استمرارية الأعمال**: أنظمة فائضة وإجراءات التعافي من الكوارث",
-                    "**Oracle Cloud Infrastructure (OCI)**: للنشر السحابي، نستخدم أمان OCI على مستوى المؤسسات"
+                    "**الاستضافة المعتمدة**: مراكز بيانات SOC 2 Type II وISO 27001",
+                    "**عزل الشبكة**: شبكات فرعية خاصة وجدران حماية لكل عميل",
+                    "**كشف التسلل**: المراقبة في الوقت الفعلي للتهديدات",
+                    "**تحديثات الأمان التلقائية**: التصحيح الفوري للثغرات الحرجة"
                 ]
             },
             {
-                title: "6. أمان الذكاء الاصطناعي ونماذج اللغة الكبيرة",
-                content: "تتطلب معالجة الذكاء الاصطناعي لدينا تدابير أمان محددة:",
+                icon: ShieldCheck,
+                title: "6. أمن الذكاء الاصطناعي ونماذج اللغة الكبيرة",
+                content: "يتم إرسال استعلامات الذكاء الاصطناعي الخاصة بنا إلى مزودي نماذج لغوية موثوقين (OpenAI، Anthropic) مع ضمانات صارمة. يتلقون فقط أسئلة اللغة الطبيعية المُجردة ومعلومات المخطط - لا توجد بيانات أولية أبداً.",
                 points: [
-                    "**تجريد الاستعلام**: تتلقى نماذج اللغة الكبيرة فقط أسئلة مجردة + معلومات المخطط",
-                    "**لا توجد بيانات PII**: لا يتم إرسال معلومات تعريف شخصية إلى موفري الذكاء الاصطناعي",
-                    "**حدود المعدل**: حماية ضد إساءة استخدام نقطة نهاية الذكاء الاصطناعي",
-                    "**تحقق من الإخراج**: مراجعة تلقائية لسلامة SQL المُنشأ",
-                    "**قوائم الحظر والسماح**: قوائم الجداول والعمليات القابلة للتكوين",
-                    "**عزل النموذج**: مثيلات نموذج منفصلة للعملاء ذوي الأمان العالي"
+                    "**تجريد الاستعلام**: إزالة جميع البيانات الحساسة قبل إرسالها إلى نماذج اللغة الكبيرة",
+                    "**عدم وجود تدريب**: بياناتك غير مستخدمة لتدريب نماذج الذكاء الاصطناعي",
+                    "**أمن نقطة النهاية**: اتصالات HTTPS مُشفرة بـ Azure OpenAI أو Anthropic Claude",
+                    "**تدقيق SQL**: التحقق التلقائي من الاستعلامات المُنشأة من الأمان"
                 ]
-            },
+            }
+        ],
+        additionalSections: [
             {
                 title: "7. الامتثال والشهادات",
-                content: "ASKLYZE مصمم للامتثال لأطر الأمان والخصوصية الرائدة في الصناعة:",
+                content: "تم تصميم ASKLYZE للامتثال للائحة العامة لحماية البيانات (GDPR) وCCPA وHIPAA وSOC 2 Type II وISO 27001 وشهادات ISO 9001. نحن نوفر وثائق الامتثال ونجري عمليات تدقيق منتظمة لضمان التوافق المستمر.",
                 points: [
-                    "**SOC 2 Type II**: ضوابط تنظيمية شاملة (جارية)",
-                    "**ISO 27001**: شهادة نظام إدارة أمن المعلومات (مخطط لها)",
-                    "**الامتثال للائحة العامة لحماية البيانات (GDPR)**: التزام كامل بحماية البيانات في الاتحاد الأوروبي",
-                    "**الامتثال لـ CCPA**: متطلبات خصوصية كاليفورنيا",
-                    "**HIPAA (للرعاية الصحية)**: النشر المحلي يدعم متطلبات HIPAA",
-                    "**PCI DSS (للمدفوعات)**: متوافق مع معايير أمان بيانات البطاقات",
-                    "**FedRAMP (للحكومة الأمريكية)**: على خارطة الطريق للنشر الحكومي"
+                    "**GDPR**: حماية البيانات للمقيمين في الاتحاد الأوروبي وحقوق موضوع البيانات",
+                    "**CCPA**: خصوصية المستهلك للمقيمين في كاليفورنيا",
+                    "**HIPAA**: إرشادات الامتثال لبيانات الرعاية الصحية (النشر المحلي)",
+                    "**SOC 2 Type II**: الضوابط الأمنية المُدققة سنوياً",
+                    "**ISO 27001 & 9001**: معايير إدارة أمن المعلومات والجودة",
+                    "**خصوصية البيانات الإقليمية**: الامتثال لقوانين حماية البيانات المحلية في الإمارات والمملكة العربية السعودية وأوروبا"
                 ]
             },
             {
                 title: "8. النسخ الاحتياطي للبيانات والتعافي من الكوارث",
+                content: "بالنسبة لعمليات النشر السحابية، نحتفظ بنسخ احتياطية مشفرة آمنة مع التكرار الجغرافي. بالنسبة لعمليات النشر المحلية، تتكامل ASKLYZE مع إستراتيجيات النسخ الاحتياطي والتعافي من الكوارث الموجودة في Oracle RMAN.",
                 points: [
-                    "**النسخ الاحتياطية المحلية**: تتبع بياناتك سياسات النسخ الاحتياطي الخاصة بـ Oracle",
-                    "**النسخ الاحتياطي لبيانات التكوين**: نسخ احتياطية يومية لإعدادات ASKLYZE والبيانات الوصفية",
-                    "**استعادة نقطة في الوقت (PITR)**: للنشر السحابي، استعادة حتى 30 يوماً",
-                    "**اختبار التعافي من الكوارث**: اختبارات استعادة ربع سنوية",
-                    "**نسخ جغرافية متماثلة (للسحابة)**: تكرار البيانات عبر المناطق للمرونة",
-                    "**اتفاقية مستوى الخدمة (SLA)**: 99.5٪ من وقت التشغيل المضمون لـ SaaS، RTO < 4 ساعات"
+                    "**نسخ احتياطية تلقائية**: نسخ احتياطية كاملة يومية ونسخ احتياطية إضافية كل ساعة",
+                    "**نسخ احتياطية مُشفرة**: تشفير AES-256 للبيانات المُخزنة",
+                    "**التكرار الجغرافي**: نسخ احتياطية مُخزنة في مناطق متعددة",
+                    "**استعادة نقطة زمنية**: استعادة إلى أي نقطة زمنية خلال 30 يوماً",
+                    "**تخطيط التعافي من الكوارث**: وثائق وإجراءات RTO/RPO"
                 ]
             },
             {
-                title: "9. إدارة الثغرات الأمنية",
+                title: "9. إدارة الثغرات",
+                content: "نحن نحافظ على برنامج نشط لإدارة الثغرات مع فحص منتظم واختبار الاختراق والكشف عن الثغرات المسؤول. جميع مكتباتنا ومُعتمداتنا يتم فحصها تلقائياً للثغرات المعروفة.",
                 points: [
-                    "**فحص الأمان المنتظم**: فحوصات ربع سنوية للثغرات",
-                    "**اختبار الاختراق**: اختبار القلم السنوي من قبل شركات أمنية مستقلة",
-                    "**برنامج الإفصاح المسؤول**: إرشادات واضحة للإبلاغ عن الثغرات",
-                    "**مكافآت الأخطاء**: مكافآت للباحثين الأمنيين (خطط مستقبلية)",
-                    "**تصحيح الأمان**: تحديثات حرجة خلال 24 ساعة من الاكتشاف",
-                    "**تتبع CVE**: مراقبة نشطة لثغرات التبعيات"
+                    "**فحص أمان منتظم**: اختبار اختراق ربع سنوي من قبل شركات خارجية",
+                    "**فحص الثغرات التلقائي**: المراقبة المستمرة لمُعتمدات التعليمات البرمجية",
+                    "**الكشف المسؤول**: سياسة الكشف عن الثغرات ونظام المكافآت",
+                    "**تصحيح سريع**: SLA لمدة 24 ساعة للثغرات الحرجة، 7 أيام للمتوسطة"
                 ]
             },
             {
                 title: "10. الاستجابة للحوادث",
-                content: "في حالة حدوث حادث أمني، تتبع ASKLYZE بروتوكولاً صارماً:",
+                content: "لدينا فريق رسمي للاستجابة للحوادث الأمنية (SIRT) وإجراءات موثقة للتعامل مع انتهاكات الأمان المحتملة. يتم إخطار العملاء خلال 24 ساعة من أي حادث يؤثر على بياناتهم.",
                 points: [
-                    "**الكشف**: مراقبة على مدار الساعة طوال أيام الأسبوع ونظم تنبيه تلقائية",
-                    "**الاحتواء**: عزل فوري للأنظمة المتأثرة",
-                    "**التحقيق**: تحليل السبب الجذري والتقييم الجنائي",
-                    "**الإخطار**: إشعار العملاء المتأثرين خلال 72 ساعة (متطلبات GDPR)",
-                    "**المعالجة**: إصلاح الثغرات وتعزيز الدفاعات",
-                    "**مراجعة ما بعد الحادث**: توثيق الدروس المستفادة وتحسينات العملية"
+                    "**فريق SIRT مخصص**: متخصصون في الأمان متاحون على مدار الساعة طوال أيام الأسبوع",
+                    "**خطة الاستجابة للحوادث**: إجراءات موثقة للاحتواء والتخفيف والاستعادة",
+                    "**إخطار العملاء**: إخطار فوري بالحوادث الأمنية ذات الصلة",
+                    "**تحليل ما بعد الحادث**: مراجعات شاملة وإجراءات تصحيحية"
                 ]
             },
             {
-                title: "11. التدريب الأمني والوعي",
+                title: "11. التدريب والتوعية الأمنية",
+                content: "يخضع جميع موظفي ASKLYZE لتدريب أمني منتظم وفحوصات خلفية شاملة. نحن نعزز ثقافة الأمان أولاً في جميع أنحاء المنظمة من خلال التدريب المستمر وبرامج التوعية.",
                 points: [
-                    "**تدريب الموظفين**: تدريب أمني إلزامي لجميع موظفي APEX Experts",
-                    "**الوعي بالتصيد الاحتيالي**: اختبارات وتدريب منتظم للتصيد الاحتيالي",
-                    "**معالجة البيانات الآمنة**: بروتوكولات صارمة لجميع الموظفين ذوي الوصول",
-                    "**فحوصات الخلفية**: فحص شامل للموظفين في الأدوار الحساسة",
-                    "**الحد الأدنى من الامتياز**: يتلقى الموظفون فقط الحد الأدنى من الوصول المطلوب",
-                    "**مراجعات الوصول**: مراجعات ربع سنوية لصلاحيات الموظفين"
+                    "**تدريب أمني إلزامي**: تدريب سنوي لجميع الموظفين",
+                    "**تمارين التصيد الاحتيالي**: محاكاة منتظمة للهجمات للحفاظ على يقظة الموظفين",
+                    "**فحوصات الخلفية**: فحص شامل لجميع الموظفين الذين لديهم وصول إلى الأنظمة",
+                    "**تدريب مطور آمن**: ممارسات تطوير OWASP وSDLC آمن"
                 ]
             },
             {
                 title: "12. أمان النشر المحلي",
-                content: "بالنسبة لعمليات النشر المحلية، لديك سيطرة كاملة على الأمان:",
+                content: "بالنسبة لعمليات النشر المحلية، يعمل ASKLYZE بالكامل داخل شبكتك، دون اتصالات خارجية مطلوبة لوظائف الذكاء الاصطناعي الأساسية. يمكن تكوين جميع الاتصالات بنماذج اللغة الكبيرة للعمل عبر نقاط نهاية آمنة داخلية أو نقاط نهاية Azure الخاصة.",
                 points: [
-                    "**شبكتك، قواعدك**: ASKLYZE يعمل ضمن سياسات الأمان الموجودة لديك",
-                    "**لا توجد استدعاءات خارجية**: يمكن تكوينها للعمل بشكل كامل على شبكة مغلقة",
-                    "**النماذج المحلية للذكاء الاصطناعي**: خيار استضافة نماذج اللغة الكبيرة محلياً (الإصدار المؤسسي)",
-                    "**المراجعات الأمنية**: يتوفر كود المصدر للمراجعة من قبل فريق الأمان الخاص بك",
-                    "**تحديثات معزولة**: آلية تحديث آمنة وخاضعة للرقابة",
-                    "**الامتثال الكامل للسيادة**: بياناتك تبقى في بلدك/منطقتك"
+                    "**نشر Air-Gapped**: تشغيل كامل دون الوصول إلى الإنترنت (باستخدام نماذج لغوية محلية)",
+                    "**تكامل نقطة النهاية الخاصة**: Azure OpenAI أو Anthropic عبر روابط خاصة",
+                    "**مقيم بالكامل**: جميع المكونات داخل البنية التحتية الخاصة بك",
+                    "**الامتثال للشبكة**: احترام سياسات جدار الحماية والوكيل الخاصة بك"
                 ]
             }
         ],
         contact: {
-            title: "فريق الأمان",
-            content: "لأي مخاوف أمنية أو للإبلاغ عن ثغرة أمنية، اتصل بفريق الأمان لدينا على:",
+            title: "مركز عمليات الأمان",
+            content: "لأي مخاوف أو أسئلة أمنية، اتصل بفريق الأمان لدينا على:",
             email: "security@apexexperts.net",
-            address: "مكتب رقم 43-44 - الفهيدي، دبي بر دبي، الإمارات العربية المتحدة",
-            responsible: "للإفصاح المسؤول عن الثغرات، يرجى تضمين تفاصيل الاكتشاف وخطوات الاستنساخ والتأثير المحتمل."
+            address: "مكتب رقم 43-44 - الفهيدي، دبي بر دبي، الإمارات العربية المتحدة"
         }
     } : {
         title: "Data Security",
+        subtitle: "Comprehensive Data Protection",
         lastUpdated: "Last Updated: January 2026",
-        intro: "At ASKLYZE, security is not a feature—it's the foundation. Our 'Zero Data Movement' architecture ensures your sensitive data never leaves your Oracle environment, providing unmatched security and compliance.",
+        intro: "ASKLYZE employs a multi-layered approach to data security, ensuring your Oracle data remains protected at every stage of the query lifecycle. From infrastructure to AI security, we implement industry best practices to safeguard your most valuable assets.",
         sections: [
             {
+                icon: Shield,
                 title: "1. Zero Data Movement Architecture",
-                content: "Our foundational security principle is simple yet powerful: your data stays where it belongs. ASKLYZE operates as an intelligence layer on top of your Oracle database, translating natural language queries into SQL without ever touching or moving your raw data.",
+                content: "Our foundational security principle: your data never leaves your Oracle environment. Our AI engine acts as a logic layer that translates natural language to SQL, but all query execution happens locally. This architectural approach ensures raw production data is never transmitted over the network or stored externally.",
                 points: [
-                    "**No Data Extraction**: Raw data never leaves your database",
-                    "**Local Execution**: All queries execute locally within your Oracle Database",
-                    "**Metadata Only**: The AI engine processes only schema information, never actual data",
-                    "**Compliance by Design**: Inherently meets data residency and sovereignty requirements"
+                    "**Local Data Processing**: All SQL queries execute within your Oracle database",
+                    "**No External Storage**: No raw data stored on ASKLYZE servers",
+                    "**Metadata-Only Transfer**: Only schema information sent for query optimization",
+                    "**Complete Isolation**: Each client operates in a fully isolated environment"
                 ]
             },
             {
+                icon: Lock,
                 title: "2. Encryption and Transport Security",
+                content: "All communication between ASKLYZE components is encrypted using industry-standard protocols. We use TLS 1.3 for all data transfers, ensuring that even metadata is protected in transit.",
                 points: [
-                    "**TLS 1.3**: Industry-standard HTTPS/TLS encryption for all communications",
-                    "**End-to-End Encryption**: All data in transit is encrypted",
-                    "**Oracle ORDS Integration**: Secure connections via Oracle REST Data Services",
-                    "**Certificate Pinning**: Strict SSL/TLS certificate validation",
-                    "**No Plaintext Data**: No sensitive data is transmitted unencrypted"
+                    "**TLS 1.3**: Latest encryption standards for all HTTPS connections",
+                    "**Certificate Pinning**: Protection against man-in-the-middle (MITM) attacks",
+                    "**End-to-End Encryption**: From user browser to Oracle database",
+                    "**Secure Key Rotation**: Automated encryption key updates"
                 ]
             },
             {
+                icon: Key,
                 title: "3. Access Control and Authentication",
+                content: "ASKLYZE uses multi-layered Role-Based Access Control (RBAC) and integrates seamlessly with your existing Oracle security framework, including VPD and Row-Level Security.",
                 points: [
-                    "**Role-Based Access Control (RBAC)**: Granular permissions based on user roles",
-                    "**Oracle VPD Integration**: Full support for Virtual Private Database",
-                    "**Row-Level Security (RLS)**: Respects existing Oracle RLS policies",
-                    "**Single Sign-On (SSO)**: Integration with LDAP, Active Directory, and OAuth",
-                    "**Multi-Factor Authentication (MFA)**: Optional MFA support for privileged accounts",
-                    "**Session Management**: Secure session expiration and token revocation"
+                    "**Multi-Factor Authentication (MFA)**: Support for TOTP, SMS, and email-based OTP",
+                    "**SSO Integration**: SAML 2.0 and OpenID Connect for enterprise environments",
+                    "**Oracle VPD**: Respect existing row-level security policies",
+                    "**Role-Based Access Control**: Granular permissions per user and team"
                 ]
             },
             {
+                icon: Eye,
                 title: "4. Audit and Monitoring",
-                content: "ASKLYZE provides comprehensive auditing capabilities for security tracking and compliance:",
+                content: "Comprehensive logging and auditing of every interaction with ASKLYZE. All query logs are stored in ASKLYZE_AI_QUERY_STORE within your own database for compliance and forensics purposes.",
                 points: [
-                    "**ASKLYZE_AI_QUERY_STORE**: Local audit table logging all queries and activity",
-                    "**User Activity Logs**: Complete tracking of who asked what and when",
-                    "**Generated SQL Audit**: All generated SQL queries are logged for review",
-                    "**Security Alerts**: Real-time notifications for suspicious access patterns",
-                    "**Compliance Reports**: Audit-ready logs for SOC 2 and ISO 27001 requirements",
-                    "**Log Retention**: Configurable retention according to your organization's policies"
+                    "**Full Query Logging**: Who asked what, when, and from where",
+                    "**SQL Generation Tracking**: Complete audit trail of AI translations",
+                    "**Security Alerts**: Real-time notifications for unusual access patterns",
+                    "**Configurable Retention**: Log retention policies per your compliance requirements"
                 ]
             },
             {
+                icon: Server,
                 title: "5. Infrastructure Security",
+                content: "For cloud-hosted deployments, we use SOC 2 and ISO 27001 certified platforms with regular patching, network isolation, and intrusion detection. For On-Premise deployments, ASKLYZE inherits your infrastructure security posture.",
                 points: [
-                    "**Network Isolation**: VPC deployment for SaaS deployments",
-                    "**Firewall Configuration**: Strict ingress/egress traffic filtering",
-                    "**Intrusion Detection**: Real-time monitoring for anomalous activity",
-                    "**Patch Management**: Regular, time-bound security updates",
-                    "**Business Continuity**: Redundant systems and disaster recovery procedures",
-                    "**Oracle Cloud Infrastructure (OCI)**: For cloud deployment, we leverage enterprise-grade OCI security"
+                    "**Certified Hosting**: SOC 2 Type II and ISO 27001 data centers",
+                    "**Network Isolation**: Private subnets and firewalls per client",
+                    "**Intrusion Detection**: Real-time monitoring for threats",
+                    "**Automated Security Updates**: Immediate patching of critical vulnerabilities"
                 ]
             },
             {
+                icon: ShieldCheck,
                 title: "6. AI and LLM Security",
-                content: "Our AI processing requires specific security measures:",
+                content: "Our AI queries are sent to trusted LLM providers (OpenAI, Anthropic) with strict safeguards. They receive only abstracted natural language questions and schema information - never raw data.",
                 points: [
-                    "**Query Abstraction**: LLMs receive only abstracted questions + schema information",
-                    "**No PII Data**: No personally identifiable information is sent to AI providers",
-                    "**Rate Limiting**: Protection against AI endpoint abuse",
-                    "**Output Validation**: Automatic review of generated SQL for safety",
-                    "**Blacklist/Whitelist**: Configurable table and operation lists",
-                    "**Model Isolation**: Separate model instances for high-security customers"
+                    "**Query Abstraction**: Strip all sensitive data before sending to LLMs",
+                    "**No Training**: Your data is not used to train AI models",
+                    "**Endpoint Security**: Encrypted HTTPS connections to Azure OpenAI or Anthropic Claude",
+                    "**SQL Auditing**: Automatic validation of generated queries for security"
                 ]
-            },
+            }
+        ],
+        additionalSections: [
             {
                 title: "7. Compliance and Certifications",
-                content: "ASKLYZE is designed for compliance with industry-leading security and privacy frameworks:",
+                content: "ASKLYZE is designed for GDPR, CCPA, HIPAA, SOC 2 Type II, ISO 27001, and ISO 9001 compliance. We provide compliance documentation and conduct regular audits to ensure ongoing conformance.",
                 points: [
-                    "**SOC 2 Type II**: Comprehensive organizational controls (in progress)",
-                    "**ISO 27001**: Information Security Management System certification (planned)",
-                    "**GDPR Compliance**: Full adherence to EU data protection regulations",
-                    "**CCPA Compliance**: California privacy requirements",
-                    "**HIPAA (Healthcare)**: On-Premise deployment supports HIPAA requirements",
-                    "**PCI DSS (Payments)**: Compatible with card data security standards",
-                    "**FedRAMP (US Government)**: Roadmapped for government deployment"
+                    "**GDPR**: Data protection for EU residents and data subject rights",
+                    "**CCPA**: Consumer privacy for California residents",
+                    "**HIPAA**: Compliance guidance for healthcare data (On-Premise deployment)",
+                    "**SOC 2 Type II**: Annually audited security controls",
+                    "**ISO 27001 & 9001**: Information security management and quality standards",
+                    "**Regional Data Privacy**: Compliance with local data protection laws in UAE, Saudi Arabia, and Europe"
                 ]
             },
             {
                 title: "8. Data Backup and Disaster Recovery",
+                content: "For cloud deployments, we maintain secure encrypted backups with geo-redundancy. For On-Premise deployments, ASKLYZE integrates with your existing Oracle RMAN backup and disaster recovery strategies.",
                 points: [
-                    "**Local Backups**: Your data follows your own Oracle backup policies",
-                    "**Configuration Data Backup**: Daily backups of ASKLYZE settings and metadata",
-                    "**Point-in-Time Recovery (PITR)**: For cloud deployment, restore up to 30 days",
-                    "**Disaster Recovery Testing**: Quarterly restore drills",
-                    "**Geo-Replication (Cloud)**: Data replication across regions for resilience",
-                    "**SLA Guarantees**: 99.5% uptime for SaaS, RTO < 4 hours"
+                    "**Automated Backups**: Daily full backups and hourly incremental backups",
+                    "**Encrypted Backups**: AES-256 encryption for data at rest",
+                    "**Geo-Redundancy**: Backups stored across multiple regions",
+                    "**Point-in-Time Recovery**: Restore to any point in time within 30 days",
+                    "**Disaster Recovery Planning**: Documented RTO/RPO procedures"
                 ]
             },
             {
                 title: "9. Vulnerability Management",
+                content: "We maintain an active vulnerability management program with regular scanning, penetration testing, and responsible disclosure. All our libraries and dependencies are automatically scanned for known vulnerabilities.",
                 points: [
-                    "**Regular Security Scanning**: Quarterly vulnerability assessments",
-                    "**Penetration Testing**: Annual pen testing by independent security firms",
-                    "**Responsible Disclosure Program**: Clear guidelines for reporting vulnerabilities",
-                    "**Bug Bounty**: Rewards for security researchers (future plans)",
-                    "**Security Patching**: Critical updates within 24 hours of discovery",
-                    "**CVE Tracking**: Active monitoring for dependency vulnerabilities"
+                    "**Regular Security Scans**: Quarterly penetration testing by third-party firms",
+                    "**Automated Vulnerability Scanning**: Continuous monitoring of code dependencies",
+                    "**Responsible Disclosure**: Vulnerability disclosure policy and bug bounty program",
+                    "**Rapid Patching**: 24-hour SLA for critical vulnerabilities, 7 days for medium"
                 ]
             },
             {
                 title: "10. Incident Response",
-                content: "In the event of a security incident, ASKLYZE follows a strict protocol:",
+                content: "We have a formal Security Incident Response Team (SIRT) and documented procedures for handling potential security breaches. Customers are notified within 24 hours of any incident affecting their data.",
                 points: [
-                    "**Detection**: 24/7 monitoring and automated alerting systems",
-                    "**Containment**: Immediate isolation of affected systems",
-                    "**Investigation**: Root cause analysis and forensic assessment",
-                    "**Notification**: Affected customers notified within 72 hours (GDPR requirement)",
-                    "**Remediation**: Patch vulnerabilities and strengthen defenses",
-                    "**Post-Incident Review**: Document lessons learned and process improvements"
+                    "**Dedicated SIRT**: Security specialists on-call 24/7",
+                    "**Incident Response Plan**: Documented procedures for containment, mitigation, and recovery",
+                    "**Customer Notification**: Immediate notification of relevant security incidents",
+                    "**Post-Incident Analysis**: Comprehensive reviews and corrective actions"
                 ]
             },
             {
                 title: "11. Security Training and Awareness",
+                content: "All ASKLYZE employees undergo regular security training and comprehensive background checks. We foster a security-first culture throughout the organization through continuous training and awareness programs.",
                 points: [
-                    "**Employee Training**: Mandatory security training for all APEX Experts staff",
-                    "**Phishing Awareness**: Regular phishing tests and training",
-                    "**Secure Data Handling**: Strict protocols for all personnel with access",
-                    "**Background Checks**: Comprehensive screening for employees in sensitive roles",
-                    "**Least Privilege**: Employees receive only minimum required access",
-                    "**Access Reviews**: Quarterly reviews of employee permissions"
+                    "**Mandatory Security Training**: Annual training for all employees",
+                    "**Phishing Exercises**: Regular simulated attacks to keep employees vigilant",
+                    "**Background Checks**: Comprehensive screening for all employees with system access",
+                    "**Secure Developer Training**: OWASP practices and secure SDLC"
                 ]
             },
             {
                 title: "12. On-Premise Deployment Security",
-                content: "For On-Premise deployments, you have full control over security:",
+                content: "For On-Premise deployments, ASKLYZE operates entirely within your network, with no external connections required for core AI functionality. All LLM connections can be configured to work via secure internal endpoints or Azure private endpoints.",
                 points: [
-                    "**Your Network, Your Rules**: ASKLYZE operates within your existing security policies",
-                    "**No External Calls**: Can be configured to work entirely air-gapped",
-                    "**Local AI Models**: Option to host LLMs locally (Enterprise edition)",
-                    "**Security Audits**: Source code available for review by your security team",
-                    "**Isolated Updates**: Secure, controlled update mechanism",
-                    "**Full Sovereignty Compliance**: Your data stays in your country/region"
+                    "**Air-Gapped Deployment**: Complete operation without internet access (using local LLM models)",
+                    "**Private Endpoint Integration**: Azure OpenAI or Anthropic via private links",
+                    "**Fully Resident**: All components within your infrastructure",
+                    "**Network Compliance**: Respect your firewall and proxy policies"
                 ]
             }
         ],
         contact: {
-            title: "Security Team",
-            content: "For any security concerns or to report a vulnerability, contact our security team at:",
+            title: "Security Operations Center",
+            content: "For any security concerns or questions, contact our security team at:",
             email: "security@apexexperts.net",
-            address: "Office No. 43-44 - Al Fahidi, Dubai Bur Dubai, UAE",
-            responsible: "For responsible vulnerability disclosure, please include details of the discovery, steps to reproduce, and potential impact."
+            address: "Office No. 43-44 - Al Fahidi, Dubai Bur Dubai, UAE"
         }
     };
 
     return (
         <>
             <Navbar dict={dict.navbar} />
-            <main className="min-h-screen bg-gray-50">
-                <div className="container mx-auto px-4 py-24">
-                    <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
-                        <h1 className="text-4xl md:text-5xl font-bold text-[#2c234d] mb-4">{content.title}</h1>
-                        <p className="text-sm text-gray-500 mb-8">{content.lastUpdated}</p>
-
-                        <p className="text-lg text-gray-700 leading-relaxed mb-12">{content.intro}</p>
-
-                        <div className="space-y-8">
-                            {content.sections.map((section, index) => (
-                                <div key={index} className="border-l-4 border-[#ff705a] pl-6">
-                                    <h2 className="text-2xl font-bold text-[#2c234d] mb-4">{section.title}</h2>
-                                    {section.content && (
-                                        <p className="text-gray-700 leading-relaxed mb-4">{section.content}</p>
-                                    )}
-                                    {section.points && (
-                                        <ul className="space-y-3">
-                                            {section.points.map((point, idx) => (
-                                                <li key={idx} className="text-gray-700 leading-relaxed flex items-start gap-3">
-                                                    <span className="text-[#ff705a] mt-1">•</span>
-                                                    <span dangerouslySetInnerHTML={{ __html: point }} />
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))}
-
-                            <div className="bg-[#faebe8] rounded-xl p-8 mt-12">
-                                <h2 className="text-2xl font-bold text-[#2c234d] mb-4">{content.contact.title}</h2>
-                                <p className="text-gray-700 mb-4">{content.contact.content}</p>
-                                <p className="text-[#ff705a] font-semibold mb-2">{content.contact.email}</p>
-                                <p className="text-gray-600 text-sm mb-4">{content.contact.address}</p>
-                                {content.contact.responsible && (
-                                    <p className="text-gray-600 text-sm italic">{content.contact.responsible}</p>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
+            <DataSecurityContent lang={lang} isArabic={isArabic} content={content} />
             <Footer dict={dict.footer} />
         </>
     );
