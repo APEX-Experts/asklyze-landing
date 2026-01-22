@@ -19,7 +19,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
     // Auto-transition through tabs with progress
     useEffect(() => {
-        const duration = 8000; // 8 seconds
+        const duration = 9000; // 9 seconds
         const startTime = Date.now();
 
         const progressInterval = setInterval(() => {
@@ -97,8 +97,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     {/* Dashboard Header Mockup */}
                     <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
                         <div className="flex items-center gap-4">
-                            <div className="font-bold text-gray-800 text-lg">R.</div>
-                            <div className="text-sm font-medium text-gray-500">{dict.dashboard}</div>
+                            <div className="font-bold text-gray-800 text-lg">ASKLYZE</div>
                         </div>
                         <div className="flex gap-2">
                             <div className="w-3 h-3 rounded-full bg-red-400" />
