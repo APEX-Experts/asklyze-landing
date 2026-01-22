@@ -37,7 +37,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
             color: "#ff705a",
             bg: "#ffece8",
             image: "/illustrations/data.svg",
-            iframeSrc: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/tables.mp4"
+            video: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/tables.mp4"
         },
         {
             icon: Search,
