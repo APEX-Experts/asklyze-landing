@@ -15,15 +15,29 @@ interface TabbedShowcaseProps {
 
 export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
     const [activeTab, setActiveTab] = useState(0);
+    const [progress, setProgress] = useState(0);
 
-    // Auto-transition through tabs
+    // Auto-transition through tabs with progress
     useEffect(() => {
-        const interval = setInterval(() => {
-            setActiveTab((prev) => (prev + 1) % dict.tabs.length);
-        }, 5000); // Change tab every 5 seconds
+        setProgress(0);
+        const duration = 5000; // 5 seconds
+        const startTime = Date.now();
 
-        return () => clearInterval(interval);
-    }, [dict.tabs.length]);
+        const progressInterval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+            const newProgress = Math.min((elapsed / duration) * 100, 100);
+            setProgress(newProgress);
+        }, 50); // Update every 50ms for smooth animation
+
+        const tabInterval = setTimeout(() => {
+            setActiveTab((prev) => (prev + 1) % dict.tabs.length);
+        }, duration);
+
+        return () => {
+            clearInterval(progressInterval);
+            clearTimeout(tabInterval);
+        };
+    }, [activeTab, dict.tabs.length]);
 
 
     return (
@@ -50,18 +64,25 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     </h2>
                 </motion.div>
 
-                {/* Custom Tabs */}
+                {/* Custom Tabs with Progress Bars */}
                 <div className="flex flex-wrap justify-center gap-4 mb-16">
                     {dict.tabs.map((tab, i) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(i)}
-                            className={`px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${activeTab === i
+                            className={`relative px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 overflow-hidden ${activeTab === i
                                 ? "bg-white text-[#ff6a88] shadow-lg scale-105"
                                 : "bg-white/20 text-white hover:bg-white/30"
                                 }`}
                         >
-                            {tab}
+                            {/* Progress bar background */}
+                            {activeTab === i && (
+                                <div
+                                    className="absolute bottom-0 left-0 h-1 bg-[#ff6a88] transition-all duration-100 ease-linear"
+                                    style={{ width: `${progress}%` }}
+                                />
+                            )}
+                            <span className="relative z-10">{tab}</span>
                         </button>
                     ))}
                 </div>
