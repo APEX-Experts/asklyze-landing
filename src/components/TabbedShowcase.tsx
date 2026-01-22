@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface TabbedShowcaseProps {
     dict: {
@@ -14,6 +14,15 @@ interface TabbedShowcaseProps {
 
 export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
     const [activeTab, setActiveTab] = useState(0);
+
+    // Auto-transition through tabs
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveTab((prev) => (prev + 1) % dict.tabs.length);
+        }, 5000); // Change tab every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [dict.tabs.length]);
 
 
     return (
