@@ -91,7 +91,12 @@ export default function FAQ({ dict }: FAQProps) {
                 </div>
 
                 <div className="text-center mt-12">
-                    <a href="#contact" className="inline-block px-8 py-3 rounded-full border border-[#ff705a] text-[#ff705a] font-medium hover:bg-[#ff705a] hover:text-white transition-all">
+                    <a
+                        href="https://docs.asklyze.ai/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-8 py-3 rounded-full border border-[#ff705a] text-[#ff705a] font-medium hover:bg-[#ff705a] hover:text-white transition-all"
+                    >
                         {dict.cta}
                     </a>
                 </div>

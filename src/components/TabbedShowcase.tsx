@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import OptimizedVideo from "./OptimizedVideo";
 
 interface TabbedShowcaseProps {
     dict: {
@@ -90,55 +91,55 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     <div className="bg-gray-50 min-h-[400px]">
                         {activeTab === 0 ? (
                             <div className="w-full h-full bg-black">
-                                <video
+                                <OptimizedVideo
                                     src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/first1.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
                                     className="w-full h-full max-h-[500px] object-cover"
-                                    playsInline
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
+                                />
                             </div>
                         ) : activeTab === 1 ? (
                             <div className="w-full h-full bg-black">
-                                <video
+                                <OptimizedVideo
                                     src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step2.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
                                     className="w-full h-full max-h-[500px] object-cover"
-                                    playsInline
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
+                                />
                             </div>
                         ) : activeTab === 2 ? (
                             <div className="w-full h-full bg-black">
-                                <video
+                                <OptimizedVideo
                                     src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step3.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
                                     className="w-full h-full max-h-[500px] object-cover"
-                                    playsInline
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
+                                />
                             </div>
                         ) : activeTab === 3 ? (
                             <div className="w-full h-full bg-black">
-                                <video
+                                <OptimizedVideo
                                     src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/step4.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
                                     className="w-full h-full max-h-[500px] object-cover"
-                                    playsInline
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
+                                />
                             </div>
                         ) : null}
                     </div>

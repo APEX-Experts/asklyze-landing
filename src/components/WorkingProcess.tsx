@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Database, Search, LineChart, LucideIcon } from "lucide-react";
+import OptimizedVideo from "./OptimizedVideo";
 
 interface Step {
     icon: LucideIcon;
@@ -92,13 +93,15 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                     {/* Content Container */}
                                     <div className="relative z-10 w-full h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
                                         {hasVideo ? (
-                                            <video
+                                            <OptimizedVideo
                                                 src={step.video}
-                                                autoPlay
-                                                loop
-                                                muted
-                                                playsInline
                                                 className="w-full h-full object-contain"
+                                                autoPlay={true}
+                                                loop={true}
+                                                muted={true}
+                                                playsInline={true}
+                                                preload="metadata"
+                                                lazyLoad={true}
                                             />
                                         ) : (
                                             <step.icon size={64} color={step.color} className="opacity-80" />

@@ -131,9 +131,9 @@
         ]
     },
     "faq": {
-        "tag": "Frequently Ask Question",
+        "tag": "Frequently Asked Questions",
         "title": "Want to ask something from us?",
-        "cta": "Explore Forum",
+        "cta": "View Documentation",
         "categories": [
             "Service",
             "General",
@@ -143,19 +143,43 @@
         "list": [
             {
                 "question": "How is ASKLYZE deployed?",
-                "answer": "We offer two models: 'On-Premise' for complete data sovereignty (ideal for government/banking) and 'SaaS' via ORDS for rapid deployment in multi-tenant environments."
+                "answer": "We offer two deployment models: 'On-Premise' for complete data sovereignty (ideal for government/banking sectors) hosted on your servers, and 'SaaS' via ORDS REST API for rapid deployment in multi-tenant cloud environments on Oracle Cloud Infrastructure (OCI)."
             },
             {
                 "question": "Is it compatible with my Oracle version?",
-                "answer": "Yes, ASKLYZE is fully compatible with Oracle 19c and ready for the advanced capabilities of Oracle 23ai, ensuring long-term infrastructure sustainability."
+                "answer": "Yes, ASKLYZE is fully compatible with Oracle 19c and ready for the advanced capabilities of Oracle 23ai, ensuring long-term infrastructure sustainability for decades to come."
             },
             {
                 "question": "Does my data leave the server?",
-                "answer": "Absolutely not. Our 'Zero Data Movement' architecture ensures that the AI acts only as a logic layer. Usage data is processed, but your core business data remains 100% within your local Oracle environment."
+                "answer": "Absolutely not. Our 'Zero Data Movement' architecture ensures that AI acts only as a logic layer that translates natural language to SQL. All queries execute locally within your Oracle environment, and your core business data remains 100% under your control."
             },
             {
-                "question": "Can it handle complex pricing/queries?",
-                "answer": "Yes. The 'Intent Detection' engine categorizes queries (Report, Analytics, Trending) and supports advanced logic like Year-over-Year growth and complex join conditions."
+                "question": "How does the 3-step configuration work?",
+                "answer": "Step 1: Whitelist your schemas and tables (supporting 1000+ tables). Step 2: Automatic metadata analysis identifies relationships and Foreign Keys for optimized joins. Step 3: Generate AI descriptions to provide business context beyond technical names."
+            },
+            {
+                "question": "What visualization options are available?",
+                "answer": "ASKLYZE offers 22+ chart types powered by ECharts, including Combo Charts and Multi-Series support. The system also includes dynamic Pivot tables (WebDataRocks) for cross-analysis and AI-generated narratives that explain statistical insights."
+            },
+            {
+                "question": "How does Intent Detection improve accuracy?",
+                "answer": "Our advanced NLP engine automatically classifies queries as REPORT (detailed tabular data), ANALYTICS (calculations and comparisons), or TRENDING (temporal patterns). This ensures the perfect response format and visualization for each question type."
+            },
+            {
+                "question": "Can it handle large-scale databases?",
+                "answer": "Yes. ASKLYZE can process complex schemas with 1000+ tables and thousands of columns simultaneously. The metadata grounding process ensures accurate join operations and eliminates AI hallucination risks."
+            },
+            {
+                "question": "What security measures are in place?",
+                "answer": "ASKLYZE integrates with Oracle VPD and Row-Level Security (RLS), ensuring users only see authorized data. All communications use HTTPS/TLS encryption, and every query is logged in ASKLYZE_AI_QUERY_STORE for compliance auditing and performance monitoring."
+            },
+            {
+                "question": "Does it support Arabic language queries?",
+                "answer": "Yes. ASKLYZE has deep semantic understanding of Arabic, including regional financial and administrative terminology. The interface and query processing fully support both Arabic and English."
+            },
+            {
+                "question": "How fast is the response time?",
+                "answer": "Most queries return results in under 2 seconds. The system eliminates the traditional IT request cycle (which takes days) and provides instant insights through natural language questions."
             }
         ]
     },
@@ -169,12 +193,12 @@
         "plans": [
             {
                 "name": "Cloud Growth Plan",
-                "price": "$999",
+                "price": "$499",
                 "period": "/ Month",
-                "desc": "(or $9,990 / Year)",
+                "desc": "(or $4,990 / Year)",
                 "features": [
                     "1 Database Instance",
-                    "Cloud-Hosted (SaaS)",
+                    "Cloud-Hosted on Oracle Cloud Infrastructure (OCI)",
                     "Unlimited Users & Schemas",
                     "Unlimited Dashboards & Reports",
                     "Unlimited Tables",
@@ -185,9 +209,9 @@
             },
             {
                 "name": "Enterprise On-Premise",
-                "price": "$25,000",
-                "period": "/ Year",
-                "desc": "(Flat License Fee)",
+                "price": "Contact Us",
+                "period": "",
+                "desc": "Custom Pricing",
                 "features": [
                     "Unlimited Database Instances",
                     "On-Premise (Your Servers)",
@@ -204,7 +228,7 @@
     "gradientCTA": {
         "title": "Experience the Future of Oracle APEX Analytics",
         "desc": "Join hundreds of forward-thinking companies that are democratizing data access with ASKLYZE.",
-        "cta": "Free Consultation"
+        "cta": "Contact Us"
     },
     "footer": {
         "company": "Company",

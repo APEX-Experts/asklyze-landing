@@ -32,44 +32,42 @@ export default function Footer({ dict }: FooterProps) {
     const pathname = usePathname();
     const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
 
+    const portfolioPDF = currentLocale === "ar"
+        ? "/ASKLYZE-Intelligent_APEX_Analytics_2026_ar.pdf"
+        : "/ASKLYZE-Intelligent_APEX_Analytics_2026_en.pdf";
+
     const footerLinks = [
         {
             title: dict.company,
             links: [
-                { name: dict.links.features, href: `/${currentLocale}#features` },
-                { name: dict.links.dashboard, href: `/${currentLocale}#dashboard` },
-                { name: dict.links.portfolio, href: `/${currentLocale}#portfolio` },
-                { name: dict.links.about, href: `/${currentLocale}#aboutUs` },
-                { name: dict.links.contact, href: `/${currentLocale}#contact` },
+                { name: dict.links.features, href: `/${currentLocale}/#features` },
+                { name: dict.links.portfolio, href: portfolioPDF, target: "_blank" },
+                { name: dict.links.contact, href: `/${currentLocale}/contact` },
             ]
         },
         {
             title: dict.services,
             links: [
-                { name: dict.links.features, href: `/${currentLocale}#features` },
-                { name: dict.links.dashboard, href: `/${currentLocale}#dashboard` },
-                { name: dict.links.portfolio, href: `/${currentLocale}#portfolio` },
-                { name: dict.links.about, href: `/${currentLocale}#aboutUs` },
-                { name: dict.links.contact, href: `/${currentLocale}#contact` },
+                { name: "Documentation", href: "https://docs.asklyze.ai/", target: "_blank" },
+                { name: "Demo", href: "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login", target: "_blank" },
+                { name: "Blog", href: `/${currentLocale}/blog` },
             ]
         },
         {
             title: dict.digitalExperience,
             links: [
-                { name: dict.links.features, href: `/${currentLocale}#features` },
-                { name: dict.links.dashboard, href: `/${currentLocale}#dashboard` },
-                { name: dict.links.portfolio, href: `/${currentLocale}#portfolio` },
-                { name: dict.links.about, href: `/${currentLocale}#aboutUs` },
-                { name: dict.links.contact, href: `/${currentLocale}#contact` },
+                { name: "Pricing", href: `/${currentLocale}/#pricing` },
+                { name: "FAQ", href: `/${currentLocale}/#faq` },
+                { name: dict.links.contact, href: `/${currentLocale}/contact` },
             ]
         }
     ];
 
     const socialLinks = [
-        { icon: Facebook, href: "#" },
-        { icon: Twitter, href: "#" },
-        { icon: Github, href: "#" },
-        { icon: Linkedin, href: "#" },
+        { icon: Facebook, href: "https://www.facebook.com/apexexperts.ai" },
+        { icon: Twitter, href: "https://twitter.com/apex_experts" },
+        { icon: Github, href: "https://github.com/APEX-Experts" },
+        { icon: Linkedin, href: "https://www.linkedin.com/company/apex-experts" },
     ];
 
     return (
@@ -88,7 +86,12 @@ export default function Footer({ dict }: FooterProps) {
                             <ul className="space-y-4">
                                 {section.links.map((link, i) => (
                                     <li key={i}>
-                                        <a href={link.href} className="text-[#6a7695] hover:text-[#ff705a] text-sm transition-colors">
+                                        <a
+                                            href={link.href}
+                                            target={link.target}
+                                            rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+                                            className="text-[#6a7695] hover:text-[#ff705a] text-sm transition-colors"
+                                        >
                                             {link.name}
                                         </a>
                                     </li>
@@ -121,6 +124,8 @@ export default function Footer({ dict }: FooterProps) {
                                 <a
                                     key={i}
                                     href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-[#ff705a] hover:text-[#ff705a] transition-all duration-300"
                                 >
                                     <social.icon size={16} />
@@ -136,9 +141,9 @@ export default function Footer({ dict }: FooterProps) {
                         © {new Date().getFullYear()} {dict.rights}
                     </p>
                     <div className="flex gap-6">
-                        <a href={`/${currentLocale}#privacy`} className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
-                        <a href={`/${currentLocale}#faq`} className="hover:text-[#ff705a]">{dict.bottomLinks.faq}</a>
-                        <a href={`/${currentLocale}#terms`} className="hover:text-[#ff705a]">{dict.bottomLinks.terms}</a>
+                        <a href="https://docs.asklyze.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
+                        <a href={`/${currentLocale}/#faq`} className="hover:text-[#ff705a]">{dict.bottomLinks.faq}</a>
+                        <a href="https://docs.asklyze.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff705a]">{dict.bottomLinks.terms}</a>
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ import { ArrowRight, Play } from "lucide-react";
 
 import { useState } from "react";
 import VideoModal from "./VideoModal";
+import OptimizedVideo from "./OptimizedVideo";
 
 interface HeroProps {
   dict: {
@@ -163,20 +164,17 @@ export default function Hero({ dict }: HeroProps) {
                   className="rounded-t-lg overflow-hidden relative"
                   style={{ background: "#000", aspectRatio: "16/10" }}
                 >
-                  <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                  <OptimizedVideo
+                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ReportBuilder.mp4"
                     className="w-full h-full object-cover"
                     poster="https://placehold.co/800x500/1a1a1a/FFF?text=Hero+Video+Placeholder"
-                  >
-                    <source
-                      src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ReportBuilder.mp4"
-                      type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                  </video>
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
+                    preload="metadata"
+                    lazyLoad={false}
+                  />
 
                   {/* Overlay Gradient for integration */}
                   <div

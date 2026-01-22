@@ -8,9 +8,10 @@ interface GradientCTAProps {
         desc: string;
         cta: string;
     };
+    lang?: string;
 }
 
-export default function GradientCTA({ dict }: GradientCTAProps) {
+export default function GradientCTA({ dict, lang = "en" }: GradientCTAProps) {
     return (
         <section className="relative py-24 overflow-hidden">
             {/* Orange Gradient Background */}
@@ -48,9 +49,7 @@ export default function GradientCTA({ dict }: GradientCTAProps) {
                     </p>
 
                     <motion.a
-                        href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={`/${lang}/contact`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="inline-block bg-white text-[#ff705a] font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all"

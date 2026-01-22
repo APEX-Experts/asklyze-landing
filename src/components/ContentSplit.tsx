@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import OptimizedVideo from "./OptimizedVideo";
 
 interface ContentSplitProps {
     dict: {
@@ -37,13 +38,15 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                             className="relative"
                         >
                             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-                                <video
+                                <OptimizedVideo
                                     src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/plugin.mp4"
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
                                     className="w-full h-auto"
+                                    autoPlay={true}
+                                    loop={true}
+                                    muted={true}
+                                    playsInline={true}
+                                    preload="metadata"
+                                    lazyLoad={true}
                                 />
                             </div>
 
@@ -110,7 +113,12 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 ))}
                             </ul>
 
-                            <a href="#security" className="btn btn-outline border-[#ff705a] text-[#ff705a] hover:bg-[#ff705a] hover:text-white">
+                            <a
+                                href="https://docs.asklyze.ai/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn btn-outline border-[#ff705a] text-[#ff705a] hover:bg-[#ff705a] hover:text-white"
+                            >
                                 {dict.section2.cta}
                             </a>
                         </motion.div>
@@ -128,13 +136,15 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full opacity-50 -z-10" />
 
                                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-                                    <video
+                                    <OptimizedVideo
                                         src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ReportBuilder.mp4"
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
                                         className="w-full h-auto"
+                                        autoPlay={true}
+                                        loop={true}
+                                        muted={true}
+                                        playsInline={true}
+                                        preload="metadata"
+                                        lazyLoad={true}
                                     />
                                 </div>
                             </div>
