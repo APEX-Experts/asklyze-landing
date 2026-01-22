@@ -22,8 +22,8 @@ interface FooterProps {
         rights: string;
         bottomLinks: {
             privacy: string;
-            faq: string;
             terms: string;
+            security: string;
         };
     };
 }
@@ -141,9 +141,9 @@ export default function Footer({ dict }: FooterProps) {
                         © {new Date().getFullYear()} {dict.rights}
                     </p>
                     <div className="flex gap-6">
-                        <a href="https://docs.asklyze.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
-                        <a href={`/${currentLocale}/#faq`} className="hover:text-[#ff705a]">{dict.bottomLinks.faq}</a>
-                        <a href="https://docs.asklyze.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ff705a]">{dict.bottomLinks.terms}</a>
+                        <a href={`/${currentLocale}/privacy`} className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
+                        <a href={`/${currentLocale}/terms`} className="hover:text-[#ff705a]">{dict.bottomLinks.terms}</a>
+                        <a href={`/${currentLocale}/security`} className="hover:text-[#ff705a]">{dict.bottomLinks.security}</a>
                     </div>
                 </div>
 

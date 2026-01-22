@@ -245,9 +245,9 @@
         },
         "rights": "ASKLYZE. Developed by APEX Experts AI Solutions.",
         "bottomLinks": {
-            "privacy": "Privacy & Policy",
-            "faq": "Faq",
-            "terms": "Terms"
+            "privacy": "Privacy Policy",
+            "terms": "Terms & Conditions",
+            "security": "Data Security"
         }
     },
     "blog": {
