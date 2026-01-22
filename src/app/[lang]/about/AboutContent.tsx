@@ -252,16 +252,38 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             <h2 className="mb-4">{content.team.title}</h2>
                             <p className="text-gray-600 mb-6">{content.team.description}</p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                {content.team.members.map((member: any, index: number) => (
-                                    <div key={index} className="bg-white rounded-2xl p-5 shadow-md border border-gray-100">
-                                        <div className="w-12 h-12 rounded-full bg-[#ffece8] text-[#ff705a] flex items-center justify-center font-bold mb-3">
-                                            {member.name?.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE"}
+                                {content.team.members.map((member: any, index: number) => {
+                                    const memberName = member?.name ?? "";
+                                    const memberInitials = memberName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
+                                    const memberImage = member?.image;
+                                    return (
+                                        <div key={index} className="bg-white rounded-2xl p-5 shadow-md border border-gray-100">
+                                            <div
+                                                className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
+                                                    memberImage
+                                                        ? "overflow-hidden bg-gray-100"
+                                                        : "bg-[#ffece8] text-[#ff705a] font-bold"
+                                                }`}
+                                            >
+                                                {memberImage ? (
+                                                    <img
+                                                        src={memberImage}
+                                                        alt={memberName || "Team member portrait"}
+                                                        className="w-full h-full object-cover"
+                                                        loading="lazy"
+                                                    />
+                                                ) : (
+                                                    <span>{memberInitials}</span>
+                                                )}
+                                            </div>
+                                            <h4 className="text-lg font-bold text-[#2c234d]">{memberName}</h4>
+                                            <p className="text-xs text-gray-500 mb-2">{member.role}</p>
+                                            {member.bio ? (
+                                                <p className="text-sm text-gray-600">{member.bio}</p>
+                                            ) : null}
                                         </div>
-                                        <h4 className="text-lg font-bold text-[#2c234d]">{member.name}</h4>
-                                        <p className="text-xs text-gray-500 mb-2">{member.role}</p>
-                                        <p className="text-sm text-gray-600">{member.bio}</p>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </motion.div>
                     </div>
