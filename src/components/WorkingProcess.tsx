@@ -92,7 +92,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                     />
                                     {/* Content Container */}
                                     <div className="relative z-10 w-full h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
-                                        {hasVideo ? (
+                                        {hasVideo && step.video ? (
                                             <OptimizedVideo
                                                 src={step.video}
                                                 className="w-full h-full object-contain"
