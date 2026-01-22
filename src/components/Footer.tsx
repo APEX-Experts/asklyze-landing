@@ -41,6 +41,7 @@ export default function Footer({ dict }: FooterProps) {
             title: dict.company,
             links: [
                 { name: dict.links.features, href: `/${currentLocale}/#features` },
+                { name: dict.links.about, href: `/${currentLocale}/about` },
                 { name: dict.links.portfolio, href: portfolioPDF, target: "_blank" },
                 { name: dict.links.contact, href: `/${currentLocale}/contact` },
             ]
