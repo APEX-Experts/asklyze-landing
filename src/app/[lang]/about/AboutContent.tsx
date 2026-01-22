@@ -22,6 +22,9 @@ interface AboutContentProps {
 export default function AboutContent({ lang, isArabic, content }: AboutContentProps) {
     const textAlign = isArabic ? "text-right" : "text-left";
     const alignItems = isArabic ? "items-end" : "items-start";
+    const founderName = content?.founder?.name ?? "";
+    const founderInitials = founderName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
+    const founderImage = content?.founder?.image;
 
     return (
         <>
@@ -208,8 +211,23 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100"
                         >
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ff705a] to-[#ff9472] flex items-center justify-center text-white text-xl font-bold">
-                                    {content.founder.name?.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE"}
+                                <div
+                                    className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                                        founderImage
+                                            ? "overflow-hidden bg-gray-100"
+                                            : "bg-gradient-to-br from-[#ff705a] to-[#ff9472]"
+                                    }`}
+                                >
+                                    {founderImage ? (
+                                        <img
+                                            src={founderImage}
+                                            alt={founderName || "Founder portrait"}
+                                            className="w-full h-full object-cover"
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <span className="text-white text-xl font-bold">{founderInitials}</span>
+                                    )}
                                 </div>
                                 <div>
                                     <div className="text-sm uppercase tracking-widest text-[#ff705a] mb-1">{content.founder.tag}</div>

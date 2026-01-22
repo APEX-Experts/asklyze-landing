@@ -27,9 +27,9 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             subtitle: "ASKLYZE مطور بواسطة APEX Experts AI Solutions.",
             intro: "نساعد المؤسسات على تحويل البيانات المعقدة إلى إجابات واضحة دون نقل أي بيانات خارج بيئتهم.",
             highlights: [
-                { value: "+10 سنوات", label: "خبرة في Oracle APEX" },
-                { value: "0 نقل بيانات", label: "بياناتك تبقى داخل بيئتك" },
-                { value: "+22 تصور", label: "رسوم بيانية ومحاور وقصص" },
+                { value: "+17 سنة", label: "خبرة في Oracle APEX" },
+                { value: "+200 تطبيق", label: "تطبيقات مُسلّمة للمؤسسات" },
+                { value: "+10 شركات", label: "شراكات مع مؤسسات كبرى" },
             ],
         },
         about: {
@@ -74,11 +74,11 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
         },
         founder: {
             tag: "المؤسس والرئيس التنفيذي",
-            name: "[اسم المؤسس]",
+            name: "Ahmed Alsaied",
             role: "Founder & CEO",
+            image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/1764320966098.jpeg",
             bio:
                 "يقود رؤية ASKLYZE لتوفير تحليلات آمنة وسريعة للمؤسسات. يمتلك خبرة عميقة في Oracle APEX وتحويل البيانات إلى قرارات.",
-            note: "يمكنك تحديث الاسم والسيرة من ملف الصفحة.",
         },
         team: {
             tag: "فريق القيادة",
@@ -86,7 +86,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             description: "فريق يجمع بين خبرة Oracle APEX والذكاء الاصطناعي وتصميم التجربة.",
             members: [
                 {
-                    name: "[اسمك]",
+                    name: "Ahmed Alsaied",
                     role: "Founder & CEO",
                     bio: "يرسم اتجاه المنتج ويضمن توافقه مع متطلبات المؤسسات.",
                 },
@@ -115,9 +115,9 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             subtitle: "ASKLYZE is developed by APEX Experts AI Solutions.",
             intro: "We help enterprises turn complex Oracle data into clear answers without moving a single byte outside their environment.",
             highlights: [
-                { value: "10+ Years", label: "Oracle APEX delivery" },
-                { value: "0 Data Movement", label: "Data stays inside your environment" },
-                { value: "22+ Visuals", label: "Charts, pivots, and narratives" },
+                { value: "17+ Years", label: "Oracle APEX Experience" },
+                { value: "200+ Apps", label: "Delivered across enterprise teams" },
+                { value: "10+ Corporates", label: "Long-term enterprise partnerships" },
             ],
         },
         about: {
@@ -162,11 +162,11 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
         },
         founder: {
             tag: "Founder & CEO",
-            name: "[Founder Name]",
+            name: "Ahmed Alsaied",
             role: "Founder & CEO",
+            image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/1764320966098.jpeg",
             bio:
                 "Leads the ASKLYZE vision to deliver secure, fast analytics for enterprises. Deep expertise in Oracle APEX and data transformation.",
-            note: "Replace the name and bio with your details.",
         },
         team: {
             tag: "Leadership Team",
@@ -174,7 +174,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             description: "A team combining Oracle APEX expertise, AI delivery, and UX craft.",
             members: [
                 {
-                    name: "[Your Name]",
+                    name: "Ahmed Alsaied",
                     role: "Founder & CEO",
                     bio: "Sets product direction and ensures enterprise-grade outcomes.",
                 },
