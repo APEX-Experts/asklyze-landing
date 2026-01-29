@@ -5,7 +5,7 @@ import { ArrowRight, Play } from "lucide-react";
 
 import { useState } from "react";
 import VideoModal from "./VideoModal";
-import OptimizedVideo from "./OptimizedVideo";
+
 
 interface HeroProps {
   dict: {
@@ -164,17 +164,22 @@ export default function Hero({ dict }: HeroProps) {
                   className="rounded-t-lg overflow-hidden relative"
                   style={{ background: "#000", aspectRatio: "16/10" }}
                 >
-                  <OptimizedVideo
-                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ReportBuilder.mp4"
-                    className="w-full h-full object-cover"
-                    poster="https://placehold.co/800x500/1a1a1a/FFF?text=Hero+Video+Placeholder"
-                    autoPlay={true}
-                    loop={true}
-                    muted={true}
-                    playsInline={true}
-                    preload="metadata"
-                    lazyLoad={false}
-                  />
+                  <div style={{ position: "relative", paddingTop: "69.23076923076923%" }}>
+                    <iframe
+                      src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/378b5ca68239fdd874e339fb1475cf30/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F378b5ca68239fdd874e339fb1475cf30%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                      loading="lazy"
+                      style={{
+                        border: "none",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        height: "100%",
+                        width: "100%",
+                      }}
+                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                      allowFullScreen={true}
+                    />
+                  </div>
 
                   {/* Overlay Gradient for integration */}
                   <div

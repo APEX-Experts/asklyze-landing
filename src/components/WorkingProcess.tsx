@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Database, Search, LineChart, LucideIcon } from "lucide-react";
 import OptimizedVideo from "./OptimizedVideo";
+import { ReactNode } from "react";
 
 interface Step {
     icon: LucideIcon;
@@ -13,6 +14,7 @@ interface Step {
     image: string;
     video?: string;
     iframeSrc?: string;
+    customVisual?: ReactNode;
 }
 
 interface WorkingProcessProps {
@@ -37,7 +39,17 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
             color: "#ff705a",
             bg: "#ffece8",
             image: "/illustrations/data.svg",
-            video: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/tables.mp4"
+            customVisual: (
+                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
+                    <iframe
+                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/d328e3583b683475127136da529109f8/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fd328e3583b683475127136da529109f8%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                        loading="lazy"
+                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowFullScreen={true}
+                    />
+                </div>
+            )
         },
         {
             icon: Search,
@@ -46,7 +58,17 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
             color: "#5e63ff",
             bg: "#ededff",
             image: "/illustrations/search.svg",
-            video: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/configuration.mp4"
+            customVisual: (
+                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
+                    <iframe
+                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/53c62775896cab1b4dab846ba1427656/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F53c62775896cab1b4dab846ba1427656%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                        loading="lazy"
+                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowFullScreen={true}
+                    />
+                </div>
+            )
         },
         {
             icon: LineChart,
@@ -55,7 +77,17 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
             color: "#1ad271",
             bg: "#e0fbf0",
             image: "/illustrations/charts.svg",
-            video: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/AIGeneration.mp4"
+            customVisual: (
+                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
+                    <iframe
+                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/158f53e6bb68c978945f6106ee7c0db4/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F158f53e6bb68c978945f6106ee7c0db4%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                        loading="lazy"
+                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowFullScreen={true}
+                    />
+                </div>
+            )
         }
     ];
 
@@ -74,7 +106,8 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                         // Explicitly check for video existence to avoid TS issues or runtime ambiguity
                         const hasVideo = "video" in step && step.video;
                         const hasIframe = "iframeSrc" in step && step.iframeSrc;
-                        const hasMedia = hasVideo || hasIframe;
+                        const hasCustom = "customVisual" in step && step.customVisual;
+                        const hasMedia = hasVideo || hasIframe || hasCustom;
 
                         return (
                             <motion.div
@@ -86,7 +119,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                 className="text-center group"
                             >
                                 {/* Illustration/Video Placeholder */}
-                                <div className={`mb-8 relative mx-auto flex items-center justify-center transition-all duration-300 ${hasMedia ? "w-full aspect-video" : "w-48 h-48"
+                                <div className={`mb-8 relative mx-auto flex items-center justify-center transition-all duration-300 ${hasCustom ? "w-full" : (hasMedia ? "w-full aspect-video" : "w-48 h-48")
                                     }`}>
                                     {/* Decorative Blob */}
                                     <div
@@ -95,7 +128,9 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                     />
                                     {/* Content Container */}
                                     <div className="relative z-10 w-full h-full bg-white rounded-3xl shadow-lg border border-gray-100 flex items-center justify-center overflow-hidden">
-                                        {hasIframe && step.iframeSrc ? (
+                                        {hasCustom ? (
+                                            step.customVisual
+                                        ) : hasIframe && step.iframeSrc ? (
                                             <iframe
                                                 src={step.iframeSrc}
                                                 width="640"

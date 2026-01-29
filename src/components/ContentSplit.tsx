@@ -38,16 +38,15 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                             className="relative"
                         >
                             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transform -rotate-1 hover:rotate-0 transition-transform duration-500">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/plugin.mp4"
-                                    className="w-full h-auto"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
-                                />
+                                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
+                                    <iframe
+                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/e418d6024c5dd8bea1835b3465095b66/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fe418d6024c5dd8bea1835b3465095b66%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                        loading="lazy"
+                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowFullScreen={true}
+                                    />
+                                </div>
                             </div>
 
                             {/* Floating Badge */}
@@ -136,16 +135,15 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-50 rounded-full opacity-50 -z-10" />
 
                                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-                                    <OptimizedVideo
-                                        src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ReportBuilder.mp4"
-                                        className="w-full h-auto"
-                                        autoPlay={true}
-                                        loop={true}
-                                        muted={true}
-                                        playsInline={true}
-                                        preload="metadata"
-                                        lazyLoad={true}
-                                    />
+                                    <div style={{ position: "relative", paddingTop: "69.23076923076923%" }}>
+                                        <iframe
+                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/378b5ca68239fdd874e339fb1475cf30/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F378b5ca68239fdd874e339fb1475cf30%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                            loading="lazy"
+                                            style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                            allowFullScreen={true}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>

@@ -19,7 +19,7 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
     // Auto-transition through tabs with progress
     useEffect(() => {
-        const duration = 8000; // 8 seconds
+        const duration = 6550; // 7seconds
         const startTime = Date.now();
 
         const progressInterval = setInterval(() => {
@@ -110,55 +110,51 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
                     <div className="bg-gray-50 min-h-[400px]">
                         {activeTab === 0 ? (
                             <div className="w-full h-full bg-black">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/configuration-data.mp4"
-                                    className="w-full h-full max-h-[500px] object-cover"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
-                                />
+                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
+                                    <iframe
+                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/55692ccda3764ca9a68525d86e504c15/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F55692ccda3764ca9a68525d86e504c15%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                        loading="lazy"
+                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowFullScreen={true}
+                                    />
+                                </div>
                             </div>
                         ) : activeTab === 1 ? (
                             <div className="w-full h-full bg-black">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Data-Generation.mp4"
-                                    className="w-full h-full max-h-[500px] object-cover"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
-                                />
+                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
+                                    <iframe
+                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/ff634d10d51fdb3d2eeec7f75049fab2/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fff634d10d51fdb3d2eeec7f75049fab2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                        loading="lazy"
+                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowFullScreen={true}
+                                    />
+                                </div>
                             </div>
                         ) : activeTab === 2 ? (
                             <div className="w-full h-full bg-black">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Dashboard-builder.mp4"
-                                    className="w-full h-full max-h-[500px] object-cover"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
-                                />
+                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
+                                    <iframe
+                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/6751079fa304be597c3140e0ed900d9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F6751079fa304be597c3140e0ed900d9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                        loading="lazy"
+                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowFullScreen={true}
+                                    />
+                                </div>
                             </div>
                         ) : activeTab === 3 ? (
                             <div className="w-full h-full bg-black">
-                                <OptimizedVideo
-                                    src="https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Customize-Dashboard.mp4"
-                                    className="w-full h-full max-h-[500px] object-cover"
-                                    autoPlay={true}
-                                    loop={true}
-                                    muted={true}
-                                    playsInline={true}
-                                    preload="metadata"
-                                    lazyLoad={true}
-                                />
+                                <div style={{ position: "relative", paddingTop: "71.80851063829788%" }}>
+                                    <iframe
+                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/4f369287d11d183bea5af749e15f7e9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F4f369287d11d183bea5af749e15f7e9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                        loading="lazy"
+                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
+                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                        allowFullScreen={true}
+                                    />
+                                </div>
                             </div>
                         ) : null}
                     </div>
