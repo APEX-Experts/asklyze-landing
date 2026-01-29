@@ -74,7 +74,7 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                             </p>
 
                             <a
-                                href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login"
+                                href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn btn-primary bg-[#ff705a] border-[#ff705a] text-white hover:bg-[#ff8a78] hover:border-[#ff8a78]"

@@ -50,7 +50,7 @@ export default function Footer({ dict }: FooterProps) {
             title: dict.services,
             links: [
                 { name: "Documentation", href: "https://docs.asklyze.ai/", target: "_blank" },
-                { name: "Demo", href: "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-demo/login", target: "_blank" },
+                { name: "Demo", href: "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login", target: "_blank" },
                 { name: "Blog", href: `/${currentLocale}/blog` },
             ]
         },
