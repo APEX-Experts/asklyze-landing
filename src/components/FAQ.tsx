@@ -13,13 +13,19 @@ interface FAQProps {
         list: Array<{
             question: string;
             answer: string;
+            category?: string;
         }>;
     };
 }
 
 export default function FAQ({ dict }: FAQProps) {
-    const [activeTab, setActiveTab] = useState(dict.categories[1]);
-    const [openIndex, setOpenIndex] = useState<number | null>(1); // Default second item open
+    const [activeTab, setActiveTab] = useState(dict.categories[0]);
+    const [openIndex, setOpenIndex] = useState<number | null>(0); // Default first item open
+
+    // Filter FAQs based on active tab
+    const filteredFAQs = activeTab === dict.categories[0]
+        ? dict.list
+        : dict.list.filter(item => item.category === activeTab);
 
     const toggleFAQ = (index: number) => {
         setOpenIndex(openIndex === index ? null : index);
@@ -41,7 +47,10 @@ export default function FAQ({ dict }: FAQProps) {
                     {dict.categories.map((cat) => (
                         <button
                             key={cat}
-                            onClick={() => setActiveTab(cat)}
+                            onClick={() => {
+                                setActiveTab(cat);
+                                setOpenIndex(null); // Close all when switching tabs
+                            }}
                             className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${activeTab === cat
                                 ? "bg-[#ff705a] text-white shadow-md transform scale-105"
                                 : "bg-[#eef2f6] text-[#6a7695] hover:bg-[#e2e6ea]"
@@ -54,7 +63,7 @@ export default function FAQ({ dict }: FAQProps) {
 
                 {/* Accordion */}
                 <div className="max-w-3xl mx-auto space-y-4">
-                    {dict.list.map((faq, index) => (
+                    {filteredFAQs.map((faq, index) => (
                         <div
                             key={index}
                             className={`border rounded-lg overflow-hidden transition-all duration-300 ${openIndex === index ? "border-[#ff705a] shadow-md bg-white" : "border-gray-100 bg-white"}`}

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Cloud, Server } from "lucide-react";
+import { Check, Cloud, Database, Server } from "lucide-react";
 
 interface PricingProps {
     dict: {
@@ -16,20 +16,23 @@ interface PricingProps {
             price: string;
             period: string;
             desc: string;
+            cta?: string;
+            href?: string;
             features: string[];
         }>;
     };
+    lang?: string;
 }
 
-const icons = [Cloud, Server];
-const colors = ["#5e63ff", "#1ad271"];
+const icons = [Cloud, Database, Server];
+const colors = ["#5e63ff", "#1ad271", "#f59e0b"];
 
-export default function Pricing({ dict }: PricingProps) {
+export default function Pricing({ dict, lang = "en" }: PricingProps) {
     const plans = dict.plans.map((p, i) => ({
         ...p,
         icon: icons[i],
         color: colors[i],
-        featured: i === 1, // On-Premise is featured
+        featured: i === 1, // Professional is featured
         description: p.desc
     }));
 
@@ -50,7 +53,7 @@ export default function Pricing({ dict }: PricingProps) {
                 </motion.div>
 
                 {/* Pricing Cards */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
                     {plans.map((plan, index) => (
                         <motion.div
                             key={plan.name}
@@ -88,20 +91,19 @@ export default function Pricing({ dict }: PricingProps) {
                             <div className="plan-name">{plan.name}</div>
                             <div className="plan-desc">{plan.description}</div>
 
-                            {/* Features */}
-                            <ul>
+                            <ul style={{ textAlign: lang === "ar" ? "right" : "left" }}>
                                 {plan.features.map((feature) => (
-                                    <li key={feature}>
-                                        <Check size={18} color="#1ad271" />
-                                        <span>{feature}</span>
+                                    <li key={feature} className="w-full flex items-center gap-3">
+                                        <Check size={18} color="#1ad271" className="flex-shrink-0" />
+                                        <span className="flex-1" style={{ textAlign: lang === "ar" ? "right" : "left" }}>{feature}</span>
                                     </li>
                                 ))}
                             </ul>
 
                             {/* CTA Button */}
                             <motion.a
-                                href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
-                                target="_blank"
+                                href={plan.href || "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"}
+                                target={plan.href?.startsWith("/") ? "_self" : "_blank"}
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
@@ -112,7 +114,7 @@ export default function Pricing({ dict }: PricingProps) {
                                     border: `2px solid ${plan.color}`,
                                 }}
                             >
-                                {dict.cta}
+                                {plan.cta || dict.cta}
                             </motion.a>
                         </motion.div>
                     ))}

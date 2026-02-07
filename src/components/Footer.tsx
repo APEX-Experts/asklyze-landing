@@ -68,7 +68,7 @@ export default function Footer({ dict }: FooterProps) {
         { icon: Facebook, href: "https://www.facebook.com/apexexperts.ai" },
         { icon: Twitter, href: "https://twitter.com/apex_experts" },
         { icon: Github, href: "https://github.com/APEX-Experts" },
-        { icon: Linkedin, href: "https://www.linkedin.com/company/apex-experts" },
+        { icon: Linkedin, href: "https://www.linkedin.com/showcase/asklyze-ai" },
     ];
 
     return (
@@ -110,7 +110,7 @@ export default function Footer({ dict }: FooterProps) {
                     >
                         {/* Footer Logo */}
                         <div className="mb-6">
-                            <Image src="/logo-dark.png" alt="ASKLYZE" width={140} height={40} className="h-8 w-auto" />
+                            <Image src="/logo-dark.png" alt="ASKLYZE" width={140} height={40} className="h-8 w-auto" unoptimized={true} />
                         </div>
 
                         <h4 className="text-[#2c234d] font-bold text-lg mb-8">{dict.address}</h4>

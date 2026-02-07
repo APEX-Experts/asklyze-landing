@@ -35,7 +35,7 @@ export default async function Home({ params }: { params: Promise<{ lang: "en" | 
                 <TabbedShowcase dict={dict.tabbedShowcase} />
                 <FeatureGrid dict={dict.featureGrid} />
                 <Testimonials dict={dict.testimonials} />
-                <Pricing dict={dict.pricing} />
+                <Pricing dict={dict.pricing} lang={lang} />
                 <FAQ dict={dict.faq} />
                 <GradientCTA dict={dict.gradientCTA} lang={lang} />
             </main>

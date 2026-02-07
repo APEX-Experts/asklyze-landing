@@ -76,7 +76,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             tag: "المؤسس والرئيس التنفيذي",
             name: "Ahmed Alsaied",
             role: "Founder & CEO",
-            image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_poj3r5poj3r5poj3.png",
+            image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/9dd78696-971a-4658-3df1-e4427a36f500/public",
             bio:
                 "يقود رؤية ASKLYZE لتوفير تحليلات آمنة وسريعة للمؤسسات. يمتلك خبرة عميقة في Oracle APEX وتحويل البيانات إلى قرارات.",
         },
@@ -86,19 +86,31 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             description: "فريق يجمع بين خبرة Oracle APEX والذكاء الاصطناعي وتصميم التجربة.",
             members: [
                 {
+                    name: "Karema Mohamed",
+                    role: "CTO",
+                    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
+                },
+                {
                     name: "Fatima Bouraba",
                     role: "COO",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_8ivjg28ivjg28ivj.png",
                 },
                 {
-                    name: "Amr Abdeen",
-                    role: "CTO",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_27lg0527lg0527lg.png",
-                },
-                {
                     name: "Amr Mohamed",
                     role: "AI Lead | GenAI",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                },
+            ],
+            employees: [
+                {
+                    name: "Michael Magdy",
+                    role: "Senior Software Engineer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/8676627d-692c-4b8b-564a-f0be8998f200/public",
+                },
+                {
+                    name: "Mario Milad",
+                    role: "Senior Product Designer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/b897e444-0127-4ef4-ebbd-32d9f5b07800/public",
                 },
             ],
         },
@@ -164,7 +176,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             tag: "Founder & CEO",
             name: "Ahmed Alsaied",
             role: "Founder & CEO",
-            image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_poj3r5poj3r5poj3.png",
+            image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/9dd78696-971a-4658-3df1-e4427a36f500/public",
             bio:
                 "Leads the ASKLYZE vision to deliver secure, fast analytics for enterprises. Deep expertise in Oracle APEX and data transformation.",
         },
@@ -174,19 +186,31 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
             description: "A team combining Oracle APEX expertise, AI delivery, and UX craft.",
             members: [
                 {
+                    name: "Karema Mohamed",
+                    role: "CTO",
+                    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
+                },
+                {
                     name: "Fatima Bouraba",
                     role: "COO",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_8ivjg28ivjg28ivj.png",
                 },
                 {
-                    name: "Amr Abdeen",
-                    role: "CTO",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_27lg0527lg0527lg.png",
-                },
-                {
                     name: "Amr Mohamed",
                     role: "AI Lead | GenAI",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                },
+            ],
+            employees: [
+                {
+                    name: "Michael Magdy",
+                    role: "Senior Software Engineer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/8676627d-692c-4b8b-564a-f0be8998f200/public",
+                },
+                {
+                    name: "Mario Milad",
+                    role: "Senior Product Designer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/b897e444-0127-4ef4-ebbd-32d9f5b07800/public",
                 },
             ],
         },

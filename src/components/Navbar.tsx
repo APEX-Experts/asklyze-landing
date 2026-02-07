@@ -65,6 +65,7 @@ export default function Navbar({ dict }: NavbarProps) {
             height={36}
             className="h-9 w-auto object-contain transition-all duration-300"
             priority
+            unoptimized={true}
           />
         </Link>
 
@@ -203,6 +204,7 @@ export default function Navbar({ dict }: NavbarProps) {
                         width={120}
                         height={35}
                         className="h-8 w-auto"
+                        unoptimized={true}
                       />
                     </Link>
                     <button

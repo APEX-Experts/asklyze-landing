@@ -131,11 +131,11 @@
         ]
     },
     "faq": {
-        "tag": "Frequently Asked Questions",
-        "title": "Want to ask something from us?",
+        "tag": "FAQ",
+        "title": "Frequently Asked Questions",
         "cta": "View Documentation",
         "categories": [
-            "Service",
+            "All",
             "General",
             "Technical",
             "Security"
@@ -143,43 +143,53 @@
         "list": [
             {
                 "question": "How is ASKLYZE deployed?",
-                "answer": "We offer two deployment models: 'On-Premise' for complete data sovereignty (ideal for government/banking sectors) hosted on your servers, and 'SaaS' via ORDS REST API for rapid deployment in multi-tenant cloud environments on Oracle Cloud Infrastructure (OCI)."
+                "answer": "We offer two deployment models: 'On-Premise' for complete data sovereignty (ideal for government/banking sectors) hosted on your servers, and 'SaaS' via ORDS REST API for rapid deployment in multi-tenant cloud environments on Oracle Cloud Infrastructure (OCI).",
+                "category": "General"
             },
             {
                 "question": "Is it compatible with my Oracle version?",
-                "answer": "Yes, ASKLYZE is fully compatible with Oracle 19c and ready for the advanced capabilities of Oracle 23ai, ensuring long-term infrastructure sustainability for decades to come."
+                "answer": "Yes, ASKLYZE is fully compatible with Oracle 19c and ready for the advanced capabilities of Oracle 23ai, ensuring long-term infrastructure sustainability for decades to come.",
+                "category": "Technical"
             },
             {
                 "question": "Does my data leave the server?",
-                "answer": "Absolutely not. Our 'Zero Data Movement' architecture ensures that AI acts only as a logic layer that translates natural language to SQL. All queries execute locally within your Oracle environment, and your core business data remains 100% under your control."
+                "answer": "Absolutely not. Our 'Zero Data Movement' architecture ensures that AI acts only as a logic layer that translates natural language to SQL. All queries execute locally within your Oracle environment, and your core business data remains 100% under your control.",
+                "category": "Security"
             },
             {
                 "question": "How does the 3-step configuration work?",
-                "answer": "Step 1: Whitelist your schemas and tables (supporting 1000+ tables). Step 2: Automatic metadata analysis identifies relationships and Foreign Keys for optimized joins. Step 3: Generate AI descriptions to provide business context beyond technical names."
+                "answer": "Step 1: Whitelist your schemas and tables (supporting 1000+ tables). Step 2: Automatic metadata analysis identifies relationships and Foreign Keys for optimized joins. Step 3: Generate AI descriptions to provide business context beyond technical names.",
+                "category": "Technical"
             },
             {
                 "question": "What visualization options are available?",
-                "answer": "ASKLYZE offers 22+ chart types powered by ECharts, including Combo Charts and Multi-Series support. The system also includes dynamic Pivot tables (WebDataRocks) for cross-analysis and AI-generated narratives that explain statistical insights."
+                "answer": "ASKLYZE offers 22+ chart types powered by ECharts, including Combo Charts and Multi-Series support. The system also includes dynamic Pivot tables (WebDataRocks) for cross-analysis and AI-generated narratives that explain statistical insights.",
+                "category": "General"
             },
             {
                 "question": "How does Intent Detection improve accuracy?",
-                "answer": "Our advanced NLP engine automatically classifies queries as REPORT (detailed tabular data), ANALYTICS (calculations and comparisons), or TRENDING (temporal patterns). This ensures the perfect response format and visualization for each question type."
+                "answer": "Our advanced NLP engine automatically classifies queries as REPORT (detailed tabular data), ANALYTICS (calculations and comparisons), or TRENDING (temporal patterns). This ensures the perfect response format and visualization for each question type.",
+                "category": "Technical"
             },
             {
                 "question": "Can it handle large-scale databases?",
-                "answer": "Yes. ASKLYZE can process complex schemas with 1000+ tables and thousands of columns simultaneously. The metadata grounding process ensures accurate join operations and eliminates AI hallucination risks."
+                "answer": "Yes. ASKLYZE can process complex schemas with 1000+ tables and thousands of columns simultaneously. The metadata grounding process ensures accurate join operations and eliminates AI hallucination risks.",
+                "category": "Technical"
             },
             {
                 "question": "What security measures are in place?",
-                "answer": "ASKLYZE integrates with Oracle VPD and Row-Level Security (RLS), ensuring users only see authorized data. All communications use HTTPS/TLS encryption, and every query is logged in ASKLYZE_AI_QUERY_STORE for compliance auditing and performance monitoring."
+                "answer": "ASKLYZE integrates with Oracle VPD and Row-Level Security (RLS), ensuring users only see authorized data. All communications use HTTPS/TLS encryption, and every query is logged in ASKLYZE_AI_QUERY_STORE for compliance auditing and performance monitoring.",
+                "category": "Security"
             },
             {
                 "question": "Does it support Arabic language queries?",
-                "answer": "Yes. ASKLYZE has deep semantic understanding of Arabic, including regional financial and administrative terminology. The interface and query processing fully support both Arabic and English."
+                "answer": "Yes. ASKLYZE has deep semantic understanding of Arabic, including regional financial and administrative terminology. The interface and query processing fully support both Arabic and English.",
+                "category": "General"
             },
             {
                 "question": "How fast is the response time?",
-                "answer": "Most queries return results in under 2 seconds. The system eliminates the traditional IT request cycle (which takes days) and provides instant insights through natural language questions."
+                "answer": "Most queries return results in under 2 seconds. The system eliminates the traditional IT request cycle (which takes days) and provides instant insights through natural language questions.",
+                "category": "Technical"
             }
         ]
     },
@@ -189,38 +199,58 @@
         "desc": "Flexible options for every enterprise. Cloud for convenience, On-Premise for complete control.",
         "cta": "Get Started",
         "recommended": "RECOMMENDED",
-        "trustNote": "All plans include Oracle Partnership support • 30-day money-back guarantee",
+        "trustNote": "All plans include Oracle Partnership support • Cloud editions hosted on Oracle Cloud (OCI)",
         "plans": [
             {
-                "name": "Cloud Growth Plan",
+                "name": "Standard",
                 "price": "$499",
                 "period": "/ Month",
                 "desc": "(or $4,990 / Year)",
                 "features": [
                     "1 Database Instance",
-                    "Cloud-Hosted on Oracle Cloud Infrastructure (OCI)",
-                    "Unlimited Users & Schemas",
-                    "Unlimited Dashboards & Reports",
-                    "Unlimited Tables",
-                    "Standard SSL/Encryption",
-                    "Shared Infrastructure",
-                    "Email Support (24h)"
+                    "1 Schema",
+                    "150 Available Table",
+                    "Unlimited AI Report Generation",
+                    "Unlimited AI Dashboard Generation",
+                    "Unlimited APP_USER access",
+                    "Hosted on Oracle Cloud (OCI)",
+                    "Shared Infrastructure"
                 ]
             },
             {
-                "name": "Enterprise On-Premise",
+                "name": "Professional",
+                "price": "$999",
+                "period": "/ Month",
+                "desc": "(or $9,990 / Year)",
+                "features": [
+                    "1 Database Instance",
+                    "2 Schema",
+                    "150 Available Table/each schema",
+                    "Unlimited AI Report Generation",
+                    "Unlimited AI Dashboard Generation",
+                    "Unlimited APP_USER access",
+                    "Hosted on Oracle Cloud (OCI)",
+                    "Shared Infrastructure"
+                ]
+            },
+            {
+                "name": "ENTERPRISE",
                 "price": "Contact Us",
                 "period": "",
                 "desc": "Custom Pricing",
+                "cta": "Contact Us",
+                "href": "/contact",
                 "features": [
                     "Unlimited Database Instances",
-                    "On-Premise (Your Servers)",
-                    "Unlimited Users & Schemas",
-                    "Unlimited Dashboards & Reports",
+                    "Unlimited Schemas",
                     "Unlimited Tables",
+                    "Unlimited AI Report Generation",
+                    "Unlimited AI Dashboard Generation",
+                    "Unlimited APP_USER access",
                     "Row-Level Security (RLS)",
                     "100% Data Sovereignty",
-                    "Priority Support & Account Manager"
+                    "Priority Support & Account Manage",
+                    "On-Premise (Your Servers)"
                 ]
             }
         ]

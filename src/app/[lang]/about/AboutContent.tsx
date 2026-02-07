@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Shield, Sparkles, Users, Globe, Building2, Target, LineChart } from "lucide-react";
 
 const iconMap = {
@@ -199,10 +200,12 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                 </div>
             </section>
 
-            {/* Founder */}
+            {/* Team Section */}
             <section className="section bg-gray-50">
                 <div className="container">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Founder & Leaders Row */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+                        {/* Founder Card */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -212,22 +215,24 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                         >
                             <div className="flex items-center gap-5 mb-6">
                                 <div
-                                    className={`w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center shadow-md ring-2 ring-white/80 flex-shrink-0 ${
-                                        founderImage
-                                            ? "overflow-hidden bg-gray-100"
-                                            : "bg-gradient-to-br from-[#ff705a] to-[#ff9472]"
-                                    }`}
+                                    className={`w-32 h-32 md:w-36 md:h-36 rounded-full flex items-center justify-center shadow-md ring-2 ring-white/80 flex-shrink-0 ${founderImage
+                                        ? "overflow-hidden bg-gray-100"
+                                        : "bg-gradient-to-br from-[#ff705a] to-[#ff9472]"
+                                        }`}
                                 >
                                     {founderImage ? (
-                                        <img
+                                        <Image
                                             src={founderImage}
                                             alt={founderName || "Founder portrait"}
+                                            width={144}
+                                            height={144}
                                             className="w-full h-full object-cover"
-                                            loading="lazy"
-                                            decoding="async"
+                                            style={{ imageRendering: 'auto' }}
+                                            quality={100}
+                                            priority
                                         />
                                     ) : (
-                                        <span className="text-white text-2xl font-bold">{founderInitials}</span>
+                                        <span className="text-white text-3xl font-bold">{founderInitials}</span>
                                     )}
                                 </div>
                                 <div>
@@ -242,6 +247,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             ) : null}
                         </motion.div>
 
+                        {/* Leadership Block */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -252,6 +258,8 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             <span className="section-tag">{content.team.tag}</span>
                             <h2 className="mb-4">{content.team.title}</h2>
                             <p className="text-gray-600 mb-6">{content.team.description}</p>
+
+                            {/* Leaders Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 {content.team.members.map((member: any, index: number) => {
                                     const memberName = member?.name ?? "";
@@ -259,24 +267,24 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     const memberImage = member?.image;
                                     return (
                                         <div key={index} className="bg-white rounded-2xl p-5 shadow-md border border-gray-100">
-                                        <div
-                                            className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-sm ring-2 ring-white/80 ${
-                                                memberImage
+                                            <div
+                                                className={`w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-sm ring-2 ring-white/80 ${memberImage
                                                     ? "overflow-hidden bg-gray-100"
                                                     : "bg-[#ffece8] text-[#ff705a] font-bold"
-                                            }`}
-                                        >
-                                            {memberImage ? (
-                                                <img
-                                                    src={memberImage}
-                                                    alt={memberName || "Team member portrait"}
-                                                    className="w-full h-full object-cover"
-                                                    loading="lazy"
-                                                    decoding="async"
-                                                />
-                                            ) : (
-                                                <span>{memberInitials}</span>
-                                            )}
+                                                    }`}
+                                            >
+                                                {memberImage ? (
+                                                    <Image
+                                                        src={memberImage}
+                                                        alt={memberName || "Team member portrait"}
+                                                        width={96}
+                                                        height={96}
+                                                        className="w-full h-full object-cover"
+                                                        quality={90}
+                                                    />
+                                                ) : (
+                                                    <span>{memberInitials}</span>
+                                                )}
                                             </div>
                                             <h4 className="text-lg font-bold text-[#2c234d]">{memberName}</h4>
                                             <p className="text-xs text-gray-500 mb-2">{member.role}</p>
@@ -289,6 +297,51 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             </div>
                         </motion.div>
                     </div>
+
+                    {/* Employees Row (Aligned with Leaders column) */}
+                    {content.team.employees && (
+                        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            <div className="hidden lg:block"></div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                viewport={{ once: true }}
+                                className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                            >
+                                {content.team.employees.map((employee: any, index: number) => {
+                                    const employeeName = employee?.name ?? "";
+                                    const employeeInitials = employeeName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
+                                    const employeeImage = employee?.image;
+                                    return (
+                                        <div key={index} className="bg-white rounded-2xl p-5 shadow-md border border-gray-100 h-full">
+                                            <div
+                                                className={`w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-sm ring-2 ring-white/80 ${employeeImage
+                                                    ? "overflow-hidden bg-gray-100"
+                                                    : "bg-[#ffece8] text-[#ff705a] font-bold"
+                                                    }`}
+                                            >
+                                                {employeeImage ? (
+                                                    <Image
+                                                        src={employeeImage}
+                                                        alt={employeeName || "Team member portrait"}
+                                                        width={96}
+                                                        height={96}
+                                                        className="w-full h-full object-cover"
+                                                        quality={90}
+                                                    />
+                                                ) : (
+                                                    <span>{employeeInitials}</span>
+                                                )}
+                                            </div>
+                                            <h4 className="text-lg font-bold text-[#2c234d]">{employeeName}</h4>
+                                            <p className="text-xs text-gray-500 mb-2">{employee.role}</p>
+                                        </div>
+                                    );
+                                })}
+                            </motion.div>
+                        </div>
+                    )}
                 </div>
             </section>
 

@@ -260,7 +260,7 @@ p {
     list-style: none;
     padding: 0;
     margin: 0 0 30px;
-    text-align: left;
+    text-align: start;
 }
 
 .pricing-card ul li {
