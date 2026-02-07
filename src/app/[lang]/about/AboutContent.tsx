@@ -230,6 +230,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                             style={{ imageRendering: 'auto' }}
                                             quality={100}
                                             priority
+                                            unoptimized
                                         />
                                     ) : (
                                         <span className="text-white text-3xl font-bold">{founderInitials}</span>
@@ -281,6 +282,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                                         height={96}
                                                         className="w-full h-full object-cover"
                                                         quality={90}
+                                                        unoptimized
                                                     />
                                                 ) : (
                                                     <span>{memberInitials}</span>
@@ -329,6 +331,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                                         height={96}
                                                         className="w-full h-full object-cover"
                                                         quality={90}
+                                                        unoptimized
                                                     />
                                                 ) : (
                                                     <span>{employeeInitials}</span>
