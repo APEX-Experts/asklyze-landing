@@ -4,6 +4,7 @@ import { withPayload } from "@payloadcms/next/withPayload";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
+    domains: ["imagedelivery.net"],
     remotePatterns: [
       {
         protocol: "https",
