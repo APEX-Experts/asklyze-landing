@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import BlogPostSchema from '@/components/BlogPostSchema'
 
 export const dynamic = 'force-dynamic'
 
@@ -63,6 +64,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
     return (
         <main className="min-h-screen bg-slate-50">
+            <BlogPostSchema post={post} lang={lang} slug={slug} />
             <Navbar dict={dict.navbar} />
 
             {/* Hero Section */}
