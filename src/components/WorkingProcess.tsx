@@ -92,7 +92,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
     ];
 
     return (
-        <section className="section" id="features">
+        <section className="section" id="process">
             <div className="w-full px-4 md:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">

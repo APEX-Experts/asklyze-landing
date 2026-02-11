@@ -8,13 +8,14 @@ import { User, Calendar } from "lucide-react";
 
 interface BlogCardProps {
     post: BlogPost;
+    lang: "en" | "ar";
     delay?: number;
     dict: {
         topics: Record<string, string>;
     };
 }
 
-export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
+export default function BlogCard({ post, lang, delay = 0, dict }: BlogCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -30,7 +31,6 @@ export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
                     alt={post.title}
                     fill
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                    unoptimized
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#ff705a] uppercase tracking-wide">
                     {dict.topics[post.category as keyof typeof dict.topics] || post.category}
@@ -55,7 +55,7 @@ export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
                 </div>
 
                 <h3 className="text-xl font-bold text-[#2c234d] mb-3 leading-snug group-hover:text-[#ff705a] transition-colors">
-                    <Link href={`/blog/${post.slug}`} className="line-clamp-2">
+                    <Link href={`/${lang}/blog/${post.slug}`} className="line-clamp-2">
                         {post.title}
                     </Link>
                 </h3>
@@ -67,7 +67,7 @@ export default function BlogCard({ post, delay = 0, dict }: BlogCardProps) {
                 {/* Footer/Link */}
                 <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
                     <Link
-                        href={`/blog/${post.slug}`}
+                        href={`/${lang}/blog/${post.slug}`}
                         className="text-sm font-bold text-[#2c234d] hover:text-[#ff705a] flex items-center gap-1 transition-colors"
                     >
                         Read More

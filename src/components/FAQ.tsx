@@ -32,7 +32,7 @@ export default function FAQ({ dict }: FAQProps) {
     };
 
     return (
-        <section className="section">
+        <section id="faq" className="section">
             <div className="container relative">
                 {/* Background Decos */}
                 <div className="absolute top-0 left-0 w-64 h-64 bg-[#faebe8] rounded-full opacity-40 -translate-x-1/2 -z-10 blur-3xl" />

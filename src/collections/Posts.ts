@@ -19,6 +19,8 @@ export const Posts: CollectionConfig = {
         {
             name: 'slug',
             type: 'text',
+            required: true,
+            unique: true,
             admin: {
                 position: 'sidebar',
             },

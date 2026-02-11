@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://asklyze.ai'),
     title: {
         default: "ASKLYZE | The First AI-Powered Analytics Platform for Oracle APEX",
-        template: "%s | ASKLYZE"
+        template: "%s"
     },
     description: "Transform Oracle APEX into an intelligent analytics center. Zero data movement, natural language queries (English & Arabic), and enterprise-grade security.",
     applicationName: 'ASKLYZE',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         siteName: 'ASKLYZE',
         images: [
             {
-                url: '/og-image.jpg', // Ensure this file exists or use a valid path
+                url: '/logo.png',
                 width: 1200,
                 height: 630,
                 alt: 'ASKLYZE Platform Preview',
@@ -82,8 +82,8 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: "ASKLYZE | AI for Oracle APEX",
         description: "Zero data movement analytics for Oracle APEX. English & Arabic support.",
-        creator: '@asklyze', // Replace with actual handle if different
-        images: ['/og-image.jpg'], // Ensure this file exists
+        creator: '@apex_experts',
+        images: ['/logo.png'],
     },
     icons: {
         icon: [

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 export default function SchemaMarkup({ lang }: { lang: string }) {
@@ -9,12 +8,7 @@ export default function SchemaMarkup({ lang }: { lang: string }) {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "ASKLYZE",
-        "url": baseUrl,
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": `${baseUrl}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string"
-        }
+        "url": baseUrl
     };
 
     const organizationSchema = {
@@ -24,12 +18,14 @@ export default function SchemaMarkup({ lang }: { lang: string }) {
         "url": baseUrl,
         "logo": `${baseUrl}/logo.png`,
         "sameAs": [
-            "https://www.linkedin.com/company/asklyze",
-            "https://twitter.com/asklyze"
+            "https://www.linkedin.com/showcase/asklyze-ai",
+            "https://twitter.com/apex_experts",
+            "https://www.facebook.com/apexexperts.ai",
+            "https://github.com/APEX-Experts"
         ],
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+971-50-1234567", // Replace with actual phone if available
+            "email": "support@asklyze.ai",
             "contactType": "sales",
             "areaServed": ["AE", "SA", "US", "GB"],
             "availableLanguage": ["en", "ar"]
@@ -51,7 +47,7 @@ export default function SchemaMarkup({ lang }: { lang: string }) {
             "priceCurrency": "USD",
             "availability": "https://schema.org/OnlineOnly"
         },
-        "screenshot": `${baseUrl}/og-image.jpg`,
+        "screenshot": `${baseUrl}/logo.png`,
         "featureList": isArabic
             ? ["تحليلات باللغة الطبيعية", "لوحات تحكم ذكية", "أمان على مستوى المؤسسات", "بدون نقل بيانات"]
             : ["Natural Language Analytics", "AI Dashboards", "Enterprise Security", "Zero Data Movement"]

@@ -98,13 +98,19 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                             </p>
                             <div className="flex gap-3">
                                 <a
-                                    href="#"
+                                    href="https://twitter.com/apex_experts"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Follow ASKLYZE on X"
                                     className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors text-white text-sm font-bold"
                                 >
                                     𝕏
                                 </a>
                                 <a
-                                    href="#"
+                                    href="https://www.linkedin.com/showcase/asklyze-ai"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Follow ASKLYZE on LinkedIn"
                                     className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors text-white text-sm font-bold"
                                 >
                                     in

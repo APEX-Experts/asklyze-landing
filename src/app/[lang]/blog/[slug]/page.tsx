@@ -14,21 +14,58 @@ export const dynamic = 'force-dynamic'
 import { getDictionary } from "@/get-dictionary";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
-    const { slug } = await params;
+    const { slug, lang } = await params;
     const payload = await getPayload({ config: await config });
-    const posts = await payload.find({
+    const result = await payload.find({
         collection: "posts",
+        locale: lang as 'en' | 'ar',
         where: { slug: { equals: slug } },
     });
 
-    if (!posts.docs.length) return { title: "Post Not Found" };
-    const post = posts.docs[0];
-    const { lang } = await params;
+    if (!result.docs.length) {
+        return {
+            title: "Post Not Found",
+            robots: {
+                index: false,
+                follow: false,
+            },
+        };
+    }
+
+    const post = result.docs[0];
     const title = lang === 'ar' && post.titleAr ? post.titleAr : post.title;
+    const description = lang === 'ar' && post.excerptAr ? post.excerptAr : post.excerpt;
+    const image = typeof post.image === 'string' ? post.image : post.image?.url;
+    const canonicalUrl = `https://asklyze.ai/${lang}/blog/${slug}`;
 
     return {
         title: `${title} | ASKLYZE Blog`,
-        description: post.excerpt || `Read ${post.title} on the ASKLYZE blog.`,
+        description: description || `Read ${post.title} on the ASKLYZE blog.`,
+        alternates: {
+            canonical: canonicalUrl,
+            languages: {
+                en: `https://asklyze.ai/en/blog/${slug}`,
+                ar: `https://asklyze.ai/ar/blog/${slug}`,
+            },
+        },
+        openGraph: {
+            type: 'article',
+            title,
+            description: description || `Read ${post.title} on the ASKLYZE blog.`,
+            url: canonicalUrl,
+            images: [
+                {
+                    url: image || '/logo.png',
+                    alt: title,
+                },
+            ],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description: description || `Read ${post.title} on the ASKLYZE blog.`,
+            images: [image || '/logo.png'],
+        },
     };
 }
 
@@ -98,7 +135,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                                     alt={authorName}
                                     fill
                                     className="object-cover"
-                                    unoptimized
                                 />
                             </div>
                         )}
@@ -123,11 +159,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
                         <Image
                             src={post.image as string}
-                            alt={post.title}
+                            alt={displayTitle}
                             fill
                             className="object-cover"
                             priority
-                            unoptimized
                         />
                     </div>
                 </div>

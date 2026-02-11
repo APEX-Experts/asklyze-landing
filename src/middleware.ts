@@ -39,9 +39,12 @@ export function middleware(request: NextRequest) {
 
         // Redirect to default locale if missing
         return NextResponse.redirect(
-            new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url)
+            new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url),
+            308
         );
     }
+
+    return NextResponse.next();
 }
 
 export const config = {
