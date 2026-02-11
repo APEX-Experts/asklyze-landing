@@ -3,7 +3,17 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://asklyze.com'
     const platforms = ['en', 'ar']
-    const routes = ['', '/blog', '/contact']
+    const routes = [
+        '',
+        '/about',
+        '/features',
+        '/pricing',
+        '/blog',
+        '/contact',
+        '/privacy',
+        '/terms',
+        '/security'
+    ]
 
     const sitemaps: MetadataRoute.Sitemap = []
 

@@ -22,21 +22,68 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-    title: "ASKLYZE | AI-Powered Analytics for Oracle APEX",
-    description:
-        "Transform your Oracle APEX into an intelligent analytics center. Natural language queries, instant insights, zero data movement.",
+    metadataBase: new URL('https://asklyze.com'),
+    title: {
+        default: "ASKLYZE | The First AI-Powered Analytics Platform for Oracle APEX",
+        template: "%s | ASKLYZE"
+    },
+    description: "Transform Oracle APEX into an intelligent analytics center. Zero data movement, natural language queries (English & Arabic), and enterprise-grade security.",
+    applicationName: 'ASKLYZE',
+    authors: [{ name: 'APEX Experts AI Solutions', url: 'https://apexexperts.ai' }],
+    generator: 'Next.js',
     keywords: [
-        "Oracle APEX",
-        "AI Analytics",
-        "Natural Language SQL",
-        "Business Intelligence",
-        "Data Democratization",
+        "Oracle APEX AI",
+        "APEX Analytics",
+        "Natural Language to SQL",
+        "Oracle APEX Reporting",
+        "AI Dashboard Generator",
+        "Oracle APEX Plugin",
+        "Data Sovereignty",
+        "Oracle Database AI",
+        "Enterprise BI Tool",
+        "Zero Data Movement"
     ],
+    referrer: 'origin-when-cross-origin',
+    creator: 'APEX Experts AI Solutions',
+    publisher: 'APEX Experts AI Solutions',
+    formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
     openGraph: {
         title: "ASKLYZE | AI-Powered Analytics for Oracle APEX",
-        description:
-            "Transform your Oracle APEX into an intelligent analytics center.",
-        type: "website",
+        description: "Transform Oracle APEX into an intelligent analytics center. Query your data with natural language in English & Arabic.",
+        url: 'https://asklyze.com',
+        siteName: 'ASKLYZE',
+        images: [
+            {
+                url: '/og-image.jpg', // Ensure this file exists or use a valid path
+                width: 1200,
+                height: 630,
+                alt: 'ASKLYZE Platform Preview',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: "ASKLYZE | AI for Oracle APEX",
+        description: "Zero data movement analytics for Oracle APEX. English & Arabic support.",
+        creator: '@asklyze', // Replace with actual handle if different
+        images: ['/og-image.jpg'], // Ensure this file exists
     },
     alternates: {
         canonical: "https://asklyze.com/en",
