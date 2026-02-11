@@ -102,11 +102,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 },
             ],
             employees: [
-                {
-                    name: "Ali Sales",
-                    role: "Oracle APEX Team Leader",
-                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/026af35e-b12c-41cd-e10f-4b049db5a500/public",
-                },
+
                 {
                     name: "Michael Magdy",
                     role: "Senior Software Engineer",
@@ -207,11 +203,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 },
             ],
             employees: [
-                {
-                    name: "Ali Sales",
-                    role: "Oracle APEX Team Leader",
-                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/026af35e-b12c-41cd-e10f-4b049db5a500/public",
-                },
+
                 {
                     name: "Michael Magdy",
                     role: "Senior Software Engineer",
