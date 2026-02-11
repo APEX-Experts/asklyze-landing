@@ -113,6 +113,11 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                     role: "Senior Product Designer",
                     image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/b897e444-0127-4ef4-ebbd-32d9f5b07800/public",
                 },
+                {
+                    name: "Reham Samer",
+                    role: "Quality Assurance Engineer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/6dfe99d6-1087-4cb0-7715-5c57fbd70500/public",
+                },
             ],
         },
         cta: {
@@ -213,6 +218,11 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                     name: "Mario Milad",
                     role: "Senior Product Designer",
                     image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/b897e444-0127-4ef4-ebbd-32d9f5b07800/public",
+                },
+                {
+                    name: "Reham Samer",
+                    role: "Quality Assurance Engineer",
+                    image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/6dfe99d6-1087-4cb0-7715-5c57fbd70500/public",
                 },
             ],
         },
