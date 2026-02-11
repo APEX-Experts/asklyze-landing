@@ -11,6 +11,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
         description: lang === "en"
             ? "Meet the team behind ASKLYZE, developed by APEX Experts AI Solutions. Learn about our mission, leadership, and values."
             : "تعرف على فريق ASKLYZE المطور بواسطة APEX Experts AI Solutions، ورسالتنا وقيادتنا وقيمنا.",
+        alternates: {
+            canonical: `https://asklyze.com/${lang}/about`,
+            languages: {
+                'en': 'https://asklyze.com/en/about',
+                'ar': 'https://asklyze.com/ar/about',
+            },
+        },
     };
 }
 

@@ -18,6 +18,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
     return {
         title: dict.metadata.home.title,
         description: dict.metadata.home.description,
+        alternates: {
+            canonical: `https://asklyze.com/${lang}`,
+            languages: {
+                'en': 'https://asklyze.com/en',
+                'ar': 'https://asklyze.com/ar',
+            },
+        },
     };
 }
 

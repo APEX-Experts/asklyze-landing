@@ -31,6 +31,13 @@ export async function generateMetadata({
     return {
         title,
         description: dict.metadata.blog.description,
+        alternates: {
+            canonical: `https://asklyze.com/${lang}/blog`,
+            languages: {
+                'en': 'https://asklyze.com/en/blog',
+                'ar': 'https://asklyze.com/ar/blog',
+            },
+        },
     };
 }
 

@@ -85,13 +85,6 @@ export const metadata: Metadata = {
         creator: '@asklyze', // Replace with actual handle if different
         images: ['/og-image.jpg'], // Ensure this file exists
     },
-    alternates: {
-        canonical: "https://asklyze.com/en",
-        languages: {
-            'en': 'https://asklyze.com/en',
-            'ar': 'https://asklyze.com/ar',
-        },
-    },
     icons: {
         icon: [
             {

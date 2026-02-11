@@ -4,6 +4,23 @@ import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import TermsConditionsContent from "./TermsConditionsContent";
 
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "ar" }> }): Promise<Metadata> {
+    const { lang } = await params;
+    return {
+        title: lang === "en" ? "Terms & Conditions | ASKLYZE" : "الشروط والأحكام | ASKLYZE",
+        description: lang === "en"
+            ? "Read the terms and conditions for using ASKLYZE's AI-powered analytics platform."
+            : "اقرأ الشروط والأحكام الخاصة باستخدام منصة تحليلات ASKLYZE المدعومة بالذكاء الاصطناعي.",
+        alternates: {
+            canonical: `https://asklyze.com/${lang}/terms`,
+            languages: {
+                'en': 'https://asklyze.com/en/terms',
+                'ar': 'https://asklyze.com/ar/terms',
+            },
+        },
+    };
+}
+
 export default async function TermsConditions({ params }: { params: Promise<{ lang: "en" | "ar" }> }) {
     const { lang } = await params;
     const dict = await getDictionary(lang);
