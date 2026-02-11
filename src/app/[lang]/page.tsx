@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
         title: dict.metadata.home.title,
         description: dict.metadata.home.description,
         alternates: {
-            canonical: `https://asklyze.com/${lang}`,
+            canonical: `https://asklyze.ai/${lang}`,
             languages: {
-                'en': 'https://asklyze.com/en',
-                'ar': 'https://asklyze.com/ar',
+                'en': 'https://asklyze.ai/en',
+                'ar': 'https://asklyze.ai/ar',
             },
         },
     };

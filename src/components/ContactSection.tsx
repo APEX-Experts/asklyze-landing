@@ -27,7 +27,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
         title: dict.emailTitle,
         lines: [
             "admin@apexexperts.net",
-            "support@asklyze.com"
+            "support@asklyze.ai"
         ],
         color: "#5e63ff"
     },

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://asklyze.com'
+    const baseUrl = 'https://asklyze.ai'
     const platforms = ['en', 'ar']
     const routes = [
         '',

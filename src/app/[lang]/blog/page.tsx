@@ -32,10 +32,10 @@ export async function generateMetadata({
         title,
         description: dict.metadata.blog.description,
         alternates: {
-            canonical: `https://asklyze.com/${lang}/blog`,
+            canonical: `https://asklyze.ai/${lang}/blog`,
             languages: {
-                'en': 'https://asklyze.com/en/blog',
-                'ar': 'https://asklyze.com/ar/blog',
+                'en': 'https://asklyze.ai/en/blog',
+                'ar': 'https://asklyze.ai/ar/blog',
             },
         },
     };

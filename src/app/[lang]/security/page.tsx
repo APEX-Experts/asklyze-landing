@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
             ? "Learn about ASKLYZE's comprehensive data security measures, Zero Data Movement architecture, and enterprise-grade protection."
             : "تعرف على تدابير أمن البيانات الشاملة لـ ASKLYZE وبنية عدم نقل البيانات والحماية على مستوى المؤسسات.",
         alternates: {
-            canonical: `https://asklyze.com/${lang}/security`,
+            canonical: `https://asklyze.ai/${lang}/security`,
             languages: {
-                'en': 'https://asklyze.com/en/security',
-                'ar': 'https://asklyze.com/ar/security',
+                'en': 'https://asklyze.ai/en/security',
+                'ar': 'https://asklyze.ai/ar/security',
             },
         },
     };

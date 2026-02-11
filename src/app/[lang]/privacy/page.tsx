@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
             ? "Learn how ASKLYZE protects your data with our comprehensive privacy policy and zero data movement architecture."
             : "تعرف على كيفية حماية ASKLYZE لبياناتك من خلال سياسة الخصوصية الشاملة وبنية عدم نقل البيانات.",
         alternates: {
-            canonical: `https://asklyze.com/${lang}/privacy`,
+            canonical: `https://asklyze.ai/${lang}/privacy`,
             languages: {
-                'en': 'https://asklyze.com/en/privacy',
-                'ar': 'https://asklyze.com/ar/privacy',
+                'en': 'https://asklyze.ai/en/privacy',
+                'ar': 'https://asklyze.ai/ar/privacy',
             },
         },
     };

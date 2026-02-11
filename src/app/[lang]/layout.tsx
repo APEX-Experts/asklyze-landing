@@ -22,7 +22,7 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://asklyze.com'),
+    metadataBase: new URL('https://asklyze.ai'),
     title: {
         default: "ASKLYZE | The First AI-Powered Analytics Platform for Oracle APEX",
         template: "%s | ASKLYZE"
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "ASKLYZE | AI-Powered Analytics for Oracle APEX",
         description: "Transform Oracle APEX into an intelligent analytics center. Query your data with natural language in English & Arabic.",
-        url: 'https://asklyze.com',
+        url: 'https://asklyze.ai',
         siteName: 'ASKLYZE',
         images: [
             {

@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function SchemaMarkup({ lang }: { lang: string }) {
     const isArabic = lang === 'ar';
-    const baseUrl = 'https://asklyze.com';
+    const baseUrl = 'https://asklyze.ai';
 
     const webSiteSchema = {
         "@context": "https://schema.org",

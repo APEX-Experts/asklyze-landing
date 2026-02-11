@@ -11,10 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
         title: dict.metadata.contact.title,
         description: dict.metadata.contact.description,
         alternates: {
-            canonical: `https://asklyze.com/${lang}/contact`,
+            canonical: `https://asklyze.ai/${lang}/contact`,
             languages: {
-                'en': 'https://asklyze.com/en/contact',
-                'ar': 'https://asklyze.com/ar/contact',
+                'en': 'https://asklyze.ai/en/contact',
+                'ar': 'https://asklyze.ai/ar/contact',
             },
         },
     };

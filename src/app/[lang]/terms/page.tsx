@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: "en
             ? "Read the terms and conditions for using ASKLYZE's AI-powered analytics platform."
             : "اقرأ الشروط والأحكام الخاصة باستخدام منصة تحليلات ASKLYZE المدعومة بالذكاء الاصطناعي.",
         alternates: {
-            canonical: `https://asklyze.com/${lang}/terms`,
+            canonical: `https://asklyze.ai/${lang}/terms`,
             languages: {
-                'en': 'https://asklyze.com/en/terms',
-                'ar': 'https://asklyze.com/ar/terms',
+                'en': 'https://asklyze.ai/en/terms',
+                'ar': 'https://asklyze.ai/ar/terms',
             },
         },
     };
