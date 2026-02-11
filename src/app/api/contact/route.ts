@@ -9,6 +9,7 @@ interface ContactFormData {
   country: string;
   countryName: string;
   countryDialCode: string;
+  mobile?: string;
   companyName: string;
   companySize: string;
   title: string;
@@ -16,16 +17,61 @@ interface ContactFormData {
   comment: string;
 }
 
-async function getAccessToken() {
+class ContactFormError extends Error {
+  status: number;
+  clientMessage: string;
+
+  constructor(clientMessage: string, status = 500, debugMessage?: string) {
+    super(debugMessage || clientMessage);
+    this.status = status;
+    this.clientMessage = clientMessage;
+    this.name = "ContactFormError";
+  }
+}
+
+function getEmailConfig(): {
+  tenantId: string;
+  clientId: string;
+  clientSecret: string;
+  mailFrom: string;
+} {
   const tenantId = process.env.AZURE_TENANT_ID;
   const clientId = process.env.AZURE_CLIENT_ID;
   const clientSecret = process.env.AZURE_CLIENT_SECRET;
+  const mailFrom = process.env.MAIL_FROM;
+  const missing: string[] = [];
 
-  if (!tenantId || !clientId || !clientSecret) {
-    throw new Error("Azure credentials not configured");
+  if (!tenantId) missing.push("AZURE_TENANT_ID");
+  if (!clientId) missing.push("AZURE_CLIENT_ID");
+  if (!clientSecret) missing.push("AZURE_CLIENT_SECRET");
+  if (!mailFrom) missing.push("MAIL_FROM");
+
+  if (missing.length > 0) {
+    throw new ContactFormError(
+      "Email service is not configured. Please contact support.",
+      500,
+      `Missing required environment variables: ${missing.join(", ")}`
+    );
   }
 
-  const tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
+  return {
+    tenantId: tenantId!,
+    clientId: clientId!,
+    clientSecret: clientSecret!,
+    mailFrom: mailFrom!,
+  };
+}
+
+async function getAccessToken(config: {
+  tenantId: string;
+  clientId: string;
+  clientSecret: string;
+}) {
+  const { tenantId, clientId, clientSecret } = config;
+
+  const tokenEndpoint = `https://login.microsoftonline.com/${encodeURIComponent(
+    tenantId
+  )}/oauth2/v2.0/token`;
 
   const params = new URLSearchParams();
   params.append("client_id", clientId);
@@ -43,17 +89,29 @@ async function getAccessToken() {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error("Token fetch error:", errorText);
-    throw new Error("Failed to get access token");
+    throw new ContactFormError(
+      "Email authentication failed. Please try again later.",
+      502,
+      `Token fetch failed (${response.status}): ${errorText}`
+    );
   }
 
   const data = await response.json();
+  if (!data.access_token) {
+    throw new ContactFormError(
+      "Email authentication failed. Please try again later.",
+      502,
+      "Token fetch succeeded but no access_token was returned."
+    );
+  }
+
   return data.access_token;
 }
 
 export async function POST(request: Request) {
   try {
     const data: ContactFormData = await request.json();
+    const emailConfig = getEmailConfig();
 
     // Validate required fields
     const requiredFields = [
@@ -66,7 +124,8 @@ export async function POST(request: Request) {
       "comment",
     ];
     for (const field of requiredFields) {
-      if (!data[field as keyof ContactFormData]) {
+      const value = data[field as keyof ContactFormData];
+      if (typeof value !== "string" || !value.trim()) {
         return NextResponse.json(
           { error: `${field} is required` },
           { status: 400 }
@@ -165,21 +224,10 @@ export async function POST(request: Request) {
         `;
 
     // Send email via Microsoft Graph API
-    const mailFrom = process.env.MAIL_FROM;
-    if (!mailFrom) {
-      console.error("MAIL_FROM environment variable is not set");
-      // Log for debugging
-      console.log("=== Contact Form Submission (Failed to send) ===");
-      console.log("Data:", JSON.stringify(data, null, 2));
-
-      return NextResponse.json(
-        { error: "Server configuration error" },
-        { status: 500 }
-      );
-    }
-
-    const accessToken = await getAccessToken();
-    const sendMailUrl = `https://graph.microsoft.com/v1.0/users/${mailFrom}/sendMail`;
+    const accessToken = await getAccessToken(emailConfig);
+    const sendMailUrl = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(
+      emailConfig.mailFrom
+    )}/sendMail`;
 
     const emailData = {
       message: {
@@ -204,7 +252,7 @@ export async function POST(request: Request) {
           },
         ],
       },
-      saveToSentItems: "false",
+      saveToSentItems: false,
     };
 
     const sendResponse = await fetch(sendMailUrl, {
@@ -218,8 +266,11 @@ export async function POST(request: Request) {
 
     if (!sendResponse.ok) {
       const errorText = await sendResponse.text();
-      console.error("Graph API Error:", errorText);
-      throw new Error("Failed to send email via Graph API");
+      throw new ContactFormError(
+        "Failed to send message. Please try again later.",
+        502,
+        `Graph API sendMail failed (${sendResponse.status}): ${errorText}`
+      );
     }
 
     return NextResponse.json({
@@ -227,7 +278,21 @@ export async function POST(request: Request) {
       message: "Your message has been sent successfully!",
     });
   } catch (error) {
-    console.error("Contact form error:", error);
+    if (error instanceof ContactFormError) {
+      console.error("Contact form error:", error.message);
+      const isProduction = process.env.NODE_ENV === "production";
+
+      return NextResponse.json(
+        {
+          error: isProduction
+            ? error.clientMessage
+            : `${error.clientMessage} (${error.message})`,
+        },
+        { status: error.status }
+      );
+    }
+
+    console.error("Contact form unexpected error:", error);
     return NextResponse.json(
       { error: "Failed to send message. Please try again later." },
       { status: 500 }
