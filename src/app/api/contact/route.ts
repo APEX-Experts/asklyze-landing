@@ -142,6 +142,10 @@ export async function POST(request: Request) {
       );
     }
 
+    const mobileDisplay = data.mobile?.trim()
+      ? `${data.countryDialCode ? `${data.countryDialCode} ` : ""}${data.mobile.trim()}`
+      : "";
+
     // Create email content
     const emailHtml = `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -179,6 +183,20 @@ export async function POST(request: Request) {
                                 ${data.countryName} (${data.countryDialCode})
                             </td>
                         </tr>
+                        ${
+                          mobileDisplay
+                            ? `
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
+                                <strong>Mobile:</strong>
+                            </td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
+                                ${mobileDisplay}
+                            </td>
+                        </tr>
+                        `
+                            : ""
+                        }
                         <tr>
                             <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
                                 <strong>Company:</strong>
