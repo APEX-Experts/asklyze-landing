@@ -95,7 +95,7 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 {
                     name: "Karema Mohamed",
                     role: "CTO",
-                    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
+                    image: "",
                 },
                 {
                     name: "Amr Mohamed",
