@@ -98,14 +98,14 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
                 },
                 {
-                    name: "Fatima Bouraba",
-                    role: "COO",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_8ivjg28ivjg28ivj.png",
-                },
-                {
                     name: "Amr Mohamed",
                     role: "AI Lead | GenAI",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                },
+                {
+                    name: "Abdulrahman Ebrahim",
+                    role: "Sr. Software Engineering",
+                    image: "",
                 },
             ],
             employees: [
@@ -204,14 +204,14 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
                 },
                 {
-                    name: "Fatima Bouraba",
-                    role: "COO",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_8ivjg28ivjg28ivj.png",
-                },
-                {
                     name: "Amr Mohamed",
                     role: "AI Lead | GenAI",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                },
+                {
+                    name: "Abdulrahman Ebrahim",
+                    role: "Sr. Software Engineering",
+                    image: "",
                 },
             ],
             employees: [
