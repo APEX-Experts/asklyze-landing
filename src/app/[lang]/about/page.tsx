@@ -201,11 +201,11 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 {
                     name: "Karema Mohamed",
                     role: "CTO",
-                    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&h=200&auto=format&fit=crop",
+                    image: "",
                 },
                 {
                     name: "Amr Mohamed",
-                    role: "AI Lead | GenAI",
+                    role: "Technical Lead",
                     image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
                 },
                 {
@@ -218,12 +218,12 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
 
                 {
                     name: "Michael Magdy",
-                    role: "Senior Software Engineer",
+                    role: "Sr. Software Engineer",
                     image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/8676627d-692c-4b8b-564a-f0be8998f200/public",
                 },
                 {
                     name: "Mario Milad",
-                    role: "Senior Product Designer",
+                    role: "Sr. Product Designer",
                     image: "https://imagedelivery.net/lTxZgYILFzqBTIG5m0i9uA/b897e444-0127-4ef4-ebbd-32d9f5b07800/public",
                 },
                 {
