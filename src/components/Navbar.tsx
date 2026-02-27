@@ -57,9 +57,9 @@ export default function Navbar({ dict }: NavbarProps) {
           className="flex items-center gap-2"
           style={{ textDecoration: "none" }}
         >
-          {/* Logo - switches between light and dark versions */}
+          {/* Logo - always dark since background is never dark */}
           <Image
-            src={isSolid ? "/logo-dark.png" : "/logo-light.png"}
+            src="/logo-light.png"
             alt="ASKLYZE"
             width={120}
             height={36}
@@ -88,24 +88,24 @@ export default function Navbar({ dict }: NavbarProps) {
               const isExternal = key === "docs";
 
               const content = (
-                <span style={{ color: isSolid ? "var(--color-heading)" : "white" }}>
+                <span style={{ color: "var(--color-heading)", fontSize: "14px", fontWeight: 500 }}>
                   {dict[key]}
                 </span>
               );
 
               return isExternal ? (
-                <a key={key} href={href} className="nav-link">
+                <a key={key} href={href} className="nav-link !text-[var(--color-heading)] hover:!text-[var(--color-primary)]">
                   {content}
                 </a>
               ) : (
-                <Link key={key} href={getLocalizedHref(href)} className="nav-link">
+                <Link key={key} href={getLocalizedHref(href)} className="nav-link !text-[var(--color-heading)] hover:!text-[var(--color-primary)]">
                   {content}
                 </Link>
               );
             })}
           </div>
 
-          <div className="flex items-center gap-4 border-l border-white/20 pl-4">
+          <div className="flex items-center gap-4 border-l border-[var(--color-border)] pl-4">
             {/* Language Switcher */}
             <div className="flex items-center gap-2">
               <button
@@ -114,21 +114,21 @@ export default function Navbar({ dict }: NavbarProps) {
                   window.location.href = newPath;
                 }}
                 className={`text-sm font-bold transition-colors ${pathname.startsWith("/en")
-                  ? isSolid ? "text-[#ff705a]" : "text-white"
-                  : isSolid ? "text-gray-600 hover:text-[#ff705a]" : "text-white/80 hover:text-white"
+                  ? "text-[var(--color-primary)]"
+                  : "text-[var(--color-body-secondary)] hover:text-[var(--color-primary)]"
                   }`}
               >
                 EN
               </button>
-              <span className={isSolid ? "text-gray-300" : "text-white/20"}>|</span>
+              <span className="text-[var(--color-border)]">|</span>
               <button
                 onClick={() => {
                   const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
                   window.location.href = newPath;
                 }}
                 className={`text-sm font-bold transition-colors ${pathname.startsWith("/ar")
-                  ? isSolid ? "text-[#ff705a]" : "text-white"
-                  : isSolid ? "text-gray-600 hover:text-[#ff705a]" : "text-white/80 hover:text-white"
+                  ? "text-[var(--color-primary)]"
+                  : "text-[var(--color-body-secondary)] hover:text-[var(--color-primary)]"
                   }`}
               >
                 AR
@@ -142,13 +142,15 @@ export default function Navbar({ dict }: NavbarProps) {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={isSolid ? "btn btn-primary" : "btn btn-outline"}
+              className="btn btn-primary"
               style={{
-                padding: "8px 20px",
-                fontSize: "13px",
-                borderColor: isSolid ? "var(--color-primary)" : "white",
+                padding: "10px 24px",
+                fontSize: "14px",
+                fontWeight: 600,
                 color: "white",
-                background: isSolid ? "var(--color-primary)" : "transparent",
+                background: "var(--color-primary)",
+                border: "none",
+                borderRadius: "8px",
               }}
             >
               {dict.getStarted}
@@ -161,7 +163,7 @@ export default function Navbar({ dict }: NavbarProps) {
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 -mr-2 flex items-center justify-center transition-colors focus:outline-none"
           style={{
-            color: isSolid ? "var(--color-heading)" : "white",
+            color: "var(--color-heading)",
             zIndex: 1001
           }}
           aria-label="Toggle menu"
@@ -188,18 +190,18 @@ export default function Navbar({ dict }: NavbarProps) {
                 animate={{ x: 0 }}
                 exit={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className={`fixed top-0 bottom-0 z-[70] w-4/5 max-w-sm bg-white shadow-2xl md:hidden ${currentLocale === "ar" ? "left-0" : "right-0"
+                className={`fixed top-0 bottom-0 z-[70] w-4/5 max-w-sm bg-[var(--color-bg-card)] shadow-[var(--shadow-card)] md:hidden ${currentLocale === "ar" ? "left-0" : "right-0"
                   }`}
               >
-                <div className="flex flex-col h-full bg-white">
+                <div className="flex flex-col h-full bg-[var(--color-bg-card)]">
                   {/* Drawer Header */}
-                  <div className="flex justify-between items-center p-6 border-b border-gray-100">
+                  <div className="flex justify-between items-center p-6 border-b border-[var(--color-border)]">
                     <Link
                       href={`/${currentLocale}`}
                       onClick={() => setIsOpen(false)}
                     >
                       <Image
-                        src="/logo-dark.png"
+                        src="/logo-light.png"
                         alt="ASKLYZE"
                         width={120}
                         height={35}
@@ -209,7 +211,7 @@ export default function Navbar({ dict }: NavbarProps) {
                     </Link>
                     <button
                       onClick={() => setIsOpen(false)}
-                      className="p-2 text-gray-500 hover:text-gray-900 transition-colors"
+                      className="p-2 text-[var(--color-body-secondary)] hover:text-[var(--color-heading)] transition-colors"
                     >
                       <X size={24} />
                     </button>
@@ -232,17 +234,17 @@ export default function Navbar({ dict }: NavbarProps) {
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.1 + index * 0.05 }}
-                            className="flex items-center justify-between py-4 px-3 rounded-xl hover:bg-gray-50 transition-colors group"
+                            className="flex items-center justify-between py-4 px-3 rounded-xl hover:bg-[var(--color-bg-alt)] transition-colors group"
                           >
                             <div className="flex items-center gap-4">
-                              <div className="p-2 rounded-lg bg-gray-50 text-gray-400 group-hover:bg-[#ff705a]/10 group-hover:text-[#ff705a] transition-colors">
+                              <div className="p-2 rounded-lg bg-[var(--color-bg-alt)] text-[var(--color-body-muted)] group-hover:bg-[var(--color-primary-light)] group-hover:text-[var(--color-primary)] transition-colors">
                                 <item.icon size={20} />
                               </div>
-                              <span className="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
+                              <span className="text-lg font-semibold text-[var(--color-body)] group-hover:text-[var(--color-heading)]">
                                 {dict[item.key]}
                               </span>
                             </div>
-                            <ChevronRight size={18} className="text-gray-300 group-hover:text-[#ff705a] transition-all transform group-hover:translate-x-1" />
+                            <ChevronRight size={18} className="text-[var(--color-body-muted)] group-hover:text-[var(--color-primary)] transition-all transform group-hover:translate-x-1" />
                           </motion.div>
                         );
 
@@ -266,7 +268,7 @@ export default function Navbar({ dict }: NavbarProps) {
                       })}
                     </div>
 
-                    <div className="mt-8 pt-8 border-t border-gray-100 flex flex-col gap-10">
+                    <div className="mt-8 pt-8 border-t border-[var(--color-border)] flex flex-col gap-10">
                       {/* CTA inside menu */}
                       <div className="px-3">
                         <a
@@ -274,15 +276,15 @@ export default function Navbar({ dict }: NavbarProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => setIsOpen(false)}
-                          className="btn btn-primary w-full py-4 rounded-xl shadow-lg shadow-[#ff705a]/30 text-center"
-                          style={{ color: "white" }}
+                          className="btn btn-primary w-full py-4 rounded-xl shadow-lg shadow-[var(--shadow-button)] text-center font-semibold"
+                          style={{ color: "white", background: "var(--color-primary)" }}
                         >
                           {dict.getStarted}
                         </a>
                       </div>
 
                       <div className="px-3">
-                        <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
+                        <div className="text-xs font-bold text-[var(--color-body-muted)] uppercase tracking-widest mb-4">
                           {currentLocale === "ar" ? "اللغة" : "Language"}
                         </div>
                         <div className="grid grid-cols-2 gap-3">
@@ -292,8 +294,8 @@ export default function Navbar({ dict }: NavbarProps) {
                               window.location.href = newPath;
                             }}
                             className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/en")
-                              ? "bg-[#ff705a] border-[#ff705a] text-white shadow-md shadow-[#ff705a]/20"
-                              : "bg-gray-50 border-gray-100 text-gray-600 hover:border-gray-300"
+                              ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-md shadow-[var(--color-primary-light)]"
+                              : "bg-[var(--color-bg-alt)] border-[var(--color-border)] text-[var(--color-body-secondary)] hover:border-[var(--color-primary)]"
                               }`}
                           >
                             EN
@@ -304,8 +306,8 @@ export default function Navbar({ dict }: NavbarProps) {
                               window.location.href = newPath;
                             }}
                             className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/ar")
-                              ? "bg-[#ff705a] border-[#ff705a] text-white shadow-md shadow-[#ff705a]/20"
-                              : "bg-gray-50 border-gray-100 text-gray-600 hover:border-gray-300"
+                              ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-md shadow-[var(--color-primary-light)]"
+                              : "bg-[var(--color-bg-alt)] border-[var(--color-border)] text-[var(--color-body-secondary)] hover:border-[var(--color-primary)]"
                               }`}
                           >
                             AR

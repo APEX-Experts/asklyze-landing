@@ -1,48 +1,50 @@
 @import "tailwindcss";
 
-/* ===== SAASPIK DESIGN TOKENS ===== */
+/* ===== ASKLYZE X.AI STYLED TOKENS ===== */
 :root {
-  /* Primary Colors */
-  --color-primary: #ff705a;
-  --color-primary-dark: #e65a45;
-  --color-primary-light: #ff8a78;
+  /* Primary Colors - Glowing Blue */
+  --color-primary: #3b82f6;
+  /* blue-500 */
+  --color-primary-dark: #2563eb;
+  /* blue-600 */
+  --color-primary-light: rgba(59, 130, 246, 0.15);
+  --color-primary-border: rgba(59, 130, 246, 0.4);
 
-  /* Accent Colors */
-  --color-blue: #5e63ff;
-  --color-green: #1ad271;
-  --color-red: #ff5e57;
-  --color-purple: #9b59b6;
-  --color-orange: #f39c12;
-  --color-cyan: #00cec9;
+  /* Backgrounds - Deep Blacks */
+  --color-bg: #000000;
+  --color-bg-alt: #0c0a09;
+  --color-bg-card: #0c0a09;
+  --color-bg-accent: #1c1917;
+  --color-bg-gradient-start: #000000;
+  --color-bg-gradient-end: #0c0a09;
 
-  /* Text Colors */
-  --color-heading: #2c234d;
-  --color-body: #6a7695;
-  --color-body-light: #8a94a6;
-
-  /* Backgrounds */
-  --color-bg: #ffffff;
-  --color-bg-alt: #f9fbfd;
-  --color-bg-gradient-start: #ff705a;
-  --color-bg-gradient-end: #ff9472;
+  /* Text Colors - High Contrast */
+  --color-heading: #ffffff;
+  --color-body: #a1a1aa;
+  /* Zinc 400 */
+  --color-body-secondary: #71717a;
+  /* Zinc 500 */
+  --color-body-muted: #52525b;
+  /* Zinc 600 */
 
   /* Borders & Shadows */
-  --color-border: #e8ecf4;
-  --shadow-card: 0 10px 50px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
-  --shadow-button: 0 8px 30px rgba(255, 112, 90, 0.35);
+  --color-border: #27272a;
+  /* Zinc 800 */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-card-hover: 0 4px 30px rgba(255, 255, 255, 0.05);
+  --shadow-button: 0 0 15px rgba(255, 255, 255, 0.1);
 
   /* Typography */
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
   /* Spacing */
-  --container-max: 1170px;
-  --section-padding: 100px;
+  --container-max: 1100px;
+  --section-padding: 120px;
 
   /* Transitions */
-  --transition-base: all 0.3s ease;
-  --transition-slow: all 0.5s ease;
+  --transition-base: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -110,6 +112,7 @@ p {
 
 .section {
   padding: var(--section-padding) 0;
+  background: var(--color-bg-alt);
 }
 
 .section-alt {
@@ -175,22 +178,23 @@ p {
 }
 
 .btn-white {
-  background: white;
-  color: var(--color-heading);
-  border: 2px solid white;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border: 2px solid var(--color-primary);
 }
 
 .btn-white:hover {
   background: transparent;
-  color: white;
+  color: var(--color-primary);
 }
 
 /* ===== FEATURE CARDS ===== */
 .feature-card {
-  background: white;
+  background: var(--color-bg-card);
   padding: 40px 30px;
   border-radius: 10px;
   box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   transition: var(--transition-base);
   text-align: center;
 }
@@ -221,10 +225,11 @@ p {
 
 /* ===== PRICING CARDS ===== */
 .pricing-card {
-  background: white;
+  background: var(--color-bg-card);
   padding: 50px 40px;
   border-radius: 10px;
   box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   text-align: center;
   transition: var(--transition-base);
   position: relative;
@@ -252,7 +257,7 @@ p {
 
 .pricing-card .plan-desc {
   font-size: 14px;
-  color: var(--color-body-light);
+  color: var(--color-body-secondary);
   margin-bottom: 30px;
 }
 
@@ -278,32 +283,12 @@ p {
 
 /* ===== HERO GRADIENT ===== */
 .hero-gradient {
-  background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
+  background: var(--color-bg);
   position: relative;
   overflow: hidden;
 }
 
-.hero-gradient::before {
-  content: '';
-  position: absolute;
-  bottom: -50%;
-  right: -10%;
-  width: 60%;
-  height: 100%;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.1;
-}
 
-.hero-gradient::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: linear-gradient(to top right, white 49%, transparent 51%);
-}
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
@@ -338,6 +323,20 @@ p {
   animation: float 4s ease-in-out infinite;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
 /* ===== NAVBAR ===== */
 .navbar {
   position: fixed;
@@ -350,9 +349,10 @@ p {
 }
 
 .navbar.scrolled {
-  background: white;
-  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+  background: var(--color-bg);
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.4);
   padding: 15px 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .navbar-container {
@@ -424,4 +424,19 @@ p {
   margin-top: 50px;
   text-align: center;
   font-size: 14px;
+}
+
+/* ===== WARM DARK SECTION BACKGROUNDS (x.ai style) ===== */
+/* Sections use warm dark tones instead of pure black */
+.section,
+.section-alt {
+  background-color: #0c0a09;
+}
+
+.hero-gradient {
+  background: #000000;
+}
+
+.cta-section {
+  background: #0c0a09;
 }

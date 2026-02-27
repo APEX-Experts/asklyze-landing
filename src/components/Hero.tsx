@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
-
-import { useState } from "react";
-import VideoModal from "./VideoModal";
-
+import { ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroProps {
   dict: {
@@ -26,261 +22,158 @@ interface HeroProps {
 }
 
 export default function Hero({ dict }: HeroProps) {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
   return (
     <section
-      className="hero-gradient"
-      style={{ minHeight: "100vh", paddingTop: "120px" }}
+      className="hero-gradient relative bg-[var(--color-bg)] w-full overflow-hidden flex flex-col justify-center items-center min-h-[90vh]"
+      style={{ paddingTop: "120px" }}
     >
-      <div className="w-full max-w-[95rem] mx-auto px-4 relative z-10">
-        <div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
-          style={{ minHeight: "calc(100vh - 50px)" }}
-        >
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-6"
-              style={{ background: "rgba(255, 255, 255, 0.2)", color: "white" }}
-            >
-              {dict.badge}
-            </motion.span>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-[1.1]" style={{ color: "white" }}>
-              {dict.titleBeforeSpan} <br />
-              <span
-                className="font-extrabold"
-                style={{
-                  color: "white",
-                  textShadow: "0 2px 10px rgba(0,0,0,0.1)",
-                }}
-              >
-                {dict.titleSpan}
-              </span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-white/90 max-w-xl mb-8 leading-relaxed" style={{ color: "rgba(255, 255, 255, 0.9)" }}>
-              {dict.description}
-            </p>
-
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-white"
-              >
-                {dict.getStarted}
-                <ArrowRight size={18} />
-              </motion.a>
-              <motion.button
-                onClick={() => setIsVideoModalOpen(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn"
-                style={{
-                  background: "transparent",
-                  border: "2px solid rgba(255, 255, 255, 0.3)",
-                  color: "white",
-                  cursor: "pointer",
-                }}
-              >
-                <Play size={18} />
-                {dict.watchDemo}
-              </motion.button>
-            </div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex gap-8 mt-12"
-            >
-              {[
-                { value: "1000+", label: dict.statTables },
-                { value: "22+", label: dict.statCharts },
-                { value: "<2s", label: dict.statResponse },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    className="text-3xl font-bold"
-                    style={{ color: "white" }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    style={{
-                      color: "rgba(255, 255, 255, 0.7)",
-                      fontSize: "14px",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Right Content - Laptop Mockup */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="relative"
-          >
-            {/* Laptop Frame */}
-            <div>
-              <div
-                className="relative mx-auto"
-                style={{
-                  maxWidth: "100%",
-                  background: "#252525",
-                  borderRadius: "20px",
-                  padding: "15px 15px 0",
-                  boxShadow: "0 50px 100px rgba(0, 0, 0, 0.3)",
-                }}
-              >
-                {/* Screen Top Bar */}
-                <div className="flex gap-2 mb-3">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                </div>
-
-                {/* Screen Content - Video */}
-                <div
-                  className="rounded-t-lg overflow-hidden relative"
-                  style={{ background: "#000", aspectRatio: "16/10" }}
-                >
-                  <div style={{ position: "relative", paddingTop: "69.23076923076923%" }}>
-                    <iframe
-                      src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/378b5ca68239fdd874e339fb1475cf30/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F378b5ca68239fdd874e339fb1475cf30%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                      loading="lazy"
-                      style={{
-                        border: "none",
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        height: "100%",
-                        width: "100%",
-                      }}
-                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                      allowFullScreen={true}
-                    />
-                  </div>
-
-                  {/* Overlay Gradient for integration */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.4), transparent)",
-                    }}
-                  />
-                </div>
-
-                {/* Laptop Base */}
-                <div
-                  style={{
-                    height: "20px",
-                    background: "#1a1a1a",
-                    borderRadius: "0 0 10px 10px",
-                    margin: "0 -15px",
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Floating elements */}
-            <motion.div
-              className="absolute -left-8 top-1/3 hidden lg:block"
-              style={{
-                background: "white",
-                borderRadius: "12px",
-                padding: "16px 20px",
-                boxShadow: "var(--shadow-card)",
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{ background: "rgba(26, 210, 113, 0.1)" }}
-                >
-                  <span
-                    style={{ color: "var(--color-green)", fontSize: "20px" }}
-                  >
-                    ✓
-                  </span>
-                </div>
-                <div>
-                  <div
-                    className="text-sm font-semibold"
-                    style={{ color: "var(--color-heading)" }}
-                  >
-                    {dict.cardQuerySuccess}
-                  </div>
-                  <div
-                    className="text-xs"
-                    style={{ color: "var(--color-body-light)" }}
-                  >
-                    {dict.cardResponseTime}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="absolute -right-4 bottom-1/4 hidden lg:block"
-              style={{
-                background: "white",
-                borderRadius: "12px",
-                padding: "16px 20px",
-                boxShadow: "var(--shadow-card)",
-              }}
-            >
-              <div
-                className="text-2xl font-bold"
-                style={{ color: "var(--color-blue)" }}
-              >
-                100%
-              </div>
-              <div
-                className="text-xs"
-                style={{ color: "var(--color-body-light)" }}
-              >
-                {dict.cardDataSovereignty}
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Background Blobs */}
+      {/* Subtle x.ai style grid/dot background effect */}
       <div
-        className="absolute top-0 right-0 w-1/2 h-full pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-20 z-0"
         style={{
-          background:
-            "radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)",
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
         }}
       />
 
-      <VideoModal
-        isOpen={isVideoModalOpen}
-        onClose={() => setIsVideoModalOpen(false)}
-        videoSrc={dict.watchDemoUrl}
-      />
+      {/* Central Hero Content */}
+      <div className="w-full max-w-5xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full flex flex-col items-center"
+        >
+          {/* Grok-style Title Typography — metallic text with fog & lens flare */}
+          <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center py-16 mb-8">
+
+            {/* Layer 1: Broad atmospheric blue wash */}
+            <div className="absolute inset-0 pointer-events-none select-none z-0 overflow-visible">
+              <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 w-[80%] h-[200%] bg-blue-600/20 blur-[150px] rounded-full"></div>
+            </div>
+
+            {/* Layer 2: Concentrated blue flare — right side */}
+            <div className="absolute inset-0 pointer-events-none select-none z-[1] overflow-visible">
+              <div className="absolute top-1/2 right-[5%] -translate-y-1/2 w-[45%] h-[140%] bg-blue-400/40 blur-[100px] rounded-full"></div>
+            </div>
+
+            {/* Layer 3: Core white lens flare — intense right hotspot */}
+            <div className="absolute inset-0 pointer-events-none select-none z-[2] overflow-visible">
+              <div className="absolute top-[40%] right-[8%] -translate-y-1/2 w-[30%] h-[80%] bg-white/60 blur-[80px] rounded-full"></div>
+            </div>
+
+            {/* Layer 4: Subtle fog/mist streaks across the text */}
+            <div className="absolute inset-0 pointer-events-none select-none z-[3] overflow-visible">
+              <div className="absolute top-[55%] right-[15%] -translate-y-1/2 w-[60%] h-[30%] bg-indigo-200/20 blur-[60px] rounded-full"></div>
+              <div className="absolute top-[45%] right-[25%] -translate-y-1/2 w-[40%] h-[20%] bg-white/10 blur-[40px] rounded-full"></div>
+            </div>
+
+            {/* The heading itself with metallic gradient + mask fade */}
+            <h1
+              className="relative z-10 text-5xl md:text-7xl lg:text-[85px] font-extrabold tracking-[-0.04em] leading-[1.05] text-transparent bg-clip-text"
+              style={{
+                backgroundImage: 'linear-gradient(to right, #374151, #6b7280, #9ca3af, #d1d5db, #f9fafb, #ffffff)',
+                WebkitBackgroundClip: 'text',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.8) 40%, black 55%, black 100%)',
+                maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.5) 25%, rgba(0,0,0,0.8) 40%, black 55%, black 100%)',
+              }}
+            >
+              {dict.titleBeforeSpan} <br className="hidden md:block" />
+              <span>
+                {dict.titleSpan}
+              </span>
+            </h1>
+          </div>
+
+          <p className="text-xl md:text-2xl text-[var(--color-body)] max-w-2xl mb-12 leading-relaxed font-medium">
+            {dict.description}
+          </p>
+
+          {/* Central x.ai style prompt input mock */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-3xl mb-12 relative group"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-[var(--color-border)] to-[var(--color-border)] rounded-[24px] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+            <div className="relative bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-[24px] p-4 flex items-center shadow-2xl">
+              <Sparkles className="text-[var(--color-body-secondary)] ml-2 mr-4" size={24} />
+              <input
+                type="text"
+                placeholder="Ask about your Oracle Analytics data..."
+                className="w-full bg-transparent border-none text-[var(--color-heading)] text-lg focus:outline-none placeholder:text-[var(--color-body-muted)] disabled:opacity-50"
+                disabled
+              />
+              <a
+                href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-4 bg-[var(--color-heading)] text-[var(--color-bg)] rounded-full p-3 hover:scale-105 transition-transform cursor-pointer flex-shrink-0"
+              >
+                <ArrowRight size={20} />
+              </a>
+            </div>
+
+            <div className="flex items-center justify-center gap-6 mt-6 text-sm text-[var(--color-body-muted)] hidden md:flex font-mono uppercase tracking-widest text-[10px]">
+              <span>SQL Generation</span>
+              <span className="h-1 w-1 bg-[var(--color-border)] rounded-full"></span>
+              <span>Data Visualization</span>
+              <span className="h-1 w-1 bg-[var(--color-border)] rounded-full"></span>
+              <span>Predictive Insights</span>
+            </div>
+          </motion.div>
+
+          {/* Action Links */}
+          <div className="flex flex-col sm:flex-row gap-6 mt-4">
+            <motion.a
+              href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-[var(--color-heading)] text-[var(--color-bg)] border border-transparent rounded-full px-8 py-4 font-bold text-lg hover:bg-[var(--color-primary-dark)] transition-colors"
+            >
+              {dict.getStarted}
+            </motion.a>
+            <motion.a
+              href={dict.watchDemoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-transparent text-[var(--color-heading)] border border-[var(--color-border)] rounded-full px-8 py-4 font-bold text-lg hover:bg-[var(--color-bg-accent)] transition-colors"
+            >
+              {dict.watchDemo}
+            </motion.a>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Trust Bar styled minimally */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8, duration: 1 }}
+        className="absolute bottom-10 w-full overflow-hidden"
+      >
+        <div className="relative w-full flex overflow-hidden opacity-30">
+          <div className="absolute left-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-r from-[var(--color-bg)] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 z-10 bg-gradient-to-l from-[var(--color-bg)] to-transparent pointer-events-none" />
+
+          <div className="flex w-max animate-marquee gap-24 items-center">
+            {[
+              "ORACLE APEX", "ENTERPRISE", "DATA MODELS", "ANALYTICS", "NEURAL NETWORKS",
+              "ORACLE APEX", "ENTERPRISE", "DATA MODELS", "ANALYTICS", "NEURAL NETWORKS"
+            ].map((partner, i) => (
+              <div key={i} className="flex-shrink-0 text-md font-mono tracking-[0.3em] text-[var(--color-heading)]">
+                {partner}
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

@@ -22,7 +22,7 @@ export default function BlogCard({ post, lang, delay = 0, dict }: BlogCardProps)
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay }}
             viewport={{ once: true }}
-            className="group bg-white rounded-2xl overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+            className="group bg-[var(--color-bg-card)] rounded-2xl overflow-hidden border border-[var(--color-border)] transition-all duration-300 hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-2"
         >
             {/* Image Container */}
             <div className="relative overflow-hidden aspect-[16/10]">
@@ -32,7 +32,7 @@ export default function BlogCard({ post, lang, delay = 0, dict }: BlogCardProps)
                     fill
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#ff705a] uppercase tracking-wide">
+                <div className="absolute top-4 left-4 bg-[var(--color-bg-accent)]/90 border border-[var(--color-border)] backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[var(--color-primary)] uppercase tracking-wide">
                     {dict.topics[post.category as keyof typeof dict.topics] || post.category}
                 </div>
             </div>
@@ -40,35 +40,35 @@ export default function BlogCard({ post, lang, delay = 0, dict }: BlogCardProps)
             {/* Content Container */}
             <div className="p-6">
                 {/* Meta Row */}
-                <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+                <div className="flex items-center gap-4 text-xs text-[var(--color-body-secondary)] mb-4">
                     <div className="flex items-center gap-1">
-                        <User size={14} className="text-[#ff705a]" />
+                        <User size={14} className="text-[var(--color-primary)]" />
                         <div className="flex flex-col">
                             <span className="font-medium">{post.author.name}</span>
                             {post.author.jobTitle && <span className="text-[10px] opacity-70 leading-none">{post.author.jobTitle}</span>}
                         </div>
                     </div>
                     <div className="flex items-center gap-1">
-                        <Calendar size={14} className="text-[#ff705a]" />
+                        <Calendar size={14} className="text-[var(--color-primary)]" />
                         <span>{post.date}</span>
                     </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#2c234d] mb-3 leading-snug group-hover:text-[#ff705a] transition-colors">
+                <h3 className="text-xl font-bold text-[var(--color-heading)] mb-3 leading-snug group-hover:text-[var(--color-primary)] transition-colors">
                     <Link href={`/${lang}/blog/${post.slug}`} className="line-clamp-2">
                         {post.title}
                     </Link>
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-6 line-clamp-3">
+                <p className="text-[var(--color-body)] text-sm mb-6 line-clamp-3">
                     {post.excerpt}
                 </p>
 
                 {/* Footer/Link */}
-                <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
+                <div className="border-t border-[var(--color-border)] pt-4 flex items-center justify-between">
                     <Link
                         href={`/${lang}/blog/${post.slug}`}
-                        className="text-sm font-bold text-[#2c234d] hover:text-[#ff705a] flex items-center gap-1 transition-colors"
+                        className="text-sm font-bold text-[var(--color-heading)] hover:text-[var(--color-primary)] flex items-center gap-1 transition-colors"
                     >
                         Read More
                     </Link>

@@ -107,34 +107,34 @@ export default async function BlogPage({
     }
 
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-[var(--color-bg)] flex flex-col">
             <Navbar dict={dict.navbar} />
 
             {/* Blog Hero */}
-            <section className="relative pt-48 pb-16 overflow-hidden">
+            <section className="relative pt-48 pb-16 overflow-hidden bg-[var(--color-bg)] border-b border-[var(--color-border)]">
                 {/* Background Details */}
-                <div className="absolute inset-0 bg-[#f9fbfd] -z-10" />
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#ffece8] to-transparent opacity-60 -z-10" />
+                <div className="absolute inset-0 bg-[var(--color-bg-alt)] opacity-50 -z-10" />
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--color-primary-light)] opacity-10 blur-[100px] -z-10 pointer-events-none" />
 
                 <div className="container text-center">
                     <div>
-                        <h1 className="text-4xl md:text-6xl font-bold text-[#2c234d] mb-6">
-                            {dict.blog.title.split(dict.blog.titleHighlight)[0]} <span className="text-[#ff705a]">{dict.blog.titleHighlight}</span> {dict.blog.title.split(dict.blog.titleHighlight)[1]}
+                        <h1 className="text-4xl md:text-6xl font-extrabold text-[var(--color-heading)] mb-6">
+                            {dict.blog.title.split(dict.blog.titleHighlight)[0]} <span className="text-[var(--color-primary)]">{dict.blog.titleHighlight}</span> {dict.blog.title.split(dict.blog.titleHighlight)[1]}
                         </h1>
-                        <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-8">
+                        <p className="text-lg text-[var(--color-body-secondary)] max-w-2xl mx-auto mb-8 font-medium">
                             {dict.blog.description}
                         </p>
 
-                        <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500">
-                            <Link href={`/${lang}`} className="hover:text-[#ff705a] transition-colors">{dict.blog.breadcrumbHome}</Link>
+                        <div className="flex items-center justify-center gap-2 text-sm font-bold text-[var(--color-body-muted)]">
+                            <Link href={`/${lang}`} className="hover:text-[var(--color-primary)] transition-colors">{dict.blog.breadcrumbHome}</Link>
                             <span>•</span>
-                            <Link href={`/${lang}/blog`} className={`${!selectedTopic ? 'text-[#ff705a]' : 'hover:text-[#ff705a] transition-colors'}`}>
+                            <Link href={`/${lang}/blog`} className={`${!selectedTopic ? 'text-[var(--color-primary)]' : 'hover:text-[var(--color-primary)] transition-colors'}`}>
                                 {dict.blog.breadcrumbBlog}
                             </Link>
                             {selectedTopic && selectedTopic !== 'All' && (
                                 <>
                                     <span>•</span>
-                                    <span className="text-[#ff705a]">
+                                    <span className="text-[var(--color-primary)]">
                                         {dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}
                                     </span>
                                 </>
@@ -145,7 +145,7 @@ export default async function BlogPage({
             </section>
 
             {/* Topic Filter */}
-            <section className="pb-12 bg-[#f9fbfd]">
+            <section className="py-8 bg-[var(--color-bg)] border-b border-[var(--color-border)]">
                 <div className="container">
                     <div className="flex flex-wrap justify-center gap-3">
                         {topics.map((topic) => (
@@ -153,8 +153,8 @@ export default async function BlogPage({
                                 key={topic}
                                 href={getTopicUrl(topic)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${(topic === 'All' && !selectedTopic) || topic === selectedTopic
-                                    ? "bg-[#ff705a] text-white shadow-md"
-                                    : "bg-white text-gray-500 border border-gray-100 hover:border-[#ff705a] hover:text-[#ff705a]"
+                                    ? "bg-[var(--color-primary)] text-white shadow-md shadow-[var(--color-primary-light)]"
+                                    : "bg-[var(--color-bg-alt)] text-[var(--color-body-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:shadow-sm"
                                     }`}
                             >
                                 {dict.blog.topics[topic as keyof typeof dict.blog.topics] || topic}
@@ -175,8 +175,8 @@ export default async function BlogPage({
 
                     {/* Empty State */}
                     {posts.length === 0 && (
-                        <div className="text-center py-20 text-gray-500">
-                            {dict.blog.noPosts} {selectedTopic ? `${dict.blog.inTopic} "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"` : ''}. <Link href="/admin" className="text-[#ff705a] font-bold">{dict.blog.adminLinkText}</Link> {dict.blog.adminLinkPrefix}
+                        <div className="text-center py-20 text-[var(--color-body-muted)] font-medium">
+                            {dict.blog.noPosts} {selectedTopic ? `${dict.blog.inTopic} "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"` : ''}. <Link href="/admin" className="text-[var(--color-primary)] font-bold">{dict.blog.adminLinkText}</Link> {dict.blog.adminLinkPrefix}
                         </div>
                     )}
 
@@ -186,7 +186,7 @@ export default async function BlogPage({
                             {hasPrevPage && (
                                 <Link
                                     href={getPaginationUrl(currentPage - 1)}
-                                    className="w-10 h-10 rounded-full bg-white text-gray-500 border border-gray-200 font-bold flex items-center justify-center hover:border-[#ff705a] hover:text-[#ff705a] transition-colors"
+                                    className="w-10 h-10 rounded-full bg-[var(--color-bg-card)] text-[var(--color-body-secondary)] border border-[var(--color-border)] font-bold flex items-center justify-center hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-all"
                                 >
                                     {'<'}
                                 </Link>
@@ -197,8 +197,8 @@ export default async function BlogPage({
                                     key={pageNum}
                                     href={getPaginationUrl(pageNum)}
                                     className={`w-10 h-10 rounded-full font-bold flex items-center justify-center transition-all ${currentPage === pageNum
-                                        ? "bg-[#ff705a] text-white shadow-lg scale-105"
-                                        : "bg-white text-gray-500 border border-gray-200 hover:border-[#ff705a] hover:text-[#ff705a]"
+                                        ? "bg-[var(--color-primary)] text-white shadow-lg shadow-[var(--color-primary-light)] scale-105"
+                                        : "bg-[var(--color-bg-card)] text-[var(--color-body-secondary)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)]"
                                         }`}
                                 >
                                     {pageNum}
@@ -208,7 +208,7 @@ export default async function BlogPage({
                             {hasNextPage && (
                                 <Link
                                     href={getPaginationUrl(currentPage + 1)}
-                                    className="w-10 h-10 rounded-full bg-white text-gray-500 border border-gray-200 font-bold flex items-center justify-center hover:border-[#ff705a] hover:text-[#ff705a] transition-colors"
+                                    className="w-10 h-10 rounded-full bg-[var(--color-bg-card)] text-[var(--color-body-secondary)] border border-[var(--color-border)] font-bold flex items-center justify-center hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-all"
                                 >
                                     {'>'}
                                 </Link>

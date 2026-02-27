@@ -19,14 +19,14 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
 
     // Auto-transition through tabs with progress
     useEffect(() => {
-        const duration = 6550; // 7seconds
+        const duration = 6550; // 6.55 seconds matching video length approx
         const startTime = Date.now();
 
         const progressInterval = setInterval(() => {
             const elapsed = Date.now() - startTime;
             const newProgress = Math.min((elapsed / duration) * 100, 100);
             setProgress(newProgress);
-        }, 50); // Update every 50ms for smooth animation
+        }, 50);
 
         const tabInterval = setTimeout(() => {
             setActiveTab((prev) => (prev + 1) % dict.tabs.length);
@@ -38,132 +38,124 @@ export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
         };
     }, [activeTab, dict.tabs.length]);
 
+    const descriptions = [
+        "Ask questions in natural language",
+        "Structured tables ready to scan and export",
+        "Instant charts and dashboards for insights",
+        "Fully explainable and auditable queries"
+    ];
 
     return (
-        <section className="relative pt-[60px] md:pt-[100px] pb-[120px] md:pb-[200px] overflow-hidden">
-            {/* Orange Gradient Background */}
-            <div
-                className="absolute inset-0 z-0"
-                style={{
-                    background: "linear-gradient(135deg, #ff9a8b 0%, #ff6a88 55%, #ff99ac 100%)",
-                }}
-            />
-
-            {/* Content Container */}
-            <div className="container relative z-10 text-center text-white">
+        <section className="section bg-[var(--color-bg)] py-24">
+            <div className="container max-w-6xl mx-auto px-4">
+                {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
+                    className="text-center mb-16"
                 >
-                    <div className="text-sm font-bold uppercase tracking-widest mb-4 opacity-90">{dict.tag}</div>
-                    <h2 className="!text-white text-4xl mb-12 font-bold max-w-2xl mx-auto">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-4">
                         {dict.title}
                     </h2>
+                    <p className="text-lg text-[var(--color-body)] max-w-3xl mx-auto">
+                        ASKLYZE doesn't lock you into a single output. Every question can evolve into
+                        reports, dashboards, charts, or SQL — instantly and transparently.
+                    </p>
                 </motion.div>
 
-                {/* Custom Tabs with Progress Bars */}
-                <div className="flex flex-wrap justify-center gap-4 mb-16">
-                    {dict.tabs.map((tab, i) => (
-                        <button
-                            key={tab}
-                            onClick={() => setActiveTab(i)}
-                            className={`relative px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 overflow-hidden ${activeTab === i
-                                ? "bg-white text-[#ff6a88] shadow-lg scale-105"
-                                : "bg-white/20 text-white hover:bg-white/30"
-                                }`}
-                        >
-                            {/* Progress bar background */}
-                            {activeTab === i && (
-                                <div
-                                    className="absolute bottom-0 left-0 h-1 bg-[#ff6a88] transition-all duration-100 ease-linear"
-                                    style={{ width: `${progress}%` }}
-                                />
-                            )}
-                            <span className="relative z-10">{tab}</span>
-                        </button>
-                    ))}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    {/* Visual Content - Right side on desktop, top on mobile */}
+                    <div className="lg:col-span-8 order-1 lg:order-2">
+                        <div className="bg-[var(--color-bg-card)] rounded-2xl p-6 md:p-8 shadow-xl border border-[var(--color-border)] h-full min-h-[400px] flex flex-col justify-center">
+                            <h3 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-6">Same Question. Different Outputs.</h3>
+
+                            {/* Content Container based on tab */}
+                            <div className="w-full rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-alt)]">
+                                {activeTab === 0 ? (
+                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                                        <iframe
+                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/55692ccda3764ca9a68525d86e504c15/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F55692ccda3764ca9a68525d86e504c15%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                            loading="lazy"
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                            allowFullScreen={true}
+                                        />
+                                    </div>
+                                ) : activeTab === 1 ? (
+                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                                        <iframe
+                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/ff634d10d51fdb3d2eeec7f75049fab2/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fff634d10d51fdb3d2eeec7f75049fab2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                            loading="lazy"
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                            allowFullScreen={true}
+                                        />
+                                    </div>
+                                ) : activeTab === 2 ? (
+                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                                        <iframe
+                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/6751079fa304be597c3140e0ed900d9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F6751079fa304be597c3140e0ed900d9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                            loading="lazy"
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                            allowFullScreen={true}
+                                        />
+                                    </div>
+                                ) : activeTab === 3 ? (
+                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
+                                        <iframe
+                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/4f369287d11d183bea5af749e15f7e9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F4f369287d11d183bea5af749e15f7e9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
+                                            loading="lazy"
+                                            className="absolute top-0 left-0 w-full h-full"
+                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                            allowFullScreen={true}
+                                        />
+                                    </div>
+                                ) : null}
+                            </div>
+                            <div className="text-center mt-4 text-xs italic text-[var(--color-body-muted)]">
+                                No SQL required. No training needed.
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Vertical Tabs - Left side on desktop, bottom on mobile */}
+                    <div className="lg:col-span-4 order-2 lg:order-1 flex flex-col gap-4">
+                        {dict.tabs.map((tab, i) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(i)}
+                                className={`text-left p-6 rounded-xl transition-all duration-300 relative overflow-hidden group border ${activeTab === i
+                                    ? "bg-[var(--color-bg-card)] border-transparent shadow-xl ring-1 ring-[var(--color-primary-light)]"
+                                    : "bg-[var(--color-bg-alt)] border-transparent hover:border-[var(--color-border)] shadow-sm"
+                                    }`}
+                            >
+                                <div className="flex items-start gap-3 relative z-10">
+                                    <div className={`w-2 h-2 rounded-full mt-2 transition-colors ${activeTab === i ? 'bg-[var(--color-primary)]' : 'bg-gray-300'}`} />
+                                    <div>
+                                        <h4 className={`text-base font-extrabold uppercase tracking-wide transition-colors ${activeTab === i ? 'text-[var(--color-heading)]' : 'text-[var(--color-body-secondary)]'}`}>
+                                            {tab}
+                                        </h4>
+                                        <p className="text-sm text-[var(--color-body-muted)] mt-1 font-medium">
+                                            {descriptions[i] || "Experience seamless interactions"}
+                                        </p>
+                                    </div>
+                                </div>
+                                {/* Progress bar background logic */}
+                                {activeTab === i && (
+                                    <div
+                                        className="absolute left-0 bottom-0 h-1 bg-[var(--color-primary)] opacity-20 transition-all duration-100 ease-linear"
+                                        style={{ width: `${progress}%` }}
+                                    />
+                                )}
+                            </button>
+                        ))}
+                    </div>
+
                 </div>
-
-                {/* Overlapping Dashboard (The prominent visual) */}
-                <motion.div
-                    key={activeTab} // Animate on tab change
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative max-w-5xl mx-auto rounded-xl shadow-2xl overflow-hidden bg-white -mb-[100px] md:-mb-[150px] mx-4 md:mx-auto"
-                >
-                    {/* Dashboard Header Mockup */}
-                    <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
-                        <div className="flex items-center gap-4">
-                            <div className="font-bold text-gray-800 text-lg">ASKLYZE</div>
-                        </div>
-                        <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-400" />
-                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                            <div className="w-3 h-3 rounded-full bg-green-400" />
-                        </div>
-                    </div>
-
-                    {/* Dashboard Body Mockup - Changing content based on tab */}
-                    <div className="bg-gray-50 min-h-[400px]">
-                        {activeTab === 0 ? (
-                            <div className="w-full h-full bg-black">
-                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
-                                    <iframe
-                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/55692ccda3764ca9a68525d86e504c15/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F55692ccda3764ca9a68525d86e504c15%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                        loading="lazy"
-                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                        allowFullScreen={true}
-                                    />
-                                </div>
-                            </div>
-                        ) : activeTab === 1 ? (
-                            <div className="w-full h-full bg-black">
-                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
-                                    <iframe
-                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/ff634d10d51fdb3d2eeec7f75049fab2/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fff634d10d51fdb3d2eeec7f75049fab2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                        loading="lazy"
-                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                        allowFullScreen={true}
-                                    />
-                                </div>
-                            </div>
-                        ) : activeTab === 2 ? (
-                            <div className="w-full h-full bg-black">
-                                <div style={{ position: "relative", paddingTop: "71.76079734219269%" }}>
-                                    <iframe
-                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/6751079fa304be597c3140e0ed900d9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F6751079fa304be597c3140e0ed900d9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                        loading="lazy"
-                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                        allowFullScreen={true}
-                                    />
-                                </div>
-                            </div>
-                        ) : activeTab === 3 ? (
-                            <div className="w-full h-full bg-black">
-                                <div style={{ position: "relative", paddingTop: "71.80851063829788%" }}>
-                                    <iframe
-                                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/4f369287d11d183bea5af749e15f7e9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F4f369287d11d183bea5af749e15f7e9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                        loading="lazy"
-                                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                        allowFullScreen={true}
-                                    />
-                                </div>
-                            </div>
-                        ) : null}
-                    </div>
-                </motion.div>
             </div>
-
-            {/* Spacer to push next content down due to negative margin */}
-            <div className="h-24"></div>
         </section>
     );
 }
-

@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, ArrowRight } from "lucide-react";
 
 interface FAQProps {
     dict: {
@@ -32,18 +32,19 @@ export default function FAQ({ dict }: FAQProps) {
     };
 
     return (
-        <section id="faq" className="section">
-            <div className="container relative">
-                {/* Background Decos */}
-                <div className="absolute top-0 left-0 w-64 h-64 bg-[#faebe8] rounded-full opacity-40 -translate-x-1/2 -z-10 blur-3xl" />
-
-                <div className="text-center mb-12">
-                    <span className="section-tag">{dict.tag}</span>
-                    <h2>{dict.title}</h2>
+        <section id="faq" className="section bg-[var(--color-bg)] py-24">
+            <div className="container max-w-4xl mx-auto px-4 relative">
+                <div className="text-center mb-16">
+                    <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
+                        {dict.tag}
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-6">
+                        {dict.title}
+                    </h2>
                 </div>
 
                 {/* Categories */}
-                <div className="flex flex-wrap justify-center gap-4 mb-16">
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
                     {dict.categories.map((cat) => (
                         <button
                             key={cat}
@@ -51,9 +52,9 @@ export default function FAQ({ dict }: FAQProps) {
                                 setActiveTab(cat);
                                 setOpenIndex(null); // Close all when switching tabs
                             }}
-                            className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${activeTab === cat
-                                ? "bg-[#ff705a] text-white shadow-md transform scale-105"
-                                : "bg-[#eef2f6] text-[#6a7695] hover:bg-[#e2e6ea]"
+                            className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 border ${activeTab === cat
+                                ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-md shadow-[var(--shadow-button)]"
+                                : "bg-[var(--color-bg-alt)] border-transparent text-[var(--color-body-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-bg-card)]"
                                 }`}
                         >
                             {cat}
@@ -62,22 +63,32 @@ export default function FAQ({ dict }: FAQProps) {
                 </div>
 
                 {/* Accordion */}
-                <div className="max-w-3xl mx-auto space-y-4">
+                <div className="space-y-4">
                     {filteredFAQs.map((faq, index) => (
-                        <div
+                        <motion.div
                             key={index}
-                            className={`border rounded-lg overflow-hidden transition-all duration-300 ${openIndex === index ? "border-[#ff705a] shadow-md bg-white" : "border-gray-100 bg-white"}`}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.05 }}
+                            className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === index
+                                ? "border-[var(--color-primary-light)] ring-1 ring-[var(--color-primary-light)] bg-[var(--color-bg-card)] shadow-[var(--shadow-card)]"
+                                : "border-[var(--color-border)] bg-[var(--color-bg-alt)] hover:border-[var(--color-border)] hover:bg-[var(--color-bg-card)]"
+                                }`}
                         >
                             <button
                                 onClick={() => toggleFAQ(index)}
-                                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                                className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)] rounded-2xl"
                             >
-                                <span className={`font-semibold text-lg ${openIndex === index ? "text-[#2c234d]" : "text-gray-600"}`}>
+                                <span className={`font-bold text-lg leading-snug pr-8 transition-colors ${openIndex === index ? "text-[var(--color-heading)]" : "text-[var(--color-body)]"
+                                    }`}>
                                     {faq.question}
                                 </span>
-                                <span className={`transition-transform duration-300 ${openIndex === index ? "rotate-180 text-[#ff705a]" : "text-gray-400"}`}>
-                                    {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
-                                </span>
+                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index
+                                    ? "bg-[var(--color-primary)] text-white rotate-180"
+                                    : "bg-[var(--color-border)] text-[var(--color-body-muted)]"
+                                    }`}>
+                                    {openIndex === index ? <Minus size={16} strokeWidth={3} /> : <Plus size={16} strokeWidth={3} />}
+                                </div>
                             </button>
 
                             <AnimatePresence>
@@ -86,27 +97,27 @@ export default function FAQ({ dict }: FAQProps) {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="overflow-hidden"
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
                                     >
-                                        <div className="px-6 pb-6 text-gray-500 leading-relaxed border-t border-gray-100 pt-4">
+                                        <div className="px-6 md:px-8 pb-8 pt-2 text-[var(--color-body-secondary)] leading-relaxed font-medium">
                                             {faq.answer}
                                         </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
-                <div className="text-center mt-12">
+                <div className="text-center mt-16">
                     <a
                         href="https://docs.asklyze.ai/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block px-8 py-3 rounded-full border border-[#ff705a] text-[#ff705a] font-medium hover:bg-[#ff705a] hover:text-white transition-all"
+                        className="inline-flex items-center gap-2 group px-8 py-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:bg-[var(--color-bg-accent)] text-[var(--color-heading)] font-bold transition-all shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]"
                     >
                         {dict.cta}
+                        <ArrowRight size={18} className="text-[var(--color-primary)] group-hover:translate-x-1 transition-transform" />
                     </a>
                 </div>
             </div>

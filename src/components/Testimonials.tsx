@@ -35,9 +35,9 @@ export default function Testimonials({ dict }: TestimonialsProps) {
     const prev = () => setCurrent((prev) => (prev - 1 + list.length) % list.length);
 
     return (
-        <section className="section bg-[#f9fbfd] relative overflow-hidden">
+        <section className="section bg-[var(--color-bg)] text-[var(--color-heading)] relative overflow-hidden">
             {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-[#faebe8] rounded-l-full opacity-30 -z-10" />
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--color-bg-alt)] rounded-l-full opacity-30 -z-10" />
 
             <div className="container">
                 <div className="text-center mb-16">
@@ -47,11 +47,11 @@ export default function Testimonials({ dict }: TestimonialsProps) {
 
                 <div className="max-w-4xl mx-auto relative">
                     {/* Slider Container */}
-                    <div className="relative bg-white rounded-2xl shadow-xl p-8 md:p-16 text-center">
+                    <div className="relative bg-[var(--color-bg-card)] rounded-2xl shadow-[var(--shadow-card)] p-8 md:p-16 text-center border border-[var(--color-border)]">
 
                         {/* Avatar */}
                         <div className="absolute -top-10 left-1/2 -translate-x-1/2">
-                            <div className="w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden">
+                            <div className="w-20 h-20 rounded-full border-4 border-[var(--color-bg-card)] shadow-lg overflow-hidden">
                                 <Image
                                     src={list[current].image}
                                     alt={list[current].name}
@@ -70,12 +70,12 @@ export default function Testimonials({ dict }: TestimonialsProps) {
                             transition={{ duration: 0.4 }}
                             className="mt-8"
                         >
-                            <p className="text-lg text-gray-600 mb-8 italic leading-relaxed">
+                            <p className="text-lg text-[var(--color-heading)] mb-8 italic leading-relaxed">
                                 &quot;{list[current].text}&quot;
                             </p>
 
-                            <h4 className="text-[#2c234d] font-bold text-xl mb-1">{list[current].name}</h4>
-                            <div className="text-sm text-gray-500 font-medium uppercase tracking-wider">
+                            <h4 className="text-[var(--color-primary)] font-bold text-xl mb-1">{list[current].name}</h4>
+                            <div className="text-sm text-[var(--color-body-secondary)] font-medium uppercase tracking-wider">
                                 {list[current].role}
                             </div>
                         </motion.div>
@@ -84,14 +84,14 @@ export default function Testimonials({ dict }: TestimonialsProps) {
                     {/* Navigation Arrows */}
                     <button
                         onClick={prev}
-                        className="absolute top-1/2 -left-2 md:-left-16 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 md:bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg z-20"
+                        className="absolute top-1/2 -left-2 md:-left-16 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:bg-[var(--color-bg-accent)] text-[var(--color-body)] hover:text-[var(--color-primary)] flex items-center justify-center transition-all hover:shadow-lg z-20"
                     >
                         <ChevronLeft size={24} />
                     </button>
 
                     <button
                         onClick={next}
-                        className="absolute top-1/2 -right-2 md:-right-16 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 md:bg-transparent hover:bg-white text-gray-400 hover:text-[#ff705a] flex items-center justify-center transition-all hover:shadow-lg z-20"
+                        className="absolute top-1/2 -right-2 md:-right-16 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:bg-[var(--color-bg-accent)] text-[var(--color-body)] hover:text-[var(--color-primary)] flex items-center justify-center transition-all hover:shadow-lg z-20"
                     >
                         <ChevronRight size={24} />
                     </button>

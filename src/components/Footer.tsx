@@ -1,9 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Facebook, Twitter, Linkedin, Github } from "lucide-react";
 
 interface FooterProps {
     dict: {
@@ -28,126 +25,101 @@ interface FooterProps {
     };
 }
 
+interface FooterLink {
+    name: string;
+    href: string;
+    target?: string;
+}
+
 export default function Footer({ dict }: FooterProps) {
     const pathname = usePathname();
     const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
 
-    const portfolioPDF = currentLocale === "ar"
-        ? "/ASKLYZE-Intelligent_APEX_Analytics_2026_ar.pdf"
-        : "/ASKLYZE-Intelligent_APEX_Analytics_2026_en.pdf";
-
-    const footerLinks = [
+    const footerColumns: { title: string; links: FooterLink[] }[] = [
         {
-            title: dict.company,
+            title: "TRY ASKLYZE ON",
             links: [
-                { name: dict.links.features, href: `/${currentLocale}/#features` },
-                { name: dict.links.about, href: `/${currentLocale}/about` },
-                { name: dict.links.portfolio, href: portfolioPDF, target: "_blank" },
-                { name: dict.links.contact, href: `/${currentLocale}/contact` },
+                { name: "Web", href: "https://asklyze.ai", target: "_blank" },
+                { name: "Oracle APEX", href: "https://asklyze.ai", target: "_blank" },
+                { name: "Dashboard", href: "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login", target: "_blank" },
             ]
         },
         {
-            title: dict.services,
+            title: "PRODUCT",
+            links: [
+                { name: "Features", href: `/${currentLocale}/#features` },
+                { name: "How It Works", href: `/${currentLocale}/#process` },
+                { name: "Pricing", href: `/${currentLocale}/#pricing` },
+                { name: "Security", href: `/${currentLocale}/security` },
+            ]
+        },
+        {
+            title: "API",
             links: [
                 { name: "Documentation", href: "https://docs.asklyze.ai/", target: "_blank" },
-                { name: "Demo", href: "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login", target: "_blank" },
+                { name: "Architecture", href: `/${currentLocale}/#architecture` },
+            ]
+        },
+        {
+            title: "COMPANY",
+            links: [
+                { name: "About", href: `/${currentLocale}/about` },
+                { name: "Contact", href: `/${currentLocale}/contact` },
                 { name: "Blog", href: `/${currentLocale}/blog` },
             ]
         },
         {
-            title: dict.digitalExperience,
+            title: "RESOURCES",
             links: [
-                { name: "Pricing", href: `/${currentLocale}/#pricing` },
+                { name: dict.bottomLinks.privacy || "Privacy Policy", href: `/${currentLocale}/privacy` },
+                { name: dict.bottomLinks.terms || "Terms of Service", href: `/${currentLocale}/terms` },
+                { name: dict.bottomLinks.security || "Security", href: `/${currentLocale}/security` },
                 { name: "FAQ", href: `/${currentLocale}/#faq` },
-                { name: dict.links.contact, href: `/${currentLocale}/contact` },
             ]
-        }
-    ];
-
-    const socialLinks = [
-        { icon: Facebook, href: "https://www.facebook.com/apexexperts.ai" },
-        { icon: Twitter, href: "https://twitter.com/apex_experts" },
-        { icon: Github, href: "https://github.com/APEX-Experts" },
-        { icon: Linkedin, href: "https://www.linkedin.com/showcase/asklyze-ai" },
+        },
     ];
 
     return (
-        <footer className="pt-24 pb-12 bg-white">
-            <div className="container">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-20">
-                    {footerLinks.map((section, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            viewport={{ once: true }}
-                        >
-                            <h4 className="text-[#2c234d] font-bold text-lg mb-8">{section.title}</h4>
-                            <ul className="space-y-4">
+        <footer className="relative pt-32 pb-0 overflow-hidden">
+            {/* Footer content */}
+            <div className="container max-w-7xl mx-auto px-6 relative z-10">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-10 lg:gap-16 mb-32">
+                    {footerColumns.map((section, idx) => (
+                        <div key={idx}>
+                            <h4 className="text-[10px] font-medium text-gray-500 uppercase tracking-[0.25em] mb-6 font-mono">
+                                {section.title}
+                            </h4>
+                            <ul className="space-y-3.5">
                                 {section.links.map((link, i) => (
                                     <li key={i}>
                                         <a
                                             href={link.href}
                                             target={link.target}
                                             rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
-                                            className="text-[#6a7695] hover:text-[#ff705a] text-sm transition-colors"
+                                            className="text-gray-300 hover:text-white text-sm transition-colors duration-200"
                                         >
                                             {link.name}
                                         </a>
                                     </li>
                                 ))}
                             </ul>
-                        </motion.div>
+                        </div>
                     ))}
-
-                    {/* Our Address Column */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        viewport={{ once: true }}
-                    >
-                        {/* Footer Logo */}
-                        <div className="mb-6">
-                            <Image src="/logo-dark.png" alt="ASKLYZE" width={140} height={40} className="h-8 w-auto" unoptimized={true} />
-                        </div>
-
-                        <h4 className="text-[#2c234d] font-bold text-lg mb-8">{dict.address}</h4>
-
-                        <p className="text-[#6a7695] text-sm leading-relaxed mb-8 max-w-xs">
-                            {dict.nycOffice}
-                        </p>
-
-                        {/* Social Icons */}
-                        <div className="flex gap-4">
-                            {socialLinks.map((social, i) => (
-                                <a
-                                    key={i}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:border-[#ff705a] hover:text-[#ff705a] transition-all duration-300"
-                                >
-                                    <social.icon size={16} />
-                                </a>
-                            ))}
-                        </div>
-                    </motion.div>
                 </div>
+            </div>
 
-                {/* Footer Bottom */}
-                <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#6a7695]">
-                    <p>
-                        © {new Date().getFullYear()} {dict.rights}
-                    </p>
-                    <div className="flex gap-6">
-                        <a href={`/${currentLocale}/privacy`} className="hover:text-[#ff705a]">{dict.bottomLinks.privacy}</a>
-                        <a href={`/${currentLocale}/terms`} className="hover:text-[#ff705a]">{dict.bottomLinks.terms}</a>
-                        <a href={`/${currentLocale}/security`} className="hover:text-[#ff705a]">{dict.bottomLinks.security}</a>
-                    </div>
-                </div>
-
+            {/* Warm amber/orange gradient glow at the bottom — like x.ai */}
+            <div className="relative w-full h-[200px] pointer-events-none select-none">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-[400px]"
+                    style={{
+                        background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(251,146,60,0.25) 0%, rgba(234,88,12,0.12) 30%, rgba(180,83,9,0.06) 50%, transparent 80%)',
+                    }}
+                />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[300px]"
+                    style={{
+                        background: 'radial-gradient(ellipse 60% 50% at 50% 100%, rgba(251,191,36,0.15) 0%, rgba(245,158,11,0.08) 40%, transparent 70%)',
+                    }}
+                />
             </div>
         </footer>
     );

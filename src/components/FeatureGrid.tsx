@@ -24,12 +24,12 @@ interface FeatureGridProps {
 
 const icons = [Database, Layers, Shield, Globe, BarChart3, Sparkles];
 const colors = [
-    { color: "#ff705a", bgColor: "rgba(255, 112, 90, 0.1)" },
-    { color: "#5e63ff", bgColor: "rgba(94, 99, 255, 0.1)" },
-    { color: "#1ad271", bgColor: "rgba(26, 210, 113, 0.1)" },
-    { color: "#f39c12", bgColor: "rgba(243, 156, 18, 0.1)" },
-    { color: "#9b59b6", bgColor: "rgba(155, 89, 182, 0.1)" },
-    { color: "#00cec9", bgColor: "rgba(0, 206, 201, 0.1)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
+    { color: "var(--color-primary)", bgColor: "var(--color-bg-accent)" },
 ];
 
 export default function FeatureGrid({ dict }: FeatureGridProps) {
@@ -62,8 +62,8 @@ export default function FeatureGrid({ dict }: FeatureGridProps) {
     };
 
     return (
-        <section id="features" className="section section-alt">
-            <div className="container">
+        <section id="features" className="section section-alt relative">
+            <div className="container relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
