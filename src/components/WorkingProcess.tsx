@@ -115,8 +115,8 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                                 src="/scene4-isolated.html"
                                                 className="border-0 outline-none select-none pointer-events-none"
                                                 style={{
-                                                    minWidth: '1100px',
-                                                    width: '1100px',
+                                                    minWidth: '1200px',
+                                                    width: '1200px',
                                                     height: '850px',
                                                     flexShrink: 0,
                                                     transform: 'scale(0.72)',
