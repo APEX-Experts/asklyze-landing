@@ -7212,18 +7212,17 @@
       justify-content: center !important;
     }
 
-    /* Standardized Scale (0.9) to make it "big" like others, while keeping professional look */
+    /* Fill monitor-screen completely — no light-blue gap around edges */
     .scene-four-shell {
-      flex: 0 0 auto !important;
-      transform: scale(0.9) !important;
-      transform-origin: center center !important;
-      width: 1100px !important;
-      height: 750px !important;
-      border-radius: 12px;
+      flex: 1 1 auto !important;
+      transform: none !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
       overflow: hidden;
-      margin: 0 auto !important;
+      margin: 0 !important;
       display: flex;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      box-shadow: none;
     }
 
     .s4-main {
