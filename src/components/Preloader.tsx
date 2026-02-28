@@ -43,21 +43,16 @@ export default function Preloader() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}
           >
-            <motion.span
+            <motion.img
+              src="/logo-light.png"
+              alt="ASKLYZE"
               style={{
-                fontSize: 32,
-                fontWeight: 800,
-                letterSpacing: '0.15em',
-                background: 'linear-gradient(135deg, #ff705a, #ff9472)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                height: 40,
+                width: 'auto',
               }}
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              ASKLYZE
-            </motion.span>
+            />
 
             {/* Progress bar */}
             <div
@@ -72,7 +67,7 @@ export default function Preloader() {
               <motion.div
                 style={{
                   height: '100%',
-                  background: 'linear-gradient(90deg, #ff705a, #ff9472)',
+                  background: 'linear-gradient(90deg, #0083FF, #3b82f6)',
                   borderRadius: 1,
                 }}
                 initial={{ width: '0%' }}
@@ -86,3 +81,4 @@ export default function Preloader() {
     </AnimatePresence>
   );
 }
+
