@@ -7151,13 +7151,14 @@
       position: static !important;
     }
 
+    /* Scale it down significantly as requested for a clear, professional miniature look */
     #scene4 {
       pointer-events: auto !important;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: scale(1) !important;
+      transform: scale(0.6) !important;
       transform-origin: center center;
     }
 
@@ -7176,8 +7177,8 @@
     .monitor-shell {
       width: 100% !important;
       height: 100% !important;
-      max-width: none !important;
-      max-height: none !important;
+      max-width: 1000px !important;
+      max-height: 700px !important;
       margin: 0 !important;
       display: flex;
       flex-direction: column;
