@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Database } from "lucide-react";
 
 interface WorkingProcessProps {
     dict: {
@@ -15,6 +15,13 @@ interface WorkingProcessProps {
         step3Desc: string;
     };
 }
+
+const tableData = [
+    { name: "EBA_COUNTRIES", tag: "MASTER", delay: 0 },
+    { name: "CUSTOMER_ORDERS", tag: "FACTS", delay: 0.2 },
+    { name: "PROJECT_MILESTONES", tag: "OPERATIONS", delay: 0.4 },
+    { name: "SYSTEM_LOGS", tag: "SYSTEM", delay: 0.6, unselected: true },
+];
 
 export default function WorkingProcess({ dict }: WorkingProcessProps) {
     const steps = [
@@ -77,61 +84,113 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                 {/* Visual Side — Bento Grid */}
                                 <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
                                     <div
-                                        className="p-8 relative overflow-hidden"
+                                        className="p-8 relative overflow-hidden flex flex-col justify-center"
                                         style={{
                                             background: "rgba(5, 5, 10, 0.6)",
                                             border: "1px solid rgba(255, 255, 255, 0.1)",
-                                            borderRadius: "var(--card-radius)",
+                                            borderRadius: "32px",
                                             minHeight: "360px",
                                         }}
                                     >
-                                        {/* 3x3 bento grid with center glow */}
-                                        <div className="grid grid-cols-3 gap-3 h-full">
-                                            {Array.from({ length: 9 }).map((_, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="transition-all duration-500"
-                                                    style={{
-                                                        background: i === 4
-                                                            ? "rgba(59, 130, 246, 0.08)"
-                                                            : "rgba(255, 255, 255, 0.02)",
-                                                        border: i === 4
-                                                            ? "1px solid rgba(59, 130, 246, 0.2)"
-                                                            : "1px solid rgba(255, 255, 255, 0.04)",
-                                                        borderRadius: "16px",
-                                                        aspectRatio: "1",
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        justifyContent: "center",
-                                                    }}
-                                                >
-                                                    {i === 4 && (
-                                                        <div style={{
-                                                            width: "24px",
-                                                            height: "24px",
-                                                            borderRadius: "8px",
-                                                            background: "rgba(59, 130, 246, 0.3)",
-                                                            border: "1px solid rgba(59, 130, 246, 0.4)",
+                                        {/* Center glow */}
+                                        <div
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full pointer-events-none"
+                                            style={{
+                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)",
+                                            }}
+                                        />
+
+                                        {index === 0 ? (
+                                            /* Whitelist Tables Animation */
+                                            <div className="relative z-10 w-full max-w-sm mx-auto flex flex-col gap-3">
+                                                <div className="flex justify-between items-end mb-2 px-1">
+                                                    <div>
+                                                        <div className="text-xs font-bold text-white/40 uppercase tracking-widest mb-1">Schema</div>
+                                                        <div className="text-sm font-semibold text-white/80">CUSTOMER01</div>
+                                                    </div>
+                                                    <span className="text-xs font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">3 Selected</span>
+                                                </div>
+
+                                                {tableData.map((table) => (
+                                                    <motion.div
+                                                        key={table.name}
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        whileInView={{ opacity: 1, x: 0 }}
+                                                        transition={{ duration: 0.5, delay: table.delay }}
+                                                        viewport={{ once: true }}
+                                                        className="flex items-center justify-between p-4 rounded-2xl border transition-all duration-500"
+                                                        style={{
+                                                            background: table.unselected ? "rgba(255,255,255,0.02)" : "rgba(59, 130, 246, 0.08)",
+                                                            borderColor: table.unselected ? "rgba(255,255,255,0.05)" : "rgba(59, 130, 246, 0.3)",
+                                                        }}
+                                                    >
+                                                        <div className="flex items-center gap-3">
+                                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${table.unselected ? 'bg-white/5' : 'bg-blue-500/20'}`}>
+                                                                <Database size={14} className={table.unselected ? 'text-white/40' : 'text-blue-400'} />
+                                                            </div>
+                                                            <div>
+                                                                <div className={`text-sm font-bold ${table.unselected ? 'text-white/60' : 'text-white'}`}>{table.name}</div>
+                                                                <div className="text-[10px] uppercase tracking-wider text-white/40 mt-0.5">{table.tag}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            {table.unselected ? (
+                                                                <div className="w-5 h-5 rounded-full border border-white/20" />
+                                                            ) : (
+                                                                <motion.div
+                                                                    initial={{ scale: 0 }}
+                                                                    whileInView={{ scale: 1 }}
+                                                                    transition={{ type: "spring", delay: table.delay + 0.3 }}
+                                                                    viewport={{ once: true }}
+                                                                >
+                                                                    <CheckCircle2 size={20} className="text-blue-500" />
+                                                                </motion.div>
+                                                            )}
+                                                        </div>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            /* Placeholder 3x3 bento grid for other steps */
+                                            <div className="grid grid-cols-3 gap-3 h-full relative z-10 w-full max-w-xs mx-auto aspect-square">
+                                                {Array.from({ length: 9 }).map((_, i) => (
+                                                    <div
+                                                        key={i}
+                                                        className="transition-all duration-500"
+                                                        style={{
+                                                            background: i === 4
+                                                                ? "rgba(59, 130, 246, 0.08)"
+                                                                : "rgba(255, 255, 255, 0.02)",
+                                                            border: i === 4
+                                                                ? "1px solid rgba(59, 130, 246, 0.2)"
+                                                                : "1px solid rgba(255, 255, 255, 0.04)",
+                                                            borderRadius: "16px",
+                                                            aspectRatio: "1",
                                                             display: "flex",
                                                             alignItems: "center",
                                                             justifyContent: "center",
-                                                            color: "rgba(59, 130, 246, 0.8)",
-                                                            fontSize: "14px",
-                                                        }}>
-                                                            +
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        {/* Center glow */}
-                                        <div
-                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full pointer-events-none"
-                                            style={{
-                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)",
-                                            }}
-                                        />
+                                                        }}
+                                                    >
+                                                        {i === 4 && (
+                                                            <div style={{
+                                                                width: "24px",
+                                                                height: "24px",
+                                                                borderRadius: "8px",
+                                                                background: "rgba(59, 130, 246, 0.3)",
+                                                                border: "1px solid rgba(59, 130, 246, 0.4)",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                color: "rgba(59, 130, 246, 0.8)",
+                                                                fontSize: "14px",
+                                                            }}>
+                                                                +
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>
