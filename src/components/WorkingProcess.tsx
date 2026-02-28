@@ -2,7 +2,88 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
+/* ------------------------------------------------------------------ */
+/*  SceneCard — renders an iframe inside a contained card, auto-scaled */
+/* ------------------------------------------------------------------ */
+function SceneCard({
+    src,
+    iframeWidth = 1000,
+    iframeHeight = 700,
+    title,
+}: {
+    src: string;
+    iframeWidth?: number;
+    iframeHeight?: number;
+    title: string;
+}) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [scale, setScale] = useState(0.5);
+
+    const updateScale = useCallback(() => {
+        if (cardRef.current) {
+            const containerWidth = cardRef.current.clientWidth;
+            setScale(containerWidth / iframeWidth);
+        }
+    }, [iframeWidth]);
+
+    useEffect(() => {
+        const el = cardRef.current;
+        if (!el) return;
+        const observer = new ResizeObserver(() => updateScale());
+        observer.observe(el);
+        updateScale();
+        return () => observer.disconnect();
+    }, [updateScale]);
+
+    return (
+        <div
+            ref={cardRef}
+            className="relative overflow-hidden w-full"
+            style={{
+                background: "rgba(5, 5, 10, 0.6)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRadius: "var(--card-radius)",
+                height: `${Math.max(iframeHeight * scale, 260)}px`,
+            }}
+        >
+            {/* Browser window dots */}
+            <div className="absolute top-4 left-5 flex gap-2 z-10">
+                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.10)" }} />
+                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.10)" }} />
+            </div>
+
+            <iframe
+                src={src}
+                className="absolute top-0 left-0 border-0 outline-none select-none pointer-events-none"
+                style={{
+                    width: `${iframeWidth}px`,
+                    height: `${iframeHeight}px`,
+                    transform: `scale(${scale})`,
+                    transformOrigin: "top left",
+                    background: "transparent",
+                }}
+                title={title}
+            />
+        </div>
+    );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Scene config per step                                              */
+/* ------------------------------------------------------------------ */
+const scenes = [
+    { src: "/scene2-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Select Tables" },
+    { src: "/scene3-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Build Metadata" },
+    { src: "/scene4-isolated.html", iframeWidth: 1200, iframeHeight: 800, title: "AI Context" },
+    { src: "/scene5-isolated.html", iframeWidth: 1200, iframeHeight: 800, title: "Generate Dashboard" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  Main component                                                     */
+/* ------------------------------------------------------------------ */
 interface WorkingProcessProps {
     dict: {
         title: string;
@@ -45,6 +126,8 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                 <div className="flex flex-col gap-32">
                     {steps.map((step, index) => {
                         const isReversed = index % 2 !== 0;
+                        const scene = scenes[index];
+
                         return (
                             <motion.div
                                 key={step.title}
@@ -77,89 +160,14 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                     </motion.a>
                                 </div>
 
-                                {/* Visual Side — Bento Grid */}
+                                {/* Visual Side — Scene Card */}
                                 <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
-                                    {index === 0 ? (
-                                        /* Verbatim Scene 2 (Select Tables) via iframe, without the outer styling card container */
-                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible">
-                                            <iframe
-                                                src="/scene2-isolated.html"
-                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
-                                                style={{ background: 'transparent' }}
-                                                title="Asklyze Workflow Scene 2"
-                                            />
-                                        </div>
-                                    ) : index === 1 ? (
-                                        /* Verbatim Scene 3 (Build Metadata) via iframe */
-                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible">
-                                            <iframe
-                                                src="/scene3-isolated.html"
-                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
-                                                style={{ background: 'transparent' }}
-                                                title="Asklyze Workflow Scene 3"
-                                            />
-                                        </div>
-                                    ) : index === 2 ? (
-                                        <>
-                                        {/* Mobile/Tablet: standard iframe like other sections */}
-                                        <div className="lg:hidden relative z-10 w-full flex items-center justify-center overflow-visible">
-                                            <iframe
-                                                src="/scene4-isolated.html"
-                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
-                                                style={{ background: 'transparent' }}
-                                                title="Asklyze Workflow Scene 4"
-                                            />
-                                        </div>
-                                        {/* Desktop: wider iframe scaled to show full scene */}
-                                        <div className="hidden lg:block relative z-10 w-full overflow-visible"
-                                            style={{ height: '700px' }}
-                                        >
-                                            <iframe
-                                                src="/scene4-isolated.html"
-                                                className="border-0 outline-none select-none pointer-events-none"
-                                                style={{
-                                                    minWidth: '1200px',
-                                                    width: '1200px',
-                                                    height: '850px',
-                                                    flexShrink: 0,
-                                                    transform: 'scale(0.72)',
-                                                    transformOrigin: 'top left',
-                                                    background: 'transparent',
-                                                }}
-                                                title="Asklyze Workflow Scene 4"
-                                            />
-                                        </div>
-                                        </>
-                                    ) : index === 3 ? (
-                                        <>
-                                        {/* Mobile/Tablet: standard iframe like other sections */}
-                                        <div className="lg:hidden relative z-10 w-full flex items-center justify-center overflow-visible">
-                                            <iframe
-                                                src="/scene5-isolated.html"
-                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
-                                                style={{ background: 'transparent' }}
-                                                title="Asklyze Workflow Scene 5 – Dashboard"
-                                            />
-                                        </div>
-                                        {/* Desktop: wider iframe scaled, anchored right so overflow goes left (away from text) */}
-                                        <div className="hidden lg:block relative z-10 w-full overflow-visible"
-                                            style={{ height: '700px' }}
-                                        >
-                                            <iframe
-                                                src="/scene5-isolated.html"
-                                                className="absolute right-0 top-0 border-0 outline-none select-none pointer-events-none"
-                                                style={{
-                                                    width: '1200px',
-                                                    height: '850px',
-                                                    transform: 'scale(0.72)',
-                                                    transformOrigin: 'top right',
-                                                    background: 'transparent',
-                                                }}
-                                                title="Asklyze Workflow Scene 5 – Dashboard"
-                                            />
-                                        </div>
-                                        </>
-                                    ) : null}
+                                    <SceneCard
+                                        src={scene.src}
+                                        iframeWidth={scene.iframeWidth}
+                                        iframeHeight={scene.iframeHeight}
+                                        title={scene.title}
+                                    />
                                 </div>
                             </motion.div>
                         );
