@@ -7156,10 +7156,9 @@
       pointer-events: auto !important;
       height: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      transform: scale(0.85) !important;
-      transform-origin: center center;
+      padding-top: 10px;
     }
 
     #scene2 .scene-two-layout {
@@ -7167,9 +7166,7 @@
       width: 100% !important;
       display: flex !important;
       justify-content: center !important;
-      transform: scale(0.8);
-      transform-origin: center center;
-      margin-left: -50px;
+      align-items: flex-start !important;
     }
 
     #scene2 .scene-two-stage {
@@ -7239,8 +7236,10 @@
             class="packet-cell"></span></div>
       </div>
 
-      <div class="app-stage" style="margin: 0 auto;">
-        <div class="app-window p-0 m-0 shadow-2xl rounded-2xl w-full h-full max-w-full">
+      <div class="app-stage"
+        style="margin: 0 auto; width: 100%; height: 100%; min-width: 600px; display: flex; justify-content: center;">
+        <div class="app-window"
+          style="box-shadow: none !important; margin: 0; width: 100%; max-width: 800px; border-radius: 16px; overflow: hidden; height: auto;">
           <div class="app-topbar">
             <img src="Asklyze_IN_Line_White.png" alt="ASKLYZE" class="app-top-logo">
             <div class="app-brand">AI Data Configuration</div>
