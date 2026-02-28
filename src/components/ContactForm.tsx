@@ -173,7 +173,7 @@ export default function ContactForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                         placeholder="Your name"
                     />
                 </div>
@@ -187,7 +187,7 @@ export default function ContactForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                         placeholder="Your email"
                     />
                 </div>
@@ -201,7 +201,7 @@ export default function ContactForm() {
                     <button
                         type="button"
                         onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                     >
                         {selectedCountry ? (
                             <span className="flex items-center gap-2">
@@ -229,7 +229,7 @@ export default function ContactForm() {
                                         value={countrySearch}
                                         onChange={(e) => setCountrySearch(e.target.value)}
                                         placeholder="Search country..."
-                                        className="w-full px-4 py-3 bg-white/5 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30"
+                                        className="w-full px-4 py-3 bg-white/5 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50"
                                     />
                                 </div>
                                 <div className="max-h-60 overflow-y-auto">
@@ -267,7 +267,7 @@ export default function ContactForm() {
                                 const value = e.target.value.replace(/[^0-9]/g, "");
                                 setFormData(prev => ({ ...prev, mobile: value }));
                             }}
-                            className="flex-1 px-5 py-4 bg-white/5 rounded-r-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                            className="flex-1 px-5 py-4 bg-white/5 rounded-r-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                             placeholder="Phone number"
                         />
                     </div>
@@ -284,7 +284,7 @@ export default function ContactForm() {
                         value={formData.companyName}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                         placeholder="Your company"
                     />
                 </div>
@@ -297,7 +297,7 @@ export default function ContactForm() {
                         value={formData.companySize}
                         onChange={handleChange}
                         required
-                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all appearance-none cursor-pointer"
+                        className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all appearance-none cursor-pointer"
                         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236a7695'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 1.25rem center", backgroundSize: "1.25rem" }}
                     >
                         <option value="" disabled>Select</option>
@@ -316,7 +316,7 @@ export default function ContactForm() {
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                    className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                     placeholder="e.g. Product Manager, CEO, Developer"
                 />
             </div>
@@ -330,7 +330,7 @@ export default function ContactForm() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all"
+                    className="w-full px-5 py-4 bg-white/5 rounded-full border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all"
                     placeholder="What is this about?"
                 />
             </div>
@@ -344,7 +344,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-5 py-4 bg-white/5 rounded-3xl border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#ff705a]/30 transition-all resize-none"
+                    className="w-full px-5 py-4 bg-white/5 rounded-3xl border-0 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#3b82f6]/50 transition-all resize-none"
                     placeholder="Tell us more about your inquiry..."
                 />
             </div>
@@ -382,7 +382,7 @@ export default function ContactForm() {
                 disabled={status === "loading"}
                 whileHover={{ scale: status === "loading" ? 1 : 1.02 }}
                 whileTap={{ scale: status === "loading" ? 1 : 0.98 }}
-                className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#ff705a] to-[#ff9472] text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full md:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
                 {status === "loading" ? (
                     <>
@@ -391,8 +391,10 @@ export default function ContactForm() {
                     </>
                 ) : (
                     <>
-                        <Send className="w-5 h-5" />
                         Send Message
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full shrink-0" style={{ background: "rgba(0,0,0,0.1)" }}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                        </span>
                     </>
                 )}
             </motion.button>

@@ -20,7 +20,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
         icon: MapPin,
         title: dict.locationTitle,
         lines: dict.locationLines,
-        color: "#ff705a"
+        color: "#ffffff"
     },
     {
         icon: Mail,
@@ -38,7 +38,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
             "+1 (800) 123-4567",
             "Mon - Fri: 9AM - 6PM EST"
         ],
-        color: "#1ad271"
+        color: "#ffffff"
     }
 ];
 
@@ -70,8 +70,8 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                             >
                                 <div className="flex items-start gap-4">
                                     <div
-                                        className="w-14 h-14 rounded-full flex items-center justify-center shrink-0"
-                                        style={{ backgroundColor: `${info.color}15` }}
+                                        className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border"
+                                        style={{ backgroundColor: "#000000", borderColor: "rgba(255,255,255,0.1)" }}
                                     >
                                         <info.icon
                                             className="w-6 h-6"
@@ -98,11 +98,16 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                             viewport={{ once: true }}
-                            className="rounded-2xl p-6"
-                            style={{ background: "linear-gradient(135deg, #ff705a, #ff9472)" }}
+                            className="rounded-2xl p-6 border relative overflow-hidden"
+                            style={{
+                                background: "#05050A",
+                                borderColor: "rgba(255, 255, 255, 0.1)",
+                                boxShadow: "0 4px 24px rgba(0, 0, 0, 0.4)",
+                            }}
                         >
-                            <h4 className="text-lg font-bold mb-3 !text-white">{dict.followTitle}</h4>
-                            <p className="!text-white text-sm mb-4 opacity-90">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-2xl rounded-full -translate-y-1/2 translate-x-1/2" />
+                            <h4 className="text-lg font-bold mb-3 text-white relative z-10">{dict.followTitle}</h4>
+                            <p className="text-sm mb-6 relative z-10" style={{ color: "rgba(255,255,255,0.55)" }}>
                                 {dict.followDesc}
                             </p>
                             <div className="flex gap-3">
@@ -111,7 +116,7 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Follow ASKLYZE on X"
-                                    className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors text-white text-sm font-bold"
+                                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 border border-white/10 transition-colors text-white text-sm font-bold relative z-10"
                                 >
                                     𝕏
                                 </a>
@@ -120,7 +125,7 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Follow ASKLYZE on LinkedIn"
-                                    className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors text-white text-sm font-bold"
+                                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 border border-white/10 transition-colors text-white text-sm font-bold relative z-10"
                                 >
                                     in
                                 </a>

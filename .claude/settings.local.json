@@ -11,7 +11,10 @@
       "Bash(npm install -D @types/three)",
       "Bash(ls /Users/ahmedalsaied/asklyze/website/asklyze-landing/src/app/[lang]/)",
       "mcp__Claude_Preview__preview_start",
-      "Bash(lsof -ti :3000)"
+      "Bash(lsof -ti :3000)",
+      "Bash(git commit:*)",
+      "Bash(git push origin main)",
+      "Bash(lsof -i :3000 -t)"
     ]
   }
 }

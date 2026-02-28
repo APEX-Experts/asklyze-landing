@@ -17,10 +17,10 @@ const iconMap = {
 } as const;
 
 /* ── Shared inline-style constants (matching landing page exactly) ── */
-const CARD_BG = "rgba(5, 5, 10, 0.6)";
+const CARD_BG = "#05050A"; // keeping this slightly off-black for contrast from #000 background
 const CARD_BORDER = "1px solid rgba(255, 255, 255, 0.1)";
 const CARD_BORDER_COLOR = "rgba(255, 255, 255, 0.1)";
-const CARD_RADIUS = "var(--card-radius)"; // 32px
+const CARD_RADIUS = "32px"; // matching vexel
 const TEXT_SECONDARY = "rgba(255,255,255,0.55)";
 const TEXT_BODY = "rgba(255,255,255,0.7)";
 const TEXT_MUTED = "rgba(255,255,255,0.4)";
@@ -62,7 +62,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                         </span>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style={{ letterSpacing: "-0.03em" }}>
                             {content.hero.title}{" "}
-                            <span style={{ color: "#ff705a" }}>{content.hero.titleHighlight}</span>
+                            <span style={{ color: "#ffffff" }}>{content.hero.titleHighlight}</span>
                         </h1>
                         <p className="text-base md:text-lg max-w-xl mb-4" style={{ color: TEXT_SECONDARY }}>
                             {content.hero.subtitle}
@@ -420,22 +420,26 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="rounded-[2rem] text-center p-12 md:p-20 shadow-2xl overflow-hidden relative"
-                        style={{ background: "#ff705a" }}
+                        className="rounded-[32px] text-center p-12 md:p-20 shadow-2xl overflow-hidden relative border"
+                        style={{ background: "#0a0a0f", borderColor: CARD_BORDER_COLOR }}
                     >
-                        <div className="absolute top-0 right-0 w-96 h-96 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "#ff8a78" }} />
+                        {/* Blue glow effect in CTA */}
+                        <div className="absolute top-0 right-0 w-96 h-96 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(0,131,255,0.15)" }} />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/40 blur-2xl rounded-full translate-y-1/2 -translate-x-1/2" />
 
                         <h2 className="relative z-10 !text-white text-3xl md:text-5xl font-extrabold mb-6 leading-tight">{content.cta.title}</h2>
-                        <p className="relative z-10 !text-white/90 max-w-2xl mx-auto mb-10 text-lg md:text-xl leading-relaxed">{content.cta.description}</p>
+                        <p className="relative z-10 !text-white/70 max-w-2xl mx-auto mb-10 text-lg md:text-xl leading-relaxed">{content.cta.description}</p>
 
                         <div className="relative z-10">
                             <a
                                 href={`/${lang}/contact`}
-                                className="inline-flex items-center gap-2 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                                className="inline-flex items-center justify-center gap-2 font-bold py-3.5 px-8 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
                                 style={{ background: "#ffffff", color: "#000000" }}
                             >
                                 {content.cta.button}
+                                <span className="flex items-center justify-center w-6 h-6 rounded-full" style={{ background: "rgba(0,0,0,0.1)" }}>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                                </span>
                             </a>
                         </div>
                     </motion.div>

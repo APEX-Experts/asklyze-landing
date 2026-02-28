@@ -43,12 +43,12 @@ export default function Navbar({ dict }: NavbarProps) {
   };
 
   const navItems = [
-    { key: "features", href: "#features" },
-    { key: "pricing", href: "#pricing" },
-    { key: "blog", href: "/blog" },
-    { key: "docs", href: "https://docs.asklyze.ai/", external: true },
-    { key: "about", href: "/about" },
-    { key: "contact", href: "/contact" },
+    { key: "features", href: "#features", icon: Zap },
+    { key: "pricing", href: "#pricing", icon: CreditCard },
+    { key: "blog", href: "/blog", icon: Newspaper },
+    { key: "docs", href: "https://docs.asklyze.ai/", icon: FileText, external: true },
+    { key: "about", href: "/about", icon: Users },
+    { key: "contact", href: "/contact", icon: Mail },
   ];
 
   return (
@@ -195,15 +195,7 @@ export default function Navbar({ dict }: NavbarProps) {
                   </div>
                   <div className="flex-1 overflow-y-auto py-6 px-6">
                     <div className="flex flex-col gap-1">
-                      {[
-                        { key: "home", icon: Home, href: "/" },
-                        { key: "features", icon: Zap, href: "#features" },
-                        { key: "pricing", icon: CreditCard, href: "#pricing" },
-                        { key: "blog", icon: Newspaper, href: "/blog" },
-                        { key: "docs", icon: FileText, href: "https://docs.asklyze.ai/", external: true },
-                        { key: "about", icon: Users, href: "/about" },
-                        { key: "contact", icon: Mail, href: "/contact" },
-                      ].map((item, index) => {
+                      {navItems.map((item, index) => {
                         const isExternal = item.external;
                         const content = (
                           <motion.div
