@@ -7151,7 +7151,7 @@
       position: static !important;
     }
 
-    /* Keep the outer scene and monitor frame large (Scale 1) to match other scenes */
+    /* Standardized Monitor Frame Structure - Restoring the Frame for Scene 4 */
     #scene4 {
       pointer-events: auto !important;
       height: 100%;
@@ -7170,33 +7170,46 @@
       justify-content: center !important;
     }
 
-    .s4-brand-logo {
-      content: url("logo-light.png") !important;
-    }
-
     .monitor-shell {
       width: 100% !important;
       height: 100% !important;
-      max-width: 1200px !important;
-      max-height: 800px !important;
-      margin: 0 !important;
+      max-width: 1000px !important;
+      max-height: 750px !important;
+      margin: 0 auto !important;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
-    .monitor-frame,
-    .monitor-screen {
+    .monitor-frame {
+      background: linear-gradient(180deg, #273954 0%, #1d2b42 100%);
+      border-radius: 20px;
+      padding: 12px 12px 18px;
+      box-shadow: 0 26px 55px rgba(18, 37, 67, 0.22);
       flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch !important;
+      justify-content: stretch !important;
     }
 
-    /* Scale only the internal app content to 0.6 for a professional "miniature" look */
+    .monitor-screen {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #dce8ff;
+      border: 1px solid rgba(151, 180, 225, 0.45);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    /* Standardized Scale (0.9) to make it "big" like others, while keeping professional look */
     .scene-four-shell {
       flex: 0 0 auto !important;
-      transform: scale(0.6) !important;
+      transform: scale(0.9) !important;
       transform-origin: center center !important;
       width: 1100px !important;
       height: 750px !important;
@@ -7204,7 +7217,7 @@
       overflow: hidden;
       margin: 0 auto !important;
       display: flex;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     }
 
     .s4-main {
