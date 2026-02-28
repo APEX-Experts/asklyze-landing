@@ -5563,19 +5563,28 @@ body.paused #scene5 .s5-area-chart path {
   }
 }
 
-/* Force scene4 to be visible and isolated */
 body, html { width: 100%; height: 100%; overflow: hidden; background: transparent !important; margin: 0; padding: 0; }
 .scene { opacity: 1 !important; transform: scale(1) !important; position: static !important; }
-
-/* Scale it gently to fit the iframe */
-#scene4 { pointer-events: auto !important; height: 100%; display: flex; align-items: center; justify-content: center; transform: scale(0.9) !important; transform-origin: center center;}
+#scene4 { 
+  pointer-events: auto !important; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  transform: scale(0.9) !important; 
+  transform-origin: center center;
+}
 #scene4 .scene-four-layout { padding: 0 !important; width: 100% !important; display: flex !important; justify-content: center !important; }
-
-/* Ensure logo is updated to logo-light.png */
 .s4-brand-logo { content: url("logo-light.png") !important; }
-
-/* Adjust sidebars and main content for the isolated view if needed */
-.scene-four-shell { width: 100%; height: 100%; max-width: 900px; max-height: 600px; border-radius: 12px; overflow: hidden; }
+.scene-four-shell { 
+  width: 95% !important; 
+  height: 90% !important; 
+  max-width: 900px !important; 
+  max-height: 600px !important; 
+  border-radius: 12px; 
+  overflow: hidden; 
+  margin: 0 auto;
+}
 </style>
 </head>
 <body class=""> 
@@ -5800,7 +5809,6 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: transparen
 
 <!-- ═══════════ SCENE 6: DASHBOARD VIEW ═══════════ -->
 <script>
-  // Add active class immediately for animations
   document.getElementById('scene4').classList.add('active');
 </script>
 </body>
