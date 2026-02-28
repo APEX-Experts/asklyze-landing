@@ -7159,15 +7159,46 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: scale(0.9) !important;
+      transform: scale(1) !important;
       transform-origin: center center;
     }
 
     #scene2 .scene-two-layout {
       padding: 0 !important;
       width: 100% !important;
+      height: 100% !important;
       display: flex !important;
-      justify-content: center !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .monitor-shell {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: none !important;
+      max-height: none !important;
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .monitor-frame {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .monitor-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-window {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Remove the margin left offset from the db stack since the db stick is gone, to perfectly center the monitor */
