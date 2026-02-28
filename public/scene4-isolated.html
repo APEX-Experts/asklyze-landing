@@ -5808,8 +5808,74 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: transparen
 </div>
 
 <!-- ═══════════ SCENE 6: DASHBOARD VIEW ═══════════ -->
+
 <script>
+const scene4PromptText = 'COMPLETED PROJECT OVERVIEW';
+const scene4TypingDurationMs = 2000;
+const scene4ResultAfterTypingMs = 140;
+const scene4PivotHoldMs = 3000;
+const scene4ChartAfterTypingMs = scene4ResultAfterTypingMs + scene4PivotHoldMs;
+const scene4HoldAfterChartMs = 3000;
+const scene4DurationMs = scene4TypingDurationMs + scene4ChartAfterTypingMs + scene4HoldAfterChartMs;
+const scene4FallbackResultMs = scene4TypingDurationMs + scene4ResultAfterTypingMs + 350;
+const scene4FallbackChartMs = scene4TypingDurationMs + scene4ChartAfterTypingMs + 350;
+
+let scene4TypingInterval = null;
+let scene4Timers = [];
+
+function clearScene4Sequence() {
+  if (scene4TypingInterval) {
+    clearInterval(scene4TypingInterval);
+    scene4TypingInterval = null;
+  }
+  scene4Timers.forEach((id) => clearTimeout(id));
+  scene4Timers = [];
+}
+
+function startScene4Sequence() {
+  const scene4 = document.getElementById('scene4');
+  const typed = document.getElementById('scene4TypedText');
+  if (!scene4 || !typed) return;
+
+  clearScene4Sequence();
+  scene4.classList.remove('phase-result', 'phase-chart');
+  typed.textContent = '';
+  typed.classList.add('typing');
+
+  const revealResult = () => scene4.classList.add('phase-result');
+  const revealChart = () => scene4.classList.add('phase-chart');
+
+  // Fallback
+  scene4Timers.push(setTimeout(revealResult, scene4FallbackResultMs));
+  scene4Timers.push(setTimeout(revealChart, scene4FallbackChartMs));
+
+  const typingStepMs = Math.max(30, Math.round(scene4TypingDurationMs / Math.max(scene4PromptText.length, 1)));
+  let index = 0;
+  scene4TypingInterval = setInterval(() => {
+    index += 1;
+    typed.textContent = scene4PromptText.slice(0, index);
+
+    if (index >= scene4PromptText.length) {
+      clearInterval(scene4TypingInterval);
+      scene4TypingInterval = null;
+      typed.classList.remove('typing');
+
+      scene4Timers.push(setTimeout(revealResult, scene4ResultAfterTypingMs));
+      scene4Timers.push(setTimeout(revealChart, scene4ChartAfterTypingMs));
+    }
+  }, typingStepMs);
+}
+
+// Start immediately on load
+document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('scene4').classList.add('active');
+  startScene4Sequence();
+  
+  // Optional: loop the sequence
+  setInterval(() => {
+    startScene4Sequence();
+  }, scene4DurationMs + 2000);
+});
 </script>
 </body>
 </html>
