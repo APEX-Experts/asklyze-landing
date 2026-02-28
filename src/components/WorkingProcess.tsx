@@ -76,35 +76,36 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
 
                                 {/* Visual Side — Bento Grid */}
                                 <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
-                                    <div
-                                        className="p-8 relative overflow-hidden flex flex-col justify-center"
-                                        style={{
-                                            background: "rgba(5, 5, 10, 0.6)",
-                                            border: "1px solid rgba(255, 255, 255, 0.1)",
-                                            borderRadius: "32px",
-                                            minHeight: "360px",
-                                        }}
-                                    >
-                                        {/* Center glow */}
+                                    {index === 0 ? (
+                                        /* Verbatim Scene 2 (Select Tables) via iframe, without the outer styling card container */
+                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible">
+                                            <iframe
+                                                src="/scene2-isolated.html"
+                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
+                                                style={{ background: 'transparent' }}
+                                                title="Asklyze Workflow Scene 2"
+                                            />
+                                        </div>
+                                    ) : (
+                                        /* Card container for placeholder bento steps */
                                         <div
-                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full pointer-events-none"
+                                            className="p-8 relative overflow-hidden flex flex-col justify-center"
                                             style={{
-                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)",
+                                                background: "rgba(5, 5, 10, 0.6)",
+                                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                                borderRadius: "32px",
+                                                minHeight: "360px",
                                             }}
-                                        />
+                                        >
+                                            {/* Center glow */}
+                                            <div
+                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full pointer-events-none"
+                                                style={{
+                                                    background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)",
+                                                }}
+                                            />
 
-                                        {index === 0 ? (
-                                            /* Verbatim Scene 2 (Select Tables) via iframe to preserve 100% exact CSS */
-                                            <div className="relative z-10 w-full h-[600px] flex items-center justify-center -m-4 sm:m-0 overflow-hidden rounded-[32px]">
-                                                <iframe
-                                                    src="/scene2-isolated.html"
-                                                    className="w-[120%] h-[600px] border-0 outline-none select-none pointer-events-none mt-2"
-                                                    style={{ background: 'transparent' }}
-                                                    title="Asklyze Workflow Scene 2"
-                                                />
-                                            </div>
-                                        ) : (
-                                            /* Placeholder 3x3 bento grid for other steps */
+                                            {/* Placeholder 3x3 bento grid for other steps */}
                                             <div className="grid grid-cols-3 gap-3 h-full relative z-10 w-full max-w-xs mx-auto aspect-square">
                                                 {Array.from({ length: 9 }).map((_, i) => (
                                                     <div
@@ -143,8 +144,8 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                                     </div>
                                                 ))}
                                             </div>
-                                        )}
-                                    </div>
+                                        </div>
+                                    )}
                                 </div>
                             </motion.div>
                         );
