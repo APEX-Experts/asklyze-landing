@@ -5564,14 +5564,21 @@ body.paused #scene5 .s5-area-chart path {
 }
 
 /* Force scene3 to be visible and isolated */
-body, html { width: 100%; height: 100%; overflow: hidden; background: transparent !important; }
+body, html { width: 100%; height: 100%; overflow: hidden; background: transparent !important; margin: 0; padding: 0; }
 .scene { opacity: 1 !important; transform: scale(1) !important; position: static !important; }
-#scene3 { pointer-events: auto !important; height: 100%; display: flex; align-items: center; justify-content: center; transform: scale(0.9) !important; }
+
+/* Scale it gently to fit the iframe */
+#scene3 { pointer-events: auto !important; height: 100%; display: flex; align-items: center; justify-content: center; transform: scale(0.9) !important; transform-origin: center center;}
 #scene3 .scene-three-layout { padding: 0 !important; width: 100% !important; display: flex !important; justify-content: center !important; }
-#scene3 .scene-three-stage { width: 440px !important; }
+
+/* Ensure logo is updated to logo-light.png */
+.app-top-logo { content: url("logo-light.png") !important; }
+
+/* Center the monitor shell */
+.scene-three-stage { margin: 0 auto !important; }
 </style>
 </head>
-<body class="dark-mode">
+<body class=""> 
 <div class="scene" id="scene3">
   <div class="scene-three-layout">
     <div class="scene-three-stage">
@@ -5653,6 +5660,8 @@ body, html { width: 100%; height: 100%; overflow: hidden; background: transparen
     </div>
   </div>
 </div>
+
+<!-- ═══════════ SCENE 5: CHAT RESULT ═══════════ -->
 <script>
   // Add active class immediately for animations
   document.getElementById('scene3').classList.add('active');
