@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scene 6 – Oracle APEX Plugin</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --cyan: #00C8FF;
+      --cyan-dim: #0099cc;
+      --cyan-glow: rgba(0, 200, 255, 0.3);
+      --dark: #060a10;
+      --dark-card: #0c1220;
+      --purple: #7B5EA7;
+      --purple-light: #9b7ed0;
+      --white: #f0f4f8;
+      --gray: #6b7a8d;
+      --scene-transition-duration: 0.72s;
+      --scene-transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --scene-safe-top: clamp(110px, 14vh, 140px);
+      --scene-safe-bottom: clamp(86px, 12vh, 112px);
+      --app-bg: #f8f6ef;
+      --app-text: #0f172a;
+      --grid-line: rgba(0, 200, 255, 0.03);
+      --radial-glow: rgba(0, 200, 255, 0.06);
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--app-bg);
+      font-family: 'Outfit', sans-serif;
+      color: var(--app-text);
+    }
+
+    body.dark-mode {
+      --app-bg: #0b1220;
+      --app-text: #dbe8ff;
+      --grid-line: rgba(132, 163, 211, 0.14);
+      --radial-glow: rgba(89, 130, 192, 0.22);
+    }
+
+    /* ═══════════ DARK MODE - SHARED ═══════════ */
+    body.dark-mode .monitor-frame {
+      background: linear-gradient(180deg, #1e2d46 0%, #17253d 100%);
+      box-shadow: 0 22px 40px rgba(3, 9, 20, 0.58);
+    }
+
+    body.dark-mode .monitor-screen {
+      background: #111d33 !important;
+      border-color: rgba(122, 151, 199, 0.32) !important;
+    }
+
+    body.dark-mode #scene6 .apex-shell {
+      background: #13233d !important;
+      border-color: rgba(126, 153, 196, 0.24) !important;
+      box-shadow: 0 14px 28px rgba(5, 11, 25, 0.5);
+    }
+
+    body.dark-mode #scene6 .apex-center,
+    body.dark-mode #scene6 .apex-left,
+    body.dark-mode #scene6 .apex-right {
+      background: #101d33 !important;
+    }
+
+    body.dark-mode #scene6 .apex-nav-links,
+    body.dark-mode #scene6 .apex-left-title,
+    body.dark-mode #scene6 .apex-tree-item,
+    body.dark-mode #scene6 .apex-toolbar,
+    body.dark-mode #scene6 .apex-card-label,
+    body.dark-mode #scene6 .apex-bottom-tools span,
+    body.dark-mode #scene6 .apex-prop-item {
+      color: #adc1e2 !important;
+    }
+
+    body.dark-mode #scene6 .apex-topnav {
+      background: #2b2a26 !important;
+      border-bottom-color: rgba(145, 163, 200, 0.22) !important;
+    }
+
+    body.dark-mode #scene6 .apex-logo {
+      color: #f0f5ff !important;
+    }
+
+    body.dark-mode #scene6 .apex-search {
+      background: #1b2a44 !important;
+      color: #c1d6f8 !important;
+      border-color: rgba(118, 147, 191, 0.3) !important;
+    }
+
+    body.dark-mode #scene6 .apex-tree-item.active {
+      background: rgba(74, 88, 165, 0.42) !important;
+      border-color: rgba(110, 127, 223, 0.5) !important;
+    }
+
+    body.dark-mode #scene6 .apex-canvas {
+      background: linear-gradient(180deg, #5a544f 0%, #4f4946 100%) !important;
+    }
+
+    body.dark-mode #scene6 .apex-lane {
+      background: #f2c764 !important;
+      box-shadow: inset 0 -1px 0 rgba(92, 63, 0, 0.32);
+    }
+
+    body.dark-mode #scene6 .apex-prop-item,
+    body.dark-mode #scene6 .apex-bottom-tools span {
+      background: #1a2b47 !important;
+      border-color: rgba(116, 146, 190, 0.3) !important;
+    }
+
+    body.dark-mode #scene6 .apex-prop-item strong {
+      color: #e7f0ff !important;
+    }
+
+    body.dark-mode #scene6 .apex-region-highlight {
+      background: rgba(226, 176, 66, 0.24) !important;
+      border-color: rgba(226, 176, 66, 0.56) !important;
+    }
+
+    body.dark-mode #scene6 .apex-highlight-label {
+      color: #f8e8b5 !important;
+    }
+
+    body.dark-mode #scene6 .apex-plugin-chip {
+      background: #3f46a2 !important;
+      border-color: rgba(149, 171, 230, 0.52) !important;
+    }
+
+    /* ═══════════ DARK MODE - DETAILED (from ~1906) ═══════════ */
+    body.dark-mode #scene6 .apex-shell {
+      background: #1f1f21;
+      border-color: #32343d;
+    }
+
+    body.dark-mode #scene6 .apex-topnav {
+      background: #141519;
+      border-bottom-color: #2d2f36;
+    }
+
+    body.dark-mode #scene6 .apex-left {
+      background: #22211e;
+      border-right-color: #393a37;
+    }
+
+    body.dark-mode #scene6 .apex-center {
+      background: #554e49;
+    }
+
+    body.dark-mode #scene6 .apex-right {
+      background: #191a1f;
+      border-left-color: #393a37;
+    }
+
+    /* ═══════════ SCENE CLASS ═══════════ */
+    .scene {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--scene-transition-duration) var(--scene-transition-ease);
+    }
+
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ═══════════ MONITOR SHELL ═══════════ */
+    .monitor-shell {
+      width: min(900px, 100%);
+      position: relative;
+    }
+
+    .monitor-frame {
+      background: linear-gradient(180deg, #273954 0%, #1d2b42 100%);
+      border-radius: 20px;
+      padding: 12px 12px 18px;
+      box-shadow: 0 26px 55px rgba(18, 37, 67, 0.22);
+    }
+
+    .monitor-screen {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #dce8ff;
+      border: 1px solid rgba(151, 180, 225, 0.45);
+    }
+
+    .monitor-stand {
+      width: 140px;
+      height: 16px;
+      margin: 10px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #3a5478 0%, #1f334d 100%);
+    }
+
+    /* ═══════════ SCENE 6: ORACLE APEX PLUGIN ═══════════ */
+    #scene6 {
+      justify-content: center;
+      align-items: center;
+      transition: opacity var(--scene-transition-duration) var(--scene-transition-ease);
+    }
+
+    #scene6 .scene-plugin-layout {
+      width: min(1240px, 96vw);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      padding-left: clamp(292px, 28.5vw, 360px);
+      position: relative;
+      opacity: 1;
+      transform: none;
+    }
+
+    #scene6.active .scene-plugin-layout {
+      animation: none;
+    }
+
+    #scene6 .scene-plugin-stage {
+      width: min(900px, 100%);
+      justify-self: end;
+      position: relative;
+      z-index: 26;
+    }
+
+    #scene6 .apex-shell {
+      width: 100%;
+      height: 510px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #3c3d43;
+      background: #252421;
+      display: grid;
+      grid-template-rows: 34px minmax(0, 1fr);
+    }
+
+    #scene6 .apex-topnav {
+      height: 34px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      padding: 0 10px;
+      border-bottom: 1px solid #35363d;
+      background: #1a1b1f;
+    }
+
+    #scene6 .apex-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #e6ebf5;
+    }
+
+    #scene6 .apex-logo .apex-ring {
+      width: 12px;
+      height: 8px;
+      border-radius: 999px;
+      border: 2px solid #ff4b42;
+      box-shadow: 0 0 0 1px rgba(255, 75, 66, 0.2);
+      transform: translateY(-0.5px);
+    }
+
+    #scene6 .apex-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.5rem;
+      color: #b8c3d6;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #scene6 .apex-nav-links span::after {
+      content: '';
+      display: inline-block;
+      width: 1px;
+      height: 8px;
+      margin-left: 8px;
+      background: rgba(153, 172, 203, 0.22);
+      vertical-align: -1px;
+    }
+
+    #scene6 .apex-nav-links span:last-child::after {
+      display: none;
+    }
+
+    #scene6 .apex-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #scene6 .apex-search {
+      font-size: 0.48rem;
+      color: #9fb1cb;
+      border: 1px solid rgba(129, 149, 184, 0.3);
+      border-radius: 6px;
+      padding: 3px 8px;
+      min-width: 92px;
+      text-align: center;
+      background: #23262d;
+    }
+
+    #scene6 .apex-user {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 1px solid rgba(149, 168, 200, 0.32);
+      background: #2c313a;
+      color: #f3f7ff;
+      display: grid;
+      place-items: center;
+      font-size: 0.46rem;
+      font-weight: 700;
+    }
+
+    #scene6 .apex-workspace {
+      display: grid;
+      grid-template-columns: 148px minmax(0, 1fr) 176px;
+      min-height: 0;
+    }
+
+    #scene6 .apex-left {
+      border-right: 1px solid #3f403d;
+      background: #2a2925;
+      padding: 7px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    #scene6 .apex-left-title {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #9eb0c9;
+      border-bottom: 1px solid rgba(132, 152, 183, 0.24);
+      padding-bottom: 5px;
+      margin-bottom: 2px;
+    }
+
+    #scene6 .apex-tree-group {
+      margin-top: 3px;
+      font-size: 0.46rem;
+      letter-spacing: 0.05em;
+      color: #8da2c1;
+      text-transform: uppercase;
+    }
+
+    #scene6 .apex-tree-item {
+      font-size: 0.52rem;
+      color: #cad7ea;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      padding: 4px 5px;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #scene6 .apex-tree-item .apex-bullet {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #7d92b2;
+      flex: 0 0 auto;
+    }
+
+    #scene6 .apex-tree-item.is-child {
+      margin-left: 13px;
+    }
+
+    #scene6 .apex-tree-item .apex-pill {
+      margin-left: auto;
+      padding: 1px 5px;
+      border-radius: 999px;
+      background: #1f9f67;
+      border: 1px solid rgba(111, 237, 180, 0.36);
+      color: #f1fff8;
+      font-size: 0.42rem;
+      font-weight: 700;
+    }
+
+    #scene6 .apex-tree-item.active {
+      background: rgba(34, 132, 89, 0.24);
+      border-color: rgba(68, 185, 130, 0.44);
+      color: #effff7;
+    }
+
+    #scene6 .apex-center {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 26px minmax(0, 1fr) 58px;
+      background: #5f5751;
+    }
+
+    #scene6 .apex-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      font-size: 0.48rem;
+      color: #c4cfdf;
+      border-bottom: 1px solid rgba(120, 133, 156, 0.26);
+      background: #2d2f35;
+    }
+
+    #scene6 .apex-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #scene6 .apex-toolbar-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    #scene6 .apex-toolbar-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      border: 1px solid rgba(145, 165, 198, 0.4);
+      background: #252932;
+    }
+
+    #scene6 .apex-canvas {
+      position: relative;
+      padding: 8px;
+      background: linear-gradient(180deg, #685f58 0%, #5a534d 100%);
+      overflow: hidden;
+    }
+
+    #scene6 .apex-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(234, 239, 250, 0.08) 0,
+        rgba(234, 239, 250, 0.08) 1px,
+        transparent 1px,
+        transparent 22px
+      );
+    }
+
+    #scene6 .apex-page-title {
+      position: relative;
+      z-index: 1;
+      height: 20px;
+      border: 1px solid rgba(205, 218, 241, 0.22);
+      border-radius: 3px;
+      background: #3b3a41;
+      color: #ecf2ff;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      display: grid;
+      place-items: center;
+    }
+
+    #scene6 .apex-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    #scene6 .apex-row.r2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    #scene6 .apex-row.r3 { grid-template-columns: 1fr; }
+    #scene6 .apex-row.r4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    #scene6 .apex-lane {
+      height: 8px;
+      border-radius: 2px;
+      background: #efc56b;
+      box-shadow: inset 0 -1px 0 rgba(87, 61, 0, 0.26);
+    }
+
+    #scene6 .apex-lane.green {
+      background: #30a76d;
+      box-shadow: inset 0 -1px 0 rgba(19, 82, 50, 0.24);
+    }
+
+    #scene6 .apex-lane.dim {
+      background: #7f746a;
+      box-shadow: inset 0 -1px 0 rgba(65, 59, 54, 0.45);
+    }
+
+    #scene6 .apex-region-highlight {
+      position: relative;
+      z-index: 2;
+      margin-top: 7px;
+      height: 56px;
+      border-radius: 5px;
+      border: 1px solid rgba(239, 197, 107, 0.56);
+      background: rgba(239, 197, 107, 0.22);
+    }
+
+    #scene6 .apex-highlight-label {
+      position: absolute;
+      top: 5px;
+      left: 8px;
+      font-size: 0.45rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      color: #f4dfab;
+    }
+
+    #scene6 .apex-plugin-chip {
+      position: absolute;
+      left: 56%;
+      top: 47%;
+      transform: translate(-50%, -50%) scale(0.92);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.5rem;
+      font-weight: 700;
+      background: #2f3f80;
+      color: #f0f4ff;
+      border: 1px solid rgba(149, 171, 230, 0.42);
+      box-shadow: 0 6px 14px rgba(11, 26, 62, 0.38);
+      opacity: 0;
+    }
+
+    #scene6 .apex-cursor {
+      position: absolute;
+      left: 48%;
+      top: 44%;
+      width: 0;
+      height: 0;
+      border-left: 10px solid #f7fbff;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      transform: translate(-50%, -50%) rotate(-17deg);
+      filter: drop-shadow(0 1px 2px rgba(13, 29, 61, 0.45));
+    }
+
+    #scene6 .apex-click-ring {
+      position: absolute;
+      left: 56%;
+      top: 47%;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 2px solid rgba(106, 190, 145, 0.75);
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+
+    #scene6 .apex-bottom-tools {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 5px;
+      padding: 8px 8px;
+      border-top: 1px solid rgba(119, 135, 161, 0.28);
+      background: #272a31;
+    }
+
+    #scene6 .apex-bottom-tools span {
+      font-size: 0.46rem;
+      color: #9eb0ca;
+      border: 1px solid rgba(124, 145, 178, 0.28);
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      min-height: 28px;
+      background: #1f232b;
+    }
+
+    #scene6 .apex-right {
+      border-left: 1px solid #3f403d;
+      background: #1f2025;
+      padding: 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    #scene6 .apex-right-head {
+      font-size: 0.5rem;
+      color: #9db0cb;
+      border-bottom: 1px solid rgba(129, 149, 184, 0.28);
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+    }
+
+    #scene6 .apex-prop-item {
+      border: 1px solid rgba(115, 137, 172, 0.26);
+      border-radius: 6px;
+      padding: 5px;
+      background: #242830;
+      font-size: 0.48rem;
+      color: #9eb1cd;
+    }
+
+    #scene6 .apex-prop-item strong {
+      display: block;
+      color: #f1f6ff;
+      font-size: 0.48rem;
+      margin-bottom: 4px;
+    }
+
+    #scene6 .apex-field {
+      border: 1px solid rgba(136, 158, 193, 0.26);
+      border-radius: 4px;
+      background: #1a1f26;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding: 3px 4px;
+      margin-top: 3px;
+    }
+
+    #scene6 .apex-field label {
+      font-size: 0.4rem;
+      color: #95a8c4;
+    }
+
+    #scene6 .apex-field span {
+      font-size: 0.46rem;
+      color: #dce6f7;
+    }
+
+    #scene6 .apex-card-label {
+      font-size: 0.44rem;
+      color: #8ea2bf;
+    }
+
+    /* ═══════════ ANIMATIONS ═══════════ */
+    #scene6.active .apex-cursor {
+      animation: pluginCursorMove 2.5s ease-in-out infinite;
+    }
+
+    #scene6.active .apex-click-ring {
+      animation: pluginClickPulse 2.5s ease-in-out infinite;
+    }
+
+    #scene6.active .apex-plugin-chip {
+      animation: pluginChipIn 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pluginCursorMove {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-17deg); }
+      34% { transform: translate(26px, 2px) rotate(-17deg); }
+      55% { transform: translate(30px, 2px) rotate(-17deg); }
+      74% { transform: translate(8px, -1px) rotate(-17deg); }
+    }
+
+    @keyframes pluginClickPulse {
+      0%, 34%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+      42% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
+      58% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+    }
+
+    @keyframes pluginChipIn {
+      0%, 34% { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
+      45%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* ═══════════ RESPONSIVE: 768px ═══════════ */
+    @media (max-width: 768px) {
+      #scene6 .scene-plugin-layout { width: min(1240px, 96vw); padding-left: 27vw; }
+      #scene6 .scene-plugin-stage { width: min(900px, 100%); }
+      #scene6 .apex-shell { height: 510px; }
+      #scene6 .apex-workspace { grid-template-columns: 116px minmax(0, 1fr) 150px; }
+      #scene6 .apex-nav-links { font-size: 0.44rem; gap: 6px; }
+      #scene6 .apex-user { width: 18px; height: 18px; font-size: 0.4rem; }
+      #scene6 .apex-page-title { height: 18px; font-size: 0.44rem; }
+      #scene6 .apex-lane { height: 7px; }
+      #scene6 .apex-bottom-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      #scene6 .apex-bottom-tools span { min-height: 28px; }
+      #scene6 .apex-tree-item,
+      #scene6 .apex-prop-item { font-size: 0.5rem; }
+    }
+
+    /* ═══════════ RESPONSIVE: 480px ═══════════ */
+    @media (max-width: 480px) {
+      #scene6 .scene-plugin-layout { width: min(1240px, 96vw); padding-left: 32vw; }
+      #scene6 .scene-plugin-stage { width: min(900px, 100%); }
+      #scene6 .apex-shell { height: 420px; }
+      #scene6 .apex-topnav { grid-template-columns: auto 1fr; gap: 8px; }
+      #scene6 .apex-nav-links span:nth-child(n+3) { display: none; }
+      #scene6 .apex-search { display: none; }
+      #scene6 .apex-user { display: none; }
+      #scene6 .apex-workspace { grid-template-columns: 92px minmax(0, 1fr); }
+      #scene6 .apex-right { display: none; }
+      #scene6 .apex-center { grid-template-rows: 26px minmax(0, 1fr) 44px; }
+      #scene6 .apex-left-title { font-size: 0.44rem; }
+      #scene6 .apex-tree-group { font-size: 0.38rem; }
+      #scene6 .apex-tree-item { font-size: 0.42rem; }
+      #scene6 .apex-page-title { height: 16px; font-size: 0.4rem; }
+      #scene6 .apex-row { gap: 4px; margin-top: 4px; }
+      #scene6 .apex-lane { height: 8px; }
+      #scene6 .apex-region-highlight { height: 46px; }
+      #scene6 .apex-bottom-tools { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 6px; }
+      #scene6 .apex-bottom-tools span { min-height: 24px; font-size: 0.46rem; }
+    }
+
+    /* ═══════════ Iframe-specific overrides ═══════════ */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent !important;
+      overflow: hidden;
+    }
+
+    .scene {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+      position: static !important;
+    }
+
+    #scene6 {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: auto !important;
+    }
+
+    #scene6 .scene-plugin-layout {
+      width: 100% !important;
+      padding-left: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+
+    #scene6 .scene-plugin-stage {
+      width: 100% !important;
+      max-width: 1100px !important;
+      justify-self: center !important;
+    }
+
+    .monitor-shell {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 1100px !important;
+      max-height: 750px !important;
+      margin: 0 auto !important;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .monitor-stand {
+      display: none !important;
+    }
+
+    .monitor-frame {
+      width: 100% !important;
+      height: 100% !important;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch !important;
+      justify-content: stretch !important;
+    }
+
+    .monitor-screen {
+      width: 100% !important;
+      height: 100% !important;
+      overflow: hidden !important;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .apex-shell {
+      flex: 1 1 auto !important;
+      transform: none !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
+    }
+  </style>
+</head>
+
+<body class="">
+  <div class="scene active" id="scene6">
+    <div class="scene-plugin-layout">
+      <div class="scene-plugin-stage">
+        <div class="monitor-shell">
+          <div class="monitor-frame">
+            <div class="monitor-screen">
+              <div class="apex-shell">
+                <div class="apex-topnav">
+                  <div class="apex-logo"><span class="apex-ring" aria-hidden="true"></span>APEX</div>
+                  <div class="apex-nav-links">
+                    <span>App Builder</span>
+                    <span>SQL Workshop</span>
+                    <span>Team Development</span>
+                    <span>Gallery</span>
+                  </div>
+                  <div class="apex-top-actions">
+                    <div class="apex-search">Search</div>
+                    <div class="apex-user">AH</div>
+                  </div>
+                </div>
+
+                <div class="apex-workspace">
+                  <aside class="apex-left">
+                    <div class="apex-left-title">Application 109</div>
+                    <div class="apex-tree-item active"><span class="apex-bullet"></span>Page 1: Home</div>
+                    <div class="apex-tree-item"><span class="apex-bullet"></span>Pre-Rendering</div>
+                    <div class="apex-tree-group">Components</div>
+                    <div class="apex-tree-item"><span class="apex-bullet"></span>Card Header</div>
+                    <div class="apex-tree-item"><span class="apex-bullet"></span>Body</div>
+                    <div class="apex-tree-item is-child"><span class="apex-bullet"></span>Add Plugin<span class="apex-pill">New</span></div>
+                    <div class="apex-tree-item"><span class="apex-bullet"></span>Post-Rendering</div>
+                  </aside>
+
+                  <div class="apex-center">
+                    <div class="apex-toolbar">
+                      <div class="apex-toolbar-left"><span>Layout</span><span>Toggle Search</span><span>Help</span></div>
+                      <div class="apex-toolbar-dots"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="apex-canvas">
+                      <div class="apex-page-title">Home</div>
+                      <div class="apex-row r1">
+                        <span class="apex-lane green"></span>
+                        <span class="apex-lane"></span>
+                        <span class="apex-lane"></span>
+                        <span class="apex-lane"></span>
+                      </div>
+                      <div class="apex-row r2">
+                        <span class="apex-lane"></span>
+                        <span class="apex-lane"></span>
+                        <span class="apex-lane"></span>
+                      </div>
+                      <div class="apex-row r3">
+                        <span class="apex-lane dim"></span>
+                      </div>
+                      <div class="apex-row r4">
+                        <span class="apex-lane"></span>
+                        <span class="apex-lane"></span>
+                      </div>
+                      <div class="apex-row r4">
+                        <span class="apex-lane dim"></span>
+                        <span class="apex-lane dim"></span>
+                      </div>
+
+                      <div class="apex-region-highlight">
+                        <span class="apex-highlight-label">BODY</span>
+                        <span class="apex-plugin-chip">Asklyze AI Plugin</span>
+                        <span class="apex-cursor" aria-hidden="true"></span>
+                        <span class="apex-click-ring" aria-hidden="true"></span>
+                      </div>
+                    </div>
+
+                    <div class="apex-bottom-tools">
+                      <span>Button</span>
+                      <span>Chart</span>
+                      <span>Calendar</span>
+                      <span>Cards</span>
+                      <span>Classic Report</span>
+                      <span>Form</span>
+                    </div>
+                  </div>
+
+                  <aside class="apex-right">
+                    <div class="apex-right-head">Region</div>
+                    <div class="apex-prop-item">
+                      <strong>Identification</strong>
+                      <div class="apex-field"><label>Name</label><span>ASKLYZE1</span></div>
+                      <div class="apex-field"><label>Type</label><span>Asklyze AI Plugin</span></div>
+                    </div>
+                    <div class="apex-prop-item">
+                      <strong>Appearance</strong>
+                      <div class="apex-field"><label>Template</label><span>Blank with Attr</span></div>
+                      <div class="apex-field"><label>Render Components</label><span>Above Content</span></div>
+                    </div>
+                    <div class="apex-prop-item">
+                      <strong>Layout</strong>
+                      <div class="apex-field"><label>Sequence</label><span>10</span></div>
+                      <div class="apex-field"><label>Parent Region</label><span>No Parent</span></div>
+                    </div>
+                    <div class="apex-prop-item">
+                      <strong>Behavior</strong>
+                      <div class="apex-field"><label>On Change</label><span>Save</span></div>
+                      <span class="apex-card-label">Use Template Defaults</span>
+                    </div>
+                  </aside>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="monitor-stand"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
