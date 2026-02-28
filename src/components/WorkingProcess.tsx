@@ -97,23 +97,36 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                             />
                                         </div>
                                     ) : index === 2 ? (
-                                        /* Verbatim Scene 4 (AI Context) via iframe — wider scene scaled to fit */
-                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible"
+                                        <>
+                                        {/* Mobile/Tablet: standard iframe like other sections */}
+                                        <div className="lg:hidden relative z-10 w-full flex items-center justify-center overflow-visible">
+                                            <iframe
+                                                src="/scene4-isolated.html"
+                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
+                                                style={{ background: 'transparent' }}
+                                                title="Asklyze Workflow Scene 4"
+                                            />
+                                        </div>
+                                        {/* Desktop: wider iframe scaled to show full scene */}
+                                        <div className="hidden lg:block relative z-10 w-full overflow-visible"
                                             style={{ height: '700px' }}
                                         >
                                             <iframe
                                                 src="/scene4-isolated.html"
                                                 className="border-0 outline-none select-none pointer-events-none"
                                                 style={{
-                                                    width: '1050px',
-                                                    height: '800px',
-                                                    transform: 'scale(0.85)',
-                                                    transformOrigin: 'top center',
+                                                    minWidth: '1100px',
+                                                    width: '1100px',
+                                                    height: '850px',
+                                                    flexShrink: 0,
+                                                    transform: 'scale(0.72)',
+                                                    transformOrigin: 'top left',
                                                     background: 'transparent',
                                                 }}
                                                 title="Asklyze Workflow Scene 4"
                                             />
                                         </div>
+                                        </>
                                     ) : (
                                         /* Card container for placeholder bento steps */
                                         <div
