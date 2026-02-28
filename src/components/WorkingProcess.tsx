@@ -141,20 +141,18 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                                 title="Asklyze Workflow Scene 5 – Dashboard"
                                             />
                                         </div>
-                                        {/* Desktop: wider iframe scaled to show full scene */}
+                                        {/* Desktop: wider iframe scaled, anchored right so overflow goes left (away from text) */}
                                         <div className="hidden lg:block relative z-10 w-full overflow-visible"
                                             style={{ height: '700px' }}
                                         >
                                             <iframe
                                                 src="/scene5-isolated.html"
-                                                className="border-0 outline-none select-none pointer-events-none"
+                                                className="absolute right-0 top-0 border-0 outline-none select-none pointer-events-none"
                                                 style={{
-                                                    minWidth: '1200px',
                                                     width: '1200px',
                                                     height: '850px',
-                                                    flexShrink: 0,
                                                     transform: 'scale(0.72)',
-                                                    transformOrigin: 'top left',
+                                                    transformOrigin: 'top right',
                                                     background: 'transparent',
                                                 }}
                                                 title="Asklyze Workflow Scene 5 – Dashboard"
