@@ -97,12 +97,20 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                             />
                                         </div>
                                     ) : index === 2 ? (
-                                        /* Verbatim Scene 4 (AI Context) via iframe */
-                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible">
+                                        /* Verbatim Scene 4 (AI Context) via iframe — wider scene scaled to fit */
+                                        <div className="relative z-10 w-full flex items-center justify-center overflow-visible"
+                                            style={{ height: '700px' }}
+                                        >
                                             <iframe
                                                 src="/scene4-isolated.html"
-                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
-                                                style={{ background: 'transparent' }}
+                                                className="border-0 outline-none select-none pointer-events-none"
+                                                style={{
+                                                    width: '1050px',
+                                                    height: '800px',
+                                                    transform: 'scale(0.85)',
+                                                    transformOrigin: 'top center',
+                                                    background: 'transparent',
+                                                }}
                                                 title="Asklyze Workflow Scene 4"
                                             />
                                         </div>
