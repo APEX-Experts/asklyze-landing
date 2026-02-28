@@ -94,13 +94,13 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                         />
 
                                         {index === 0 ? (
-                                            /* Verbatim Scene 3 (Build Metadata) via iframe to preserve 100% exact CSS */
+                                            /* Verbatim Scene 2 (Select Tables) via iframe to preserve 100% exact CSS */
                                             <div className="relative z-10 w-full h-full min-h-[460px] flex items-center justify-center -m-4 sm:m-0 overflow-hidden rounded-[32px]">
                                                 <iframe
-                                                    src="/scene3-isolated.html"
+                                                    src="/scene2-isolated.html"
                                                     className="w-[120%] h-[600px] border-0 outline-none select-none pointer-events-none"
                                                     style={{ background: 'transparent' }}
-                                                    title="Asklyze Workflow Scene 3"
+                                                    title="Asklyze Workflow Scene 2"
                                                 />
                                             </div>
                                         ) : (
