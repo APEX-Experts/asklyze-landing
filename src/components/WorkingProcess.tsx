@@ -13,6 +13,8 @@ interface WorkingProcessProps {
         step2Desc: string;
         step3Title: string;
         step3Desc: string;
+        step4Title: string;
+        step4Desc: string;
     };
 }
 
@@ -21,6 +23,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
         { title: dict.step1Title, description: dict.step1Desc },
         { title: dict.step2Title, description: dict.step2Desc },
         { title: dict.step3Title, description: dict.step3Desc },
+        { title: dict.step4Title, description: dict.step4Desc },
     ];
 
     return (
@@ -127,66 +130,38 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                             />
                                         </div>
                                         </>
-                                    ) : (
-                                        /* Card container for placeholder bento steps */
-                                        <div
-                                            className="p-8 relative overflow-hidden flex flex-col justify-center"
-                                            style={{
-                                                background: "rgba(5, 5, 10, 0.6)",
-                                                border: "1px solid rgba(255, 255, 255, 0.1)",
-                                                borderRadius: "32px",
-                                                minHeight: "360px",
-                                            }}
-                                        >
-                                            {/* Center glow */}
-                                            <div
-                                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] rounded-full pointer-events-none"
-                                                style={{
-                                                    background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)",
-                                                }}
+                                    ) : index === 3 ? (
+                                        <>
+                                        {/* Mobile/Tablet: standard iframe like other sections */}
+                                        <div className="lg:hidden relative z-10 w-full flex items-center justify-center overflow-visible">
+                                            <iframe
+                                                src="/scene5-isolated.html"
+                                                className="w-[120%] max-w-[900px] h-[700px] border-0 outline-none select-none pointer-events-none sm:-ml-[10%]"
+                                                style={{ background: 'transparent' }}
+                                                title="Asklyze Workflow Scene 5 – Dashboard"
                                             />
-
-                                            {/* Placeholder 3x3 bento grid for other steps */}
-                                            <div className="grid grid-cols-3 gap-3 h-full relative z-10 w-full max-w-xs mx-auto aspect-square">
-                                                {Array.from({ length: 9 }).map((_, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className="transition-all duration-500"
-                                                        style={{
-                                                            background: i === 4
-                                                                ? "rgba(59, 130, 246, 0.08)"
-                                                                : "rgba(255, 255, 255, 0.02)",
-                                                            border: i === 4
-                                                                ? "1px solid rgba(59, 130, 246, 0.2)"
-                                                                : "1px solid rgba(255, 255, 255, 0.04)",
-                                                            borderRadius: "16px",
-                                                            aspectRatio: "1",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                        }}
-                                                    >
-                                                        {i === 4 && (
-                                                            <div style={{
-                                                                width: "24px",
-                                                                height: "24px",
-                                                                borderRadius: "8px",
-                                                                background: "rgba(59, 130, 246, 0.3)",
-                                                                border: "1px solid rgba(59, 130, 246, 0.4)",
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                                justifyContent: "center",
-                                                                color: "rgba(59, 130, 246, 0.8)",
-                                                                fontSize: "14px",
-                                                            }}>
-                                                                +
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
                                         </div>
-                                    )}
+                                        {/* Desktop: wider iframe scaled to show full scene */}
+                                        <div className="hidden lg:block relative z-10 w-full overflow-visible"
+                                            style={{ height: '700px' }}
+                                        >
+                                            <iframe
+                                                src="/scene5-isolated.html"
+                                                className="border-0 outline-none select-none pointer-events-none"
+                                                style={{
+                                                    minWidth: '1200px',
+                                                    width: '1200px',
+                                                    height: '850px',
+                                                    flexShrink: 0,
+                                                    transform: 'scale(0.72)',
+                                                    transformOrigin: 'top left',
+                                                    background: 'transparent',
+                                                }}
+                                                title="Asklyze Workflow Scene 5 – Dashboard"
+                                            />
+                                        </div>
+                                        </>
+                                    ) : null}
                                 </div>
                             </motion.div>
                         );
