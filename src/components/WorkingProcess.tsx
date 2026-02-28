@@ -139,9 +139,9 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                             >
                                 {/* Text Side */}
                                 <div className={isReversed ? "lg:order-2" : "lg:order-1"}>
-                                    <h3 className="text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">
+                                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">
                                         {step.title}
-                                    </h3>
+                                    </h2>
                                     <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
                                         {step.description}
                                     </p>
