@@ -32,7 +32,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
     return (
         <>
             {/* Hero */}
-            <section className="relative pt-40 pb-20 bg-[var(--color-bg)] overflow-hidden">
+            <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: "#000" }}>
                 <div className="container max-w-6xl mx-auto px-4 relative z-20">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -40,17 +40,17 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                         transition={{ duration: 0.6 }}
                         className={`max-w-3xl ${textAlign}`}
                     >
-                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-6 block">
+                        <span className="text-xs font-bold tracking-[0.2em] uppercase mb-6 block" style={{ color: "rgba(255,255,255,0.4)" }}>
                             {content.hero.badge}
                         </span>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--color-heading)] mb-6 leading-tight">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
                             {content.hero.title}{" "}
-                            <span className="text-[var(--color-primary)]">{content.hero.titleHighlight}</span>
+                            <span style={{ color: "#ff705a" }}>{content.hero.titleHighlight}</span>
                         </h1>
-                        <p className="text-lg md:text-xl text-[var(--color-body-secondary)] max-w-xl font-medium mb-4">
+                        <p className="text-lg md:text-xl max-w-xl font-medium mb-4" style={{ color: "rgba(255,255,255,0.55)" }}>
                             {content.hero.subtitle}
                         </p>
-                        <p className="text-sm text-[var(--color-body-muted)] max-w-2xl">
+                        <p className="text-sm max-w-2xl" style={{ color: "rgba(255,255,255,0.35)" }}>
                             {content.hero.intro}
                         </p>
                     </motion.div>
@@ -63,21 +63,33 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                                 viewport={{ once: true }}
-                                className="bg-[var(--color-bg-card)] border border-[var(--color-border)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow rounded-2xl p-6"
+                                className="rounded-2xl p-6 transition-shadow border"
+                                style={{
+                                    background: "rgba(10, 10, 15, 0.8)",
+                                    borderColor: "rgba(255, 255, 255, 0.1)",
+                                    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.4)",
+                                }}
                             >
-                                <div className="text-3xl font-extrabold text-[var(--color-primary)] mb-2">{item.value}</div>
-                                <div className="text-sm font-semibold text-[var(--color-body-secondary)] uppercase tracking-wider">{item.label}</div>
+                                <div className="text-3xl font-extrabold mb-2" style={{ color: "#ff705a" }}>{item.value}</div>
+                                <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.55)" }}>{item.label}</div>
                             </motion.div>
                         ))}
                     </div>
                 </div>
 
-                {/* Subtle Decorative Elements */}
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--color-primary-light)] opacity-20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+                {/* Subtle blue glow */}
+                <div
+                    className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+                    style={{
+                        width: "800px",
+                        height: "600px",
+                        background: "radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 60%)",
+                    }}
+                />
             </section>
 
             {/* About / Company */}
-            <section className="section bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+            <section className="section" style={{ background: "#000", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <div className="container max-w-6xl mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <motion.div
@@ -87,17 +99,17 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             viewport={{ once: true }}
                             className={textAlign}
                         >
-                            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
+                            <span className="text-xs font-bold tracking-[0.2em] uppercase mb-4 block" style={{ color: "#ff705a" }}>
                                 {content.about.tag}
                             </span>
-                            <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-6">{content.about.title}</h2>
-                            <p className="text-xl text-[var(--color-heading)] font-semibold mb-4 leading-relaxed">{content.about.subtitle}</p>
-                            <p className="text-lg text-[var(--color-body-secondary)] mb-8 leading-relaxed font-medium">{content.about.description}</p>
+                            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">{content.about.title}</h2>
+                            <p className="text-xl text-white font-semibold mb-4 leading-relaxed">{content.about.subtitle}</p>
+                            <p className="text-lg mb-8 leading-relaxed font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>{content.about.description}</p>
                             <ul className={`space-y-4 ${textAlign}`}>
                                 {content.about.bullets.map((item: string, index: number) => (
                                     <li key={index} className={`flex gap-3 ${alignItems}`}>
-                                        <span className="text-[var(--color-primary)] font-bold mt-1">•</span>
-                                        <span className="text-[var(--color-body)] font-medium">{item}</span>
+                                        <span className="font-bold mt-1" style={{ color: "#3b82f6" }}>•</span>
+                                        <span className="font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>{item}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -108,21 +120,21 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-[var(--color-bg-alt)] rounded-[2rem] p-10 shadow-sm border border-[var(--color-border)] relative"
+                            className="rounded-[2rem] p-10 shadow-sm border relative"
+                            style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)" }}
                         >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-primary)] opacity-5 blur-3xl rounded-full pointer-events-none" />
                             <div className="flex items-center gap-4 mb-6 relative z-10">
-                                <div className="w-14 h-14 rounded-2xl bg-[var(--color-primary)] flex items-center justify-center shadow-md">
+                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md" style={{ background: "#ff705a" }}>
                                     <Building2 size={24} className="text-white" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[var(--color-heading)]">{content.about.card.title}</h3>
+                                <h3 className="text-2xl font-bold text-white">{content.about.card.title}</h3>
                             </div>
-                            <p className="text-lg text-[var(--color-body-secondary)] mb-8 font-medium relative z-10">{content.about.card.description}</p>
+                            <p className="text-lg mb-8 font-medium relative z-10" style={{ color: "rgba(255,255,255,0.55)" }}>{content.about.card.description}</p>
                             <div className="space-y-4 relative z-10">
                                 {content.about.card.points.map((point: string, index: number) => (
                                     <div key={index} className="flex items-start gap-4">
-                                        <span className="text-[var(--color-primary)] font-bold mt-1">•</span>
-                                        <span className="text-[var(--color-body)] font-medium leading-relaxed">{point}</span>
+                                        <span className="font-bold mt-1" style={{ color: "#3b82f6" }}>•</span>
+                                        <span className="font-medium leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{point}</span>
                                     </div>
                                 ))}
                             </div>
@@ -132,7 +144,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
             </section>
 
             {/* Mission & Vision */}
-            <section className="section bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+            <section className="section" style={{ background: "#000", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <div className="container max-w-6xl mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <motion.div
@@ -140,15 +152,16 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
                             viewport={{ once: true }}
-                            className="bg-[var(--color-bg-card)] rounded-[2rem] p-10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow border border-[var(--color-border)]"
+                            className="rounded-[2rem] p-10 transition-shadow border"
+                            style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}
                         >
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-14 h-14 rounded-2xl bg-[var(--color-bg-accent)] flex items-center justify-center">
-                                    <Target size={24} className="text-[var(--color-primary)]" />
+                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255, 112, 90, 0.1)" }}>
+                                    <Target size={24} style={{ color: "#ff705a" }} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[var(--color-heading)]">{content.mission.title}</h3>
+                                <h3 className="text-2xl font-bold text-white">{content.mission.title}</h3>
                             </div>
-                            <p className="text-lg text-[var(--color-body-secondary)] font-medium leading-relaxed">{content.mission.description}</p>
+                            <p className="text-lg font-medium leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{content.mission.description}</p>
                         </motion.div>
 
                         <motion.div
@@ -156,29 +169,30 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-[var(--color-bg-card)] rounded-[2rem] p-10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow border border-[var(--color-border)]"
+                            className="rounded-[2rem] p-10 transition-shadow border"
+                            style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}
                         >
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-14 h-14 rounded-2xl bg-[var(--color-bg-accent)] flex items-center justify-center">
-                                    <LineChart size={24} className="text-[var(--color-primary)]" />
+                                <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: "rgba(255, 112, 90, 0.1)" }}>
+                                    <LineChart size={24} style={{ color: "#ff705a" }} />
                                 </div>
-                                <h3 className="text-2xl font-bold text-[var(--color-heading)]">{content.vision.title}</h3>
+                                <h3 className="text-2xl font-bold text-white">{content.vision.title}</h3>
                             </div>
-                            <p className="text-lg text-[var(--color-body-secondary)] font-medium leading-relaxed">{content.vision.description}</p>
+                            <p className="text-lg font-medium leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{content.vision.description}</p>
                         </motion.div>
                     </div>
                 </div>
             </section>
 
             {/* Values */}
-            <section className="section bg-[var(--color-bg)] border-b border-[var(--color-border)]">
+            <section className="section" style={{ background: "#000", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                 <div className="container max-w-6xl mx-auto px-4">
                     <div className="text-center mb-16">
-                        <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
+                        <span className="text-xs font-bold tracking-[0.2em] uppercase mb-4 block" style={{ color: "#ff705a" }}>
                             {content.values.tag}
                         </span>
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-4">{content.values.title}</h2>
-                        <p className="text-lg text-[var(--color-body-secondary)] font-medium max-w-2xl mx-auto">{content.values.subtitle}</p>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">{content.values.title}</h2>
+                        <p className="text-lg font-medium max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.55)" }}>{content.values.subtitle}</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -191,13 +205,14 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5 }}
                                     viewport={{ once: true }}
-                                    className="bg-[var(--color-bg-card)] rounded-2xl p-8 border border-[var(--color-border)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow"
+                                    className="rounded-2xl p-8 border transition-shadow"
+                                    style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}
                                 >
-                                    <div className="w-14 h-14 rounded-xl bg-[var(--color-bg-accent)] flex items-center justify-center border border-[var(--color-border)] shadow-sm mb-6">
-                                        {Icon ? <Icon size={24} className="text-[var(--color-primary)]" /> : null}
+                                    <div className="w-14 h-14 rounded-xl flex items-center justify-center border shadow-sm mb-6" style={{ background: "rgba(255, 112, 90, 0.1)", borderColor: "rgba(255,255,255,0.1)" }}>
+                                        {Icon ? <Icon size={24} style={{ color: "#ff705a" }} /> : null}
                                     </div>
-                                    <h3 className="text-xl font-bold text-[var(--color-heading)] mb-3">{item.title}</h3>
-                                    <p className="text-[var(--color-body-secondary)] font-medium leading-relaxed">{item.description}</p>
+                                    <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                                    <p className="font-medium leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{item.description}</p>
                                 </motion.div>
                             );
                         })}
@@ -206,7 +221,7 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
             </section>
 
             {/* Team Section */}
-            <section className="section bg-[var(--color-bg)] pb-32">
+            <section className="section pb-32" style={{ background: "#000" }}>
                 <div className="container max-w-6xl mx-auto px-4">
                     {/* Founder & Leaders Row */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
@@ -216,14 +231,16 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                             viewport={{ once: true }}
-                            className="bg-[var(--color-bg-card)] rounded-[2rem] p-10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow border border-[var(--color-border)]"
+                            className="rounded-[2rem] p-10 transition-shadow border"
+                            style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}
                         >
                             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 text-center sm:text-left">
                                 <div
-                                    className={`w-32 h-32 md:w-36 md:h-36 rounded-2xl flex items-center justify-center shadow-md border border-[var(--color-border)] flex-shrink-0 ${founderImage
+                                    className={`w-32 h-32 md:w-36 md:h-36 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 ${founderImage
                                         ? "overflow-hidden bg-gray-100"
-                                        : "bg-[var(--color-primary)]"
+                                        : ""
                                         }`}
+                                    style={founderImage ? { borderColor: "rgba(255,255,255,0.1)" } : { background: "#ff705a" }}
                                 >
                                     {founderImage ? (
                                         <Image
@@ -242,14 +259,14 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     )}
                                 </div>
                                 <div className="sm:mt-4">
-                                    <div className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-2">{content.founder.tag}</div>
-                                    <h3 className="text-3xl font-extrabold text-[var(--color-heading)] mb-2">{content.founder.name}</h3>
-                                    <p className="text-lg text-[var(--color-body-secondary)] font-medium">{content.founder.role}</p>
+                                    <div className="text-xs font-bold tracking-[0.2em] uppercase mb-2" style={{ color: "#ff705a" }}>{content.founder.tag}</div>
+                                    <h3 className="text-3xl font-extrabold text-white mb-2">{content.founder.name}</h3>
+                                    <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>{content.founder.role}</p>
                                 </div>
                             </div>
-                            <p className="text-lg text-[var(--color-body)] mb-6 font-medium leading-relaxed border-t border-[var(--color-border)] pt-8">{content.founder.bio}</p>
+                            <p className="text-lg mb-6 font-medium leading-relaxed pt-8" style={{ color: "rgba(255,255,255,0.6)", borderTop: "1px solid rgba(255,255,255,0.08)" }}>{content.founder.bio}</p>
                             {content.founder.note ? (
-                                <p className="text-sm text-[var(--color-body-muted)] italic font-medium">{content.founder.note}</p>
+                                <p className="text-sm italic font-medium" style={{ color: "rgba(255,255,255,0.35)" }}>{content.founder.note}</p>
                             ) : null}
                         </motion.div>
 
@@ -261,9 +278,9 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                             viewport={{ once: true }}
                             className={textAlign}
                         >
-                            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">{content.team.tag}</span>
-                            <h2 className="text-4xl font-extrabold text-[var(--color-heading)] mb-4">{content.team.title}</h2>
-                            <p className="text-lg text-[var(--color-body-secondary)] font-medium mb-10">{content.team.description}</p>
+                            <span className="text-xs font-bold tracking-[0.2em] uppercase mb-4 block" style={{ color: "#ff705a" }}>{content.team.tag}</span>
+                            <h2 className="text-4xl font-extrabold text-white mb-4">{content.team.title}</h2>
+                            <p className="text-lg font-medium mb-10" style={{ color: "rgba(255,255,255,0.55)" }}>{content.team.description}</p>
 
                             {/* Leaders Grid */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -272,12 +289,13 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     const memberInitials = memberName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
                                     const memberImage = member?.image;
                                     return (
-                                        <div key={index} className="bg-[var(--color-bg-card)] rounded-2xl p-6 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow border border-[var(--color-border)] text-center">
+                                        <div key={index} className="rounded-2xl p-6 transition-shadow border text-center" style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}>
                                             <div
-                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-[var(--color-border)] ${memberImage
+                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm ${memberImage
                                                     ? "overflow-hidden bg-gray-100"
-                                                    : "bg-[var(--color-bg-accent)] text-[var(--color-primary)] font-bold text-xl"
+                                                    : "font-bold text-xl"
                                                     }`}
+                                                style={memberImage ? { borderColor: "rgba(255,255,255,0.1)" } : { background: "rgba(255, 112, 90, 0.1)", color: "#ff705a" }}
                                             >
                                                 {memberImage ? (
                                                     <Image
@@ -293,10 +311,10 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                                     <span>{memberInitials}</span>
                                                 )}
                                             </div>
-                                            <h4 className="text-lg font-bold text-[var(--color-heading)]">{memberName}</h4>
-                                            <p className="text-sm font-medium text-[var(--color-body-secondary)] mb-3">{member.role}</p>
+                                            <h4 className="text-lg font-bold text-white">{memberName}</h4>
+                                            <p className="text-sm font-medium mb-3" style={{ color: "rgba(255,255,255,0.55)" }}>{member.role}</p>
                                             {member.bio ? (
-                                                <p className="text-xs text-[var(--color-body-muted)] leading-relaxed">{member.bio}</p>
+                                                <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.35)" }}>{member.bio}</p>
                                             ) : null}
                                         </div>
                                     );
@@ -321,12 +339,13 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                     const employeeInitials = employeeName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
                                     const employeeImage = employee?.image;
                                     return (
-                                        <div key={index} className="bg-[var(--color-bg-card)] rounded-2xl p-6 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow border border-[var(--color-border)] text-center h-full">
+                                        <div key={index} className="rounded-2xl p-6 transition-shadow border text-center h-full" style={{ background: "rgba(10, 10, 15, 0.8)", borderColor: "rgba(255,255,255,0.1)", boxShadow: "0 4px 24px rgba(0,0,0,0.4)" }}>
                                             <div
-                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-[var(--color-border)] ${employeeImage
+                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm ${employeeImage
                                                     ? "overflow-hidden bg-gray-100"
-                                                    : "bg-[var(--color-bg-accent)] text-[var(--color-primary)] font-bold text-xl"
+                                                    : "font-bold text-xl"
                                                     }`}
+                                                style={employeeImage ? { borderColor: "rgba(255,255,255,0.1)" } : { background: "rgba(255, 112, 90, 0.1)", color: "#ff705a" }}
                                             >
                                                 {employeeImage ? (
                                                     <Image
@@ -342,8 +361,8 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                                                     <span>{employeeInitials}</span>
                                                 )}
                                             </div>
-                                            <h4 className="text-lg font-bold text-[var(--color-heading)]">{employeeName}</h4>
-                                            <p className="text-sm font-medium text-[var(--color-body-secondary)]">{employee.role}</p>
+                                            <h4 className="text-lg font-bold text-white">{employeeName}</h4>
+                                            <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.55)" }}>{employee.role}</p>
                                         </div>
                                     );
                                 })}
@@ -354,17 +373,18 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
             </section>
 
             {/* CTA */}
-            <section className="relative py-20 overflow-hidden bg-[var(--color-bg)]">
+            <section className="relative py-20 overflow-hidden" style={{ background: "#000" }}>
                 <div className="container max-w-5xl mx-auto px-4 relative z-20">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="rounded-[2rem] bg-[var(--color-primary)] text-center p-12 md:p-20 shadow-2xl overflow-hidden relative"
+                        className="rounded-[2rem] text-center p-12 md:p-20 shadow-2xl overflow-hidden relative"
+                        style={{ background: "#ff705a" }}
                     >
                         {/* Decorative subtle background sweeps inside CTA */}
-                        <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary-light)] blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute top-0 right-0 w-96 h-96 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "#ff8a78" }} />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/40 blur-2xl rounded-full translate-y-1/2 -translate-x-1/2" />
 
                         <h2 className="relative z-10 !text-white text-3xl md:text-5xl font-extrabold mb-6 leading-tight">{content.cta.title}</h2>
@@ -373,7 +393,8 @@ export default function AboutContent({ lang, isArabic, content }: AboutContentPr
                         <div className="relative z-10">
                             <a
                                 href={`/${lang}/contact`}
-                                className="inline-flex items-center gap-2 bg-[var(--color-heading)] text-[var(--color-bg)] font-bold py-4 px-10 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer inline-block"
+                                className="inline-flex items-center gap-2 font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                                style={{ background: "#ffffff", color: "#000000" }}
                             >
                                 {content.cta.button}
                             </a>

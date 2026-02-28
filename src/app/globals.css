@@ -23,9 +23,17 @@
   --color-bg-elevated: #0a0a0f;
   --color-bg-card: rgba(10, 10, 15, 0.8);
 
+  /* Secondary text */
+  --color-body-secondary: rgba(255, 255, 255, 0.55);
+  --color-body-muted: rgba(255, 255, 255, 0.35);
+
+  /* Accent backgrounds */
+  --color-bg-accent: rgba(255, 112, 90, 0.1);
+
   /* Borders & Shadows */
   --color-border: rgba(255, 255, 255, 0.1);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.6);
 
   /* Glass morphism */
   --glass-bg: rgba(255, 255, 255, 0.03);

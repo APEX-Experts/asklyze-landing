@@ -158,8 +158,8 @@ export default function ContactForm() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="rounded-2xl shadow-xl p-8 md:p-10 border border-white/8"
-            style={{ background: "rgba(20, 20, 35, 0.8)", backdropFilter: "blur(20px)" }}
+            className="rounded-2xl shadow-xl p-8 md:p-10 border"
+            style={{ background: "rgba(10, 10, 15, 0.8)", backdropFilter: "blur(20px)", borderColor: "rgba(255, 255, 255, 0.1)" }}
         >
             <h3 className="text-2xl font-bold text-white mb-8">Send us a Message</h3>
 

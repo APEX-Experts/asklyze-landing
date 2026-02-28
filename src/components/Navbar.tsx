@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Home, Zap, CreditCard, Newspaper, FileText, Mail, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Menu, X, Home, Zap, CreditCard, Newspaper, FileText, Mail, Users, ChevronRight, ArrowUpRight } from "lucide-react";
 
 interface NavbarProps {
   dict: {
@@ -42,7 +42,14 @@ export default function Navbar({ dict }: NavbarProps) {
     return `/${currentLocale}${href}`;
   };
 
-  const navItems = ["features", "pricing", "blog", "contact"];
+  const navItems = [
+    { key: "features", href: "#features" },
+    { key: "pricing", href: "#pricing" },
+    { key: "blog", href: "/blog" },
+    { key: "docs", href: "https://docs.asklyze.ai/", external: true },
+    { key: "about", href: "/about" },
+    { key: "contact", href: "/contact" },
+  ];
 
   return (
     <motion.nav
@@ -71,24 +78,17 @@ export default function Navbar({ dict }: NavbarProps) {
 
         {/* DESKTOP: Center Nav Links */}
         <div className="hidden md:flex items-center gap-10">
-          {navItems.map((key) => {
-            const href =
-              key === "blog"
-                ? "/blog"
-                : key === "contact"
-                  ? "/contact"
-                  : `#${key}`;
-
-            return (
-              <Link key={key} href={getLocalizedHref(href)} className="nav-link">
-                <span>{dict[key]}</span>
+          {navItems.map((item) =>
+            item.external ? (
+              <a key={item.key} href={item.href} className="nav-link">
+                {dict[item.key] || item.key}
+              </a>
+            ) : (
+              <Link key={item.key} href={getLocalizedHref(item.href)} className="nav-link">
+                <span>{dict[item.key]}</span>
               </Link>
-            );
-          })}
-          {/* Docs - external */}
-          <a href="https://docs.asklyze.ai/" className="nav-link">
-            {dict.docs || "Docs"}
-          </a>
+            )
+          )}
         </div>
 
         {/* DESKTOP: Right Side CTA + Lang */}
@@ -201,6 +201,7 @@ export default function Navbar({ dict }: NavbarProps) {
                         { key: "pricing", icon: CreditCard, href: "#pricing" },
                         { key: "blog", icon: Newspaper, href: "/blog" },
                         { key: "docs", icon: FileText, href: "https://docs.asklyze.ai/", external: true },
+                        { key: "about", icon: Users, href: "/about" },
                         { key: "contact", icon: Mail, href: "/contact" },
                       ].map((item, index) => {
                         const isExternal = item.external;

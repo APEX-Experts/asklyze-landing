@@ -29,7 +29,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
             "admin@apexexperts.net",
             "support@asklyze.ai"
         ],
-        color: "#5e63ff"
+        color: "#3b82f6"
     },
     {
         icon: Phone,
@@ -46,8 +46,11 @@ export default function ContactSection({ dict }: ContactSectionProps) {
     const contactInfo = getContactInfo(dict);
 
     return (
-        <section className="py-20" style={{ background: "#0f0f18" }}>
+        <section className="py-20" style={{ background: "#000" }}>
             <div className="container">
+                {/* Divider */}
+                <div className="mb-16" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} />
+
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                     {/* Contact Info Cards */}
                     <div className="lg:col-span-4 space-y-6">
@@ -58,8 +61,12 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 viewport={{ once: true }}
-                                className="rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-white/8"
-                                style={{ background: "rgba(20, 20, 35, 0.6)" }}
+                                className="rounded-2xl p-6 transition-shadow border"
+                                style={{
+                                    background: "rgba(10, 10, 15, 0.8)",
+                                    borderColor: "rgba(255, 255, 255, 0.1)",
+                                    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.4)",
+                                }}
                             >
                                 <div className="flex items-start gap-4">
                                     <div
@@ -76,7 +83,7 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                                             {info.title}
                                         </h4>
                                         {info.lines.map((line: string, i: number) => (
-                                            <p key={i} className="text-gray-400 text-sm leading-relaxed">
+                                            <p key={i} className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
                                                 {line}
                                             </p>
                                         ))}
@@ -91,7 +98,8 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                             viewport={{ once: true }}
-                            className="bg-gradient-to-r from-[#ff705a] to-[#ff9472] rounded-2xl p-6"
+                            className="rounded-2xl p-6"
+                            style={{ background: "linear-gradient(135deg, #ff705a, #ff9472)" }}
                         >
                             <h4 className="text-lg font-bold mb-3 !text-white">{dict.followTitle}</h4>
                             <p className="!text-white text-sm mb-4 opacity-90">

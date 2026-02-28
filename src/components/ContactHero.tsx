@@ -11,27 +11,34 @@ interface ContactHeroProps {
 
 export default function ContactHero({ dict }: ContactHeroProps) {
     return (
-        <section className="hero-gradient pt-40 pb-32 relative">
-            <div className="container relative z-20">
+        <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: "#000" }}>
+            <div className="container max-w-3xl mx-auto px-6 relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="max-w-3xl"
+                    className="text-center"
                 >
-                    <h1 className="!text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    <p className="text-sm font-medium tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>
+                        Get in Touch
+                    </p>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                         {dict.title}
                     </h1>
-                    <p className="!text-white/80 text-lg md:text-xl max-w-xl">
+                    <p className="text-base md:text-lg max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.55)" }}>
                         {dict.desc}
                     </p>
                 </motion.div>
             </div>
-
-            {/* Decorative shapes */}
-            <div className="absolute top-20 right-10 w-20 h-20 rounded-full animate-float" style={{ background: "rgba(255, 112, 90, 0.06)" }} />
-            <div className="absolute bottom-40 right-1/4 w-32 h-32 rounded-full animate-float" style={{ background: "rgba(255, 112, 90, 0.03)", animationDelay: "1s" }} />
-            <div className="absolute top-1/3 right-20 w-16 h-16 rounded-full border-2 border-white/5 animate-float" style={{ animationDelay: "0.5s" }} />
+            {/* Subtle blue glow */}
+            <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+                style={{
+                    width: "800px",
+                    height: "600px",
+                    background: "radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 60%)",
+                }}
+            />
         </section>
     );
 }
