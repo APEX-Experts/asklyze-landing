@@ -764,11 +764,12 @@
     .monitor-shell {
       width: 100% !important;
       height: 100% !important;
-      max-width: none !important;
-      max-height: none !important;
-      margin: 0 !important;
+      max-width: 1100px !important;
+      max-height: 750px !important;
+      margin: 0 auto !important;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .monitor-stand {
@@ -776,27 +777,25 @@
     }
 
     .monitor-frame {
-      width: 100% !important;
-      height: 100% !important;
+      background: linear-gradient(180deg, #273954 0%, #1d2b42 100%);
+      border-radius: 20px;
+      padding: 12px 12px 18px;
+      box-shadow: 0 26px 55px rgba(18, 37, 67, 0.22);
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: none !important;
-      padding: 0 !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
+      align-items: stretch !important;
+      justify-content: stretch !important;
     }
 
     .monitor-screen {
-      width: 100% !important;
-      height: 100% !important;
-      overflow: hidden !important;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #dce8ff;
+      border: 1px solid rgba(151, 180, 225, 0.45);
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: transparent !important;
-      border: none !important;
-      border-radius: 0 !important;
     }
 
     #scene6 .apex-shell {
@@ -805,7 +804,6 @@
       width: 100% !important;
       height: 100% !important;
       border-radius: 0 !important;
-      border: none !important;
     }
   </style>
 </head>
