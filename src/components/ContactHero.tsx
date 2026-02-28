@@ -11,28 +11,27 @@ interface ContactHeroProps {
 
 export default function ContactHero({ dict }: ContactHeroProps) {
     return (
-        <section className="relative pt-40 pb-20 bg-[var(--color-bg)] overflow-hidden">
-            <div className="container max-w-6xl mx-auto px-4 relative z-20">
+        <section className="hero-gradient pt-40 pb-32 relative">
+            <div className="container relative z-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     className="max-w-3xl"
                 >
-                    <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-6 block">
-                        Contact Us
-                    </span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--color-heading)] mb-6 leading-tight">
+                    <h1 className="!text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                         {dict.title}
                     </h1>
-                    <p className="text-lg md:text-xl text-[var(--color-body-secondary)] max-w-xl font-medium">
+                    <p className="!text-white/80 text-lg md:text-xl max-w-xl">
                         {dict.desc}
                     </p>
                 </motion.div>
             </div>
 
-            {/* Subtle Decorative Elements */}
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--color-primary-light)] opacity-20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+            {/* Decorative shapes */}
+            <div className="absolute top-20 right-10 w-20 h-20 rounded-full animate-float" style={{ background: "rgba(255, 112, 90, 0.06)" }} />
+            <div className="absolute bottom-40 right-1/4 w-32 h-32 rounded-full animate-float" style={{ background: "rgba(255, 112, 90, 0.03)", animationDelay: "1s" }} />
+            <div className="absolute top-1/3 right-20 w-16 h-16 rounded-full border-2 border-white/5 animate-float" style={{ animationDelay: "0.5s" }} />
         </section>
     );
 }

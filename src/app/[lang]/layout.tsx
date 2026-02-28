@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter, Vazirmatn } from "next/font/google";
 import "../globals.css";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import Preloader from "@/components/Preloader";
+import CustomCursor from "@/components/ClientCustomCursor";
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -85,10 +87,22 @@ export const metadata: Metadata = {
         creator: '@apex_experts',
         images: ['/logo.png'],
     },
+    other: {
+        'theme-color': '#000000',
+    },
     icons: {
-        icon: "/favicon-light.png",
-        shortcut: "/favicon-light.png",
-        apple: "/favicon-light.png",
+        icon: [
+            {
+                url: "/favicon-light.png",
+                media: "(prefers-color-scheme: light)",
+            },
+            {
+                url: "/favicon-dark.png",
+                media: "(prefers-color-scheme: dark)",
+            },
+        ],
+        shortcut: ["/favicon-light.png"],
+        apple: ["/favicon-light.png"],
     },
 };
 
@@ -116,23 +130,12 @@ export default async function RootLayout({
                     // @ts-expect-error - CSS variables in style attribute
                     "--font-heading": isArabic ? "var(--font-vazirmatn)" : "var(--font-inter)",
                     "--font-body": isArabic ? "var(--font-vazirmatn)" : "var(--font-inter)",
+                    background: "#000000",
                 }}
                 suppressHydrationWarning
             >
-                {/* Global Grok-style Background — Blue flare (top/hero area) */}
-                <div className="fixed inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-[-1]">
-                    <div className="relative w-full h-full flex items-center justify-center pt-[15vh]">
-                        {/* Blue/Purple Aura */}
-                        <div className="absolute right-[-10vw] top-1/2 -translate-y-[60%] w-[70vw] h-[50vw] bg-blue-500 blur-[130px] rounded-full mix-blend-screen opacity-30 pointer-events-none z-20"></div>
-
-                        {/* Core White Flare */}
-                        <div className="absolute right-[-5vw] top-1/2 -translate-y-[60%] w-[40vw] h-[40vw] bg-white blur-[120px] rounded-full mix-blend-screen opacity-80 pointer-events-none z-20"></div>
-
-                        {/* Additional elongated edge glow */}
-                        <div className="absolute right-[-10vw] top-1/2 -translate-y-[60%] w-[30vw] h-[80vw] bg-indigo-300 blur-[150px] rounded-full mix-blend-screen opacity-40 pointer-events-none z-20"></div>
-                    </div>
-                </div>
-
+                <Preloader />
+                <CustomCursor />
                 {children}
             </body>
         </html>

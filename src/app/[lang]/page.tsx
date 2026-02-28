@@ -5,6 +5,7 @@ import FeatureGrid from "@/components/FeatureGrid";
 import WorkingProcess from "@/components/WorkingProcess";
 import ContentSplit from "@/components/ContentSplit";
 import TabbedShowcase from "@/components/TabbedShowcase";
+import TrustBar from "@/components/TrustBar";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import GradientCTA from "@/components/GradientCTA";
@@ -37,10 +38,11 @@ export default async function Home({ params }: { params: Promise<{ lang: "en" | 
             <Navbar dict={dict.navbar} />
             <main>
                 <Hero dict={dict.hero} />
+                <FeatureGrid dict={dict.featureGrid} />
                 <WorkingProcess dict={dict.workingProcess} />
                 <ContentSplit dict={dict.contentSplit} />
                 <TabbedShowcase dict={dict.tabbedShowcase} />
-                <FeatureGrid dict={dict.featureGrid} />
+                <TrustBar />
                 <Testimonials dict={dict.testimonials} />
                 <Pricing dict={dict.pricing} lang={lang} />
                 <FAQ dict={dict.faq} />

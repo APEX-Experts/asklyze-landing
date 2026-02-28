@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Plus, Minus, ArrowRight } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 
 interface FAQProps {
     dict: {
@@ -20,9 +20,8 @@ interface FAQProps {
 
 export default function FAQ({ dict }: FAQProps) {
     const [activeTab, setActiveTab] = useState(dict.categories[0]);
-    const [openIndex, setOpenIndex] = useState<number | null>(0); // Default first item open
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-    // Filter FAQs based on active tab
     const filteredFAQs = activeTab === dict.categories[0]
         ? dict.list
         : dict.list.filter(item => item.category === activeTab);
@@ -32,29 +31,25 @@ export default function FAQ({ dict }: FAQProps) {
     };
 
     return (
-        <section id="faq" className="section bg-[var(--color-bg)] py-24">
-            <div className="container max-w-4xl mx-auto px-4 relative">
-                <div className="text-center mb-16">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
-                        {dict.tag}
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-6">
-                        {dict.title}
-                    </h2>
+        <section id="faq" className="section">
+            <div className="container relative">
+                <div className="text-center mb-12">
+                    <p className="text-sm uppercase tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>{dict.tag}</p>
+                    <h2 className="text-3xl md:text-4xl font-bold">{dict.title}</h2>
                 </div>
 
                 {/* Categories */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                <div className="flex flex-wrap justify-center gap-3 mb-16">
                     {dict.categories.map((cat) => (
                         <button
                             key={cat}
                             onClick={() => {
                                 setActiveTab(cat);
-                                setOpenIndex(null); // Close all when switching tabs
+                                setOpenIndex(null);
                             }}
-                            className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-300 border ${activeTab === cat
-                                ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-md shadow-[var(--shadow-button)]"
-                                : "bg-[var(--color-bg-alt)] border-transparent text-[var(--color-body-secondary)] hover:border-[var(--color-border)] hover:bg-[var(--color-bg-card)]"
+                            className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeTab === cat
+                                ? "bg-white text-black"
+                                : "bg-white/5 text-gray-400 hover:bg-white/10"
                                 }`}
                         >
                             {cat}
@@ -63,32 +58,28 @@ export default function FAQ({ dict }: FAQProps) {
                 </div>
 
                 {/* Accordion */}
-                <div className="space-y-4">
+                <div className="max-w-3xl mx-auto space-y-3">
                     {filteredFAQs.map((faq, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: index * 0.05 }}
-                            className={`border rounded-2xl overflow-hidden transition-all duration-300 ${openIndex === index
-                                ? "border-[var(--color-primary-light)] ring-1 ring-[var(--color-primary-light)] bg-[var(--color-bg-card)] shadow-[var(--shadow-card)]"
-                                : "border-[var(--color-border)] bg-[var(--color-bg-alt)] hover:border-[var(--color-border)] hover:bg-[var(--color-bg-card)]"
-                                }`}
+                            className={`rounded-xl overflow-hidden transition-all duration-300`}
+                            style={{
+                                background: openIndex === index ? "rgba(255, 255, 255, 0.03)" : "rgba(255, 255, 255, 0.01)",
+                                border: openIndex === index
+                                    ? "1px solid rgba(255, 255, 255, 0.1)"
+                                    : "1px solid rgba(255, 255, 255, 0.05)",
+                            }}
                         >
                             <button
                                 onClick={() => toggleFAQ(index)}
-                                className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none focus:ring-2 focus:ring-[var(--color-primary-light)] rounded-2xl"
+                                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                             >
-                                <span className={`font-bold text-lg leading-snug pr-8 transition-colors ${openIndex === index ? "text-[var(--color-heading)]" : "text-[var(--color-body)]"
-                                    }`}>
+                                <span className={`font-semibold ${openIndex === index ? "text-white" : "text-gray-300"}`}>
                                     {faq.question}
                                 </span>
-                                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${openIndex === index
-                                    ? "bg-[var(--color-primary)] text-white rotate-180"
-                                    : "bg-[var(--color-border)] text-[var(--color-body-muted)]"
-                                    }`}>
-                                    {openIndex === index ? <Minus size={16} strokeWidth={3} /> : <Plus size={16} strokeWidth={3} />}
-                                </div>
+                                <span className={`transition-transform duration-300 ${openIndex === index ? "text-white" : "text-gray-600"}`}>
+                                    {openIndex === index ? <Minus size={18} /> : <Plus size={18} />}
+                                </span>
                             </button>
 
                             <AnimatePresence>
@@ -97,27 +88,32 @@ export default function FAQ({ dict }: FAQProps) {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        transition={{ duration: 0.3 }}
+                                        className="overflow-hidden"
                                     >
-                                        <div className="px-6 md:px-8 pb-8 pt-2 text-[var(--color-body-secondary)] leading-relaxed font-medium">
+                                        <div className="px-6 pb-6 leading-relaxed border-t pt-4" style={{ color: "rgba(255,255,255,0.5)", borderColor: "rgba(255,255,255,0.05)" }}>
                                             {faq.answer}
                                         </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-                <div className="text-center mt-16">
+                <div className="text-center mt-12">
                     <a
                         href="https://docs.asklyze.ai/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 group px-8 py-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:bg-[var(--color-bg-accent)] text-[var(--color-heading)] font-bold transition-all shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all"
+                        style={{
+                            background: "transparent",
+                            color: "#ffffff",
+                            border: "1.5px solid rgba(255,255,255,0.15)",
+                        }}
                     >
                         {dict.cta}
-                        <ArrowRight size={18} className="text-[var(--color-primary)] group-hover:translate-x-1 transition-transform" />
                     </a>
                 </div>
             </div>

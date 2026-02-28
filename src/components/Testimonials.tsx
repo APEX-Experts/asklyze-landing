@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 interface TestimonialsProps {
     dict: {
@@ -23,79 +22,161 @@ const images = [
     "https://i.pravatar.cc/150?img=3"
 ];
 
+function generateParticles() {
+    return Array.from({ length: 40 }).map(() => ({
+        width: `${2 + Math.random() * 3}px`,
+        height: `${2 + Math.random() * 3}px`,
+        background: `rgba(59, 130, 246, ${(0.15 + Math.random() * 0.3).toFixed(3)})`,
+        top: `${(5 + Math.random() * 50).toFixed(2)}%`,
+        left: `${(15 + Math.random() * 70).toFixed(2)}%`,
+        boxShadow: `0 0 ${(4 + Math.random() * 8).toFixed(2)}px rgba(59, 130, 246, 0.3)`,
+    }));
+}
+
 export default function Testimonials({ dict }: TestimonialsProps) {
+    const [particles, setParticles] = useState<React.CSSProperties[]>([]);
+
+    useEffect(() => {
+        setParticles(generateParticles());
+    }, []);
+
     const list = dict.list.map((t, i) => ({
         ...t,
         image: images[i]
     }));
 
-    const [current, setCurrent] = useState(0);
-
-    const next = () => setCurrent((prev) => (prev + 1) % list.length);
-    const prev = () => setCurrent((prev) => (prev - 1 + list.length) % list.length);
-
     return (
-        <section className="section bg-[var(--color-bg)] text-[var(--color-heading)] relative overflow-hidden">
-            {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--color-bg-alt)] rounded-l-full opacity-30 -z-10" />
+        <section className="section relative overflow-hidden">
+            {/* Blue Particle Sphere Background — CSS recreation of the Vexel 3D sphere */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+                {/* Main sphere glow */}
+                <div
+                    className="absolute top-[10%] left-1/2 -translate-x-1/2"
+                    style={{
+                        width: "800px",
+                        height: "800px",
+                        background: "radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.08) 30%, rgba(59, 130, 246, 0.03) 50%, transparent 70%)",
+                        borderRadius: "50%",
+                    }}
+                />
+                {/* Particle ring effect */}
+                <div
+                    className="absolute top-[15%] left-1/2 -translate-x-1/2"
+                    style={{
+                        width: "600px",
+                        height: "600px",
+                        border: "1px solid rgba(59, 130, 246, 0.1)",
+                        borderRadius: "50%",
+                    }}
+                />
+                <div
+                    className="absolute top-[20%] left-1/2 -translate-x-1/2"
+                    style={{
+                        width: "400px",
+                        height: "400px",
+                        border: "1px solid rgba(59, 130, 246, 0.06)",
+                        borderRadius: "50%",
+                    }}
+                />
+                {/* Scattered blue dots to simulate particles */}
+                {particles.map((p, i) => (
+                    <div
+                        key={i}
+                        className="absolute rounded-full"
+                        style={p}
+                    />
+                ))}
+            </div>
 
-            <div className="container">
-                <div className="text-center mb-16">
-                    <span className="section-tag">{dict.tag}</span>
-                    <h2>{dict.title}</h2>
-                </div>
+            <div className="container relative z-10">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">{dict.title}</h2>
+                    <p style={{ color: "rgba(255,255,255,0.55)" }}>
+                        Discover why teams trust ASKLYZE for AI-powered analytics.
+                    </p>
+                </motion.div>
 
-                <div className="max-w-4xl mx-auto relative">
-                    {/* Slider Container */}
-                    <div className="relative bg-[var(--color-bg-card)] rounded-2xl shadow-[var(--shadow-card)] p-8 md:p-16 text-center border border-[var(--color-border)]">
-
-                        {/* Avatar */}
-                        <div className="absolute -top-10 left-1/2 -translate-x-1/2">
-                            <div className="w-20 h-20 rounded-full border-4 border-[var(--color-bg-card)] shadow-lg overflow-hidden">
-                                <Image
-                                    src={list[current].image}
-                                    alt={list[current].name}
-                                    fill
-                                    className="object-cover"
-                                    unoptimized
-                                />
-                            </div>
-                        </div>
-
-                        {/* Content */}
+                {/* 3-Column Testimonial Cards — Glassmorphism with 32px radius */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+                    {list.map((testimonial, index) => (
                         <motion.div
-                            key={current}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4 }}
-                            className="mt-8"
+                            key={index}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="p-8"
+                            style={{
+                                background: "rgba(255, 255, 255, 0.03)",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                borderRadius: "var(--card-radius)",
+                                backdropFilter: "blur(20px)",
+                                WebkitBackdropFilter: "blur(20px)",
+                            }}
                         >
-                            <p className="text-lg text-[var(--color-heading)] mb-8 italic leading-relaxed">
-                                &quot;{list[current].text}&quot;
+                            {/* Quote */}
+                            <p className="text-sm md:text-base leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.8)" }}>
+                                &quot;{testimonial.text}&quot;
                             </p>
 
-                            <h4 className="text-[var(--color-primary)] font-bold text-xl mb-1">{list[current].name}</h4>
-                            <div className="text-sm text-[var(--color-body-secondary)] font-medium uppercase tracking-wider">
-                                {list[current].role}
+                            {/* Author */}
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full overflow-hidden relative flex-shrink-0">
+                                    <Image
+                                        src={testimonial.image}
+                                        alt={testimonial.name}
+                                        fill
+                                        className="object-cover"
+                                        unoptimized
+                                    />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">{testimonial.name}</div>
+                                    <div className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
+                                        {testimonial.role}
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
-                    </div>
-
-                    {/* Navigation Arrows */}
-                    <button
-                        onClick={prev}
-                        className="absolute top-1/2 -left-2 md:-left-16 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:bg-[var(--color-bg-accent)] text-[var(--color-body)] hover:text-[var(--color-primary)] flex items-center justify-center transition-all hover:shadow-lg z-20"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-
-                    <button
-                        onClick={next}
-                        className="absolute top-1/2 -right-2 md:-right-16 -translate-y-1/2 w-10 h-10 rounded-full bg-[var(--color-bg-card)] border border-[var(--color-border)] hover:bg-[var(--color-bg-accent)] text-[var(--color-body)] hover:text-[var(--color-primary)] flex items-center justify-center transition-all hover:shadow-lg z-20"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
+                    ))}
                 </div>
+
+                {/* Stats Row — 3 big number cards like Vexel */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
+                >
+                    {[
+                        { value: "99.99%", label: "Always On, Always Reliable" },
+                        { value: "1000+", label: "Tables Supported" },
+                        { value: "24/7", label: "Enterprise Support" },
+                    ].map((stat, index) => (
+                        <div
+                            key={index}
+                            className="p-8"
+                            style={{
+                                background: "rgba(5, 5, 10, 0.6)",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                borderRadius: "var(--card-radius)",
+                            }}
+                        >
+                            <div className="text-5xl md:text-6xl font-bold text-white mb-2" style={{ letterSpacing: "-0.03em" }}>
+                                {stat.value}
+                            </div>
+                            <div className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>{stat.label}</div>
+                        </div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );

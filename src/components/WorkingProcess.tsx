@@ -1,21 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Database, Search, LineChart, LucideIcon } from "lucide-react";
-import OptimizedVideo from "./OptimizedVideo";
-import { ReactNode } from "react";
-
-interface Step {
-    icon: LucideIcon;
-    title: string;
-    description: string;
-    color: string;
-    bg: string;
-    image: string;
-    video?: string;
-    iframeSrc?: string;
-    customVisual?: ReactNode;
-}
+import { ArrowUpRight } from "lucide-react";
 
 interface WorkingProcessProps {
     dict: {
@@ -27,133 +13,126 @@ interface WorkingProcessProps {
         step2Desc: string;
         step3Title: string;
         step3Desc: string;
-    }
+    };
 }
 
 export default function WorkingProcess({ dict }: WorkingProcessProps) {
-    const steps: Step[] = [
-        {
-            icon: Database,
-            title: dict.step1Title,
-            description: dict.step1Desc,
-            color: "var(--color-heading)",
-            bg: "var(--color-bg-accent)",
-            image: "/illustrations/data.svg",
-            customVisual: (
-                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
-                    <iframe
-                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/d328e3583b683475127136da529109f8/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fd328e3583b683475127136da529109f8%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                        loading="lazy"
-                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                        allowFullScreen={true}
-                    />
-                </div>
-            )
-        },
-        {
-            icon: Search,
-            title: dict.step2Title,
-            description: dict.step2Desc,
-            color: "var(--color-heading)",
-            bg: "var(--color-bg-accent)",
-            image: "/illustrations/search.svg",
-            customVisual: (
-                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
-                    <iframe
-                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/53c62775896cab1b4dab846ba1427656/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F53c62775896cab1b4dab846ba1427656%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                        loading="lazy"
-                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                        allowFullScreen={true}
-                    />
-                </div>
-            )
-        },
-        {
-            icon: LineChart,
-            title: dict.step3Title,
-            description: dict.step3Desc,
-            color: "var(--color-heading)",
-            bg: "var(--color-bg-accent)",
-            image: "/illustrations/charts.svg",
-            customVisual: (
-                <div style={{ position: "relative", paddingTop: "71.61803713527851%", width: "100%" }}>
-                    <iframe
-                        src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/158f53e6bb68c978945f6106ee7c0db4/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F158f53e6bb68c978945f6106ee7c0db4%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                        loading="lazy"
-                        style={{ border: "none", position: "absolute", top: 0, left: 0, height: "100%", width: "100%" }}
-                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                        allowFullScreen={true}
-                    />
-                </div>
-            )
-        }
+    const steps = [
+        { title: dict.step1Title, description: dict.step1Desc },
+        { title: dict.step2Title, description: dict.step2Desc },
+        { title: dict.step3Title, description: dict.step3Desc },
     ];
 
     return (
-        <section className="section bg-[var(--color-bg-alt)] py-24 border-b border-[var(--color-border)] relative overflow-hidden" id="process">
-            {/* x.ai warm atmospheric top glow */}
-            <div className="absolute inset-0 pointer-events-none select-none z-0">
-                {/* Left corner warm reddish glow */}
-                <div className="absolute top-0 left-0 w-[50%] h-[300px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 80% 80% at 0% 0%, rgba(180,83,9,0.12) 0%, rgba(120,53,5,0.06) 40%, transparent 70%)',
-                    }}
-                />
-                {/* Right corner warm reddish glow */}
-                <div className="absolute top-0 right-0 w-[50%] h-[300px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 80% 80% at 100% 0%, rgba(180,83,9,0.10) 0%, rgba(120,53,5,0.05) 40%, transparent 70%)',
-                    }}
-                />
-                {/* Center top subtle amber line */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[200px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(251,146,60,0.06) 0%, transparent 60%)',
-                    }}
-                />
-            </div>
-            <div className="container max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
-                        {dict.title}
-                    </span>
-                    <h2 className="text-4xl lg:text-5xl font-extrabold text-[var(--color-heading)]">
-                        {dict.subtitle}
-                    </h2>
-                </div>
+        <section className="section">
+            <div className="container">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-20 max-w-3xl mx-auto"
+                >
+                    <p className="text-sm uppercase tracking-[0.2em] mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>{dict.title}</p>
+                    <h2 className="text-3xl md:text-5xl font-bold">{dict.subtitle}</h2>
+                </motion.div>
 
-                {/* Steps Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                {/* Alternating Bento-Style Sections */}
+                <div className="flex flex-col gap-32">
                     {steps.map((step, index) => {
-                        const hasCustom = "customVisual" in step && step.customVisual;
-
+                        const isReversed = index % 2 !== 0;
                         return (
                             <motion.div
                                 key={step.title}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.15, duration: 0.5 }}
+                                transition={{ duration: 0.7, delay: 0.1 }}
                                 viewport={{ once: true }}
-                                className="flex flex-col text-center"
+                                className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
                             >
-                                {/* Media Container */}
-                                <div className="mb-8 relative w-full rounded-2xl shadow-[var(--shadow-card)] border border-[var(--color-border)] overflow-hidden bg-[var(--color-bg-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow duration-300 group">
-                                    {hasCustom && step.customVisual}
-                                    {/* Subtle overlay on hover */}
-                                    <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                                </div>
-
-                                {/* Text Content */}
-                                <div className="px-2">
-                                    <h3 className="mb-3 font-bold text-lg text-[var(--color-heading)]">
+                                {/* Text Side */}
+                                <div className={isReversed ? "lg:order-2" : "lg:order-1"}>
+                                    <h3 className="text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">
                                         {step.title}
                                     </h3>
-                                    <p className="text-sm font-medium text-[var(--color-body-secondary)] leading-relaxed">
+                                    <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
                                         {step.description}
                                     </p>
+                                    <motion.a
+                                        href="https://docs.asklyze.ai/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ scale: 1.03 }}
+                                        whileTap={{ scale: 0.97 }}
+                                        className="btn-pill-white inline-flex"
+                                    >
+                                        Try It Now
+                                        <span className="btn-icon">
+                                            <ArrowUpRight size={14} />
+                                        </span>
+                                    </motion.a>
+                                </div>
+
+                                {/* Visual Side — Bento Grid */}
+                                <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
+                                    <div
+                                        className="p-8 relative overflow-hidden"
+                                        style={{
+                                            background: "rgba(5, 5, 10, 0.6)",
+                                            border: "1px solid rgba(255, 255, 255, 0.1)",
+                                            borderRadius: "var(--card-radius)",
+                                            minHeight: "360px",
+                                        }}
+                                    >
+                                        {/* 3x3 bento grid with center glow */}
+                                        <div className="grid grid-cols-3 gap-3 h-full">
+                                            {Array.from({ length: 9 }).map((_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="transition-all duration-500"
+                                                    style={{
+                                                        background: i === 4
+                                                            ? "rgba(59, 130, 246, 0.08)"
+                                                            : "rgba(255, 255, 255, 0.02)",
+                                                        border: i === 4
+                                                            ? "1px solid rgba(59, 130, 246, 0.2)"
+                                                            : "1px solid rgba(255, 255, 255, 0.04)",
+                                                        borderRadius: "16px",
+                                                        aspectRatio: "1",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                    }}
+                                                >
+                                                    {i === 4 && (
+                                                        <div style={{
+                                                            width: "24px",
+                                                            height: "24px",
+                                                            borderRadius: "8px",
+                                                            background: "rgba(59, 130, 246, 0.3)",
+                                                            border: "1px solid rgba(59, 130, 246, 0.4)",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            color: "rgba(59, 130, 246, 0.8)",
+                                                            fontSize: "14px",
+                                                        }}>
+                                                            +
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Center glow */}
+                                        <div
+                                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full pointer-events-none"
+                                            style={{
+                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)",
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             </motion.div>
                         );

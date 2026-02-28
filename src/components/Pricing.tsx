@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Cloud, Database, Server } from "lucide-react";
+import { Sparkles, ArrowUpRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PricingProps {
     dict: {
@@ -24,139 +25,183 @@ interface PricingProps {
     lang?: string;
 }
 
-const icons = [Cloud, Database, Server];
+function genSectionParticles() {
+    return Array.from({ length: 20 }).map(() => ({
+        width: `${(1 + Math.random() * 2).toFixed(2)}px`,
+        height: `${(1 + Math.random() * 2).toFixed(2)}px`,
+        background: `rgba(59, 130, 246, ${(0.2 + Math.random() * 0.3).toFixed(3)})`,
+        top: `${(Math.random() * 60).toFixed(2)}%`,
+        right: `${(Math.random() * 40).toFixed(2)}%`,
+        boxShadow: `0 0 ${(3 + Math.random() * 6).toFixed(2)}px rgba(59, 130, 246, 0.3)`,
+    }));
+}
+
+function genCardParticles() {
+    return Array.from({ length: 15 }).map(() => ({
+        width: `${(1 + Math.random() * 2).toFixed(2)}px`,
+        height: `${(1 + Math.random() * 2).toFixed(2)}px`,
+        background: `rgba(59, 130, 246, ${(0.2 + Math.random() * 0.4).toFixed(3)})`,
+        top: `${(Math.random() * 80).toFixed(2)}%`,
+        right: `${(Math.random() * 80).toFixed(2)}%`,
+        boxShadow: `0 0 ${(2 + Math.random() * 5).toFixed(2)}px rgba(59, 130, 246, 0.3)`,
+    }));
+}
 
 export default function Pricing({ dict, lang = "en" }: PricingProps) {
-    const plans = dict.plans.map((p, i) => ({
-        ...p,
-        icon: icons[i],
-        featured: i === 1, // Professional is featured
-        description: p.desc
-    }));
+    const [sectionParts, setSectionParts] = useState<React.CSSProperties[]>([]);
+    const [cardParts, setCardParts] = useState<React.CSSProperties[][]>([[], []]);
+
+    useEffect(() => {
+        setSectionParts(genSectionParticles());
+        setCardParts([genCardParticles(), genCardParticles()]);
+    }, []);
 
     return (
-        <section id="pricing" className="section bg-[#0c0a09] border-t border-[var(--color-border)] py-24 relative overflow-hidden">
-            {/* Warm golden atmospheric glow — x.ai careers style */}
-            <div className="absolute inset-0 pointer-events-none select-none z-0">
-                {/* Main golden glow — top center */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100%] h-[500px]"
+        <section id="pricing" className="section relative overflow-hidden">
+            {/* Blue particle streaks in background (top right) */}
+            <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none z-0">
+                <div
+                    className="absolute top-0 right-0"
                     style={{
-                        background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180,130,50,0.18) 0%, rgba(160,100,30,0.10) 25%, rgba(120,70,20,0.05) 45%, transparent 70%)',
+                        width: "500px",
+                        height: "500px",
+                        background: "radial-gradient(ellipse at 100% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%)",
                     }}
                 />
-                {/* Secondary warm amber accent */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[350px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 50% 45% at 50% 0%, rgba(217,170,80,0.12) 0%, rgba(180,130,50,0.05) 40%, transparent 65%)',
-                    }}
-                />
-                {/* Subtle edge warmth */}
-                <div className="absolute top-0 left-[20%] w-[30%] h-[300px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 70% 60% at 30% 0%, rgba(180,100,30,0.08) 0%, transparent 55%)',
-                    }}
-                />
-                <div className="absolute top-0 right-[20%] w-[30%] h-[300px]"
-                    style={{
-                        background: 'radial-gradient(ellipse 70% 60% at 70% 0%, rgba(180,100,30,0.08) 0%, transparent 55%)',
-                    }}
-                />
+                {/* Particle streaks */}
+                {sectionParts.map((p, i) => (
+                    <div
+                        key={i}
+                        className="absolute rounded-full"
+                        style={p}
+                    />
+                ))}
             </div>
-            <div className="container max-w-6xl mx-auto px-4 relative z-10">
+
+            <div className="container relative z-10">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-16 max-w-3xl mx-auto"
                 >
-                    <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-primary)] uppercase mb-4 block">
-                        {dict.tag}
-                    </span>
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-6">
-                        {dict.title}
-                    </h2>
-                    <p className="text-lg text-[var(--color-body)] max-w-2xl mx-auto">
-                        {dict.desc}
-                    </p>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-5">{dict.title}</h2>
+                    <p className="text-base md:text-lg" style={{ color: "rgba(255,255,255,0.55)" }}>{dict.desc}</p>
                 </motion.div>
 
-                {/* Pricing Cards */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-                    {plans.map((plan, index) => (
-                        <motion.div
-                            key={plan.name}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: index * 0.15 }}
-                            viewport={{ once: true }}
-                            className={`relative flex flex-col bg-[var(--color-bg-card)] rounded-2xl border transition-all duration-300 ${plan.featured
-                                ? "border-[var(--color-primary)] ring-1 ring-[var(--color-primary)] shadow-xl lg:-mt-4 lg:mb-4"
-                                : "border-[var(--color-border)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] mt-0"
-                                }`}
-                        >
-                            {/* Featured Badge */}
-                            {plan.featured && (
-                                <div
-                                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold text-white bg-[var(--color-primary)] shadow-sm"
-                                >
-                                    {dict.recommended}
-                                </div>
-                            )}
+                {/* 3-Column Pricing Cards — Vexel exact style */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    {dict.plans.map((plan, index) => {
+                        const isPro = index === 1;
+                        const isEnterprise = index === 2;
+                        const hasParticles = isPro || isEnterprise;
+                        const particleIdx = isPro ? 0 : 1;
 
-                            <div className="p-8 border-b border-[var(--color-border)]">
-                                {/* Icon & Title */}
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${plan.featured ? "bg-[var(--color-primary)] text-white" : "bg-[var(--color-bg-accent)] text-[var(--color-primary)]"
-                                        }`}>
-                                        <plan.icon size={24} />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-[var(--color-heading)]">{plan.name}</h3>
-                                    </div>
-                                </div>
+                        return (
+                            <motion.div
+                                key={plan.name}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: index * 0.15 }}
+                                viewport={{ once: true }}
+                                className="relative overflow-hidden transition-all duration-300"
+                                style={{
+                                    background: "rgba(5, 5, 10, 0.8)",
+                                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                                    borderRadius: "var(--card-radius)",
+                                    padding: "48px 36px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                }}
+                            >
+                                {/* Pro card: Blue glow from top — matches Vexel exactly */}
+                                {isPro && (
+                                    <div
+                                        className="absolute pointer-events-none"
+                                        style={{
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            height: "200px",
+                                            background: "#0083FF",
+                                            filter: "blur(116px)",
+                                            opacity: 0.35,
+                                        }}
+                                    />
+                                )}
 
-                                <p className="text-sm text-[var(--color-body-secondary)] min-h-[40px] mb-6">
-                                    {plan.description}
+                                {/* Blue particle effect on Pro/Enterprise cards (top right) */}
+                                {hasParticles && (
+                                    <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none">
+                                        <div
+                                            style={{
+                                                position: "absolute",
+                                                top: "-20px",
+                                                right: "-20px",
+                                                width: "200px",
+                                                height: "200px",
+                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 60%)",
+                                            }}
+                                        />
+                                        {cardParts[particleIdx]?.map((p, i) => (
+                                            <div
+                                                key={i}
+                                                className="absolute rounded-full"
+                                                style={p}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Plan Name — Bold, large */}
+                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                                    {plan.name}
+                                </h3>
+                                <p className="text-sm mb-8" style={{ color: "rgba(255,255,255,0.45)" }}>
+                                    {plan.desc}
                                 </p>
 
-                                {/* Price */}
-                                <div className="mb-2">
-                                    <span className="text-4xl font-extrabold text-[var(--color-heading)]">{plan.price}</span>
-                                    {plan.price !== "Custom" && <span className="text-[var(--color-body-muted)] text-sm font-medium">/{plan.period}</span>}
+                                {/* Price — Very large */}
+                                <div className="mb-10">
+                                    <span className="text-4xl md:text-5xl font-bold text-white" style={{ letterSpacing: "-0.03em" }}>
+                                        {plan.price}
+                                    </span>
+                                    {plan.period && (
+                                        <span className="text-base" style={{ color: "rgba(255,255,255,0.4)" }}>
+                                            {plan.period}
+                                        </span>
+                                    )}
                                 </div>
-                            </div>
 
-                            <div className="p-8 flex-1 flex flex-col bg-[var(--color-bg-alt)] rounded-b-2xl">
-                                <ul className="space-y-4 mb-8 flex-1" style={{ textAlign: lang === "ar" ? "right" : "left" }}>
-                                    {plan.features.map((feature, i) => (
-                                        <li key={i} className="flex items-start gap-3">
-                                            <div className="w-5 h-5 rounded-full bg-[var(--color-bg-accent)] flex items-center justify-center shrink-0 mt-0.5">
-                                                <Check size={12} className="text-[var(--color-primary)]" />
-                                            </div>
-                                            <span className="text-sm text-[var(--color-body-secondary)] leading-relaxed flex-1" style={{ textAlign: lang === "ar" ? "right" : "left" }}>
-                                                {feature}
-                                            </span>
+                                {/* Features — Blue sparkle icons like Vexel */}
+                                <ul className="space-y-4 mb-10 flex-1" style={{ textAlign: lang === "ar" ? "right" : "left" }}>
+                                    {plan.features.map((feature) => (
+                                        <li key={feature} className="flex items-start gap-3">
+                                            <Sparkles size={16} className="flex-shrink-0 mt-0.5" style={{ color: "#3b82f6" }} />
+                                            <span className="text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>{feature}</span>
                                         </li>
                                     ))}
                                 </ul>
 
-                                {/* CTA Button */}
-                                <a
+                                {/* CTA Button — White pill with black circle arrow (exactly like Vexel) */}
+                                <motion.a
                                     href={plan.href || "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"}
                                     target={plan.href?.startsWith("/") ? "_self" : "_blank"}
                                     rel="noopener noreferrer"
-                                    className={`w-full py-4 rounded-xl text-sm font-bold transition-all text-center ${plan.featured
-                                        ? "bg-[var(--color-primary)] text-[var(--color-bg)] hover:bg-[var(--color-primary-dark)] shadow-[var(--shadow-button)]"
-                                        : "bg-[var(--color-bg-card)] text-[var(--color-heading)] border border-[var(--color-border)] hover:bg-[var(--color-bg)] hover:border-[var(--color-primary)]"
-                                        }`}
+                                    whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    className="btn-pill-white w-full justify-center"
                                 >
                                     {plan.cta || dict.cta}
-                                </a>
-                            </div>
-                        </motion.div>
-                    ))}
+                                    <span className="btn-icon">
+                                        <ArrowUpRight size={14} />
+                                    </span>
+                                </motion.a>
+                            </motion.div>
+                        );
+                    })}
                 </div>
 
                 {/* Trust Note */}
@@ -165,11 +210,11 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     viewport={{ once: true }}
-                    className="text-center mt-12 text-sm text-[var(--color-body-muted)] font-medium"
+                    className="text-center mt-10 text-sm"
+                    style={{ color: "rgba(255,255,255,0.3)" }}
                 >
                     {dict.trustNote}
                 </motion.p>
-
             </div>
         </section>
     );

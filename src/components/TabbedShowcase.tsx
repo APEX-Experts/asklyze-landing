@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import OptimizedVideo from "./OptimizedVideo";
 
 interface TabbedShowcaseProps {
     dict: {
@@ -14,147 +12,133 @@ interface TabbedShowcaseProps {
 }
 
 export default function TabbedShowcase({ dict }: TabbedShowcaseProps) {
-    const [activeTab, setActiveTab] = useState(0);
-    const [progress, setProgress] = useState(0);
-
-    // Auto-transition through tabs with progress
-    useEffect(() => {
-        const duration = 6550; // 6.55 seconds matching video length approx
-        const startTime = Date.now();
-
-        const progressInterval = setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const newProgress = Math.min((elapsed / duration) * 100, 100);
-            setProgress(newProgress);
-        }, 50);
-
-        const tabInterval = setTimeout(() => {
-            setActiveTab((prev) => (prev + 1) % dict.tabs.length);
-        }, duration);
-
-        return () => {
-            clearInterval(progressInterval);
-            clearTimeout(tabInterval);
-        };
-    }, [activeTab, dict.tabs.length]);
-
-    const descriptions = [
-        "Ask questions in natural language",
-        "Structured tables ready to scan and export",
-        "Instant charts and dashboards for insights",
-        "Fully explainable and auditable queries"
-    ];
+    const cards = dict.tabs.map((tab, i) => ({
+        title: tab,
+        icon: ["⚙️", "✦", "📊", "🔒"][i] || "✦",
+    }));
 
     return (
-        <section className="section bg-[var(--color-bg)] py-24">
-            <div className="container max-w-6xl mx-auto px-4">
-                {/* Header */}
+        <section className="section">
+            <div className="container">
+                {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-16 max-w-3xl mx-auto"
                 >
-                    <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-heading)] mb-4">
-                        {dict.title}
-                    </h2>
-                    <p className="text-lg text-[var(--color-body)] max-w-3xl mx-auto">
-                        ASKLYZE doesn't lock you into a single output. Every question can evolve into
-                        reports, dashboards, charts, or SQL — instantly and transparently.
+                    <p className="text-sm uppercase tracking-[0.2em] mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>
+                        {dict.tag}
                     </p>
+                    <h2 className="text-3xl md:text-5xl font-bold">{dict.title}</h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                    {/* Visual Content - Right side on desktop, top on mobile */}
-                    <div className="lg:col-span-8 order-1 lg:order-2">
-                        <div className="bg-[var(--color-bg-card)] rounded-2xl p-6 md:p-8 shadow-xl border border-[var(--color-border)] h-full min-h-[400px] flex flex-col justify-center">
-                            <h3 className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider mb-6">Same Question. Different Outputs.</h3>
-
-                            {/* Content Container based on tab */}
-                            <div className="w-full rounded-xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-bg-alt)]">
-                                {activeTab === 0 ? (
-                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                                        <iframe
-                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/55692ccda3764ca9a68525d86e504c15/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F55692ccda3764ca9a68525d86e504c15%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                            loading="lazy"
-                                            className="absolute top-0 left-0 w-full h-full"
-                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                            allowFullScreen={true}
-                                        />
+                {/* 2x2 Bento Grid — 32px radius */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+                >
+                    {cards.map((card, index) => (
+                        <motion.div
+                            key={card.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="p-10 relative overflow-hidden group transition-all duration-300"
+                            style={{
+                                background: "rgba(5, 5, 10, 0.6)",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                borderRadius: "var(--card-radius)",
+                                minHeight: "260px",
+                            }}
+                        >
+                            {/* Decorative Visual */}
+                            <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-30">
+                                {index === 0 && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="grid grid-cols-3 gap-2 p-4">
+                                            {Array.from({ length: 9 }).map((_, i) => (
+                                                <div
+                                                    key={i}
+                                                    className="w-6 h-6"
+                                                    style={{
+                                                        background: "rgba(255,255,255,0.04)",
+                                                        border: "1px solid rgba(255,255,255,0.06)",
+                                                        borderRadius: "6px",
+                                                    }}
+                                                />
+                                            ))}
+                                        </div>
                                     </div>
-                                ) : activeTab === 1 ? (
-                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                                        <iframe
-                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/ff634d10d51fdb3d2eeec7f75049fab2/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2Fff634d10d51fdb3d2eeec7f75049fab2%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                            loading="lazy"
-                                            className="absolute top-0 left-0 w-full h-full"
-                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                            allowFullScreen={true}
-                                        />
-                                    </div>
-                                ) : activeTab === 2 ? (
-                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                                        <iframe
-                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/6751079fa304be597c3140e0ed900d9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F6751079fa304be597c3140e0ed900d9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                            loading="lazy"
-                                            className="absolute top-0 left-0 w-full h-full"
-                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                            allowFullScreen={true}
-                                        />
-                                    </div>
-                                ) : activeTab === 3 ? (
-                                    <div style={{ position: "relative", paddingTop: "56.25%" }}>
-                                        <iframe
-                                            src="https://customer-nd6eq88q2tb3xwgl.cloudflarestream.com/4f369287d11d183bea5af749e15f7e9a/iframe?muted=true&loop=true&autoplay=true&poster=https%3A%2F%2Fcustomer-nd6eq88q2tb3xwgl.cloudflarestream.com%2F4f369287d11d183bea5af749e15f7e9a%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600&controls=false"
-                                            loading="lazy"
-                                            className="absolute top-0 left-0 w-full h-full"
-                                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                                            allowFullScreen={true}
-                                        />
-                                    </div>
-                                ) : null}
-                            </div>
-                            <div className="text-center mt-4 text-xs italic text-[var(--color-body-muted)]">
-                                No SQL required. No training needed.
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Vertical Tabs - Left side on desktop, bottom on mobile */}
-                    <div className="lg:col-span-4 order-2 lg:order-1 flex flex-col gap-4">
-                        {dict.tabs.map((tab, i) => (
-                            <button
-                                key={tab}
-                                onClick={() => setActiveTab(i)}
-                                className={`text-left p-6 rounded-xl transition-all duration-300 relative overflow-hidden group border ${activeTab === i
-                                    ? "bg-[var(--color-bg-card)] border-transparent shadow-xl ring-1 ring-[var(--color-primary-light)]"
-                                    : "bg-[var(--color-bg-alt)] border-transparent hover:border-[var(--color-border)] shadow-sm"
-                                    }`}
-                            >
-                                <div className="flex items-start gap-3 relative z-10">
-                                    <div className={`w-2 h-2 rounded-full mt-2 transition-colors ${activeTab === i ? 'bg-[var(--color-primary)]' : 'bg-gray-300'}`} />
-                                    <div>
-                                        <h4 className={`text-base font-extrabold uppercase tracking-wide transition-colors ${activeTab === i ? 'text-[var(--color-heading)]' : 'text-[var(--color-body-secondary)]'}`}>
-                                            {tab}
-                                        </h4>
-                                        <p className="text-sm text-[var(--color-body-muted)] mt-1 font-medium">
-                                            {descriptions[i] || "Experience seamless interactions"}
-                                        </p>
-                                    </div>
-                                </div>
-                                {/* Progress bar background logic */}
-                                {activeTab === i && (
-                                    <div
-                                        className="absolute left-0 bottom-0 h-1 bg-[var(--color-primary)] opacity-20 transition-all duration-100 ease-linear"
-                                        style={{ width: `${progress}%` }}
-                                    />
                                 )}
-                            </button>
-                        ))}
-                    </div>
+                                {index === 1 && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        {[0, 1, 2, 3, 4].map((i) => (
+                                            <div
+                                                key={i}
+                                                className="absolute w-2 h-2 rounded-full"
+                                                style={{
+                                                    background: "rgba(59, 130, 246, 0.4)",
+                                                    top: `${20 + i * 15}%`,
+                                                    left: `${30 + i * 10}%`,
+                                                    boxShadow: "0 0 10px rgba(59, 130, 246, 0.3)",
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                                {index === 2 && (
+                                    <div className="absolute inset-0 flex items-end justify-center pb-8 gap-2 px-4">
+                                        {[40, 60, 30, 80, 50, 70].map((h, i) => (
+                                            <div
+                                                key={i}
+                                                className="w-4 rounded-t"
+                                                style={{
+                                                    height: `${h}%`,
+                                                    background: `rgba(59, 130, 246, ${0.1 + i * 0.05})`,
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                                {index === 3 && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div
+                                            className="w-16 h-16"
+                                            style={{
+                                                background: "rgba(59, 130, 246, 0.06)",
+                                                border: "1px solid rgba(59, 130, 246, 0.15)",
+                                                borderRadius: "16px",
+                                                boxShadow: "0 0 40px rgba(59, 130, 246, 0.08)",
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </div>
 
-                </div>
+                            <div className="relative z-10">
+                                <div className="text-2xl mb-5">{card.icon}</div>
+                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{card.title}</h3>
+                                <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
+                                    {dict.dashboard}
+                                </p>
+                            </div>
+
+                            {/* Hover glow */}
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                                style={{
+                                    background: "radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 60%)",
+                                }}
+                            />
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
