@@ -175,6 +175,8 @@
       z-index: 10;
       opacity: 0;
       pointer-events: none;
+      padding-top: var(--scene-safe-top);
+      padding-bottom: var(--scene-safe-bottom);
       transition: opacity var(--scene-transition-duration) var(--scene-transition-ease);
     }
 
@@ -459,13 +461,11 @@
       position: absolute;
       inset: 8px;
       pointer-events: none;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(234, 239, 250, 0.08) 0,
-        rgba(234, 239, 250, 0.08) 1px,
-        transparent 1px,
-        transparent 22px
-      );
+      background: repeating-linear-gradient(to bottom,
+          rgba(234, 239, 250, 0.08) 0,
+          rgba(234, 239, 250, 0.08) 1px,
+          transparent 1px,
+          transparent 22px);
     }
 
     #scene6 .apex-page-title {
@@ -492,9 +492,17 @@
       margin-top: 5px;
     }
 
-    #scene6 .apex-row.r2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    #scene6 .apex-row.r3 { grid-template-columns: 1fr; }
-    #scene6 .apex-row.r4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #scene6 .apex-row.r2 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #scene6 .apex-row.r3 {
+      grid-template-columns: 1fr;
+    }
+
+    #scene6 .apex-row.r4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
     #scene6 .apex-lane {
       height: 8px;
@@ -667,64 +675,202 @@
     }
 
     @keyframes pluginCursorMove {
-      0%, 100% { transform: translate(-50%, -50%) rotate(-17deg); }
-      34% { transform: translate(26px, 2px) rotate(-17deg); }
-      55% { transform: translate(30px, 2px) rotate(-17deg); }
-      74% { transform: translate(8px, -1px) rotate(-17deg); }
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) rotate(-17deg);
+      }
+
+      34% {
+        transform: translate(26px, 2px) rotate(-17deg);
+      }
+
+      55% {
+        transform: translate(30px, 2px) rotate(-17deg);
+      }
+
+      74% {
+        transform: translate(8px, -1px) rotate(-17deg);
+      }
     }
 
     @keyframes pluginClickPulse {
-      0%, 34%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
-      42% { opacity: 0.85; transform: translate(-50%, -50%) scale(1); }
-      58% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+
+      0%,
+      34%,
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.55);
+      }
+
+      42% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      58% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+      }
     }
 
     @keyframes pluginChipIn {
-      0%, 34% { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
-      45%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+      0%,
+      34% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.88);
+      }
+
+      45%,
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
 
     /* ═══════════ RESPONSIVE: 768px ═══════════ */
     @media (max-width: 768px) {
-      #scene6 .scene-plugin-layout { width: min(1240px, 96vw); padding-left: 27vw; }
-      #scene6 .scene-plugin-stage { width: min(900px, 100%); }
-      #scene6 .apex-shell { height: 510px; }
-      #scene6 .apex-workspace { grid-template-columns: 116px minmax(0, 1fr) 150px; }
-      #scene6 .apex-nav-links { font-size: 0.44rem; gap: 6px; }
-      #scene6 .apex-user { width: 18px; height: 18px; font-size: 0.4rem; }
-      #scene6 .apex-page-title { height: 18px; font-size: 0.44rem; }
-      #scene6 .apex-lane { height: 7px; }
-      #scene6 .apex-bottom-tools { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      #scene6 .apex-bottom-tools span { min-height: 28px; }
+      #scene6 .scene-plugin-layout {
+        width: min(1240px, 96vw);
+        padding-left: 27vw;
+      }
+
+      #scene6 .scene-plugin-stage {
+        width: min(900px, 100%);
+      }
+
+      #scene6 .apex-shell {
+        height: 510px;
+      }
+
+      #scene6 .apex-workspace {
+        grid-template-columns: 116px minmax(0, 1fr) 150px;
+      }
+
+      #scene6 .apex-nav-links {
+        font-size: 0.44rem;
+        gap: 6px;
+      }
+
+      #scene6 .apex-user {
+        width: 18px;
+        height: 18px;
+        font-size: 0.4rem;
+      }
+
+      #scene6 .apex-page-title {
+        height: 18px;
+        font-size: 0.44rem;
+      }
+
+      #scene6 .apex-lane {
+        height: 7px;
+      }
+
+      #scene6 .apex-bottom-tools {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      #scene6 .apex-bottom-tools span {
+        min-height: 28px;
+      }
+
       #scene6 .apex-tree-item,
-      #scene6 .apex-prop-item { font-size: 0.5rem; }
+      #scene6 .apex-prop-item {
+        font-size: 0.5rem;
+      }
     }
 
     /* ═══════════ RESPONSIVE: 480px ═══════════ */
     @media (max-width: 480px) {
-      #scene6 .scene-plugin-layout { width: min(1240px, 96vw); padding-left: 32vw; }
-      #scene6 .scene-plugin-stage { width: min(900px, 100%); }
-      #scene6 .apex-shell { height: 420px; }
-      #scene6 .apex-topnav { grid-template-columns: auto 1fr; gap: 8px; }
-      #scene6 .apex-nav-links span:nth-child(n+3) { display: none; }
-      #scene6 .apex-search { display: none; }
-      #scene6 .apex-user { display: none; }
-      #scene6 .apex-workspace { grid-template-columns: 92px minmax(0, 1fr); }
-      #scene6 .apex-right { display: none; }
-      #scene6 .apex-center { grid-template-rows: 26px minmax(0, 1fr) 44px; }
-      #scene6 .apex-left-title { font-size: 0.44rem; }
-      #scene6 .apex-tree-group { font-size: 0.38rem; }
-      #scene6 .apex-tree-item { font-size: 0.42rem; }
-      #scene6 .apex-page-title { height: 16px; font-size: 0.4rem; }
-      #scene6 .apex-row { gap: 4px; margin-top: 4px; }
-      #scene6 .apex-lane { height: 8px; }
-      #scene6 .apex-region-highlight { height: 46px; }
-      #scene6 .apex-bottom-tools { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 6px; }
-      #scene6 .apex-bottom-tools span { min-height: 24px; font-size: 0.46rem; }
+      #scene6 .scene-plugin-layout {
+        width: min(1240px, 96vw);
+        padding-left: 32vw;
+      }
+
+      #scene6 .scene-plugin-stage {
+        width: min(900px, 100%);
+      }
+
+      #scene6 .apex-shell {
+        height: 420px;
+      }
+
+      #scene6 .apex-topnav {
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+      }
+
+      #scene6 .apex-nav-links span:nth-child(n+3) {
+        display: none;
+      }
+
+      #scene6 .apex-search {
+        display: none;
+      }
+
+      #scene6 .apex-user {
+        display: none;
+      }
+
+      #scene6 .apex-workspace {
+        grid-template-columns: 92px minmax(0, 1fr);
+      }
+
+      #scene6 .apex-right {
+        display: none;
+      }
+
+      #scene6 .apex-center {
+        grid-template-rows: 26px minmax(0, 1fr) 44px;
+      }
+
+      #scene6 .apex-left-title {
+        font-size: 0.44rem;
+      }
+
+      #scene6 .apex-tree-group {
+        font-size: 0.38rem;
+      }
+
+      #scene6 .apex-tree-item {
+        font-size: 0.42rem;
+      }
+
+      #scene6 .apex-page-title {
+        height: 16px;
+        font-size: 0.4rem;
+      }
+
+      #scene6 .apex-row {
+        gap: 4px;
+        margin-top: 4px;
+      }
+
+      #scene6 .apex-lane {
+        height: 8px;
+      }
+
+      #scene6 .apex-region-highlight {
+        height: 46px;
+      }
+
+      #scene6 .apex-bottom-tools {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        padding: 6px;
+      }
+
+      #scene6 .apex-bottom-tools span {
+        min-height: 24px;
+        font-size: 0.46rem;
+      }
     }
 
     /* ═══════════ Iframe-specific overrides ═══════════ */
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       background: transparent !important;
@@ -838,13 +984,15 @@
                     <div class="apex-tree-group">Components</div>
                     <div class="apex-tree-item"><span class="apex-bullet"></span>Card Header</div>
                     <div class="apex-tree-item"><span class="apex-bullet"></span>Body</div>
-                    <div class="apex-tree-item is-child"><span class="apex-bullet"></span>Add Plugin<span class="apex-pill">New</span></div>
+                    <div class="apex-tree-item is-child"><span class="apex-bullet"></span>Add Plugin<span
+                        class="apex-pill">New</span></div>
                     <div class="apex-tree-item"><span class="apex-bullet"></span>Post-Rendering</div>
                   </aside>
 
                   <div class="apex-center">
                     <div class="apex-toolbar">
-                      <div class="apex-toolbar-left"><span>Layout</span><span>Toggle Search</span><span>Help</span></div>
+                      <div class="apex-toolbar-left"><span>Layout</span><span>Toggle Search</span><span>Help</span>
+                      </div>
                       <div class="apex-toolbar-dots"><span></span><span></span><span></span></div>
                     </div>
                     <div class="apex-canvas">
