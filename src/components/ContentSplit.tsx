@@ -76,7 +76,7 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                         className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
                     >
                         <div
-                            className="relative overflow-hidden w-full order-2 lg:order-1"
+                            className="p-8 relative overflow-hidden order-2 lg:order-1"
                             style={{
                                 background: "rgba(5, 5, 10, 0.6)",
                                 border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -84,13 +84,7 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 minHeight: "320px",
                             }}
                         >
-                            {/* Browser window dots — matches SceneCard frame */}
-                            <div className="absolute top-4 left-5 flex gap-2 z-10">
-                                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.15)" }} />
-                                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.10)" }} />
-                                <div className="w-2.5 h-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.10)" }} />
-                            </div>
-                            <div className="flex items-center justify-center" style={{ minHeight: "320px", paddingTop: "40px" }}>
+                            <div className="flex items-center justify-center h-full">
                                 <div className="grid grid-cols-3 gap-8 items-center">
                                     <div className="flex flex-col gap-4">
                                         {[1, 2, 3].map((i) => (
