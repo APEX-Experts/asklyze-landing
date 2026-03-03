@@ -11,7 +11,7 @@ const scenes = [
     { src: "/scene2-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Select Tables" },
     { src: "/scene3-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Build Metadata" },
     { src: "/scene4-isolated.html", iframeWidth: 1200, iframeHeight: 800, title: "AI Context" },
-    { src: "/scene5-isolated.html", iframeWidth: 1200, iframeHeight: 800, title: "Generate Dashboard" },
+    { src: "/scene5-isolated.html", iframeWidth: 1100, iframeHeight: 900, title: "Generate Dashboard" },
 ];
 
 /* ------------------------------------------------------------------ */
