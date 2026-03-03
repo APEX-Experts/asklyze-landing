@@ -1,6 +1,8 @@
 import { getPayload } from 'payload'
 import config from '../payload.config'
 import { blogData } from '../data/blogData'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const seed = async () => {
     console.log('--- Seeding Database ---')

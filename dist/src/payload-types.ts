@@ -150,7 +150,7 @@ export interface Post {
   id: number;
   title: string;
   titleAr?: string | null;
-  slug: string;
+  slug?: string | null;
   author: {
     name: string;
     image?: string | null;

@@ -1,78 +1,43 @@
-# Multi-stage Docker build for Next.js + Payload CMS
-# Optimized for production deployment with minimal image size
+FROM node:22.17.0-alpine AS base
 
-# =======================================
-# Stage 1: Dependencies
-# =======================================
-FROM node:22.17.0-alpine AS deps
+FROM base AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
-
-# Copy package files
 COPY package.json package-lock.json ./
-
-# Install dependencies
 RUN npm ci --legacy-peer-deps
 
-# =======================================
-# Stage 2: Builder
-# =======================================
-FROM node:22.17.0-alpine AS builder
+FROM base AS builder
 WORKDIR /app
-
-# Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
-
-# Copy application source
 COPY . .
 
-# Set environment variables for build
+# Pass public URL for static generation during build
+ARG NEXT_PUBLIC_SERVER_URL
+ENV NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-https://asklyze.com}
+
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-
-# Build the application
 RUN npm run build
 
-# =======================================
-# Stage 3: Runner (Production)
-# =======================================
-FROM node:22.17.0-alpine AS runner
+FROM base AS runner
 WORKDIR /app
 
-# Set production environment
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3076
 
-# Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy necessary files from builder
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/package-lock.json ./package-lock.json
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY --from=builder /app/src ./src
-
-# Copy Next.js build output
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 
-# Create directories for persistent data with proper permissions
-RUN mkdir -p /app/data /app/media && \
-    chown -R nextjs:nodejs /app/data /app/media && \
-    chmod 755 /app/data /app/media
-
-# Switch to non-root user
 USER nextjs
-
-# Expose application port
 EXPOSE 3076
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3076/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})" || exit 1
-
-# Start the application
 CMD ["npm", "start"]
