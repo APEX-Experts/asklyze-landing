@@ -434,6 +434,19 @@ p {
   }
 }
 
+/* ===== SELECT OPTIONS (Dark Mode) ===== */
+select option {
+  background: #14141f;
+  color: #ffffff;
+  padding: 8px 12px;
+}
+
+select option:hover,
+select option:checked {
+  background: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
+}
+
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
 
