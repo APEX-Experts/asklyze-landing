@@ -141,9 +141,8 @@ export async function POST(request: Request) {
                                 ${data.countryName} (${data.countryDialCode})
                             </td>
                         </tr>
-                        ${
-                          mobileDisplay
-                            ? `
+                        ${mobileDisplay
+        ? `
                         <tr>
                             <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
                                 <strong>Mobile:</strong>
@@ -153,8 +152,8 @@ export async function POST(request: Request) {
                             </td>
                         </tr>
                         `
-                            : ""
-                        }
+        : ""
+      }
                         <tr>
                             <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
                                 <strong>Company:</strong>
