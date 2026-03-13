@@ -124,7 +124,7 @@ export default function Navbar({ dict }: NavbarProps) {
 
           {/* CTA: White pill button with arrow */}
           <motion.a
-            href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+            href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
@@ -230,7 +230,7 @@ export default function Navbar({ dict }: NavbarProps) {
                     <div className="mt-8 pt-8 border-t border-white/8 flex flex-col gap-10">
                       <div className="px-3">
                         <a
-                          href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+                          href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() => setIsOpen(false)}

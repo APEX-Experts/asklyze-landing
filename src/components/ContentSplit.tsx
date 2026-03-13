@@ -44,7 +44,7 @@ export default function ContentSplit({ dict }: ContentSplitProps) {
                                 {dict.section1.desc}
                             </p>
                             <motion.a
-                                href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+                                href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 whileHover={{ scale: 1.03 }}

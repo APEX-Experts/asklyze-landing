@@ -187,7 +187,7 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
 
                                 {/* CTA Button — White pill with black circle arrow (exactly like Vexel) */}
                                 <motion.a
-                                    href={plan.href || "https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"}
+                                    href={plan.href || "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"}
                                     target={plan.href?.startsWith("/") ? "_self" : "_blank"}
                                     rel="noopener noreferrer"
                                     whileHover={{ scale: 1.03 }}

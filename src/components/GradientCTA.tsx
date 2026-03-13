@@ -39,7 +39,7 @@ export default function GradientCTA({ dict, lang = "en" }: GradientCTAProps) {
                     <div className="flex flex-wrap gap-6 justify-center items-center mb-12">
                         {/* Get Started — text link with arrow */}
                         <a
-                            href="https://g50f94ce30c3ffb-asklyze.adb.ca-toronto-1.oraclecloudapps.com/ords/r/asklyze_local/asklyze-customer-portal/login"
+                            href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-text-link"
