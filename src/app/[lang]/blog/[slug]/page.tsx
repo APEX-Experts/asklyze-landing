@@ -100,36 +100,39 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     const displayContent = lang === 'ar' && post.contentAr ? post.contentAr : post.content
 
     return (
-        <main className="min-h-screen bg-slate-50">
+        <main className="min-h-screen bg-[#0f0f18]">
             <BlogPostSchema post={post} lang={lang} slug={slug} />
             <Navbar dict={dict.navbar} />
 
+            {/* Background Details */}
+            <div className="absolute top-0 right-0 w-1/3 h-[800px] bg-gradient-to-l from-[#ff705a]/5 to-transparent opacity-60 -z-10" />
+
             {/* Hero Section */}
-            <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                <div className="max-w-4xl mx-auto text-center">
-                    <span className="inline-block px-3 py-1 bg-coral-100 text-coral-600 rounded-full text-sm font-medium mb-4">
+            <section className="relative pt-48 pb-16 overflow-hidden">
+                <div className="container max-w-4xl mx-auto text-center">
+                    <span className="inline-block px-4 py-1.5 bg-black/60 backdrop-blur-sm border border-[#ff705a]/20 text-[#ff705a] rounded-full text-xs font-bold uppercase tracking-widest mb-8">
                         {dict.blog.topics[category as keyof typeof dict.blog.topics] || category}
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 leading-tight">
+                    
+                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight tracking-tight">
                         {displayTitle}
                     </h1>
 
-                    <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500 mb-8 border-b border-slate-100 pb-8">
-                        <Link href={`/${lang}`} className="hover:text-coral-500 transition-colors">{dict.blog.breadcrumbHome}</Link>
+                    {/* Breadcrumbs */}
+                    <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-500 mb-12">
+                        <Link href={`/${lang}`} className="hover:text-[#ff705a] transition-colors">{dict.blog.breadcrumbHome}</Link>
                         <span>•</span>
-                        <Link href={`/${lang}/blog`} className="hover:text-coral-500 transition-colors">{dict.blog.breadcrumbBlog}</Link>
+                        <Link href={`/${lang}/blog`} className="hover:text-[#ff705a] transition-colors">{dict.blog.breadcrumbBlog}</Link>
                         <span>•</span>
-                        <Link
-                            href={`/${lang}/blog?topic=${category}`}
-                            className="hover:text-coral-500 transition-colors"
-                        >
-                            {dict.blog.topics[category as keyof typeof dict.blog.topics] || category}
-                        </Link>
+                        <span className="text-gray-400 truncate max-w-[200px]">
+                            {displayTitle}
+                        </span>
                     </div>
 
-                    <div className="flex items-center justify-center space-x-4 mb-4">
+                    {/* Author Info */}
+                    <div className="flex items-center justify-center gap-4 py-8 border-y border-white/5">
                         {authorImage && (
-                            <div className="relative w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-white/10 shadow-lg">
                                 <Image
                                     src={authorImage}
                                     alt={authorName}
@@ -139,15 +142,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                             </div>
                         )}
                         <div className="text-left">
-                            <p className="text-navy-900 font-medium">{authorName}</p>
-                            {authorJobTitle && <p className="text-slate-400 text-xs">{authorJobTitle}</p>}
-                            <p className="text-slate-500 text-sm">
-                                {new Date(post.publishedDate).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })}
-                            </p>
+                            <p className="text-white font-bold text-lg leading-tight">{authorName}</p>
+                            <div className="flex items-center gap-2 mt-1">
+                                {authorJobTitle && <span className="text-[#ff705a] text-xs font-semibold">{authorJobTitle}</span>}
+                                <span className="text-gray-500 text-xs">•</span>
+                                <span className="text-gray-500 text-xs">
+                                    {new Date(post.publishedDate).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: 'numeric'
+                                    })}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,32 +161,45 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Featured Image */}
             {post.image && (
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-                    <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-xl">
-                        <Image
-                            src={post.image as string}
-                            alt={displayTitle}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
+                <section className="pb-16 px-4">
+                    <div className="max-w-5xl mx-auto">
+                        <div className="relative w-full aspect-[16/9] rounded-[32px] overflow-hidden shadow-2xl border border-white/10">
+                            <Image
+                                src={post.image as string}
+                                alt={displayTitle}
+                                fill
+                                className="object-cover transform hover:scale-105 transition-transform duration-1000"
+                                priority
+                            />
+                        </div>
                     </div>
-                </div>
+                </section>
             )}
 
             {/* Content Body */}
-            <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 prose prose-lg prose-slate prose-headings:text-navy-900 prose-a:text-coral-500">
+            <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 prose prose-lg prose-invert 
+                prose-headings:text-white 
+                prose-p:text-gray-400 prose-p:leading-relaxed
+                prose-a:text-[#ff705a] prose-a:no-underline hover:prose-a:underline
+                prose-strong:text-white
+                prose-blockquote:border-[#ff705a] prose-blockquote:bg-white/5 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-r-xl
+                prose-img:rounded-2xl
+                ">
                 {displayContent && (
                     <RichText data={displayContent} />
                 )}
             </article>
 
-            <div className="max-w-3xl mx-auto px-4 mb-24 text-center">
+            {/* Navigation / Footer Link */}
+            <div className="max-w-3xl mx-auto px-4 pb-32 text-center border-t border-white/5 pt-12">
                 <Link
                     href={`/${lang}/blog`}
-                    className="inline-flex items-center font-medium text-coral-500 hover:text-coral-600 transition-colors"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-white/5 hover:bg-[#ff705a] border border-white/10 hover:border-[#ff705a] text-white font-bold rounded-full transition-all group"
                 >
-                    {lang === 'ar' ? '← العودة إلى المدونة' : '← Back to Blog'}
+                    <span className="transition-transform group-hover:-translate-x-1">
+                        {lang === 'ar' ? '←' : '←'}
+                    </span>
+                    {lang === 'ar' ? 'العودة إلى المدونة' : 'Back to Blog'}
                 </Link>
             </div>
 

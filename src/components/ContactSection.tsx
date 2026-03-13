@@ -35,7 +35,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
         icon: Phone,
         title: dict.callTitle,
         lines: [
-            "+1 (800) 123-4567",
+            "+971585803977",
             "Mon - Fri: 9AM - 6PM EST"
         ],
         color: "#ffffff"
