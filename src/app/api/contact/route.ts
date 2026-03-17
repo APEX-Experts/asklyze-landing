@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 
 // Rate limiting is handled by Nginx in production
 // For development, consider adding a rate limiting library
@@ -31,23 +30,21 @@ class ContactFormError extends Error {
 }
 
 function getEmailConfig(): {
-  host: string;
-  port: number;
-  secure: boolean;
-  user: string;
-  pass: string;
+  tenantId: string;
+  clientId: string;
+  clientSecret: string;
+  mailFrom: string;
 } {
-  const host = process.env.EMAIL_HOST;
-  const portRaw = process.env.EMAIL_PORT;
-  const secureRaw = process.env.EMAIL_SECURE;
-  const user = process.env.EMAIL_USER;
-  const pass = process.env.EMAIL_PASS;
+  const tenantId = process.env.AZURE_TENANT_ID;
+  const clientId = process.env.AZURE_CLIENT_ID;
+  const clientSecret = process.env.AZURE_CLIENT_SECRET;
+  const mailFrom = process.env.MAIL_FROM;
   const missing: string[] = [];
 
-  if (!host) missing.push("EMAIL_HOST");
-  if (!portRaw) missing.push("EMAIL_PORT");
-  if (!user) missing.push("EMAIL_USER");
-  if (!pass) missing.push("EMAIL_PASS");
+  if (!tenantId) missing.push("AZURE_TENANT_ID");
+  if (!clientId) missing.push("AZURE_CLIENT_ID");
+  if (!clientSecret) missing.push("AZURE_CLIENT_SECRET");
+  if (!mailFrom) missing.push("MAIL_FROM");
 
   if (missing.length > 0) {
     throw new ContactFormError(
@@ -58,12 +55,57 @@ function getEmailConfig(): {
   }
 
   return {
-    host: host!,
-    port: parseInt(portRaw!, 10),
-    secure: secureRaw?.toLowerCase() === "true",
-    user: user!,
-    pass: pass!,
+    tenantId: tenantId!,
+    clientId: clientId!,
+    clientSecret: clientSecret!,
+    mailFrom: mailFrom!,
   };
+}
+
+async function getAccessToken(config: {
+  tenantId: string;
+  clientId: string;
+  clientSecret: string;
+}) {
+  const { tenantId, clientId, clientSecret } = config;
+
+  const tokenEndpoint = `https://login.microsoftonline.com/${encodeURIComponent(
+    tenantId
+  )}/oauth2/v2.0/token`;
+
+  const params = new URLSearchParams();
+  params.append("client_id", clientId);
+  params.append("scope", "https://graph.microsoft.com/.default");
+  params.append("client_secret", clientSecret);
+  params.append("grant_type", "client_credentials");
+
+  const response = await fetch(tokenEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params,
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new ContactFormError(
+      "Email authentication failed. Please try again later.",
+      502,
+      `Token fetch failed (${response.status}): ${errorText}`
+    );
+  }
+
+  const data = await response.json();
+  if (!data.access_token) {
+    throw new ContactFormError(
+      "Email authentication failed. Please try again later.",
+      502,
+      "Token fetch succeeded but no access_token was returned."
+    );
+  }
+
+  return data.access_token;
 }
 
 export async function POST(request: Request) {
@@ -197,24 +239,59 @@ export async function POST(request: Request) {
             </div>
         `;
 
-    // Send email via SMTP (nodemailer)
-    const transporter = nodemailer.createTransport({
-      host: emailConfig.host,
-      port: emailConfig.port,
-      secure: emailConfig.secure,
-      auth: {
-        user: emailConfig.user,
-        pass: emailConfig.pass,
-      },
-    });
+    // Send email via Microsoft Graph API
+    const accessToken = await getAccessToken(emailConfig);
+    const sendMailUrl = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(
+      emailConfig.mailFrom
+    )}/sendMail`;
 
-    await transporter.sendMail({
-      from: `"ASKLYZE Contact Form" <${emailConfig.user}>`,
-      to: "admin@apexexperts.net",
-      replyTo: `"${data.name}" <${data.email}>`,
-      subject: `[ASKLYZE Contact] ${data.subject}`,
-      html: emailHtml,
+    const emailData = {
+      message: {
+        subject: `[ASKLYZE Contact] ${data.subject}`,
+        body: {
+          contentType: "HTML",
+          content: emailHtml,
+        },
+        toRecipients: [
+          {
+            emailAddress: {
+              address: "amr.mohamed@apexexperts.net",
+            },
+          },
+          {
+            emailAddress: {
+              address: "amrmohamed2766@gmail.com"
+            }
+          }
+        ],
+        replyTo: [
+          {
+            emailAddress: {
+              address: data.email,
+              name: data.name,
+            },
+          },
+        ],
+      },
+      saveToSentItems: false,
+    };
+
+    const sendResponse = await fetch(sendMailUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emailData),
     });
+    if (!sendResponse.ok) {
+      const errorText = await sendResponse.text();
+      throw new ContactFormError(
+        "Failed to send message. Please try again later.",
+        502,
+        `Graph API sendMail failed (${sendResponse.status}): ${errorText}`
+      );
+    }
 
     return NextResponse.json({
       success: true,
