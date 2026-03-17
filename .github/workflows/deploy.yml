@@ -60,11 +60,10 @@ jobs:
           DATABASE_URI: "${{ secrets.ASKLYZE_DATABASE_URL }}"
           PAYLOAD_SECRET: "${{ secrets.PAYLOAD_SECRET }}"
           NEXT_PUBLIC_SERVER_URL: "${{ secrets.NEXT_PUBLIC_SERVER_URL }}"
-          EMAIL_HOST: "${{ secrets.EMAIL_HOST }}"
-          EMAIL_PORT: "${{ secrets.EMAIL_PORT }}"
-          EMAIL_SECURE: "${{ secrets.EMAIL_SECURE }}"
-          EMAIL_USER: "${{ secrets.EMAIL_USER }}"
-          EMAIL_PASS: "${{ secrets.EMAIL_PASS }}"
+          AZURE_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID}}"
+          AZURE_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET}}"
+          AZURE_TENANT_ID: "${{ secrets.AZURE_TENANT_ID}}"
+          MAIL_FROM: "${{ secrets.MAIL_FROM}}"
           EOF
 
       - name: Deploy to Cloud Run
