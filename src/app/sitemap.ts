@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             pagination: false
         })
 
-        posts.docs.forEach((post: any) => {
+        posts.docs.forEach((post) => {
             platforms.forEach((lang) => {
                 sitemaps.push({
                     url: `${baseUrl}/${lang}/blog/${post.slug}`,
