@@ -255,14 +255,9 @@ export async function POST(request: Request) {
         toRecipients: [
           {
             emailAddress: {
-              address: "amr.mohamed@apexexperts.net",
+              address: "admin@apexexperts.net",
             },
           },
-          {
-            emailAddress: {
-              address: "amrmohamed2766@gmail.com"
-            }
-          }
         ],
         replyTo: [
           {
