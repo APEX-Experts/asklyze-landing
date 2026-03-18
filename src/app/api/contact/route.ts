@@ -258,6 +258,16 @@ export async function POST(request: Request) {
               address: "admin@apexexperts.net",
             },
           },
+          {
+            emailAddress: {
+              address: "ahmed-alsaied@msn.com",
+            },
+          },
+          {
+            emailAddress: {
+              address: "support@asklyze.ai",
+            },
+          },
         ],
         replyTo: [
           {

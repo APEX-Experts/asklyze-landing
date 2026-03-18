@@ -13,5 +13,9 @@ export interface BlogPost {
         jobTitleAr?: string;
     };
     date: string;
+    publishedDate?: string;
     image: string;
+    heroImage?: string;
+    contentHtml?: string;
+    contentHtmlAr?: string;
 }

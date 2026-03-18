@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BlogCard from "@/components/BlogCard";
-import { getPayload } from 'payload'
-import config from '../../../payload.config'
-import Link from "next/link";
+import { blogData } from "@/data/blogData";
 import { BlogPost } from "@/types/blog";
-
-export const dynamic = 'force-dynamic'
-
 import { getDictionary } from "@/get-dictionary";
 
 export async function generateMetadata({
@@ -23,7 +19,7 @@ export async function generateMetadata({
     const dict = await getDictionary(lang);
 
     let title = dict.metadata.blog.title;
-    if (typeof topic === 'string' && topic !== 'All') {
+    if (typeof topic === "string" && topic !== "All") {
         const localizedTopic = dict.blog.topics[topic as keyof typeof dict.blog.topics] || topic;
         title = `${localizedTopic} | ${dict.metadata.blog.title}`;
     }
@@ -34,8 +30,8 @@ export async function generateMetadata({
         alternates: {
             canonical: `https://asklyze.ai/${lang}/blog`,
             languages: {
-                'en': 'https://asklyze.ai/en/blog',
-                'ar': 'https://asklyze.ai/ar/blog',
+                en: "https://asklyze.ai/en/blog",
+                ar: "https://asklyze.ai/ar/blog",
             },
         },
     };
@@ -48,71 +44,58 @@ export default async function BlogPage({
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>,
     params: Promise<{ lang: "en" | "ar" }>
 }) {
-    const { page: pageParam, topic: topicParam } = await searchParams
-    const { lang } = await params
+    const { page: pageParam, topic: topicParam } = await searchParams;
+    const { lang } = await params;
     const dict = await getDictionary(lang);
-    const currentPage = typeof pageParam === 'string' ? parseInt(pageParam, 10) : 1
-    const selectedTopic = typeof topicParam === 'string' ? topicParam : undefined
-    const limit = 6
+    const currentPageParam = typeof pageParam === "string" ? parseInt(pageParam, 10) : 1;
+    const selectedTopic = typeof topicParam === "string" && topicParam !== "All" ? topicParam : undefined;
+    const limit = 6;
 
-    const payload = await getPayload({ config: await config })
-
-    // Fetch results with optional category filter
-    const postsResult = await payload.find({
-        collection: 'posts',
-        sort: '-publishedDate',
-        limit,
-        page: currentPage,
-        locale: lang,
-        where: selectedTopic ? {
-            category: {
-                equals: selectedTopic
-            }
-        } : undefined
-    })
-
-    const { totalPages, hasNextPage, hasPrevPage } = postsResult
-
-    // Define available topics based on collection options
-    const topics = ['All', 'Tutorial', 'Industry Trends', 'Features', 'Security', 'Case Study', 'Product Update']
-
-    // Map Payload results to existing BlogCard interface
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const posts: BlogPost[] = postsResult.docs.map((doc: any) => ({
-        id: doc.id,
-        slug: doc.slug,
-        title: lang === 'ar' && doc.titleAr ? doc.titleAr : doc.title,
-        excerpt: lang === 'ar' && doc.excerptAr ? doc.excerptAr : doc.excerpt,
-        category: doc.category,
+    const localizedPosts: BlogPost[] = blogData.map((post) => ({
+        ...post,
+        title: lang === "ar" && post.titleAr ? post.titleAr : post.title,
+        excerpt: lang === "ar" && post.excerptAr ? post.excerptAr : post.excerpt,
         author: {
-            name: doc.author?.name || 'Unknown',
-            image: doc.author?.image || 'https://i.pravatar.cc/150?u=unknown',
-            jobTitle: lang === 'ar' && doc.author?.jobTitleAr ? doc.author?.jobTitleAr : doc.author?.jobTitle,
+            ...post.author,
+            jobTitle: lang === "ar" && post.author.jobTitleAr ? post.author.jobTitleAr : post.author.jobTitle,
         },
-        date: new Date(doc.publishedDate).toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-        image: doc.image,
-    }))
+        date: new Date(post.publishedDate || post.date).toLocaleDateString(lang === "ar" ? "ar-EG" : "en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+        }),
+    }));
+
+    const filteredPosts = selectedTopic
+        ? localizedPosts.filter((post) => post.category === selectedTopic)
+        : localizedPosts;
+
+    const totalPages = Math.max(1, Math.ceil(filteredPosts.length / limit));
+    const currentPage = currentPageParam > 0 ? Math.min(currentPageParam, totalPages) : 1;
+    const hasNextPage = currentPage < totalPages;
+    const hasPrevPage = currentPage > 1;
+    const startIndex = (currentPage - 1) * limit;
+    const posts = filteredPosts.slice(startIndex, startIndex + limit);
+    const topics = ["All", ...new Set(blogData.map((post) => post.category))];
 
     const getPaginationUrl = (page: number) => {
-        const params = new URLSearchParams()
-        params.set('page', page.toString())
-        if (selectedTopic) params.set('topic', selectedTopic)
-        return `/${lang}/blog?${params.toString()}`
-    }
+        const nextParams = new URLSearchParams();
+        nextParams.set("page", page.toString());
+        if (selectedTopic) nextParams.set("topic", selectedTopic);
+        return `/${lang}/blog?${nextParams.toString()}`;
+    };
 
     const getTopicUrl = (topic: string) => {
-        const params = new URLSearchParams()
-        if (topic !== 'All') params.set('topic', topic)
-        return `/${lang}/blog?${params.toString()}`
-    }
+        const nextParams = new URLSearchParams();
+        if (topic !== "All") nextParams.set("topic", topic);
+        return `/${lang}/blog?${nextParams.toString()}`;
+    };
 
     return (
         <main className="min-h-screen bg-[#0f0f18]">
             <Navbar dict={dict.navbar} />
 
-            {/* Blog Hero */}
             <section className="relative pt-48 pb-16 overflow-hidden">
-                {/* Background Details */}
                 <div className="absolute inset-0 bg-[#0f0f18] -z-10" />
                 <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#ff705a]/5 to-transparent opacity-60 -z-10" />
 
@@ -128,10 +111,10 @@ export default async function BlogPage({
                         <div className="flex items-center justify-center gap-2 text-sm font-medium text-gray-400">
                             <Link href={`/${lang}`} className="hover:text-[#ff705a] transition-colors">{dict.blog.breadcrumbHome}</Link>
                             <span>•</span>
-                            <Link href={`/${lang}/blog`} className={`${!selectedTopic ? 'text-[#ff705a]' : 'hover:text-[#ff705a] transition-colors'}`}>
+                            <Link href={`/${lang}/blog`} className={`${!selectedTopic ? "text-[#ff705a]" : "hover:text-[#ff705a] transition-colors"}`}>
                                 {dict.blog.breadcrumbBlog}
                             </Link>
-                            {selectedTopic && selectedTopic !== 'All' && (
+                            {selectedTopic && (
                                 <>
                                     <span>•</span>
                                     <span className="text-[#ff705a]">
@@ -144,7 +127,6 @@ export default async function BlogPage({
                 </div>
             </section>
 
-            {/* Topic Filter */}
             <section className="pb-12 bg-[#0f0f18]">
                 <div className="container">
                     <div className="flex flex-wrap justify-center gap-3">
@@ -152,7 +134,7 @@ export default async function BlogPage({
                             <Link
                                 key={topic}
                                 href={getTopicUrl(topic)}
-                                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${(topic === 'All' && !selectedTopic) || topic === selectedTopic
+                                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${(topic === "All" && !selectedTopic) || topic === selectedTopic
                                     ? "bg-[#ff705a] text-white shadow-md"
                                     : "bg-white/5 text-gray-400 border border-white/8 hover:border-[#ff705a] hover:text-[#ff705a]"
                                     }`}
@@ -164,7 +146,6 @@ export default async function BlogPage({
                 </div>
             </section>
 
-            {/* Blog Grid */}
             <section className="section pt-16 pb-24">
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -173,14 +154,12 @@ export default async function BlogPage({
                         ))}
                     </div>
 
-                    {/* Empty State */}
                     {posts.length === 0 && (
                         <div className="text-center py-20 text-gray-400">
-                            {dict.blog.noPosts} {selectedTopic ? `${dict.blog.inTopic} "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"` : ''}. <Link href="/admin" className="text-[#ff705a] font-bold">{dict.blog.adminLinkText}</Link> {dict.blog.adminLinkPrefix}
+                            {dict.blog.noPosts} {selectedTopic ? `${dict.blog.inTopic} "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"` : ""}.
                         </div>
                     )}
 
-                    {/* Pagination */}
                     {totalPages > 1 && (
                         <div className="flex justify-center items-center gap-3 mt-16">
                             {hasPrevPage && (
@@ -188,7 +167,7 @@ export default async function BlogPage({
                                     href={getPaginationUrl(currentPage - 1)}
                                     className="w-10 h-10 rounded-full bg-white/5 text-gray-400 border border-white/8 font-bold flex items-center justify-center hover:border-[#ff705a] hover:text-[#ff705a] transition-colors"
                                 >
-                                    {'<'}
+                                    {"<"}
                                 </Link>
                             )}
 
@@ -210,7 +189,7 @@ export default async function BlogPage({
                                     href={getPaginationUrl(currentPage + 1)}
                                     className="w-10 h-10 rounded-full bg-white/5 text-gray-400 border border-white/8 font-bold flex items-center justify-center hover:border-[#ff705a] hover:text-[#ff705a] transition-colors"
                                 >
-                                    {'>'}
+                                    {">"}
                                 </Link>
                             )}
                         </div>

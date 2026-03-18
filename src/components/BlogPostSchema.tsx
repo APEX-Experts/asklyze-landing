@@ -9,11 +9,11 @@ interface BlogPostSchemaProps {
 export default function BlogPostSchema({ post, lang, slug }: BlogPostSchemaProps) {
     const baseUrl = 'https://asklyze.ai';
     const url = `${baseUrl}/${lang}/blog/${slug}`;
-    const imageUrl = post.image ? (typeof post.image === 'string' ? post.image : post.image.url) : `${baseUrl}/logo.png`;
+    const imageUrl = post.image || `${baseUrl}/logo.png`;
 
     // Format date specifically for Schema (ISO 8601)
-    const datePublished = new Date(post.publishedDate).toISOString();
-    const dateModified = new Date(post.updatedAt || post.publishedDate).toISOString();
+    const datePublished = new Date(post.publishedDate || post.date || new Date()).toISOString();
+    const dateModified = new Date(post.updatedAt || post.publishedDate || post.date || new Date()).toISOString();
 
     const title = lang === 'ar' && post.titleAr ? post.titleAr : post.title;
     const description = lang === 'ar' && post.excerptAr ? post.excerptAr : post.excerpt;
