@@ -17,7 +17,7 @@ export default function GradientCTA({ dict, lang = "en" }: GradientCTAProps) {
     const socialLinks = [
         { icon: Linkedin, href: "https://www.linkedin.com/showcase/asklyze-ai" },
         { icon: Github, href: "https://github.com/APEX-Experts" },
-        { icon: Twitter, href: "https://twitter.com/apex_experts" },
+        { icon: Twitter, href: "https://x.com/asklyze" },
     ];
 
     return (

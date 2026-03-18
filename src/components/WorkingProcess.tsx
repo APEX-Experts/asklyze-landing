@@ -79,7 +79,7 @@ export default function WorkingProcess({ dict }: WorkingProcessProps) {
                                         {step.description}
                                     </p>
                                     <motion.a
-                                        href="https://docs.asklyze.ai/"
+                                        href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         whileHover={{ scale: 1.03 }}

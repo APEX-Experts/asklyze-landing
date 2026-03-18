@@ -36,6 +36,7 @@ const getContactInfo = (dict: ContactSectionProps['dict']) => [
         title: dict.callTitle,
         lines: [
             "+971585803977",
+            "+201022034499",
             "Mon - Fri: 9AM - 6PM EST"
         ],
         color: "#ffffff"
@@ -112,7 +113,7 @@ export default function ContactSection({ dict }: ContactSectionProps) {
                             </p>
                             <div className="flex gap-3">
                                 <a
-                                    href="https://twitter.com/apex_experts"
+                                    href="https://x.com/asklyze"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Follow ASKLYZE on X"

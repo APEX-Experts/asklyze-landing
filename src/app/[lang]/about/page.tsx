@@ -100,12 +100,12 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 {
                     name: "Amr Mohamed",
                     role: "Technical Lead",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                    image: "/Amr.png",
                 },
                 {
                     name: "Abdulrahman Ebrahim",
                     role: "Sr. Software Engineering",
-                    image: "",
+                    image: "/abd.png",
                 },
             ],
             employees: [
@@ -206,12 +206,12 @@ export default async function About({ params }: { params: Promise<{ lang: "en" |
                 {
                     name: "Amr Mohamed",
                     role: "Technical Lead",
-                    image: "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/Gemini_Generated_Image_hxa9abhxa9abhxa9.png",
+                    image: "/Amr.png",
                 },
                 {
                     name: "Abdulrahman Ebrahim",
                     role: "Sr. Software Engineering",
-                    image: "",
+                    image: "/abd.png",
                 },
             ],
             employees: [

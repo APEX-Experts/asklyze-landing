@@ -19,7 +19,7 @@ export default function SchemaMarkup({ lang }: { lang: string }) {
         "logo": `${baseUrl}/logo.png`,
         "sameAs": [
             "https://www.linkedin.com/showcase/asklyze-ai",
-            "https://twitter.com/apex_experts",
+            "https://x.com/asklyze",
             "https://www.facebook.com/apexexperts.ai",
             "https://github.com/APEX-Experts"
         ],
