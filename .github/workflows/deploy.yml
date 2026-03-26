@@ -60,9 +60,7 @@ jobs:
           DATABASE_URI: "${{ secrets.ASKLYZE_DATABASE_URL }}"
           PAYLOAD_SECRET: "${{ secrets.PAYLOAD_SECRET }}"
           NEXT_PUBLIC_SERVER_URL: "${{ secrets.NEXT_PUBLIC_SERVER_URL }}"
-          AZURE_CLIENT_ID: "${{ secrets.AZURE_CLIENT_ID}}"
-          AZURE_CLIENT_SECRET: "${{ secrets.AZURE_CLIENT_SECRET}}"
-          AZURE_TENANT_ID: "${{ secrets.AZURE_TENANT_ID}}"
+          SENDGRID_API_KEY: "${{ secrets.SENDGRID_API_KEY}}"
           MAIL_FROM: "${{ secrets.MAIL_FROM}}"
           EOF
 

@@ -6,7 +6,7 @@
 
 - [ ] VPS with Ubuntu 20.04+ (2GB RAM, 2 CPU)
 - [ ] Domain name with DNS access
-- [ ] Azure account (for email)
+- [ ] SendGrid account (for email)
 - [ ] GitHub account with repo access
 
 ## Step 1: VPS Setup (15 min)
@@ -75,16 +75,13 @@ sudo ln -s /etc/nginx/sites-available/asklyze-landing /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-## Step 5: Azure Setup (10 min)
+## Step 5: SendGrid Setup (5 min)
 
-1. Go to [Azure Portal](https://portal.azure.com)
-2. Azure Active Directory → App registrations → New
-3. Name: "Asklyze Email Service"
-4. Note **Tenant ID** and **Client ID**
-5. Certificates & secrets → New client secret
-6. Copy **Secret Value** immediately
-7. API permissions → Add → Microsoft Graph → Application
-8. Select **Mail.Send** → Grant admin consent
+1. Go to [SendGrid](https://sendgrid.com) and create an account
+2. Navigate to Settings → API Keys
+3. Create a new API key with **Mail Send** permission
+4. Copy the **API key** immediately
+5. Navigate to Settings → Sender Authentication and verify your domain
 
 ## Step 6: GitHub Secrets (10 min)
 
@@ -98,9 +95,7 @@ Add these secrets:
 | `VPS_USER`               | SSH user        | `deploy`                            |
 | `SSH_PRIVATE_KEY`        | SSH private key | `-----BEGIN OPENSSH...`             |
 | `PAYLOAD_SECRET`         | Random string   | Generate: `openssl rand -base64 32` |
-| `AZURE_TENANT_ID`        | From Azure      | `12345678-...`                      |
-| `AZURE_CLIENT_ID`        | From Azure      | `87654321-...`                      |
-| `AZURE_CLIENT_SECRET`    | From Azure      | `AbC~1dE2f...`                      |
+| `SENDGRID_API_KEY`       | From SendGrid   | `SG.xxxxxxxxxxxx...`                |
 | `MAIL_FROM`              | Email sender    | `noreply@YOUR_DOMAIN.com`           |
 | `NEXT_PUBLIC_SERVER_URL` | Site URL        | `https://YOUR_DOMAIN.com`           |
 
@@ -167,9 +162,9 @@ docker-compose logs -f
 
 ### Email not sending
 
-- Verify Azure app has Mail.Send permission
-- Check admin consent was granted
-- Ensure MAIL_FROM email exists in tenant
+- Verify SendGrid API key has Mail Send permission
+- Check that sender domain is verified in SendGrid
+- Ensure MAIL_FROM email matches a verified sender
 
 ## Quick Commands
 

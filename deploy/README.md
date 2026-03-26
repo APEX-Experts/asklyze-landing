@@ -78,9 +78,7 @@ VPS_USER=deploy
 VPS_PORT=22
 SSH_PRIVATE_KEY=<your-private-key>
 PAYLOAD_SECRET=<strong-random-secret>
-AZURE_TENANT_ID=<your-azure-tenant-id>
-AZURE_CLIENT_ID=<your-azure-client-id>
-AZURE_CLIENT_SECRET=<your-azure-client-secret>
+SENDGRID_API_KEY=<your-sendgrid-api-key>
 MAIL_FROM=noreply@yourdomain.com
 NEXT_PUBLIC_SERVER_URL=https://yourdomain.com
 ```

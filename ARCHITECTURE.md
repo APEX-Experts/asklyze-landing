@@ -240,7 +240,7 @@ Development                Production                 (Future) Staging
 │ - Hot Reload │          │ - Optimized  │           │ - Pre-prod   │
 │ - Source Maps│          │ - Minified   │           │ - Testing    │
 │ - SQLite     │          │ - SQLite     │           │ - PostgreSQL?│
-│ - Mock Email │          │ - Azure Mail │           │ - Real Email │
+│ - Mock Email │          │ - SendGrid   │           │ - Real Email │
 │              │          │ - SSL/HTTPS  │           │ - SSL/HTTPS  │
 │ localhost:   │          │ yourdomain.  │           │ staging.     │
 │   3000       │          │   com        │           │   yourdomain │

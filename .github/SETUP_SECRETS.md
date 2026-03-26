@@ -72,50 +72,26 @@ openssl rand -base64 32
 
 Example output: `jK8vN2mP9qR4sT6uV7wX8yZ0aB1cD2eF3gH4iJ5kL6m=`
 
-#### `AZURE_TENANT_ID`
+#### `SENDGRID_API_KEY`
 
-Your Azure AD tenant ID
-
-**Find it:**
-
-1. Go to [Azure Portal](https://portal.azure.com)
-2. Navigate to **Azure Active Directory**
-3. Copy the **Tenant ID** from Overview
-
-Example: `12345678-1234-1234-1234-123456789012`
-
-#### `AZURE_CLIENT_ID`
-
-Your Azure application (client) ID
-
-**Find it:**
-
-1. Go to Azure Portal → **Azure Active Directory** → **App registrations**
-2. Select your app
-3. Copy the **Application (client) ID**
-
-Example: `87654321-4321-4321-4321-210987654321`
-
-#### `AZURE_CLIENT_SECRET`
-
-Your Azure application client secret
+Your SendGrid API key for sending emails
 
 **Create:**
 
-1. Go to your app registration
-2. Navigate to **Certificates & secrets**
-3. Click **New client secret**
-4. Copy the **Value** (not the Secret ID!)
+1. Go to [SendGrid](https://sendgrid.com) → **Settings** → **API Keys**
+2. Click **Create API Key**
+3. Select **Restricted Access** and enable **Mail Send**
+4. Copy the API key immediately
 
 ⚠️ **Important:** Copy immediately! It won't be shown again.
 
-Example: `AbC~1dE2fG3hI4jK5lM6nO7pQ8rS9tU0vW1xY2zA3`
+Example: `SG.xxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
 
 #### `MAIL_FROM`
 
 Email address for sending contact form emails
 
-Must be a valid email in your Microsoft 365 tenant.
+Must be a verified sender in your SendGrid account.
 
 Example: `noreply@yourdomain.com`
 
@@ -134,9 +110,7 @@ Here's a checklist of all secrets to add:
 - [ ] `VPS_PORT` - SSH port (optional, defaults to 22)
 - [ ] `SSH_PRIVATE_KEY` - Private SSH key for authentication
 - [ ] `PAYLOAD_SECRET` - Random secret for Payload CMS
-- [ ] `AZURE_TENANT_ID` - Azure AD tenant ID
-- [ ] `AZURE_CLIENT_ID` - Azure app client ID
-- [ ] `AZURE_CLIENT_SECRET` - Azure app client secret
+- [ ] `SENDGRID_API_KEY` - SendGrid API key
 - [ ] `MAIL_FROM` - Sender email address
 - [ ] `NEXT_PUBLIC_SERVER_URL` - Production site URL
 
@@ -181,12 +155,12 @@ git push origin main
 - Check container logs for startup errors
 - Verify no firewall blocking internal port
 
-### Azure Email Not Working
+### SendGrid Email Not Working
 
-- Verify all Azure credentials are correct
-- Check app has `Mail.Send` permission granted
-- Ensure admin consent was granted for the permission
-- Verify `MAIL_FROM` email exists in your tenant
+- Verify `SENDGRID_API_KEY` is correct and not expired
+- Check API key has `Mail Send` permission enabled
+- Ensure sender domain is verified in SendGrid
+- Verify `MAIL_FROM` email matches a verified sender
 
 ## Security Best Practices
 

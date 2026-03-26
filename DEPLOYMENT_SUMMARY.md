@@ -110,17 +110,15 @@ All deployment configurations and documentation have been successfully implement
 
 ## 🔑 Required Secrets
 
-### GitHub Actions Secrets (9 required)
+### GitHub Actions Secrets (7 required)
 
 1. `VPS_HOST` - VPS IP address
 2. `VPS_USER` - SSH username
 3. `SSH_PRIVATE_KEY` - Private SSH key
 4. `PAYLOAD_SECRET` - CMS encryption key
-5. `AZURE_TENANT_ID` - Azure tenant ID
-6. `AZURE_CLIENT_ID` - Azure app client ID
-7. `AZURE_CLIENT_SECRET` - Azure app secret
-8. `MAIL_FROM` - Sender email address
-9. `NEXT_PUBLIC_SERVER_URL` - Public site URL
+5. `SENDGRID_API_KEY` - SendGrid API key
+6. `MAIL_FROM` - Sender email address
+7. `NEXT_PUBLIC_SERVER_URL` - Public site URL
 
 See [.github/SETUP_SECRETS.md](.github/SETUP_SECRETS.md) for setup instructions.
 

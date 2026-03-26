@@ -30,20 +30,14 @@ class ContactFormError extends Error {
 }
 
 function getEmailConfig(): {
-  tenantId: string;
-  clientId: string;
-  clientSecret: string;
+  apiKey: string;
   mailFrom: string;
 } {
-  const tenantId = process.env.AZURE_TENANT_ID;
-  const clientId = process.env.AZURE_CLIENT_ID;
-  const clientSecret = process.env.AZURE_CLIENT_SECRET;
+  const apiKey = process.env.SENDGRID_API_KEY;
   const mailFrom = process.env.MAIL_FROM;
   const missing: string[] = [];
 
-  if (!tenantId) missing.push("AZURE_TENANT_ID");
-  if (!clientId) missing.push("AZURE_CLIENT_ID");
-  if (!clientSecret) missing.push("AZURE_CLIENT_SECRET");
+  if (!apiKey) missing.push("SENDGRID_API_KEY");
   if (!mailFrom) missing.push("MAIL_FROM");
 
   if (missing.length > 0) {
@@ -55,57 +49,9 @@ function getEmailConfig(): {
   }
 
   return {
-    tenantId: tenantId!,
-    clientId: clientId!,
-    clientSecret: clientSecret!,
+    apiKey: apiKey!,
     mailFrom: mailFrom!,
   };
-}
-
-async function getAccessToken(config: {
-  tenantId: string;
-  clientId: string;
-  clientSecret: string;
-}) {
-  const { tenantId, clientId, clientSecret } = config;
-
-  const tokenEndpoint = `https://login.microsoftonline.com/${encodeURIComponent(
-    tenantId
-  )}/oauth2/v2.0/token`;
-
-  const params = new URLSearchParams();
-  params.append("client_id", clientId);
-  params.append("scope", "https://graph.microsoft.com/.default");
-  params.append("client_secret", clientSecret);
-  params.append("grant_type", "client_credentials");
-
-  const response = await fetch(tokenEndpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: params,
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new ContactFormError(
-      "Email authentication failed. Please try again later.",
-      502,
-      `Token fetch failed (${response.status}): ${errorText}`
-    );
-  }
-
-  const data = await response.json();
-  if (!data.access_token) {
-    throw new ContactFormError(
-      "Email authentication failed. Please try again later.",
-      502,
-      "Token fetch succeeded but no access_token was returned."
-    );
-  }
-
-  return data.access_token;
 }
 
 export async function POST(request: Request) {
@@ -239,62 +185,52 @@ export async function POST(request: Request) {
             </div>
         `;
 
-    // Send email via Microsoft Graph API
-    const accessToken = await getAccessToken(emailConfig);
-    const sendMailUrl = `https://graph.microsoft.com/v1.0/users/${encodeURIComponent(
-      emailConfig.mailFrom
-    )}/sendMail`;
+    // Send email via SendGrid API
+    const sendGridUrl = "https://api.sendgrid.com/v3/mail/send";
 
     const emailData = {
-      message: {
-        subject: `[ASKLYZE Contact] ${data.subject}`,
-        body: {
-          contentType: "HTML",
-          content: emailHtml,
+      personalizations: [
+        {
+          to: [
+            { email: "admin@apexexperts.net" },
+            { email: "ahmed-alsaied@msn.com" },
+            { email: "support@asklyze.ai" },
+          ],
         },
-        toRecipients: [
-          {
-            emailAddress: {
-              address: "admin@apexexperts.net",
-            },
-          },
-          {
-            emailAddress: {
-              address: "ahmed-alsaied@msn.com",
-            },
-          },
-          {
-            emailAddress: {
-              address: "support@asklyze.ai",
-            },
-          },
-        ],
-        replyTo: [
-          {
-            emailAddress: {
-              address: data.email,
-              name: data.name,
-            },
-          },
-        ],
+      ],
+      from: {
+        email: emailConfig.mailFrom,
+        name: "ASKLYZE",
       },
-      saveToSentItems: false,
+      reply_to: {
+        email: data.email,
+        name: data.name,
+      },
+      subject: `[ASKLYZE Contact] ${data.subject}`,
+      content: [
+        {
+          type: "text/html",
+          value: emailHtml,
+        },
+      ],
     };
 
-    const sendResponse = await fetch(sendMailUrl, {
+    const sendResponse = await fetch(sendGridUrl, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${emailConfig.apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(emailData),
     });
+
+    // SendGrid returns 202 Accepted on success
     if (!sendResponse.ok) {
       const errorText = await sendResponse.text();
       throw new ContactFormError(
         "Failed to send message. Please try again later.",
         502,
-        `Graph API sendMail failed (${sendResponse.status}): ${errorText}`
+        `SendGrid API failed (${sendResponse.status}): ${errorText}`
       );
     }
 

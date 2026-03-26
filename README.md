@@ -1,6 +1,6 @@
 # Asklyze Landing Page
 
-A modern, bilingual (English/Arabic) landing page built with Next.js 15 and Payload CMS. Features SSR/SSG hybrid rendering, integrated CMS for blog management, and email integration via Azure Graph API.
+A modern, bilingual (English/Arabic) landing page built with Next.js 15 and Payload CMS. Features SSR/SSG hybrid rendering, integrated CMS for blog management, and email integration via SendGrid API.
 
 ## 🚀 Features
 
@@ -8,7 +8,7 @@ A modern, bilingual (English/Arabic) landing page built with Next.js 15 and Payl
 - **Payload CMS** for content management
 - **Bilingual Support** - English and Arabic with RTL support
 - **Blog System** with dynamic routing and rich text editor
-- **Contact Form** with Azure email integration
+- **Contact Form** with SendGrid email integration
 - **SEO Optimized** with sitemap, robots.txt, and schema markup
 - **Responsive Design** with Tailwind CSS
 - **Type-Safe** with TypeScript
@@ -17,7 +17,7 @@ A modern, bilingual (English/Arabic) landing page built with Next.js 15 and Payl
 
 - Node.js 20 or higher
 - pnpm (recommended) or npm
-- Azure account with Microsoft 365 (for email functionality)
+- SendGrid account with API key (for email functionality)
 
 ## 🛠️ Development Setup
 
@@ -45,9 +45,7 @@ Edit `.env` and add your configuration:
 ```env
 PAYLOAD_SECRET=your-strong-random-secret
 DATABASE_URI=file:./payload-sqlite.db
-AZURE_TENANT_ID=your-azure-tenant-id
-AZURE_CLIENT_ID=your-azure-client-id
-AZURE_CLIENT_SECRET=your-azure-client-secret
+SENDGRID_API_KEY=your-sendgrid-api-key
 MAIL_FROM=noreply@yourdomain.com
 NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ```
@@ -146,9 +144,7 @@ VPS_USER=deploy
 VPS_PORT=22
 SSH_PRIVATE_KEY=<your-private-ssh-key>
 PAYLOAD_SECRET=<strong-random-secret>
-AZURE_TENANT_ID=<your-tenant-id>
-AZURE_CLIENT_ID=<your-client-id>
-AZURE_CLIENT_SECRET=<your-client-secret>
+SENDGRID_API_KEY=<your-sendgrid-api-key>
 MAIL_FROM=noreply@yourdomain.com
 NEXT_PUBLIC_SERVER_URL=https://yourdomain.com
 ```
@@ -210,14 +206,13 @@ The site supports English and Arabic with automatic RTL layout for Arabic.
 
 ## 📧 Email Configuration
 
-The contact form uses Azure Graph API for sending emails. To set up:
+The contact form uses SendGrid API for sending emails. To set up:
 
-1. Go to [Azure Portal](https://portal.azure.com)
-2. Navigate to Azure Active Directory → App registrations
-3. Create a new app registration
-4. Add `Mail.Send` API permission (Microsoft Graph)
-5. Create a client secret
-6. Add credentials to `.env`
+1. Go to [SendGrid](https://sendgrid.com) and create an account
+2. Navigate to Settings → API Keys
+3. Create a new API key with "Mail Send" permission
+4. Add the API key to your `.env` as `SENDGRID_API_KEY`
+5. Verify your sender email domain in SendGrid
 
 ## 🧪 Available Scripts
 

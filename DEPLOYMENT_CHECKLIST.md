@@ -9,7 +9,7 @@ Quick reference guide for deploying Asklyze Landing Page to a VPS.
   - [ ] 2 CPU cores
   - [ ] 20GB storage
 - [ ] Domain name purchased
-- [ ] Azure account with Microsoft 365 access
+- [ ] SendGrid account with API key
 - [ ] GitHub repository access
 
 ## DNS Configuration
@@ -43,22 +43,14 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-## Azure Configuration
+## SendGrid Configuration
 
-- [ ] Login to [Azure Portal](https://portal.azure.com)
-- [ ] Navigate to Azure Active Directory → App registrations
-- [ ] Create new app registration
-  - [ ] Name: "Asklyze Email Service"
-  - [ ] Supported account types: Single tenant
-- [ ] Note Application (client) ID
-- [ ] Note Directory (tenant) ID
-- [ ] Navigate to Certificates & secrets
-  - [ ] Create new client secret
-  - [ ] Copy secret value immediately
-- [ ] Navigate to API permissions
-  - [ ] Add permission: Microsoft Graph → Application permissions
-  - [ ] Select: `Mail.Send`
-  - [ ] Grant admin consent
+- [ ] Create a [SendGrid](https://sendgrid.com) account
+- [ ] Navigate to Settings → API Keys
+- [ ] Create a new API key with "Mail Send" permission
+- [ ] Copy the API key immediately
+- [ ] Navigate to Settings → Sender Authentication
+  - [ ] Verify your sender domain or single sender email
 
 ## GitHub Actions Configuration
 
@@ -69,9 +61,7 @@ Navigate to GitHub repository → Settings → Secrets and variables → Actions
 - [ ] `VPS_PORT` = 22 (optional)
 - [ ] `SSH_PRIVATE_KEY` = Private SSH key
 - [ ] `PAYLOAD_SECRET` = Generated random secret
-- [ ] `AZURE_TENANT_ID` = Azure tenant ID
-- [ ] `AZURE_CLIENT_ID` = Azure client ID
-- [ ] `AZURE_CLIENT_SECRET` = Azure client secret
+- [ ] `SENDGRID_API_KEY` = SendGrid API key
 - [ ] `MAIL_FROM` = noreply@yourdomain.com
 - [ ] `NEXT_PUBLIC_SERVER_URL` = https://yourdomain.com
 
@@ -212,9 +202,9 @@ sudo systemctl status nginx
 
 ### Email not working
 
-- Verify Azure credentials in GitHub secrets
-- Check Mail.Send permission is granted
-- Test Azure token: See Azure Graph API documentation
+- Verify `SENDGRID_API_KEY` in GitHub secrets
+- Check that the API key has "Mail Send" permission
+- Verify sender domain is authenticated in SendGrid
 
 ## Support Resources
 
