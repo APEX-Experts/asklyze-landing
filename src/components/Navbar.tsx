@@ -20,6 +20,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Logo from "./Logo";
+import LinkButton from "./LinkButton";
 
 interface NavbarProps {
   dict: {
@@ -113,19 +114,18 @@ export default function Navbar({ dict }: NavbarProps) {
           {/* DESKTOP: Right Side CTA + Lang */}
           <div className="hidden lg:flex items-center gap-4">
             {/* CTA: White pill button with arrow */}
-            <Link
+            <LinkButton
               href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center px-5 h-[50px] py-4 rounded-full transition-all bg-primary text-white shadow-sm hover:bg-primary-hover"
             >
               {dict.getStarted}
-            </Link>
+            </LinkButton>
             {/* Language Switcher Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-50 transition-colors text-text-heading font-semibold text-sm"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-50 transition-colors text-text-heading font-semibold text-sm"
               >
                 <Globe size={18} className="text-primary" />
                 <span className="uppercase">{currentLocale}</span>
@@ -166,7 +166,7 @@ export default function Navbar({ dict }: NavbarProps) {
                           className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${
                             currentLocale === lang.code
                               ? "text-primary font-bold bg-primary/5"
-                              : "text-text-heading"
+                              : "text-text-heading cursor-pointer"
                           }`}
                         >
                           <span>{lang.label}</span>

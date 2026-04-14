@@ -23,6 +23,7 @@
   --color-primary: #1f2a6b;
   --color-primary-hover: #19235a;
   --color-primary-active: #141c4a;
+  --color-primary-dark: #0f172a;
   --color-primary-light: #e8ebf8;
   /* Background */
   --color-bg: #fff;
@@ -78,19 +79,6 @@
   --color-error-700: #dc3546;
   --color-error-800: #cf2e3e;
   --color-error-900: #c02333;
-  /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  --spacing-3xl: 32px;
-  --spacing-4xl: 40px;
-  --spacing-5xl: 48px;
-  --spacing-6xl: 64px;
-  --spacing-7xl: 80px;
-  --spacing-8xl: 128px;
   /* Border Radius */
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -115,6 +103,7 @@
   --color-primary-hover: var(--color-primary-hover);
   --color-primary-active: var(--color-primary-active);
   --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
   --color-bg: var(--color-bg);
   --color-bg-card: var(--color-bg-card);
   --color-bg-subtle: var(--color-bg-subtle);
@@ -163,18 +152,6 @@
   --color-error-700: var(--color-error-700);
   --color-error-800: var(--color-error-800);
   --color-error-900: var(--color-error-900);
-  --spacing-xs: var(--spacing-xs);
-  --spacing-sm: var(--spacing-sm);
-  --spacing-md: var(--spacing-md);
-  --spacing-lg: var(--spacing-lg);
-  --spacing-xl: var(--spacing-xl);
-  --spacing-2xl: var(--spacing-2xl);
-  --spacing-3xl: var(--spacing-3xl);
-  --spacing-4xl: var(--spacing-4xl);
-  --spacing-5xl: var(--spacing-5xl);
-  --spacing-6xl: var(--spacing-6xl);
-  --spacing-7xl: var(--spacing-7xl);
-  --spacing-8xl: var(--spacing-8xl);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
@@ -208,35 +185,6 @@ body {
 }
 
 /* ===== TYPOGRAPHY ===== */
-h1 {
-  font-size: var(--h1-size);
-  font-weight: 800;
-}
-
-h2 {
-  font-size: var(--h2-size);
-  font-weight: 800;
-}
-
-h3 {
-  font-size: var(--h3-size);
-  font-weight: 800;
-}
-
-h4 {
-  font-size: var(--h4-size);
-  font-weight: 800;
-}
-
-h5 {
-  font-size: var(--h5-size);
-  font-weight: 800;
-}
-
-h6 {
-  font-size: var(--h6-size);
-  font-weight: 800;
-}
 
 p {
   color: var(--color-text-body);
@@ -322,7 +270,19 @@ p {
   }
 }
 
-
 .bg-gradient-primary {
-  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--gray-50, #fafafa) 0.65%,
+    #f5f5f5 42.51%,
+    #eef1ff 99.86%
+  );
 }

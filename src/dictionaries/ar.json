@@ -10,19 +10,14 @@
     "getStarted": "ابدأ تجربة مجانية"
   },
   "hero": {
-    "badge": "🚀 مستقبل تحليل البيانات لـ Oracle APEX",
-    "titleBeforeSpan": "حول Oracle APEX إلى",
-    "titleSpan": "مركز تحليلات مدعوم بالذكاء الاصطناعي",
-    "description": "ديمقراطية البيانات الحقيقية. بدون نقل للبيانات. انتقل من SQL اليدوي إلى اللغة الطبيعية في ثوانٍ.",
-    "getStarted": "ابدأ الآن",
-    "watchDemo": "شاهد العرض",
+    "badge": "تحليلات بالذكاء الاصطناعي لفرق العمل الحديثة",
+    "titleBeforeSpan": "حوّل بياناتك",
+    "titleSpan": "إلى قرارات ذكية",
+    "description": "تستخدم Asklyze الذكاء الاصطناعي لتحليل بياناتك، واكتشاف الأنماط الخفية، ومساعدتك على اتخاذ قرارات أذكى بشكل أسرع — بدون تعقيد.",
+    "getStarted": "ابدأ تجربة مجانية",
+    "watchDemo": "عرض توضيحي",
     "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_ar.mp4",
-    "statTables": "جداول",
-    "statCharts": "رسوم بيانية",
-    "statResponse": "استجابة",
-    "cardQuerySuccess": "نجاح الاستعلام",
-    "cardResponseTime": "وقت استجابة 1.2 ثانية",
-    "cardDataSovereignty": "سيادة البيانات"
+    "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان."
   },
   "workingProcess": {
     "title": "آلية العمل",
