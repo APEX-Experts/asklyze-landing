@@ -1,11 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  ChevronDown,
+  ChevronRight,
+  CreditCard,
+  FileText,
+  Globe,
+  Home,
+  Mail,
+  Menu,
+  Newspaper,
+  Users,
+  X,
+  Zap,
+} from "lucide-react";
 import Image from "next/image";
-import { Menu, X, Home, Zap, CreditCard, Newspaper, FileText, Mail, Users, ChevronRight, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Logo from "./Logo";
 
 interface NavbarProps {
   dict: {
@@ -20,21 +34,10 @@ interface NavbarProps {
 }
 
 export default function Navbar({ dict }: NavbarProps) {
-  const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const pathname = usePathname();
   const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
-  const isHome = pathname === "/" || pathname === "/en" || pathname === "/ar";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const isSolid = scrolled || !isHome;
 
   const getLocalizedHref = (href: string) => {
     if (href.startsWith("#")) return `/${currentLocale}${href}`;
@@ -43,10 +46,16 @@ export default function Navbar({ dict }: NavbarProps) {
   };
 
   const navItems = [
+    { key: "home", href: "/", icon: Home },
     { key: "features", href: "#features", icon: Zap },
     { key: "pricing", href: "#pricing", icon: CreditCard },
     { key: "blog", href: "/blog", icon: Newspaper },
-    { key: "docs", href: "https://docs.asklyze.ai/", icon: FileText, external: true },
+    {
+      key: "docs",
+      href: "https://docs.asklyze.ai/",
+      icon: FileText,
+      external: true,
+    },
     { key: "about", href: "/about", icon: Users },
     { key: "contact", href: "/contact", icon: Mail },
   ];
@@ -56,103 +65,130 @@ export default function Navbar({ dict }: NavbarProps) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`navbar ${isSolid ? "scrolled" : ""}`}
+      style={{ marginTop: "35px" }}
+      className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4"
     >
-      <div className="container navbar-container">
+      <div className="flex w-full max-w-[1240px] h-[64px] py-[14px] pr-[10px] pl-[30px] justify-between items-center shrink-0 rounded-[50px] bg-white backdrop-blur-[7.5px] mx-auto shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
         {/* Logo */}
         <Link
           href={`/${currentLocale}`}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 text-primary"
           style={{ textDecoration: "none" }}
         >
-          <Image
-            src="/logo-light.png"
-            alt="ASKLYZE"
-            width={120}
-            height={36}
-            className="h-9 w-auto object-contain transition-all duration-300"
-            priority
-            unoptimized={true}
-          />
+          <Logo width={120} height={36} />
         </Link>
 
         {/* DESKTOP: Center Nav Links */}
         <div className="hidden md:flex items-center gap-10">
-          {navItems.map((item) =>
-            item.external ? (
-              <a key={item.key} href={item.href} className="nav-link">
+          {navItems.map((item) => {
+            const isActive =
+              item.href === "/"
+                ? pathname === `/${currentLocale}` || pathname === "/"
+                : pathname.includes(item.href.replace("#", "")) &&
+                  item.href !== "/";
+            return item.external ? (
+              <a
+                key={item.key}
+                href={item.href}
+                className="text-text-heading hover:text-primary font-medium transition-colors"
+              >
                 {dict[item.key] || item.key}
               </a>
             ) : (
-              <Link key={item.key} href={getLocalizedHref(item.href)} className="nav-link">
+              <Link
+                key={item.key}
+                href={getLocalizedHref(item.href)}
+                className={`${isActive ? "text-primary " : "text-text-heading"} relative hover:text-primary font-medium transition-colors`}
+              >
                 <span>{dict[item.key]}</span>
+                <span
+                  className={`absolute w-[60%] h-[1.5px] bg-primary -bottom-[2.5px] left-1/2 -translate-x-1/2 ${isActive ? "block" : "hidden"}`}
+                ></span>
               </Link>
-            )
-          )}
+            );
+          })}
         </div>
 
         {/* DESKTOP: Right Side CTA + Lang */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Language Switcher */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => {
-                const newPath = pathname.replace(/^\/(en|ar)/, "/en");
-                window.location.href = newPath;
-              }}
-              className={`text-xs font-bold transition-colors ${pathname.startsWith("/en")
-                ? "text-white"
-                : "text-white/40 hover:text-white/70"
-                }`}
-            >
-              EN
-            </button>
-            <span className="text-white/20">|</span>
-            <button
-              onClick={() => {
-                const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
-                window.location.href = newPath;
-              }}
-              className={`text-xs font-bold transition-colors ${pathname.startsWith("/ar")
-                ? "text-white"
-                : "text-white/40 hover:text-white/70"
-                }`}
-            >
-              AR
-            </button>
-          </div>
-
           {/* CTA: White pill button with arrow */}
-          <motion.a
+          <Link
             href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all"
-            style={{
-              background: "#ffffff",
-              color: "#000000",
-            }}
+            className="flex items-center px-5 h-[50px] py-4 rounded-full transition-all bg-primary text-white shadow-sm hover:bg-primary-hover"
           >
             {dict.getStarted}
-            <span
-              className="flex items-center justify-center w-6 h-6 rounded-full"
-              style={{ background: "rgba(0,0,0,0.1)" }}
+          </Link>
+          {/* Language Switcher Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded-full hover:bg-gray-50 transition-colors text-text-heading font-semibold text-sm"
             >
-              <ArrowUpRight size={14} />
-            </span>
-          </motion.a>
+              <Globe size={18} className="text-primary" />
+              <span className="uppercase">{currentLocale}</span>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${isLangOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {isLangOpen && (
+                <>
+                  {/* Backdrop for clicking away */}
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLangOpen(false)}
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute top-full right-0 mt-2 w-40 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                  >
+                    {[
+                      { code: "en", label: "English" },
+                      { code: "ar", label: "العربية" },
+                    ].map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          const newPath = pathname.replace(
+                            /^\/(en|ar)/,
+                            `/${lang.code}`
+                          );
+                          window.location.href = newPath;
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${
+                          currentLocale === lang.code
+                            ? "text-primary font-bold bg-primary/5"
+                            : "text-text-heading"
+                        }`}
+                      >
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 -mr-2 flex items-center justify-center transition-colors focus:outline-none"
-          style={{ color: "white", zIndex: 1001 }}
+          className="md:hidden p-2 -mr-2 flex items-center justify-center transition-colors focus:outline-none text-text-heading hover:text-primary"
+          style={{ zIndex: 1001 }}
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={30} strokeWidth={2.5} /> : <Menu size={30} strokeWidth={2.5} />}
+          {isOpen ? (
+            <X size={30} strokeWidth={2.5} color="currentColor" />
+          ) : (
+            <Menu size={30} strokeWidth={2.5} color="currentColor" />
+          )}
         </button>
 
         {/* Mobile Menu */}
@@ -164,19 +200,22 @@ export default function Navbar({ dict }: NavbarProps) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setIsOpen(false)}
-                className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm md:hidden"
+                className="fixed inset-0 z-60 bg-black/60 backdrop-blur-sm md:hidden"
               />
               <motion.div
                 initial={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className={`fixed top-0 bottom-0 z-[70] w-4/5 max-w-sm shadow-2xl md:hidden ${currentLocale === "ar" ? "left-0" : "right-0"}`}
+                className={`fixed top-0 bottom-0 z-70 w-4/5 max-w-sm shadow-2xl md:hidden ${currentLocale === "ar" ? "left-0" : "right-0"}`}
                 style={{ background: "#0a0a0f" }}
               >
                 <div className="flex flex-col h-full">
                   <div className="flex justify-between items-center p-6 border-b border-white/8">
-                    <Link href={`/${currentLocale}`} onClick={() => setIsOpen(false)}>
+                    <Link
+                      href={`/${currentLocale}`}
+                      onClick={() => setIsOpen(false)}
+                    >
                       <Image
                         src="/logo-light.png"
                         alt="ASKLYZE"
@@ -212,16 +251,27 @@ export default function Navbar({ dict }: NavbarProps) {
                                 {dict[item.key]}
                               </span>
                             </div>
-                            <ChevronRight size={18} className="text-gray-600 group-hover:text-white transition-all transform group-hover:translate-x-1" />
+                            <ChevronRight
+                              size={18}
+                              className="text-gray-600 group-hover:text-white transition-all transform group-hover:translate-x-1"
+                            />
                           </motion.div>
                         );
 
                         return isExternal ? (
-                          <a key={item.key} href={item.href} onClick={() => setIsOpen(false)}>
+                          <a
+                            key={item.key}
+                            href={item.href}
+                            onClick={() => setIsOpen(false)}
+                          >
                             {content}
                           </a>
                         ) : (
-                          <Link key={item.key} href={getLocalizedHref(item.href)} onClick={() => setIsOpen(false)}>
+                          <Link
+                            key={item.key}
+                            href={getLocalizedHref(item.href)}
+                            onClick={() => setIsOpen(false)}
+                          >
                             {content}
                           </Link>
                         );
@@ -247,25 +297,33 @@ export default function Navbar({ dict }: NavbarProps) {
                         <div className="grid grid-cols-2 gap-3">
                           <button
                             onClick={() => {
-                              const newPath = pathname.replace(/^\/(en|ar)/, "/en");
+                              const newPath = pathname.replace(
+                                /^\/(en|ar)/,
+                                "/en"
+                              );
                               window.location.href = newPath;
                             }}
-                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/en")
-                              ? "bg-white border-white text-black"
-                              : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
-                              }`}
+                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
+                              pathname.startsWith("/en")
+                                ? "bg-white border-white text-black"
+                                : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
+                            }`}
                           >
                             EN
                           </button>
                           <button
                             onClick={() => {
-                              const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
+                              const newPath = pathname.replace(
+                                /^\/(en|ar)/,
+                                "/ar"
+                              );
                               window.location.href = newPath;
                             }}
-                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/ar")
-                              ? "bg-white border-white text-black"
-                              : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
-                              }`}
+                            className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
+                              pathname.startsWith("/ar")
+                                ? "bg-white border-white text-black"
+                                : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
+                            }`}
                           >
                             AR
                           </button>
