@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Vazirmatn } from "next/font/google";
+import { Playfair_Display, Inter, Almarai } from "next/font/google";
 import "../globals.css";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import Preloader from "@/components/Preloader";
-import CustomCursor from "@/components/ClientCustomCursor";
 import GoogleTag from "@/components/GoogleTag";
 
 const playfair = Playfair_Display({
@@ -18,9 +17,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const vazirmatn = Vazirmatn({
+const almarai = Almarai({
   subsets: ["arabic"],
-  variable: "--font-vazirmatn",
+  weight: ["300", "400", "700", "800"],
+  variable: "--font-almarai",
   display: "swap",
 });
 
@@ -132,7 +132,7 @@ export default async function RootLayout({
     <html
       lang={lang}
       dir={isArabic ? "rtl" : "ltr"}
-      className={`${playfair.variable} ${inter.variable} ${vazirmatn.variable}`}
+      className={`${playfair.variable} ${inter.variable} ${almarai.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -141,22 +141,18 @@ export default async function RootLayout({
       <body
         style={{
           fontFamily: isArabic
-            ? "var(--font-vazirmatn), system-ui, sans-serif"
+            ? "var(--font-almarai), system-ui, sans-serif"
             : "var(--font-inter), system-ui, sans-serif",
           // @ts-expect-error - CSS variables in style attribute
           "--font-heading": isArabic
-            ? "var(--font-vazirmatn)"
+            ? "var(--font-almarai)"
             : "var(--font-inter)",
-          "--font-body": isArabic
-            ? "var(--font-vazirmatn)"
-            : "var(--font-inter)",
-          background: "#000000",
+          "--font-body": isArabic ? "var(--font-almarai)" : "var(--font-inter)",
         }}
         suppressHydrationWarning
       >
         <GoogleTag gaId={gaId} adsId={adsId} />
         <Preloader />
-        <CustomCursor />
         {children}
       </body>
     </html>
