@@ -9,6 +9,7 @@ type Props = {
   variant?: "primary" | "secondary" | "outline";
   target?: string;
   rel?: string;
+  type?: "button" | "submit" | "reset";
 };
 
 const LinkButton = ({
@@ -19,6 +20,7 @@ const LinkButton = ({
   variant,
   target,
   rel,
+  type,
 }: Props) => {
   switch (variant) {
     case "secondary": {
@@ -28,6 +30,7 @@ const LinkButton = ({
           onClick={onClick}
           target={target}
           rel={rel}
+          type={type}
           className={`cursor-pointer flex items-center gap-2.5 px-5 h-[50px] py-4 rounded-full transition-all bg-secondary text-white shadow-sm hover:bg-secondary-hover ${className}`}
         >
           {children}
@@ -41,6 +44,7 @@ const LinkButton = ({
           onClick={onClick}
           target={target}
           rel={rel}
+          type={type}
           className={`cursor-pointer flex items-center gap-2.5 px-5 h-[50px] py-4 rounded-full transition-all bg-transparent border border-primary text-primary shadow-sm hover:bg-primary hover:text-white ${className}`}
         >
           {children}
@@ -54,6 +58,7 @@ const LinkButton = ({
           onClick={onClick}
           target={target}
           rel={rel}
+          type={type}
           className={`cursor-pointer flex items-center gap-2.5 px-5 h-[50px] py-4 rounded-full transition-all bg-primary text-white shadow-sm hover:bg-primary-hover ${className}`}
         >
           {children}
@@ -63,9 +68,9 @@ const LinkButton = ({
   }
 };
 
-const LinkOrButton = ({ href = "#", onClick, ...props }: Props) => {
-  if (onClick) {
-    return <button onClick={onClick} {...props} />;
+const LinkOrButton = ({ href = "#", onClick, type, ...props }: Props) => {
+  if (onClick || type) {
+    return <button onClick={onClick} type={type ?? "button"} {...props} />;
   }
   return <Link href={href} {...props} />;
 };

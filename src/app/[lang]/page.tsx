@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import TrustedSection from "@/components/TrustedSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import ContactUs from "@/components/ContactUs";
 
 export async function generateMetadata({
   params,
@@ -57,7 +58,7 @@ export default async function Home({
         <WhyChooseUs dict={dict.whyChoose} commonCTA_Dict={dict.commonCTA} />
         <Pricing dict={dict.pricing} lang={lang} />
         <FAQ dict={dict.faq} />
-        <GradientCTA dict={dict.gradientCTA} lang={lang} />
+        <ContactUs dict={dict.contactUs} />
       </main>
       <Footer dict={dict.footer} />
     </>

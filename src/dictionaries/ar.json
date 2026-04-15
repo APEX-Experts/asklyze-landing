@@ -225,6 +225,72 @@
       }
     ]
   },
+  "contactUs": {
+    "title": "تواصل معنا",
+    "subtitle": "هل لديك أسئلة حول ASKLYZE؟ فريقنا من خبراء Oracle APEX والذكاء الاصطناعي جاهز لمساعدتك على تطوير استراتيجيتك للبيانات وتحقيق أقصى استفادة منها.",
+    "locationLabel": "موقعنا",
+    "location1": "مكتب رقم 43-44 - الفهيدي، دبي، بر دبي، الإمارات",
+    "location2": " 75 شارع الأمان، الورديان، الإسكندرية، مصر",
+    "emailLabel": "راسلنا عبر البريد الإلكتروني",
+    "email1": "admin@apexexperts.net",
+    "email2": "support@asklyze.ai",
+    "callLabel": "اتصل بنا",
+    "phone1": "+971585803977",
+    "phone2": "+201022034499",
+    "callTimes": "من الإثنين إلى الجمعة: 9 صباحًا – 6 مساءً (بتوقيت EST)",
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "اسمك",
+        "required": "الاسم مطلوب"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "بريدك الإلكتروني",
+        "required": "البريد الإلكتروني مطلوب",
+        "invalid": "بريد إلكتروني غير صالح"
+      },
+      "country": {
+        "label": "البلد",
+        "placeholder": "اختر البلد",
+        "required": "البلد مطلوب",
+        "countrySelect": true
+      },
+      "phone": {
+        "label": "الهاتف",
+        "placeholder": "رقم الهاتف",
+        "invalid": "رقم هاتف غير صالح"
+      },
+      "companyName": {
+        "label": "اسم الشركة",
+        "placeholder": "اسم شركتك",
+        "required": "اسم الشركة مطلوب"
+      },
+      "companySize": {
+        "label": "حجم الشركة",
+        "placeholder": "اختر حجم الشركة",
+        "required": "حجم الشركة مطلوب",
+        "options": ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001+"]
+      },
+      "role": {
+        "label": "منصبك",
+        "placeholder": "منصبك",
+        "required": "منصبك مطلوب"
+      },
+      "subject": {
+        "label": "الموضوع",
+        "placeholder": "اكتب الموضوع الذي تود ارسال رسالة عنه",
+        "required": "الموضوع مطلوب"
+      },
+      "message": {
+        "label": "الرسالة",
+        "placeholder": "اكتب إلينا",
+        "required": "الرسالة مطلوبة",
+        "textarea": true
+      },
+      "submit": "ارسال رسالة"
+    }
+  },
   "pricing": {
     "tag": "خطط الأسعار",
     "title": "اختر الخطة المناسبة لك",

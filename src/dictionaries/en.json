@@ -327,6 +327,72 @@
     "desc": "Join hundreds of forward-thinking companies that are democratizing data access with ASKLYZE.",
     "cta": "Contact Us"
   },
+  "contactUs": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions about integration or use cases? Our team of APEX & AI Experts are here to help.",
+    "locationLabel": "Our Location",
+    "location1": "Office No. 43-44 - Al Fahidi Dubai Bur Dubai, UAE",
+    "location2": "75 Al aman st, Al wardian, Alexandria, Egypt",
+    "emailLabel": "Email Us",
+    "email1": "admin@apexexperts.net",
+    "email2": "support@asklyze.ai",
+    "callLabel": "Call Us",
+    "phone1": "+971585803977",
+    "phone2": "+201022034499",
+    "callTimes": "Mon - Fri: 9AM - 6PM EST",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your Name",
+        "required": "Name is required"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Your email",
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Select Country",
+        "required": "Country is required",
+        "countrySelect": true
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Phone Number",
+        "invalid": "Invalid phone"
+      },
+      "companyName": {
+        "label": "Company Name",
+        "placeholder": "Your company",
+        "required": "Company Name is required"
+      },
+      "companySize": {
+        "label": "Company Size",
+        "placeholder": "Select Company Size",
+        "required": "Company Size is required",
+        "options": ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001+"]
+      },
+      "role": {
+        "label": "Your Role",
+        "placeholder": "Your role",
+        "required": "Role is required"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "What is this about?",
+        "required": "Subject is required"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us more about your inquiry...",
+        "required": "Message is required",
+        "textarea": true
+      },
+      "submit": "Send Message"
+    }
+  },
   "footer": {
     "company": "Company",
     "services": "Services",

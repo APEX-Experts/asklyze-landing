@@ -14,7 +14,7 @@ const TrustedSection = (props: Props) => {
   const { dict, lang } = props;
 
   return (
-    <section className="py-12 md:py-16 lg:py-20">
+    <section className=" lg:py-20">
       <div className="flex flex-col items-center mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-[40px] font-bold mb-4 text-primary-dark">

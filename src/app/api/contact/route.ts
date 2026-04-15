@@ -7,14 +7,13 @@ interface ContactFormData {
   name: string;
   email: string;
   country: string;
-  countryName: string;
-  countryDialCode: string;
-  mobile?: string;
+  phone?: string;
+  phoneCode?: string;
   companyName: string;
   companySize: string;
-  title: string;
+  role?: string;
   subject: string;
-  comment: string;
+  message: string;
 }
 
 class ContactFormError extends Error {
@@ -60,17 +59,17 @@ export async function POST(request: Request) {
     const emailConfig = getEmailConfig();
 
     // Validate required fields
-    const requiredFields = [
+    const requiredFields: (keyof ContactFormData)[] = [
       "name",
       "email",
       "country",
       "companyName",
       "companySize",
       "subject",
-      "comment",
+      "message",
     ];
     for (const field of requiredFields) {
-      const value = data[field as keyof ContactFormData];
+      const value = data[field];
       if (typeof value !== "string" || !value.trim()) {
         return NextResponse.json(
           { error: `${field} is required` },
@@ -88,102 +87,56 @@ export async function POST(request: Request) {
       );
     }
 
-    const mobileDisplay = data.mobile?.trim()
-      ? `${data.countryDialCode ? `${data.countryDialCode} ` : ""}${data.mobile.trim()}`
-      : "";
+    // Build email HTML
+    const rows = [
+      ["Name", data.name],
+      ["Email", `<a href="mailto:${data.email}" style="color:#1f2a6b;text-decoration:none;font-weight:600">${data.email}</a>`],
+      ["Country", data.country],
+      ...(data.phone?.trim() 
+        ? [["Phone", `${data.phoneCode || ""} ${data.phone.trim()}`.trim()]] 
+        : []),
+      ["Company Name", data.companyName],
+      ["Company Size", `${data.companySize} employees`],
+      ...(data.role?.trim() ? [["Role", data.role.trim()]] : []),
+    ];
 
-    // Create email content
+    const tableRows = rows
+      .map(
+        ([label, value]) => `
+        <tr>
+          <td style="padding:12px 0;border-bottom:1px solid #e8ebf8;color:#5b647e;width:140px;font-size:14px">
+            <strong>${label}:</strong>
+          </td>
+          <td style="padding:12px 0;border-bottom:1px solid #e8ebf8;color:#1a1a1a;font-size:14px">
+            ${value}
+          </td>
+        </tr>`
+      )
+      .join("");
+
     const emailHtml = `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <div style="background: linear-gradient(90deg, #ff705a 0%, #ff9472 100%); padding: 30px; text-align: center;">
-                    <h1 style="color: white; margin: 0;">New Contact Form Submission</h1>
-                </div>
-                
-                <div style="padding: 30px; background: #f9fbfd;">
-                    <h2 style="color: #2c234d; border-bottom: 2px solid #ff705a; padding-bottom: 10px;">
-                        ${data.subject}
-                    </h2>
-                    
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695; width: 140px;">
-                                <strong>Name:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${data.name}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Email:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                <a href="mailto:${data.email}" style="color: #ff705a;">${data.email}</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Country:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${data.countryName} (${data.countryDialCode})
-                            </td>
-                        </tr>
-                        ${mobileDisplay
-        ? `
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Mobile:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${mobileDisplay}
-                            </td>
-                        </tr>
-                        `
-        : ""
-      }
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Company:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${data.companyName}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Company Size:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${data.companySize} employees
-                            </td>
-                        </tr>
-                        ${data.title
-        ? `
-                        <tr>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #6a7695;">
-                                <strong>Title:</strong>
-                            </td>
-                            <td style="padding: 12px 0; border-bottom: 1px solid #e8ecf4; color: #2c234d;">
-                                ${data.title}
-                            </td>
-                        </tr>
-                        `
-        : ""
-      }
-                    </table>
-                    
-                    <div style="margin-top: 25px; padding: 20px; background: white; border-radius: 10px; border-left: 4px solid #ff705a;">
-                        <h3 style="color: #2c234d; margin-top: 0;">Message:</h3>
-                        <p style="color: #6a7695; line-height: 1.6; white-space: pre-wrap;">${data.comment}</p>
-                    </div>
-                </div>
-                
-                <div style="padding: 20px; text-align: center; background: #2c234d; color: rgba(255,255,255,0.7); font-size: 12px;">
-                    This email was sent from the ASKLYZE Contact Form
-                </div>
-            </div>
-        `;
+      <div style="font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;background-color:#ffffff;border:1px solid #e8ebf8;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.05)">
+        <div style="background-color:#1f2a6b;padding:40px 30px;text-align:center">
+          <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em">New Contact Request</h1>
+          <p style="color:rgba(255,255,255,0.8);margin:10px 0 0 0;font-size:14px">Asklyze Landing Page Submission</p>
+        </div>
+        <div style="padding:40px 30px;background-color:#ffffff">
+          <h2 style="color:#1a1a1a;font-size:20px;margin:0 0 24px 0;padding-bottom:12px;border-bottom:2px solid #e8ebf8">
+            ${data.subject}
+          </h2>
+          <table style="width:100%;border-collapse:collapse">
+            ${tableRows}
+          </table>
+          <div style="margin-top:32px;padding:24px;background-color:#f7f8fc;border-radius:12px;border-left:4px solid #1f2a6b">
+            <h3 style="color:#1a1a1a;margin:0 0 12px 0;font-size:16px">Message Content:</h3>
+            <p style="color:#5b647e;line-height:1.6;margin:0;white-space:pre-wrap;font-size:15px">${data.message}</p>
+          </div>
+        </div>
+        <div style="padding:24px;text-align:center;background-color:#f7f8fc;color:#94a3b8;font-size:12px;border-top:1px solid #e8ecf4">
+          <p style="margin:0">This is an automated notification from your Asklyze website.</p>
+          <p style="margin:4px 0 0 0">&copy; ${new Date().getFullYear()} Asklyze. All rights reserved.</p>
+        </div>
+      </div>`;
 
     // Send email via SendGrid API
     const sendGridUrl = "https://api.sendgrid.com/v3/mail/send";
@@ -192,9 +145,7 @@ export async function POST(request: Request) {
       personalizations: [
         {
           to: [
-            { email: "admin@apexexperts.net" },
-            { email: "ahmed-alsaied@msn.com" },
-            { email: "support@asklyze.ai" },
+            { email: "amr.mohamed@apexexperts.net" }
           ],
         },
       ],
