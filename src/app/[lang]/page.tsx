@@ -12,6 +12,7 @@ import GradientCTA from "@/components/GradientCTA";
 import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
+import TrustedSection from "@/components/TrustedSection";
 
 export async function generateMetadata({
   params,
@@ -51,6 +52,7 @@ export default async function Home({
           dict={dict.workingProcess}
           commonCTA_Dict={dict.commonCTA}
         />
+        <TrustedSection dict={dict.trustedBy} lang={lang} />
         <ContentSplit dict={dict.contentSplit} />
         <TabbedShowcase dict={dict.tabbedShowcase} />
         <TrustBar />

@@ -68,9 +68,9 @@ export default function Navbar({ dict }: NavbarProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         style={{ marginTop: "35px" }}
-        className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4"
+        className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 "
       >
-        <div className="flex w-full max-w-[1240px] h-[64px] py-[14px] pr-[10px] pl-[30px] justify-between items-center shrink-0 rounded-[50px] bg-white backdrop-blur-[7.5px] mx-auto shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+        <div className="border border-primary-light flex w-full max-w-[1240px] h-[64px] py-[14px] pr-[10px] pl-[30px] justify-between items-center shrink-0 rounded-[50px] bg-white backdrop-blur-[7.5px] mx-auto shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
           {/* Logo */}
           <Link
             href={`/${currentLocale}`}

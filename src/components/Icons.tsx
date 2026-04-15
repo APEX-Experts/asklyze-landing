@@ -1,4 +1,10 @@
 import React from "react";
+import TrustedBy0 from "@/../public/icons/trusted-by0.svg";
+import TrustedBy1 from "@/../public/icons/trusted-by1.svg";
+import TrustedBy2 from "@/../public/icons/trusted-by2.svg";
+import TrustedBy3 from "@/../public/icons/trusted-by3.svg";
+import TrustedBy4 from "@/../public/icons/trusted-by4.svg";
+import TrustedBy5 from "@/../public/icons/trusted-by5.svg";
 
 export const SparksIcon = ({
   width = 18,
@@ -151,5 +157,34 @@ export const FeatureIcon = ({
           </defs>
         </svg>
       );
+  }
+};
+
+export const TrustedByIcon = ({
+  index,
+  width = 120,
+  height = 30,
+  className = "",
+}: {
+  index: number;
+  width?: number;
+  height?: number;
+  className?: string;
+}) => {
+  switch (index) {
+    case 0:
+      return <TrustedBy0 className={className} />;
+    case 1:
+      return <TrustedBy1 className={className} />;
+    case 2:
+      return <TrustedBy2 className={className} />;
+    case 3:
+      return <TrustedBy3 className={className} />;
+    case 4:
+      return <TrustedBy4 className={className} />;
+    case 5:
+      return <TrustedBy5 className={className} />;
+    default:
+      return <TrustedBy0 className={className} />;
   }
 };

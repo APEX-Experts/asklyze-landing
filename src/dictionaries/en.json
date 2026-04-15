@@ -28,6 +28,10 @@
     "step3Title": "Get Insights",
     "step3Desc": "Simply ask questions in plain English and receive instant, actionable answers, charts, and reports to drive decisions."
   },
+  "trustedBy": {
+    "title": "Trusted by Data-Driven Teams",
+    "subtitle": "Join companies using Asklyze to make smarter, faster decisions."
+  },
   "contact": {
     "locationTitle": "Our Location",
     "locationLines": [
