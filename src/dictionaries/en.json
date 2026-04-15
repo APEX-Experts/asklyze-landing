@@ -231,14 +231,32 @@
     "title": "Choose Your Deployment",
     "desc": "Flexible options for every enterprise. Cloud for convenience, On-Premise for complete control.",
     "cta": "Get Started",
-    "recommended": "RECOMMENDED",
-    "trustNote": "All plans include Oracle Partnership support • Cloud editions hosted on Oracle Cloud (OCI)",
+    "href": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "recommended": "MOST POPULAR",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
     "plans": [
       {
         "name": "Standard",
         "price": "$499",
-        "period": "/ Month",
-        "desc": "(or $4,990 / Year)",
+        "period": "monthly",
+        "periodLabel": "/ Month",
+        "features": [
+          "1 Database Instance",
+          "1 Schema",
+          "150 Available Table",
+          "Unlimited AI Report Generation",
+          "Unlimited AI Dashboard Generation",
+          "Unlimited APP_USER access",
+          "Hosted on Oracle Cloud (OCI)",
+          "Shared Infrastructure"
+        ]
+      },
+      {
+        "name": "Standard",
+        "price": "$4,990",
+        "period": "yearly",
+        "periodLabel": "/ Year",
         "features": [
           "1 Database Instance",
           "1 Schema",
@@ -253,8 +271,26 @@
       {
         "name": "Professional",
         "price": "$999",
-        "period": "/ Month",
-        "desc": "(or $9,990 / Year)",
+        "period": "monthly",
+        "periodLabel": "/ Month",
+        "isRecommended": true,
+        "features": [
+          "1 Database Instance",
+          "2 Schema",
+          "150 Available Table/each schema",
+          "Unlimited AI Report Generation",
+          "Unlimited AI Dashboard Generation",
+          "Unlimited APP_USER access",
+          "Hosted on Oracle Cloud (OCI)",
+          "Shared Infrastructure"
+        ]
+      },
+      {
+        "name": "Professional",
+        "price": "$9,990",
+        "period": "yearly",
+        "periodLabel": "/ Year",
+        "isRecommended": true,
         "features": [
           "1 Database Instance",
           "2 Schema",
@@ -270,8 +306,7 @@
         "name": "ENTERPRISE",
         "price": "Contact Us",
         "period": "",
-        "desc": "Custom Pricing",
-        "cta": "Contact Us",
+        "periodLabel": "",
         "href": "/contact",
         "features": [
           "Unlimited Database Instances",

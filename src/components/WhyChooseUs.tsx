@@ -22,7 +22,7 @@ const WhyChooseUs = (props: Props) => {
   const { dict, commonCTA_Dict } = props;
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-24">
-      <div className="max-w-full flex flex-col items-center mx-auto bg-primary-light rounded-5xl gap-8 justify-center py-12 md:py-16 lg:py-25 px-4 md:px-8 lg:px-12">
+      <div className="max-w-full flex flex-col items-center mx-auto bg-bg-card rounded-5xl gap-8 justify-center py-12 md:py-16 lg:py-25 px-4 md:px-8 lg:px-12">
         <div className="text-center">
           <h2 className="text-3xl lg:text-[40px] font-bold mb-4 text-primary-dark">
             {dict.title}
