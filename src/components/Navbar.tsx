@@ -87,7 +87,7 @@ export default function Navbar({ dict }: NavbarProps) {
                 item.href === "/"
                   ? pathname === `/${currentLocale}` || pathname === "/"
                   : pathname.includes(item.href.replace("#", "")) &&
-                    item.href !== "/";
+                  item.href !== "/";
               return item.external ? (
                 <a
                   key={item.key}
@@ -163,11 +163,10 @@ export default function Navbar({ dict }: NavbarProps) {
                             );
                             window.location.href = newPath;
                           }}
-                          className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${
-                            currentLocale === lang.code
+                          className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${currentLocale === lang.code
                               ? "text-primary font-bold bg-primary/5"
                               : "text-text-heading cursor-pointer"
-                          }`}
+                            }`}
                         >
                           <span>{lang.label}</span>
                         </button>
@@ -212,9 +211,8 @@ export default function Navbar({ dict }: NavbarProps) {
             animate={{ x: 0 }}
             exit={{ x: currentLocale === "ar" ? "-100%" : "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className={`lg:hidden fixed top-0 bottom-0 z-70 max-w-[85%] shadow-2xl bg-white flex flex-col ${
-              currentLocale === "ar" ? "left-0" : "right-0"
-            }`}
+            className={`lg:hidden fixed top-0 bottom-0 z-70 max-w-[85%] shadow-2xl bg-white flex flex-col ${currentLocale === "ar" ? "left-0" : "right-0"
+              }`}
           >
             <div className="flex justify-between items-center p-6 border-b border-gray-100">
               <Link href={`/${currentLocale}`} onClick={() => setIsOpen(false)}>
@@ -294,11 +292,10 @@ export default function Navbar({ dict }: NavbarProps) {
                         const newPath = pathname.replace(/^\/(en|ar)/, "/en");
                         window.location.href = newPath;
                       }}
-                      className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
-                        pathname.startsWith("/en")
+                      className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/en")
                           ? "bg-primary border-primary text-white"
                           : "bg-white border-gray-200 text-text-body hover:border-primary/50"
-                      }`}
+                        }`}
                     >
                       EN
                     </button>
@@ -307,11 +304,10 @@ export default function Navbar({ dict }: NavbarProps) {
                         const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
                         window.location.href = newPath;
                       }}
-                      className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
-                        pathname.startsWith("/ar")
+                      className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/ar")
                           ? "bg-primary border-primary text-white"
                           : "bg-white border-gray-200 text-text-body hover:border-primary/50"
-                      }`}
+                        }`}
                     >
                       AR
                     </button>

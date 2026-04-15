@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 
 const formatPoint = (point: string) => point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
-interface PrivacyPolicyContentProps {
+interface TermsAndConditionsContentProps {
     lang: "en" | "ar";
     isArabic: boolean;
     content: any;
 }
 
-export default function PrivacyPolicyContent({ lang, isArabic, content }: PrivacyPolicyContentProps) {
+export default function TermsAndConditionsContent({ lang, isArabic, content }: TermsAndConditionsContentProps) {
     const [activeSection, setActiveSection] = useState(0);
     const allSections = [...(content.sections || []), ...(content.additionalSections || [])];
 
