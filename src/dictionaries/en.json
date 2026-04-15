@@ -171,7 +171,6 @@
   "faq": {
     "tag": "FAQ",
     "title": "Frequently Asked Questions",
-    "cta": "View Documentation",
     "categories": ["All", "General", "Technical", "Security"],
     "list": [
       {

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import LinkButton from "./LinkButton";
 import { cn } from "@/lib/utils";
+import TabSelector from "./TabSelector";
 
 interface PricingProps {
   dict: {
@@ -53,42 +54,17 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
         </div>
 
         {/* Period Selector Tabs */}
-        <div className="flex items-center justify-center mt-4">
-          <div className="relative flex rounded-full p-[5px] w-fit pricing-tabs">
-            <motion.div
-              layoutId="billingTab"
-              className=" bg-white rounded-full pricing-tabs"
-              initial={false}
-              animate={{
-                left: billingPeriod === "monthly" ? "6px" : "calc(50% + 1px)",
-                right: billingPeriod === "monthly" ? "calc(50% + 1px)" : "6px",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
-            <button
-              onClick={() => setBillingPeriod("monthly")}
-              className={`relative z-10 px-8 py-2.5 text-sm font-bold rounded-xl transition-colors duration-300 min-w-[120px] ${
-                billingPeriod === "monthly"
-                  ? "bg-primary text-white"
-                  : "text-primary-dark"
-              }`}
-            >
-              {dict.monthly}
-            </button>
-            <button
-              onClick={() => setBillingPeriod("yearly")}
-              className={`relative z-10 px-6 py-[13] text-sm font-bold rounded-xl transition-colors duration-300 min-w-[120px] ${
-                billingPeriod === "yearly"
-                  ? "bg-primary text-white"
-                  : "text-primary-dark"
-              }`}
-            >
-              {dict.yearly}
-            </button>
-          </div>
-        </div>
+        <TabSelector
+          tabs={[dict.monthly, dict.yearly]}
+          activeTab={billingPeriod === "monthly" ? dict.monthly : dict.yearly}
+          onChange={(tab) =>
+            setBillingPeriod(tab === dict.monthly ? "monthly" : "yearly")
+          }
+          layoutId="pricingPeriod"
+          className="mt-4"
+        />
 
-        <div className="flex flex-row -space-x-8 w-full mt-4">
+        <div className="flex flex-row max-lg:flex-wrap max-lg:gap-8 -space-x-8 w-full mt-4">
           {filteredPlans.map((plan, index) => (
             <motion.div
               key={`${plan.name}-${index}`}
@@ -126,7 +102,7 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
                 }`}
               >
                 <div className="flex items-center flex-col gap-4">
-                  <h3 className="text-2xl lg:text-[40px] font-bold text-text-heading">
+                  <h3 className="max-lg:mt-16 text-[40px] font-bold text-text-heading">
                     {plan.name}
                   </h3>
                   <div className="">

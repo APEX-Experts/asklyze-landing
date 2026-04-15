@@ -74,7 +74,7 @@ export default function FeatureGrid({
                     src={features[activeFeature].image}
                     alt={features[activeFeature].title}
                     fill
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </motion.div>
               </AnimatePresence>

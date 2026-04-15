@@ -191,12 +191,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ===== TYPOGRAPHY ===== */
-
-p {
-  color: var(--color-text-body);
-}
-
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   from {
