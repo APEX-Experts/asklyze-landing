@@ -46,7 +46,7 @@ export default async function Home({
       <Navbar dict={dict.navbar} />
       <main className="mt-4">
         <Hero dict={dict.hero} />
-        <FeatureGrid dict={dict.featureGrid} />
+        <FeatureGrid dict={dict.featureGrid} commonCTA_Dict={dict.commonCTA} />
         <WorkingProcess dict={dict.workingProcess} />
         <ContentSplit dict={dict.contentSplit} />
         <TabbedShowcase dict={dict.tabbedShowcase} />

@@ -25,6 +25,10 @@
   --color-primary-active: #141c4a;
   --color-primary-dark: #0f172a;
   --color-primary-light: #e8ebf8;
+  --color-primary-border: #4f46e5;
+  --color-primary-bg-light: #eef2ff;
+  --color-primary-border-light: #e6e9f5;
+  --color-primary-variant: #8a96c2;
   /* Background */
   --color-bg: #fff;
   --color-bg-card: #e8ebfa;
@@ -104,6 +108,9 @@
   --color-primary-active: var(--color-primary-active);
   --color-primary-light: var(--color-primary-light);
   --color-primary-dark: var(--color-primary-dark);
+  --color-primary-border: var(--color-primary-border);
+  --color-primary-bg-light: var(--color-primary-bg-light);
+  --color-primary-variant: var(--color-primary-variant);
   --color-bg: var(--color-bg);
   --color-bg-card: var(--color-bg-card);
   --color-bg-subtle: var(--color-bg-subtle);
@@ -285,4 +292,18 @@ p {
     #f5f5f5 42.51%,
     #eef1ff 99.86%
   );
+}
+
+.image-container {
+  border: 0 solid var(--Linear-1, #8a96c2);
+
+  background:
+    url("/screenshot1.jpg") lightgray -0.753px 0px / 100.136% 136.216% no-repeat,
+    #000;
+
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+}
+
+.feature-gradient {
+  background: linear-gradient(0deg, #fff 0%, #fff 100%), #c2c2c2;
 }

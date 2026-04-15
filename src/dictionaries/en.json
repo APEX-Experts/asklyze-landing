@@ -49,34 +49,42 @@
   },
   "featureGrid": {
     "tag": "Our Features",
-    "title": "Why Choose ASKLYZE",
-    "desc": "Transform Oracle APEX into an AI-powered analytics center with our simple 3-step setup process and enterprise-grade features.",
+    "title": "Powerful Features to Turn Data Into Decisions",
+    "desc": "Powerful AI-driven features designed to help you understand your data, uncover insights, and take action faster.",
     "features": [
       {
-        "title": "Natural Language to SQL",
-        "desc": "Bridge the technical gap. Move from manual SQL coding to natural language questions for instant insights."
+        "title": "AI-Powered Insights",
+        "desc": "Instantly analyze your data and uncover hidden patterns, trends, and opportunities using advanced AI.",
+        "image": "/screenshot1.jpg"
       },
       {
-        "title": "Zero Data Movement",
-        "desc": "Logic executes locally via our native Plugin. Your sensitive data never leaves your Oracle environment."
+        "title": "Smart Data Queries",
+        "desc": "Instantly analyze your data and uncover hidden patterns, trends, and opportunities using advanced AI.",
+        "image": "/screenshot1.jpg"
       },
       {
-        "title": "Enterprise Security",
-        "desc": "Integrated with Oracle VPD and Row-Level Security. Compliance is built-in, not an afterthought."
+        "title": "Interactive Dashboards",
+        "desc": "Instantly analyze your data and uncover hidden patterns, trends, and opportunities using advanced AI.",
+        "image": "/screenshot1.jpg"
       },
       {
-        "title": "Flexible Deployment",
-        "desc": "Choose On-Premise for sovereignty or SaaS via ORDS for scalability. Supports Oracle 19c & 23ai."
+        "title": "Automated Reports",
+        "desc": "Instantly analyze your data and uncover hidden patterns, trends, and opportunities using advanced AI.",
+        "image": "/screenshot1.jpg"
       },
       {
-        "title": "Smart Visualization",
-        "desc": "22+ chart types with ECharts. Combo charts, multi-series support, and AI-generated narratives."
-      },
-      {
-        "title": "Intent Detection",
-        "desc": "Advanced NLP tags queries as REPORT, ANALYTICS, or TRENDING to deliver the perfect response format."
+        "title": "Data Recommendations",
+        "desc": "Instantly analyze your data and uncover hidden patterns, trends, and opportunities using advanced AI.",
+        "image": "/screenshot1.jpg"
       }
     ]
+  },
+  "commonCTA": {
+    "getStarted": "Start Free Trial",
+    "getStartedUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "watchDemo": "Live Demo",
+    "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4",
+    "disclaimer": "14-day free trial. No credit card required."
   },
   "contentSplit": {
     "section1": {
