@@ -63,7 +63,7 @@ export default function WorkingProcess({
             >
               <div className="relative max-w-[342px] max-h-[287px]">
                 <Image
-                  src={`/icons/work${index}.png`}
+                  src={`/icons/work${index}.svg`}
                   alt={title}
                   width={634}
                   height={532}
