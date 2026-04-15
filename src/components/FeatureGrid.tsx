@@ -55,12 +55,12 @@ export default function FeatureGrid({
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex flex-row flex-wrap gap-8 justify-center"
+          className="flex flex-col lg:flex-row gap-8 justify-center"
         >
           {/* CTA */}
-          <div className="flex flex-col gap-6 items-center w-full lg:max-w-[604px]">
+          <div className="flex flex-col gap-6 items-center w-full">
             {/* Image */}
-            <div className="w-full h-[450px] rounded-3xl relative overflow-hidden">
+            <div className="w-full h-[450px] rounded-3xl relative overflow-hidden feature-image-container">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFeature}
@@ -82,7 +82,7 @@ export default function FeatureGrid({
             <CommonCTA commonCTA_Dict={commonCTA_Dict} />
           </div>
           {/* Features */}
-          <div className="flex flex-col gap-4 w-full lg:max-w-[604px]">
+          <div className="flex flex-col gap-4 w-full">
             {features.map(({ title, desc }, index) => (
               <div
                 key={index}

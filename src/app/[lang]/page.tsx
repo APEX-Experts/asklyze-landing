@@ -47,7 +47,10 @@ export default async function Home({
       <main className="mt-4">
         <Hero dict={dict.hero} />
         <FeatureGrid dict={dict.featureGrid} commonCTA_Dict={dict.commonCTA} />
-        <WorkingProcess dict={dict.workingProcess} />
+        <WorkingProcess
+          dict={dict.workingProcess}
+          commonCTA_Dict={dict.commonCTA}
+        />
         <ContentSplit dict={dict.contentSplit} />
         <TabbedShowcase dict={dict.tabbedShowcase} />
         <TrustBar />

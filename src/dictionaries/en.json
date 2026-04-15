@@ -20,16 +20,13 @@
     "disclaimer": "14-day free trial. No credit card required."
   },
   "workingProcess": {
-    "title": "Working Process",
-    "subtitle": "How does Asklyze work?",
-    "step1Title": "Whitelist Tables.",
-    "step1Desc": "Define your safe scope with precision. Select which schemas and tables to expose to the AI engine — supporting over 1,000 tables seamlessly. You stay in full control of what the AI can access, ensuring data governance from the very first step.",
-    "step2Title": "Build Metadata.",
-    "step2Desc": "Let the engine do the heavy lifting. It automatically analyzes table relationships, identifies Foreign Keys, and optimizes join paths across your entire schema — so your queries return accurate, well-structured results without manual configuration.",
-    "step3Title": "AI Context.",
-    "step3Desc": "Go beyond technical column names. Enrich your tables with business-friendly descriptions that give the AI real understanding of your data — turning cryptic field names into meaningful context that powers smarter, more relevant query generation.",
-    "step4Title": "Generate Dashboard.",
-    "step4Desc": "Instant visual insights at your fingertips. Transform raw query results into fully interactive dashboards packed with charts, KPIs, and trend lines — all generated automatically by AI. No design skills needed, just ask and visualize."
+    "title": "How Asklyze Works",
+    "step1Title": "Connect & Sync",
+    "step1Desc": "Instantly link your databases or spreadsheets. Our system securely maps your data structures without any complex configuration.",
+    "step2Title": "AI Analysis",
+    "step2Desc": "Asklyze automatically scans your linked data to uncover hidden patterns, trends, and opportunities using advanced AI models.",
+    "step3Title": "Get Insights",
+    "step3Desc": "Simply ask questions in plain English and receive instant, actionable answers, charts, and reports to drive decisions."
   },
   "contact": {
     "locationTitle": "Our Location",

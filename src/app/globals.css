@@ -294,7 +294,7 @@ p {
   );
 }
 
-.image-container {
+.feature-image-container {
   border: 0 solid var(--Linear-1, #8a96c2);
 
   background:
@@ -306,4 +306,8 @@ p {
 
 .feature-gradient {
   background: linear-gradient(0deg, #fff 0%, #fff 100%), #c2c2c2;
+}
+
+.step-container {
+  box-shadow: 0 0 30px 0 rgba(26, 26, 26, 0.1);
 }
