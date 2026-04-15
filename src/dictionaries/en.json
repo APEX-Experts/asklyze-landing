@@ -32,6 +32,36 @@
     "title": "Trusted by Data-Driven Teams",
     "subtitle": "Join companies using Asklyze to make smarter, faster decisions."
   },
+  "whyChoose": {
+    "title": "Why Teams Choose Asklyze",
+    "subtitle": "Discover why modern teams rely on Asklyze to turn complex data into clear, actionable decisions.",
+    "features": [
+      {
+        "title": "⚡ Fast Insights",
+        "desc": "Get instant answers from your data without waiting or complexity."
+      },
+      {
+        "title": "🧠 AI That Gets You",
+        "desc": "Ask questions naturally and get accurate, meaningful insights."
+      },
+      {
+        "title": "📊 All-in-One Dashboard",
+        "desc": "Manage, analyze, and visualize your data in one unified place."
+      },
+      {
+        "title": "🔒 Secure & Reliable",
+        "desc": "Your data is protected with enterprise-grade security."
+      },
+      {
+        "title": "🚀 Boost Productivity",
+        "desc": "Save time and focus on decisions, not data processing."
+      },
+      {
+        "title": "🤝 Built for Teams",
+        "desc": "Collaborate seamlessly and share insights across your team."
+      }
+    ]
+  },
   "contact": {
     "locationTitle": "Our Location",
     "locationLines": [

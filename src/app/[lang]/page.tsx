@@ -13,6 +13,7 @@ import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import TrustedSection from "@/components/TrustedSection";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 export async function generateMetadata({
   params,
@@ -53,10 +54,7 @@ export default async function Home({
           commonCTA_Dict={dict.commonCTA}
         />
         <TrustedSection dict={dict.trustedBy} lang={lang} />
-        <ContentSplit dict={dict.contentSplit} />
-        <TabbedShowcase dict={dict.tabbedShowcase} />
-        <TrustBar />
-        <Testimonials dict={dict.testimonials} />
+        <WhyChooseUs dict={dict.whyChoose} commonCTA_Dict={dict.commonCTA} />
         <Pricing dict={dict.pricing} lang={lang} />
         <FAQ dict={dict.faq} />
         <GradientCTA dict={dict.gradientCTA} lang={lang} />
