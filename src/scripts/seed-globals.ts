@@ -17,7 +17,7 @@ const mapStringsToObjects = (arr: any[]): any[] => {
 // Deep clone and map specific arrays
 const mapDictForPayload = (dict: any): any => {
     const d = JSON.parse(JSON.stringify(dict)); // deep clone
-    
+
     if (d.contact?.locationLines) {
         d.contact.locationLines = mapStringsToObjects(d.contact.locationLines);
     }
@@ -39,7 +39,7 @@ const mapDictForPayload = (dict: any): any => {
     if (d.contactUs?.form?.companySize?.options) {
         d.contactUs.form.companySize.options = mapStringsToObjects(d.contactUs.form.companySize.options);
     }
-    
+
     // Map points arrays in privacy, terms, security
     const mapPointsIfPresent = (sections: any[]) => {
         if (!sections) return;
@@ -61,6 +61,10 @@ const mapDictForPayload = (dict: any): any => {
         mapPointsIfPresent(d.security.additionalSections);
     }
 
+    if (d.aboutPage?.solutions?.whatWeBuild?.points) {
+        d.aboutPage.solutions.whatWeBuild.points = mapStringsToObjects(d.aboutPage.solutions.whatWeBuild.points);
+    }
+
     // Explicitly fallback boolean fields that might be missing completely rather than undefined
     if (d.contactUs?.form?.message) {
         d.contactUs.form.message.textarea = !!d.contactUs.form.message.textarea;
@@ -75,7 +79,7 @@ const mapDictForPayload = (dict: any): any => {
 async function runSeed() {
     process.env.SEEDING = 'true';
     console.log('Loading Payload...');
-    
+
     const payload = await getPayload({ config: configPromise });
 
     console.log('Starting seed process...');
@@ -91,17 +95,12 @@ async function runSeed() {
             workingProcess: 'working-process-content',
             trustedBy: 'trusted-by-content',
             whyChoose: 'why-choose-content',
-            contact: 'contact-content',
             contactHero: 'contact-hero-content',
             featureGrid: 'feature-grid-content',
             commonCTA: 'common-cta-content',
             contactCTA: 'contact-cta-content',
-            contentSplit: 'content-split-content',
-            tabbedShowcase: 'tabbed-showcase-content',
-            testimonials: 'testimonials-content',
             faq: 'faq-content',
             pricing: 'pricing-content',
-            gradientCTA: 'gradient-cta-content',
             contactUs: 'contact-us-content',
             footer: 'footer-content',
             blogSection: 'blog-section-content',
@@ -110,6 +109,7 @@ async function runSeed() {
             privacy: 'privacy-content',
             terms: 'terms-content',
             security: 'security-content',
+            aboutPage: 'about-page-content',
         } as const;
 
         for (const [key, slug] of Object.entries(slugMap)) {

@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { TermsContent } from "../../../../payload-types";
 
 const formatPoint = (point: string) =>
   point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
@@ -10,7 +10,7 @@ const formatPoint = (point: string) =>
 interface TermsAndConditionsContentProps {
   lang: "en" | "ar";
   isArabic: boolean;
-  content: any;
+  content: Omit<TermsContent, "id" | "createdAt" | "updatedAt">;
 }
 
 export default function TermsAndConditionsContent({
@@ -85,7 +85,7 @@ export default function TermsAndConditionsContent({
         <div className="w-full max-w-[1240px] px-6 flex flex-col md:flex-row justify-between items-start gap-10">
           {/* Left Sidebar Menu */}
           <aside className="w-full md:w-auto md:min-w-[280px] md:max-w-[320px] shrink-0 flex flex-col gap-[16px] sticky top-[120px]">
-            {allSections.map((section: any, index: number) => {
+            {allSections.map((section, index: number) => {
               const isActive = activeSection === index;
               return (
                 <button
@@ -128,7 +128,7 @@ export default function TermsAndConditionsContent({
 
           {/* Right Main Content */}
           <div className="w-full max-w-[857px] flex flex-col gap-12 font-inter text-[14px] leading-loose text-[#1A1A1A]">
-            {allSections.map((section: any, index: number) => (
+            {allSections.map((section, index: number) => (
               <article
                 id={`section-${index}`}
                 data-index={index}
@@ -141,7 +141,7 @@ export default function TermsAndConditionsContent({
                 {section.content && <p className="mb-4">{section.content}</p>}
                 {section.points && (
                   <ul className="space-y-2 mb-4">
-                    {section.points.map((point: string, idx: number) => (
+                    {section.points.map(({ text: point }, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <span className="mt-[2px] shrink-0 text-[#1F2A6B]">
                           •

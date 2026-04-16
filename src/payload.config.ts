@@ -9,11 +9,11 @@ import { Users } from "./collections/Users.ts";
 
 import {
   NavbarContent, HeroContent, WorkingProcessContent, TrustedByContent,
-  WhyChooseContent, ContactContent, ContactHeroContent, FeatureGridContent,
-  CommonCtaContent, ContactCtaContent, ContentSplitContent, TabbedShowcaseContent, TestimonialsContent,
-  FaqContent, PricingContent, GradientCtaContent, ContactUsContent,
+  WhyChooseContent, ContactHeroContent, FeatureGridContent,
+  CommonCtaContent, ContactCtaContent,
+  FaqContent, PricingContent, ContactUsContent,
   FooterContent, BlogSectionContent, BlogContent, MetadataContent,
-  PrivacyContent, TermsContent, SecurityContent
+  PrivacyContent, TermsContent, SecurityContent, AboutPageContent
 } from "./globals";
 
 dotenv.config()
@@ -26,11 +26,11 @@ export default buildConfig({
   collections: [Users, Posts],
   globals: [
     NavbarContent, HeroContent, WorkingProcessContent, TrustedByContent,
-    WhyChooseContent, ContactContent, ContactHeroContent, FeatureGridContent,
-    CommonCtaContent, ContactCtaContent, ContentSplitContent, TabbedShowcaseContent, TestimonialsContent,
-    FaqContent, PricingContent, GradientCtaContent, ContactUsContent,
+    WhyChooseContent, ContactHeroContent, FeatureGridContent,
+    CommonCtaContent, ContactCtaContent,
+    FaqContent, PricingContent, ContactUsContent,
     FooterContent, BlogSectionContent, BlogContent, MetadataContent,
-    PrivacyContent, TermsContent, SecurityContent
+    PrivacyContent, TermsContent, SecurityContent, AboutPageContent
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '',

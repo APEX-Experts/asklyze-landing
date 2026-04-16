@@ -62,18 +62,6 @@
       }
     ]
   },
-  "contact": {
-    "locationTitle": "Our Location",
-    "locationLines": [
-      "Office No. 43-44 - Al Fahidi",
-      "Dubai Bur Dubai, UAE",
-      "75 Al aman st, Al wardian, Alexandria, Egypt"
-    ],
-    "emailTitle": "Email Us",
-    "callTitle": "Call Us",
-    "followTitle": "Follow Us",
-    "followDesc": "Stay connected with us on social media for updates and news."
-  },
   "contactHero": {
     "title": "Get in Touch",
     "desc": "Have questions about ASKLYZE? Our team of Oracle APEX and AI experts is ready to help you transform your data strategy."
@@ -120,66 +108,10 @@
   "contactCTA": {
     "title": "Bring AI-Powered Analytics Into Your APEX Applications"
   },
-  "contentSplit": {
-    "section1": {
-      "title": "Native APEX Integration.",
-      "desc": "Built as a native Plugin that executes queries locally. We bridge the gap between complex database structures and executive decision-making without moving a single byte of data.",
-      "cta": "Try It Live",
-      "badgeTitle": "Plug & Play",
-      "badgeTime": "In 0.5 seconds"
-    },
-    "section2": {
-      "title": "Audit & Compliance.",
-      "desc": "Every query is logged in the ASKLYZE_AI_QUERY_STORE. Use these logs for performance monitoring, compliance auditing, and refining AI responses over time.",
-      "cta": "Learn More",
-      "features": [
-        "Zero Data Movement",
-        "Role-Based Access Control",
-        "24/7 Enterprise Support"
-      ]
-    }
-  },
-  "tabbedShowcase": {
-    "tag": "Unified Analytics",
-    "title": "Everything you need to master your data",
-    "tabs": [
-      "Data Configuration",
-      "AI Data Generation",
-      "Dashboard Builder",
-      "Customize Dashboard"
-    ],
-    "dashboard": "Dashboard"
-  },
-  "testimonials": {
-    "tag": "Testimonial",
-    "title": "What our client say about us",
-    "list": [
-      {
-        "text": "The natural language query feature helped our non-technical staff get insights immediately. It's truly a game changer for Oracle APEX.",
-        "name": "Sarah Jenkins",
-        "role": "Data Analyst"
-      },
-      {
-        "text": "We integrated ASKLYZE with our Oracle APEX apps in under an hour. The security features are top-notch and comply with our enterprise standards.",
-        "name": "Michael Chen",
-        "role": "CTO"
-      },
-      {
-        "text": "Fantastic tools and excellent support. The zero data movement architecture gave us the confidence to use AI with our sensitive data.",
-        "name": "Desmond Eagle",
-        "role": "IT Director"
-      }
-    ]
-  },
   "faq": {
     "tag": "FAQ",
     "title": "Frequently Asked Questions",
-    "categories": [
-      "All",
-      "General",
-      "Technical",
-      "Security"
-    ],
+    "categories": ["All", "General", "Technical", "Security"],
     "list": [
       {
         "question": "How is ASKLYZE deployed?",
@@ -330,11 +262,6 @@
       }
     ]
   },
-  "gradientCTA": {
-    "title": "Experience the Future of Oracle APEX Analytics",
-    "desc": "Join hundreds of forward-thinking companies that are democratizing data access with ASKLYZE.",
-    "cta": "Contact Us"
-  },
   "contactUs": {
     "title": "Get in Touch",
     "subtitle": "Have questions about integration or use cases? Our team of APEX & AI Experts are here to help.",
@@ -380,14 +307,7 @@
         "label": "Company Size",
         "placeholder": "Select Company Size",
         "required": "Company Size is required",
-        "options": [
-          "1-10",
-          "11-50",
-          "51-200",
-          "201-500",
-          "501-1000",
-          "1001+"
-        ]
+        "options": ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001+"]
       },
       "role": {
         "label": "Your Role",
@@ -525,30 +445,54 @@
         "iconKey": "Eye",
         "title": "2. Information We Collect",
         "points": [
-          "**Metadata**: Schema information, table structures, and relationships (for query optimization)",
-          "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)",
-          "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)",
-          "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          {
+            "text": "**Metadata**: Schema information, table structures, and relationships (for query optimization)"
+          },
+          {
+            "text": "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)"
+          },
+          {
+            "text": "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)"
+          },
+          {
+            "text": "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          }
         ]
       },
       {
         "iconKey": "Shield",
         "title": "3. Information We Do NOT Collect",
         "points": [
-          "Raw business data or actual rows from your database",
-          "Personally Identifiable Information (PII) of your customers",
-          "Financial data or transaction records",
-          "Sensitive information stored in your tables"
+          {
+            "text": "Raw business data or actual rows from your database"
+          },
+          {
+            "text": "Personally Identifiable Information (PII) of your customers"
+          },
+          {
+            "text": "Financial data or transaction records"
+          },
+          {
+            "text": "Sensitive information stored in your tables"
+          }
         ]
       },
       {
         "iconKey": "FileCheck",
         "title": "4. How We Use Information",
         "points": [
-          "**Query Processing**: To convert your questions into accurate SQL queries",
-          "**Performance Optimization**: To improve AI accuracy and responsiveness over time",
-          "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking",
-          "**Technical Support**: To assist with troubleshooting and service improvements"
+          {
+            "text": "**Query Processing**: To convert your questions into accurate SQL queries"
+          },
+          {
+            "text": "**Performance Optimization**: To improve AI accuracy and responsiveness over time"
+          },
+          {
+            "text": "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking"
+          },
+          {
+            "text": "**Technical Support**: To assist with troubleshooting and service improvements"
+          }
         ]
       },
       {
@@ -560,10 +504,18 @@
         "iconKey": "Lock",
         "title": "6. Security and Encryption",
         "points": [
-          "HTTPS/TLS encryption for all communications",
-          "Integration with Oracle VPD and Row-Level Security (RLS)",
-          "Role-Based Access Control (RBAC)",
-          "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          {
+            "text": "HTTPS/TLS encryption for all communications"
+          },
+          {
+            "text": "Integration with Oracle VPD and Row-Level Security (RLS)"
+          },
+          {
+            "text": "Role-Based Access Control (RBAC)"
+          },
+          {
+            "text": "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          }
         ]
       }
     ],
@@ -579,10 +531,18 @@
       {
         "title": "9. Your Rights",
         "points": [
-          "**Access**: Review your query logs at any time",
-          "**Deletion**: Delete specific logs or your entire account",
-          "**Portability**: Export your data in machine-readable formats",
-          "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          {
+            "text": "**Access**: Review your query logs at any time"
+          },
+          {
+            "text": "**Deletion**: Delete specific logs or your entire account"
+          },
+          {
+            "text": "**Portability**: Export your data in machine-readable formats"
+          },
+          {
+            "text": "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          }
         ]
       },
       {
@@ -612,30 +572,54 @@
         "iconKey": "Eye",
         "title": "2. Information We Collect",
         "points": [
-          "**Metadata**: Schema information, table structures, and relationships (for query optimization)",
-          "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)",
-          "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)",
-          "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          {
+            "text": "**Metadata**: Schema information, table structures, and relationships (for query optimization)"
+          },
+          {
+            "text": "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)"
+          },
+          {
+            "text": "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)"
+          },
+          {
+            "text": "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          }
         ]
       },
       {
         "iconKey": "Shield",
         "title": "3. Information We Do NOT Collect",
         "points": [
-          "Raw business data or actual rows from your database",
-          "Personally Identifiable Information (PII) of your customers",
-          "Financial data or transaction records",
-          "Sensitive information stored in your tables"
+          {
+            "text": "Raw business data or actual rows from your database"
+          },
+          {
+            "text": "Personally Identifiable Information (PII) of your customers"
+          },
+          {
+            "text": "Financial data or transaction records"
+          },
+          {
+            "text": "Sensitive information stored in your tables"
+          }
         ]
       },
       {
         "iconKey": "FileCheck",
         "title": "4. How We Use Information",
         "points": [
-          "**Query Processing**: To convert your questions into accurate SQL queries",
-          "**Performance Optimization**: To improve AI accuracy and responsiveness over time",
-          "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking",
-          "**Technical Support**: To assist with troubleshooting and service improvements"
+          {
+            "text": "**Query Processing**: To convert your questions into accurate SQL queries"
+          },
+          {
+            "text": "**Performance Optimization**: To improve AI accuracy and responsiveness over time"
+          },
+          {
+            "text": "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking"
+          },
+          {
+            "text": "**Technical Support**: To assist with troubleshooting and service improvements"
+          }
         ]
       },
       {
@@ -647,10 +631,18 @@
         "iconKey": "Lock",
         "title": "6. Security and Encryption",
         "points": [
-          "HTTPS/TLS encryption for all communications",
-          "Integration with Oracle VPD and Row-Level Security (RLS)",
-          "Role-Based Access Control (RBAC)",
-          "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          {
+            "text": "HTTPS/TLS encryption for all communications"
+          },
+          {
+            "text": "Integration with Oracle VPD and Row-Level Security (RLS)"
+          },
+          {
+            "text": "Role-Based Access Control (RBAC)"
+          },
+          {
+            "text": "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          }
         ]
       }
     ],
@@ -666,10 +658,18 @@
       {
         "title": "9. Your Rights",
         "points": [
-          "**Access**: Review your query logs at any time",
-          "**Deletion**: Delete specific logs or your entire account",
-          "**Portability**: Export your data in machine-readable formats",
-          "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          {
+            "text": "**Access**: Review your query logs at any time"
+          },
+          {
+            "text": "**Deletion**: Delete specific logs or your entire account"
+          },
+          {
+            "text": "**Portability**: Export your data in machine-readable formats"
+          },
+          {
+            "text": "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          }
         ]
       },
       {
@@ -699,30 +699,54 @@
         "iconKey": "Eye",
         "title": "2. Information We Collect",
         "points": [
-          "**Metadata**: Schema information, table structures, and relationships (for query optimization)",
-          "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)",
-          "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)",
-          "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          {
+            "text": "**Metadata**: Schema information, table structures, and relationships (for query optimization)"
+          },
+          {
+            "text": "**Query Logs**: Questions asked and SQL queries generated (stored in local ASKLYZE_AI_QUERY_STORE)"
+          },
+          {
+            "text": "**Usage Analytics**: Statistical patterns to improve performance (anonymized and aggregated)"
+          },
+          {
+            "text": "**Account Information**: User credentials and access roles (for authentication purposes only)"
+          }
         ]
       },
       {
         "iconKey": "Shield",
         "title": "3. Information We Do NOT Collect",
         "points": [
-          "Raw business data or actual rows from your database",
-          "Personally Identifiable Information (PII) of your customers",
-          "Financial data or transaction records",
-          "Sensitive information stored in your tables"
+          {
+            "text": "Raw business data or actual rows from your database"
+          },
+          {
+            "text": "Personally Identifiable Information (PII) of your customers"
+          },
+          {
+            "text": "Financial data or transaction records"
+          },
+          {
+            "text": "Sensitive information stored in your tables"
+          }
         ]
       },
       {
         "iconKey": "FileCheck",
         "title": "4. How We Use Information",
         "points": [
-          "**Query Processing**: To convert your questions into accurate SQL queries",
-          "**Performance Optimization**: To improve AI accuracy and responsiveness over time",
-          "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking",
-          "**Technical Support**: To assist with troubleshooting and service improvements"
+          {
+            "text": "**Query Processing**: To convert your questions into accurate SQL queries"
+          },
+          {
+            "text": "**Performance Optimization**: To improve AI accuracy and responsiveness over time"
+          },
+          {
+            "text": "**Audit & Compliance**: To provide logs for security monitoring and compliance tracking"
+          },
+          {
+            "text": "**Technical Support**: To assist with troubleshooting and service improvements"
+          }
         ]
       },
       {
@@ -734,10 +758,18 @@
         "iconKey": "Lock",
         "title": "6. Security and Encryption",
         "points": [
-          "HTTPS/TLS encryption for all communications",
-          "Integration with Oracle VPD and Row-Level Security (RLS)",
-          "Role-Based Access Control (RBAC)",
-          "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          {
+            "text": "HTTPS/TLS encryption for all communications"
+          },
+          {
+            "text": "Integration with Oracle VPD and Row-Level Security (RLS)"
+          },
+          {
+            "text": "Role-Based Access Control (RBAC)"
+          },
+          {
+            "text": "Comprehensive auditing in ASKLYZE_AI_QUERY_STORE"
+          }
         ]
       }
     ],
@@ -753,10 +785,18 @@
       {
         "title": "9. Your Rights",
         "points": [
-          "**Access**: Review your query logs at any time",
-          "**Deletion**: Delete specific logs or your entire account",
-          "**Portability**: Export your data in machine-readable formats",
-          "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          {
+            "text": "**Access**: Review your query logs at any time"
+          },
+          {
+            "text": "**Deletion**: Delete specific logs or your entire account"
+          },
+          {
+            "text": "**Portability**: Export your data in machine-readable formats"
+          },
+          {
+            "text": "**Opt-Out**: Opt out of aggregated metadata for service improvements"
+          }
         ]
       },
       {
@@ -833,9 +873,15 @@
         "title": "What we build",
         "subtitle": "Asklyze combines performance, security, and simplicity for Oracle-driven teams.",
         "points": [
-          "Query data in Arabic and English.\\nNo SQL needed.",
-          "Generate visuals that fit directly\\ninto APEX apps.",
-          "Run queries on your Oracle database.\\nNo data movement."
+          {
+            "text": "Query data in Arabic and English.\\nNo SQL needed."
+          },
+          {
+            "text": "Generate visuals that fit directly\\ninto APEX apps."
+          },
+          {
+            "text": "Run queries on your Oracle database.\\nNo data movement."
+          }
         ]
       }
     },
@@ -882,7 +928,8 @@
             "facebook": "https://facebook.com",
             "linkedin": "https://linkedin.com",
             "instagram": "https://instagram.com"
-          }
+          },
+          "imageUrl": "https://apexexperts.net/images/team/ceo.png"
         },
         {
           "name": "Amr Mohamed",
@@ -891,7 +938,18 @@
             "facebook": "https://facebook.com",
             "linkedin": "https://linkedin.com",
             "instagram": "https://instagram.com"
-          }
+          },
+          "imageUrl": "https://apexexperts.net/images/team/amr.png"
+        },
+        {
+          "name": "Michael Magdy",
+          "role": "Sr. Software Engineer",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          },
+          "imageUrl": "https://apexexperts.net/images/team/michael.jpeg"
         },
         {
           "name": "Abdulrahman Ebrahim",
@@ -900,7 +958,28 @@
             "facebook": "https://facebook.com",
             "linkedin": "https://linkedin.com",
             "instagram": "https://instagram.com"
-          }
+          },
+          "imageUrl": "https://apexexperts.net/images/team/abd.png"
+        },
+        {
+          "name": "Mario Milad",
+          "role": "UI/UX Engineer",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          },
+          "imageUrl": "https://apexexperts.net/images/team/mario.png"
+        },
+        {
+          "name": "Reham Samer",
+          "role": "QA Engineer",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          },
+          "imageUrl": "https://apexexperts.net/images/team/reham.png"
         }
       ]
     }

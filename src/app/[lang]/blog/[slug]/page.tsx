@@ -1,16 +1,14 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BlogPostSchema from "@/components/BlogPostSchema";
 import BlogCarousel from "@/components/BlogCarousel";
+import BlogPostSchema from "@/components/BlogPostSchema";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
 import { Post } from "@/payload-types";
 import { RichText } from "@payloadcms/richtext-lexical/react";
-import Separator from "@/components/Separator";
+import type { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -109,7 +107,7 @@ export default async function BlogPostPage({
     limit: 6,
     sort: "-publishedDate",
   });
-  const relatedPosts = (relatedDocs as unknown as Post[]).filter((p) => p.slug);
+  const relatedPosts = relatedDocs.filter((p) => p.slug);
 
   return (
     <main className="min-h-screen w-full bg-bg">
@@ -216,7 +214,10 @@ export default async function BlogPostPage({
                   />
                 </svg>
                 <span className="text-gray-550 font-medium leading-[150%]">
-                  {Math.max(1, Math.ceil(JSON.stringify(richContent || {}).length / 3000))}{" "}
+                  {Math.max(
+                    1,
+                    Math.ceil(JSON.stringify(richContent || {}).length / 3000)
+                  )}{" "}
                   {dict.blog.article.mins}
                 </span>
               </div>

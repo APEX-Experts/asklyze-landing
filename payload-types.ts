@@ -93,17 +93,12 @@ export interface Config {
     'working-process-content': WorkingProcessContent;
     'trusted-by-content': TrustedByContent;
     'why-choose-content': WhyChooseContent;
-    'contact-content': ContactContent;
     'contact-hero-content': ContactHeroContent;
     'feature-grid-content': FeatureGridContent;
     'common-cta-content': CommonCtaContent;
     'contact-cta-content': ContactCtaContent;
-    'content-split-content': ContentSplitContent;
-    'tabbed-showcase-content': TabbedShowcaseContent;
-    'testimonials-content': TestimonialsContent;
     'faq-content': FaqContent;
     'pricing-content': PricingContent;
-    'gradient-cta-content': GradientCtaContent;
     'contact-us-content': ContactUsContent;
     'footer-content': FooterContent;
     'blog-section-content': BlogSectionContent;
@@ -112,6 +107,7 @@ export interface Config {
     'privacy-content': PrivacyContent;
     'terms-content': TermsContent;
     'security-content': SecurityContent;
+    'about-page-content': AboutPageContent;
   };
   globalsSelect: {
     'navbar-content': NavbarContentSelect<false> | NavbarContentSelect<true>;
@@ -119,17 +115,12 @@ export interface Config {
     'working-process-content': WorkingProcessContentSelect<false> | WorkingProcessContentSelect<true>;
     'trusted-by-content': TrustedByContentSelect<false> | TrustedByContentSelect<true>;
     'why-choose-content': WhyChooseContentSelect<false> | WhyChooseContentSelect<true>;
-    'contact-content': ContactContentSelect<false> | ContactContentSelect<true>;
     'contact-hero-content': ContactHeroContentSelect<false> | ContactHeroContentSelect<true>;
     'feature-grid-content': FeatureGridContentSelect<false> | FeatureGridContentSelect<true>;
     'common-cta-content': CommonCtaContentSelect<false> | CommonCtaContentSelect<true>;
     'contact-cta-content': ContactCtaContentSelect<false> | ContactCtaContentSelect<true>;
-    'content-split-content': ContentSplitContentSelect<false> | ContentSplitContentSelect<true>;
-    'tabbed-showcase-content': TabbedShowcaseContentSelect<false> | TabbedShowcaseContentSelect<true>;
-    'testimonials-content': TestimonialsContentSelect<false> | TestimonialsContentSelect<true>;
     'faq-content': FaqContentSelect<false> | FaqContentSelect<true>;
     'pricing-content': PricingContentSelect<false> | PricingContentSelect<true>;
-    'gradient-cta-content': GradientCtaContentSelect<false> | GradientCtaContentSelect<true>;
     'contact-us-content': ContactUsContentSelect<false> | ContactUsContentSelect<true>;
     'footer-content': FooterContentSelect<false> | FooterContentSelect<true>;
     'blog-section-content': BlogSectionContentSelect<false> | BlogSectionContentSelect<true>;
@@ -138,6 +129,7 @@ export interface Config {
     'privacy-content': PrivacyContentSelect<false> | PrivacyContentSelect<true>;
     'terms-content': TermsContentSelect<false> | TermsContentSelect<true>;
     'security-content': SecurityContentSelect<false> | SecurityContentSelect<true>;
+    'about-page-content': AboutPageContentSelect<false> | AboutPageContentSelect<true>;
   };
   locale: 'en' | 'ar';
   widgets: {
@@ -486,24 +478,6 @@ export interface WhyChooseContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact-content".
- */
-export interface ContactContent {
-  id: number;
-  locationTitle: string;
-  locationLines: {
-    text: string;
-    id?: string | null;
-  }[];
-  emailTitle: string;
-  callTitle: string;
-  followTitle: string;
-  followDesc: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-hero-content".
  */
 export interface ContactHeroContent {
@@ -557,64 +531,6 @@ export interface ContactCtaContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "content-split-content".
- */
-export interface ContentSplitContent {
-  id: number;
-  section1: {
-    title: string;
-    desc: string;
-    cta: string;
-    badgeTitle: string;
-    badgeTime: string;
-  };
-  section2: {
-    title: string;
-    desc: string;
-    cta: string;
-    features: {
-      text: string;
-      id?: string | null;
-    }[];
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tabbed-showcase-content".
- */
-export interface TabbedShowcaseContent {
-  id: number;
-  tag: string;
-  title: string;
-  tabs: {
-    text: string;
-    id?: string | null;
-  }[];
-  dashboard: string;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials-content".
- */
-export interface TestimonialsContent {
-  id: number;
-  tag: string;
-  title: string;
-  list: {
-    text: string;
-    name: string;
-    role: string;
-    id?: string | null;
-  }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faq-content".
  */
 export interface FaqContent {
@@ -661,18 +577,6 @@ export interface PricingContent {
     }[];
     id?: string | null;
   }[];
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gradient-cta-content".
- */
-export interface GradientCtaContent {
-  id: number;
-  title: string;
-  desc: string;
-  cta: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -875,6 +779,10 @@ export interface MetadataContent {
     title: string;
     description: string;
   };
+  about: {
+    title: string;
+    description: string;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1006,6 +914,107 @@ export interface SecurityContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page-content".
+ */
+export interface AboutPageContent {
+  id: number;
+  alts?: {
+    apexLogo?: string | null;
+    feature?: string | null;
+    visionLogo?: string | null;
+    visionImage?: string | null;
+    missionLogo?: string | null;
+    missionImage?: string | null;
+  };
+  header?: {
+    title?: string | null;
+    intro?: string | null;
+  };
+  hero?: {
+    title?: string | null;
+    subtitle?: string | null;
+  };
+  trusted?: {
+    title?: string | null;
+    subtitle?: string | null;
+    footer?: string | null;
+    stats?:
+      | {
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  trustedSC1?: {
+    title?: string | null;
+    subtitle?: string | null;
+    footer?: string | null;
+    stats?:
+      | {
+          value?: string | null;
+          label?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  solutions?: {
+    title?: string | null;
+    description?: string | null;
+    whatWeBuild?: {
+      title?: string | null;
+      subtitle?: string | null;
+      points?:
+        | {
+            text?: string | null;
+            id?: string | null;
+          }[]
+        | null;
+    };
+  };
+  guides?: {
+    title?: string | null;
+    subtitle?: string | null;
+    cards?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  visionMission?: {
+    vision?: {
+      title?: string | null;
+      description?: string | null;
+    };
+    mission?: {
+      title?: string | null;
+      description?: string | null;
+    };
+  };
+  leaders?: {
+    title?: string | null;
+    subtitle?: string | null;
+    members?:
+      | {
+          name?: string | null;
+          role?: string | null;
+          social?: {
+            facebook?: string | null;
+            linkedin?: string | null;
+            instagram?: string | null;
+          };
+          imageUrl?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navbar-content_select".
  */
 export interface NavbarContentSelect<T extends boolean = true> {
@@ -1085,26 +1094,6 @@ export interface WhyChooseContentSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact-content_select".
- */
-export interface ContactContentSelect<T extends boolean = true> {
-  locationTitle?: T;
-  locationLines?:
-    | T
-    | {
-        text?: T;
-        id?: T;
-      };
-  emailTitle?: T;
-  callTitle?: T;
-  followTitle?: T;
-  followDesc?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-hero-content_select".
  */
 export interface ContactHeroContentSelect<T extends boolean = true> {
@@ -1154,74 +1143,6 @@ export interface CommonCtaContentSelect<T extends boolean = true> {
  */
 export interface ContactCtaContentSelect<T extends boolean = true> {
   title?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "content-split-content_select".
- */
-export interface ContentSplitContentSelect<T extends boolean = true> {
-  section1?:
-    | T
-    | {
-        title?: T;
-        desc?: T;
-        cta?: T;
-        badgeTitle?: T;
-        badgeTime?: T;
-      };
-  section2?:
-    | T
-    | {
-        title?: T;
-        desc?: T;
-        cta?: T;
-        features?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tabbed-showcase-content_select".
- */
-export interface TabbedShowcaseContentSelect<T extends boolean = true> {
-  tag?: T;
-  title?: T;
-  tabs?:
-    | T
-    | {
-        text?: T;
-        id?: T;
-      };
-  dashboard?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials-content_select".
- */
-export interface TestimonialsContentSelect<T extends boolean = true> {
-  tag?: T;
-  title?: T;
-  list?:
-    | T
-    | {
-        text?: T;
-        name?: T;
-        role?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1281,18 +1202,6 @@ export interface PricingContentSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gradient-cta-content_select".
- */
-export interface GradientCtaContentSelect<T extends boolean = true> {
-  title?: T;
-  desc?: T;
-  cta?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1541,6 +1450,12 @@ export interface MetadataContentSelect<T extends boolean = true> {
         title?: T;
         description?: T;
       };
+  about?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1684,6 +1599,133 @@ export interface SecurityContentSelect<T extends boolean = true> {
         content?: T;
         email?: T;
         address?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page-content_select".
+ */
+export interface AboutPageContentSelect<T extends boolean = true> {
+  alts?:
+    | T
+    | {
+        apexLogo?: T;
+        feature?: T;
+        visionLogo?: T;
+        visionImage?: T;
+        missionLogo?: T;
+        missionImage?: T;
+      };
+  header?:
+    | T
+    | {
+        title?: T;
+        intro?: T;
+      };
+  hero?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+      };
+  trusted?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        footer?: T;
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  trustedSC1?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        footer?: T;
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  solutions?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        whatWeBuild?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              points?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+      };
+  guides?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        cards?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  visionMission?:
+    | T
+    | {
+        vision?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+        mission?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+      };
+  leaders?:
+    | T
+    | {
+        title?: T;
+        subtitle?: T;
+        members?:
+          | T
+          | {
+              name?: T;
+              role?: T;
+              social?:
+                | T
+                | {
+                    facebook?: T;
+                    linkedin?: T;
+                    instagram?: T;
+                  };
+              imageUrl?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

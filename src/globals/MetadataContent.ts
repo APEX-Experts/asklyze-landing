@@ -43,6 +43,12 @@ export const MetadataContent: GlobalConfig = {
                 { name: 'title', type: 'text', localized: true, required: true },
                 { name: 'description', type: 'textarea', localized: true, required: true }
             ]
+        },
+        {
+            name: 'about', type: 'group', fields: [
+                { name: 'title', type: 'text', localized: true, required: true },
+                { name: 'description', type: 'textarea', localized: true, required: true }
+            ]
         }
     ],
 };

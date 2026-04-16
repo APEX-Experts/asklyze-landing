@@ -1,4 +1,3 @@
-import { GlobalConfig } from 'payload';
 
 export const revalidateHook = (globalSlug: string): any => {
     return async ({ doc, req: { payload } }: any) => {
