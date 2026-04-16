@@ -48,11 +48,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-
     // Strip source mapping URLs from framer-motion to prevent 404s in dev console and terminal
     config.module.rules.push({
       test: /\.(js|mjs|jsx|ts|tsx)$/,
