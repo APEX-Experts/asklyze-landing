@@ -1,450 +1,535 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Shield, Sparkles, Users, Globe, Building2, Target, LineChart } from "lucide-react";
-
-const iconMap = {
-    Shield,
-    Sparkles,
-    Users,
-    Globe,
-    Building2,
-    Target,
-    LineChart,
-} as const;
-
-/* ── Shared inline-style constants (matching landing page exactly) ── */
-const CARD_BG = "#05050A"; // keeping this slightly off-black for contrast from #000 background
-const CARD_BORDER = "1px solid rgba(255, 255, 255, 0.1)";
-const CARD_BORDER_COLOR = "rgba(255, 255, 255, 0.1)";
-const CARD_RADIUS = "32px"; // matching vexel
-const TEXT_SECONDARY = "rgba(255,255,255,0.55)";
-const TEXT_BODY = "rgba(255,255,255,0.7)";
-const TEXT_MUTED = "rgba(255,255,255,0.4)";
-const BLUE_ACCENT = "#3b82f6";
+import { Shield, Sparkles, Layout, Globe, Activity, CheckCircle, Lightbulb, Users, Box, Zap, Facebook, Linkedin, Instagram } from "lucide-react";
+import Link from "next/link";
 
 interface AboutContentProps {
     lang: "en" | "ar";
     isArabic: boolean;
-    content: any;
+    content: {
+        alts: {
+            apexLogo: string;
+            feature: string;
+            visionLogo: string;
+            visionImage: string;
+            missionLogo: string;
+            missionImage: string;
+        };
+        header: {
+            title: string;
+            intro: string;
+        };
+        hero: {
+            title: string;
+            subtitle: string;
+        };
+        trustedSC1: {
+            title: string;
+            subtitle: string;
+            stats: Array<{ value: string; label: string }>;
+            footer: string;
+        };
+        solutions: {
+            title: string;
+            description: string;
+            whatWeBuild: {
+                title: string;
+                subtitle: string;
+                points: string[];
+            };
+        };
+        guides: {
+            title: string;
+            subtitle: string;
+            cards: Array<{ title: string; description: string }>;
+        };
+        visionMission: {
+            vision: { title: string; description: string };
+            mission: { title: string; description: string };
+        };
+        leaders: {
+            title: string;
+            subtitle: string;
+            members: Array<{
+                name: string;
+                role: string;
+                social: {
+                    facebook?: string;
+                    linkedin?: string;
+                    instagram?: string;
+                };
+            }>;
+        };
+    };
 }
 
 export default function AboutContent({ lang, isArabic, content }: AboutContentProps) {
     const textAlign = isArabic ? "text-right" : "text-left";
-    const alignItems = isArabic ? "items-end" : "items-start";
-    const founderName = content?.founder?.name ?? "";
-    const founderInitials = founderName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
-    const founderImage = content?.founder?.image;
+    const dir = isArabic ? "rtl" : "ltr";
+
+    // Reusable animation variants
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    };
+
+    const staggerContainer = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 }
+        }
+    };
 
     return (
-        <>
-            {/* Hero */}
-            <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: "#000" }}>
-                <div className="container max-w-6xl mx-auto px-4 relative z-20">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className={`max-w-3xl ${textAlign}`}
-                    >
-                        <span
-                            className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium mb-8"
-                            style={{
-                                background: "rgba(255, 255, 255, 0.05)",
-                                color: "rgba(255, 255, 255, 0.8)",
-                                border: "1px solid rgba(255, 255, 255, 0.1)",
-                            }}
-                        >
-                            {content.hero.badge}
-                        </span>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight" style={{ letterSpacing: "-0.03em" }}>
-                            {content.hero.title}{" "}
-                            <span style={{ color: "#ffffff" }}>{content.hero.titleHighlight}</span>
-                        </h1>
-                        <p className="text-base md:text-lg max-w-xl mb-4" style={{ color: TEXT_SECONDARY }}>
-                            {content.hero.subtitle}
-                        </p>
-                        <p className="text-sm max-w-2xl" style={{ color: TEXT_MUTED }}>
-                            {content.hero.intro}
-                        </p>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto md:mx-0">
-                        {content.hero.highlights.map((item: any, index: number) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1, duration: 0.5 }}
-                                viewport={{ once: true }}
-                                style={{
-                                    background: CARD_BG,
-                                    border: CARD_BORDER,
-                                    borderRadius: CARD_RADIUS,
-                                    padding: "36px 28px",
-                                }}
-                            >
-                                <div className="text-3xl font-extrabold text-white mb-2">{item.value}</div>
-                                <div className="text-sm font-semibold uppercase tracking-wider" style={{ color: TEXT_MUTED }}>{item.label}</div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Blue glow (matches landing page) */}
-                <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        <div dir={dir} className="w-full bg-[#FFFFFF] font-sans pb-0 overflow-hidden max-w-full-width mx-auto">
+            {/* 1. Hero Section */}
+            <div className="w-full px-6 md:px-[100px] mt-[20px] mb-[55px]">
+                <section
+                    className="relative rounded-[50px] flex flex-col items-center overflow-hidden"
                     style={{
-                        width: "800px",
-                        height: "600px",
-                        background: "radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.08) 0%, transparent 60%)",
+                        background:
+                            "linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(245, 245, 245, 1) 42%, rgba(238, 241, 255, 1) 100%)",
+                        paddingTop: "150px",
+                        paddingBottom: "80px",
                     }}
-                />
-            </section>
-
-            {/* About / Company */}
-            <section className="section" style={{ background: "#000" }}>
-                <div className="container max-w-6xl mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                >
+                    <div className="container max-w-[1240px] mx-auto px-6 relative z-10 flex flex-col items-center">
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
-                            className={textAlign}
+                            initial="hidden"
+                            animate="visible"
+                            variants={fadeInUp}
+                            className="flex flex-col items-center gap-[24px]"
                         >
-                            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">{content.about.title}</h2>
-                            <p className="text-xl text-white font-semibold mb-4 leading-relaxed">{content.about.subtitle}</p>
-                            <p className="text-lg mb-8 leading-relaxed" style={{ color: TEXT_SECONDARY }}>{content.about.description}</p>
-                            <ul className={`space-y-4 ${textAlign}`}>
-                                {content.about.bullets.map((item: string, index: number) => (
-                                    <li key={index} className={`flex gap-3 ${alignItems}`}>
-                                        <span className="mt-[2px] shrink-0" style={{ color: BLUE_ACCENT }}>•</span>
-                                        <span style={{ color: TEXT_BODY }}>{item}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            viewport={{ once: true }}
-                            style={{
-                                background: CARD_BG,
-                                border: CARD_BORDER,
-                                borderRadius: CARD_RADIUS,
-                                padding: "48px 36px",
-                            }}
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "#ffffff" }}>
-                                    <Building2 size={24} style={{ color: "#000000" }} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white">{content.about.card.title}</h3>
-                            </div>
-                            <p className="text-lg mb-8" style={{ color: TEXT_SECONDARY }}>{content.about.card.description}</p>
-                            <div className="space-y-4">
-                                {content.about.card.points.map((point: string, index: number) => (
-                                    <div key={index} className="flex items-start gap-3">
-                                        <span className="mt-[2px] shrink-0" style={{ color: BLUE_ACCENT }}>•</span>
-                                        <span className="leading-relaxed" style={{ color: TEXT_BODY }}>{point}</span>
-                                    </div>
-                                ))}
-                            </div>
+                            <h1 className="text-[32px] md:text-[56px] font-bold text-[#181A2A] text-center leading-[1.21]">
+                                {content.hero.title}
+                            </h1>
+                            <p className="text-[16px] font-normal text-[#5B647E] text-center leading-[1.6] max-w-[670px] px-4">
+                                {content.hero.subtitle}
+                            </p>
                         </motion.div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
 
-            {/* Mission & Vision */}
-            <section className="section" style={{ background: "#000" }}>
-                <div className="container max-w-6xl mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                            viewport={{ once: true }}
-                            style={{
-                                background: CARD_BG,
-                                border: CARD_BORDER,
-                                borderRadius: CARD_RADIUS,
-                                padding: "48px 36px",
-                            }}
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "#ffffff" }}>
-                                    <Target size={24} style={{ color: "#000000" }} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white">{content.mission.title}</h3>
-                            </div>
-                            <p className="text-lg leading-relaxed" style={{ color: TEXT_SECONDARY }}>{content.mission.description}</p>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                            viewport={{ once: true }}
-                            style={{
-                                background: CARD_BG,
-                                border: CARD_BORDER,
-                                borderRadius: CARD_RADIUS,
-                                padding: "48px 36px",
-                            }}
-                        >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "#ffffff" }}>
-                                    <LineChart size={24} style={{ color: "#000000" }} />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white">{content.vision.title}</h3>
-                            </div>
-                            <p className="text-lg leading-relaxed" style={{ color: TEXT_SECONDARY }}>{content.vision.description}</p>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Values */}
-            <section className="section" style={{ background: "#000" }}>
-                <div className="container max-w-6xl mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">{content.values.title}</h2>
-                        <p className="text-lg max-w-2xl mx-auto" style={{ color: TEXT_SECONDARY }}>{content.values.subtitle}</p>
+            {/* 2. Trusted AI */}
+            <div className="w-full bg-white mb-[55px]">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={staggerContainer}
+                    className="flex flex-col items-center justify-center w-full px-6 py-[55px] md:px-[100px] gap-[32px]"
+                >
+                    <div className="flex flex-col items-center gap-[10px] w-full text-center">
+                        <motion.h2 variants={fadeInUp} className="text-[#1A1A1A] text-[32px] md:text-[40px] font-semibold leading-[1.21] text-center m-0">
+                            {content.trustedSC1.title.split(/\\n|\n/).map((line: string, i: number, arr: string[]) => (
+                                <span key={i}>
+                                    {line}
+                                    {i < arr.length - 1 && <br />}
+                                </span>
+                            ))}
+                        </motion.h2>
+                        <motion.p variants={fadeInUp} className="text-[#1A1A1A] text-[14px] font-normal md:max-w-[958px] leading-[1.43] text-center max-w-full m-0">
+                            {content.trustedSC1.subtitle}
+                        </motion.p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {content.values.items.map((item: any, index: number) => {
-                            const Icon = iconMap[item.iconKey as keyof typeof iconMap];
-                            return (
+                    <div className="w-full flex justify-center">
+                        <div className="flex flex-col md:flex-row gap-[32px] w-full">
+                            {content.trustedSC1.stats.map((stat: any, index: number) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                                    viewport={{ once: true }}
-                                    style={{
-                                        background: CARD_BG,
-                                        border: CARD_BORDER,
-                                        borderRadius: CARD_RADIUS,
-                                        padding: "48px 36px",
-                                        minHeight: "280px",
-                                    }}
+                                    variants={fadeInUp}
+                                    className="flex-1 bg-[#FFFFFF] rounded-[30px] px-[29px] py-[30px] flex flex-col items-center justify-center gap-[24px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)] transform transition-transform hover:-translate-y-2"
                                 >
-                                    <div className="w-16 h-16 rounded-full flex items-center justify-center mb-10" style={{ background: "#ffffff" }}>
-                                        {Icon ? <Icon size={24} style={{ color: "#000000" }} /> : null}
+                                    <div className="text-[#1F2A6B] text-[24px] font-bold leading-[1.21] text-center m-0 p-0 break-words">{stat.value}</div>
+                                    <div className="text-[#5B647E] text-[16px] font-medium leading-[1.21] text-center m-0 p-0 break-words">{stat.label}</div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <motion.div variants={fadeInUp} className="w-full flex justify-center">
+                        <p className="text-[#1A1A1A] text-[18px] font-normal leading-[1.56] m-0 text-center">
+                            {content.trustedSC1.footer}
+                        </p>
+                    </motion.div>
+                </motion.div>
+            </div>
+
+            {/* 3. APEX Experts AI Solutions */}
+            <div className="w-full px-6 md:px-[100px] mb-[55px]">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInUp}
+                    className="w-full flex flex-col items-center gap-[32px]"
+                >
+                    <h2 className="text-[#1A1A1A] text-[32px] md:text-[40px] font-semibold text-center m-0 leading-[1.21]">
+                        {content.solutions.title}
+                    </h2>
+
+                    <div className="bg-[#E8EBFA] rounded-[30px] p-[30px] md:p-[50px] w-full flex flex-col items-center gap-[32px]">
+                        <Image
+                            src="/images/about/apex-logo.svg"
+                            alt={content.alts.apexLogo}
+                            width={480}
+                            height={93}
+                            className="w-full max-w-[480px] h-auto object-contain"
+                        />
+
+                        <p className="text-[#1A1A1A] text-[20px] md:text-[28px] leading-[1.5em] font-normal max-w-[1151px] text-center m-0">
+                            {content.solutions.description}
+                        </p>
+
+                        <div className="flex flex-col items-center w-full gap-[32px]">
+                            <div className="flex flex-col items-center text-center gap-[10px]">
+                                <h3 className="text-[#1A1A1A] text-[28px] font-semibold leading-[1.1] m-0">
+                                    {content.solutions.whatWeBuild.title}
+                                </h3>
+                                <p className="text-[#1A1A1A] text-[18px] leading-[1.56em] font-normal m-0 max-w-[800px] text-center">
+                                    {content.solutions.whatWeBuild.subtitle}
+                                </p>
+                            </div>
+
+                            <div className="w-full flex flex-col md:flex-row items-stretch gap-[32px]">
+                                {content.solutions.whatWeBuild.points.map((point: string, idx: number) => {
+                                    const iconSrc = idx === 0 
+                                        ? "/images/about/solution-icon-1.svg" 
+                                        : idx === 1 
+                                            ? "/images/about/solution-icon-2.svg" 
+                                            : "/images/about/solution-icon-3.svg";
+                                    return (
+                                        <div key={idx} className="flex-1 bg-white rounded-[30px] p-[20px] flex flex-col justify-start gap-[16px] shadow-sm transform transition-transform hover:-translate-y-2">
+                                            <div className={`flex ${isArabic ? 'justify-end' : 'justify-start'}`}>
+                                                <Image src={iconSrc} alt={`${content.alts.feature} ${idx + 1}`} width={90} height={90} />
+                                            </div>
+                                            <p className={`text-[#1A1A1A] text-[18px] font-normal leading-[1.21] m-0 ${textAlign}`}>
+                                                {point.split(/\\n|\n/).map((line: string, i: number, arr: string[]) => (
+                                                    <span key={i}>
+                                                        {line}
+                                                        {i < arr.length - 1 && <br />}
+                                                    </span>
+                                                ))}
+                                            </p>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* 4. Guides */}
+            <div
+                className="w-full px-6 md:px-[100px] mb-[55px] rounded-[50px]"
+                style={{ background: "transparent" }}
+            >
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={staggerContainer}
+                    className="flex flex-col items-center gap-[24px] py-[50px]"
+                >
+                    <div className="flex flex-col items-center gap-[24px] w-full text-center">
+                        <motion.h2 variants={fadeInUp} className="text-[#1A1A1A] text-[32px] md:text-[40px] font-semibold m-0 leading-[1.21]">
+                            {content.guides.title}
+                        </motion.h2>
+                        <motion.p variants={fadeInUp} className="text-[#5B647E] text-[16px] font-normal leading-[1.3] m-0">
+                            {content.guides.subtitle}
+                        </motion.p>
+                    </div>
+
+                    <div className="flex flex-col lg:flex-row gap-[24px] w-full items-stretch">
+                        {content.guides.cards.map((card: any, idx: number) => {
+                            return (
+                                <motion.div key={idx} variants={fadeInUp} className="bg-[#E8EBFA] rounded-[30px] p-[25px] flex flex-col items-center gap-[20px] flex-1 transform transition-transform hover:-translate-y-2">
+                                    <Image
+                                        src={`/images/about/guide-icon-${idx + 1}.svg`}
+                                        alt={card.title}
+                                        width={100}
+                                        height={100}
+                                        className="w-[100px] h-[100px] object-contain shrink-0"
+                                    />
+                                    <div className="flex flex-col items-center justify-center gap-0">
+                                        <h3 className="text-[#393939] text-[24px] font-semibold leading-[1.25] font-poppins m-0 text-center">
+                                            {card.title}
+                                        </h3>
                                     </div>
-                                    <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                                    <p className="leading-relaxed" style={{ color: TEXT_SECONDARY }}>{item.description}</p>
+                                    <div className="w-full flex justify-center text-center">
+                                        <p className="text-[#5B647E] text-[16px] leading-[1.625] font-normal m-0 text-center">
+                                            {card.description}
+                                        </p>
+                                    </div>
                                 </motion.div>
                             );
                         })}
                     </div>
-                </div>
-            </section>
+                </motion.div>
+            </div>
 
-            {/* Team Section */}
-            <section className="section pb-32" style={{ background: "#000" }}>
-                <div className="container max-w-6xl mx-auto px-4">
-                    {/* Founder & Leaders Row */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
-                        {/* Founder Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
-                            style={{
-                                background: CARD_BG,
-                                border: CARD_BORDER,
-                                borderRadius: CARD_RADIUS,
-                                padding: "48px 36px",
-                            }}
+            {/* 5. Vision and Mission */}
+            <div
+                className="w-full px-6 md:px-[100px] mb-[55px]"
+                style={{ display: "flex", flexDirection: "column", gap: "50px" }}
+            >
+                {/* Vision Card */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInUp}
+                    className="relative w-full rounded-[50px] overflow-hidden flex flex-col md:flex-row justify-between items-center"
+                    style={{
+                        background: "#E8EBFA",
+                        padding: isArabic ? "20px 50px 20px 30px" : "20px 30px 20px 50px",
+                    }}
+                >
+                    {/* Tiled background pattern */}
+                    <div
+                        className="absolute inset-0 rounded-[30px] z-0"
+                        style={{
+                            backgroundImage: "url(/images/about/vm-bg-pattern-v2.png)",
+                            backgroundRepeat: "repeat",
+                            backgroundSize: "100px 100px",
+                            border: "1px solid #F6FBFF",
+                            borderRadius: "30px",
+                            top: "0.21px",
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.1,
+                        }}
+                    />
+
+                    {/* Text block */}
+                    <div
+                        className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
+                        style={{ flex: "1" }}
+                    >
+                        <Image
+                            src="/images/about/vision-logo.svg"
+                            alt={content.alts.visionLogo}
+                            width={100}
+                            height={100}
+                            className="w-[100px] h-[100px] object-contain"
+                        />
+                        <h3
+                            className="font-almarai text-[#1A1A1A] m-0"
+                            style={{ fontSize: "40px", fontWeight: 700, lineHeight: "1.116em", textAlign: "center" }}
                         >
-                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8 text-center sm:text-left">
-                                <div
-                                    className={`w-32 h-32 md:w-36 md:h-36 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 ${founderImage ? "overflow-hidden bg-gray-100" : ""}`}
-                                    style={founderImage ? { border: CARD_BORDER } : { background: "#ffffff" }}
-                                >
-                                    {founderImage ? (
-                                        <Image
-                                            src={founderImage}
-                                            alt={founderName || "Founder portrait"}
-                                            width={144}
-                                            height={144}
-                                            className="w-full h-full object-cover"
-                                            style={{ imageRendering: 'auto' }}
-                                            quality={100}
-                                            priority
-                                            unoptimized
-                                        />
-                                    ) : (
-                                        <span className="text-black text-3xl font-bold">{founderInitials}</span>
-                                    )}
-                                </div>
-                                <div className="sm:mt-4">
-                                    <div className="text-xs font-bold tracking-[0.2em] uppercase mb-2" style={{ color: TEXT_MUTED }}>{content.founder.tag}</div>
-                                    <h3 className="text-3xl font-extrabold text-white mb-2">{content.founder.name}</h3>
-                                    <p className="text-lg" style={{ color: TEXT_SECONDARY }}>{content.founder.role}</p>
-                                </div>
-                            </div>
-                            <p className="text-lg mb-6 leading-relaxed pt-8" style={{ color: TEXT_BODY, borderTop: "1px solid rgba(255,255,255,0.05)" }}>{content.founder.bio}</p>
-                            {content.founder.note ? (
-                                <p className="text-sm italic" style={{ color: TEXT_MUTED }}>{content.founder.note}</p>
-                            ) : null}
-                        </motion.div>
-
-                        {/* Leadership Block */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, delay: 0.1 }}
-                            viewport={{ once: true }}
-                            className={textAlign}
+                            {content.visionMission.vision.title}
+                        </h3>
+                        <p
+                            className="font-almarai text-[#1A1A1A] m-0"
+                            style={{ fontSize: "24px", fontWeight: 400, lineHeight: "1.5em", textAlign: "center", width: "570px", maxWidth: "100%" }}
                         >
-                            <h2 className="text-4xl font-extrabold text-white mb-4">{content.team.title}</h2>
-                            <p className="text-lg mb-10" style={{ color: TEXT_SECONDARY }}>{content.team.description}</p>
-
-                            {/* Leaders Grid */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                                {content.team.members.map((member: any, index: number) => {
-                                    const memberName = member?.name ?? "";
-                                    const memberInitials = memberName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
-                                    const memberImage = member?.image;
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="text-center"
-                                            style={{
-                                                background: CARD_BG,
-                                                border: CARD_BORDER,
-                                                borderRadius: CARD_RADIUS,
-                                                padding: "36px 24px",
-                                            }}
-                                        >
-                                            <div
-                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm ${memberImage ? "overflow-hidden bg-gray-100" : "font-bold text-xl"}`}
-                                                style={memberImage ? { border: CARD_BORDER } : { background: "#ffffff", color: "#000000" }}
-                                            >
-                                                {memberImage ? (
-                                                    <Image
-                                                        src={memberImage}
-                                                        alt={memberName || "Team member portrait"}
-                                                        width={96}
-                                                        height={96}
-                                                        className="w-full h-full object-cover"
-                                                        quality={90}
-                                                        unoptimized
-                                                    />
-                                                ) : (
-                                                    <span>{memberInitials}</span>
-                                                )}
-                                            </div>
-                                            <h4 className="text-lg font-bold text-white">{memberName}</h4>
-                                            <p className="text-sm mb-3" style={{ color: TEXT_MUTED }}>{member.role}</p>
-                                            {member.bio ? (
-                                                <p className="text-xs leading-relaxed" style={{ color: TEXT_MUTED }}>{member.bio}</p>
-                                            ) : null}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </motion.div>
+                            {content.visionMission.vision.description}
+                        </p>
                     </div>
 
-                    {/* Employees Row (Aligned with Leaders column) */}
-                    {content.team.employees && (
-                        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
-                            <div className="hidden lg:block"></div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: 0.2 }}
-                                viewport={{ once: true }}
-                                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
-                            >
-                                {content.team.employees.map((employee: any, index: number) => {
-                                    const employeeName = employee?.name ?? "";
-                                    const employeeInitials = employeeName.replace(/[^\p{L}]/gu, "").slice(0, 2) || "AE";
-                                    const employeeImage = employee?.image;
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="text-center h-full"
-                                            style={{
-                                                background: CARD_BG,
-                                                border: CARD_BORDER,
-                                                borderRadius: CARD_RADIUS,
-                                                padding: "36px 24px",
-                                            }}
-                                        >
-                                            <div
-                                                className={`w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4 shadow-sm ${employeeImage ? "overflow-hidden bg-gray-100" : "font-bold text-xl"}`}
-                                                style={employeeImage ? { border: CARD_BORDER } : { background: "#ffffff", color: "#000000" }}
-                                            >
-                                                {employeeImage ? (
-                                                    <Image
-                                                        src={employeeImage}
-                                                        alt={employeeName || "Team member portrait"}
-                                                        width={96}
-                                                        height={96}
-                                                        className="w-full h-full object-cover"
-                                                        quality={90}
-                                                        unoptimized
-                                                    />
-                                                ) : (
-                                                    <span>{employeeInitials}</span>
-                                                )}
-                                            </div>
-                                            <h4 className="text-lg font-bold text-white">{employeeName}</h4>
-                                            <p className="text-sm" style={{ color: TEXT_MUTED }}>{employee.role}</p>
-                                        </div>
-                                    );
-                                })}
-                            </motion.div>
-                        </div>
-                    )}
-                </div>
-            </section>
-
-            {/* CTA */}
-            <section className="relative py-20 overflow-hidden" style={{ background: "#000" }}>
-                <div className="container max-w-5xl mx-auto px-4 relative z-20">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                        className="rounded-[32px] text-center p-12 md:p-20 shadow-2xl overflow-hidden relative border"
-                        style={{ background: "#0a0a0f", borderColor: CARD_BORDER_COLOR }}
+                    {/* Vision photo */}
+                    <div
+                        className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
+                        style={{ width: "500px", height: "266px" }}
                     >
-                        {/* Blue glow effect in CTA */}
-                        <div className="absolute top-0 right-0 w-96 h-96 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" style={{ background: "rgba(0,131,255,0.15)" }} />
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/40 blur-2xl rounded-full translate-y-1/2 -translate-x-1/2" />
+                        <Image
+                            src="/images/about/vision.png"
+                            alt={content.alts.visionImage}
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+                </motion.div>
 
-                        <h2 className="relative z-10 !text-white text-3xl md:text-5xl font-extrabold mb-6 leading-tight">{content.cta.title}</h2>
-                        <p className="relative z-10 !text-white/70 max-w-2xl mx-auto mb-10 text-lg md:text-xl leading-relaxed">{content.cta.description}</p>
+                {/* Mission Card */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeInUp}
+                    className="relative w-full rounded-[50px] overflow-hidden flex flex-col md:flex-row justify-between items-center"
+                    style={{
+                        background: "#E8EBFA",
+                        padding: isArabic ? "20px 30px 20px 50px" : "20px 50px 20px 30px",
+                    }}
+                >
+                    {/* Tiled background pattern */}
+                    <div
+                        className="absolute inset-0 rounded-[30px] z-0"
+                        style={{
+                            backgroundImage: "url(/images/about/vm-bg-pattern-v2.png)",
+                            backgroundRepeat: "repeat",
+                            backgroundSize: "100px 100px",
+                            border: "1px solid #F6FBFF",
+                            borderRadius: "30px",
+                            top: "0.21px",
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.1,
+                        }}
+                    />
 
-                        <div className="relative z-10">
-                            <a
-                                href={`/${lang}/contact`}
-                                className="inline-flex items-center justify-center gap-2 font-bold py-3.5 px-8 rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer"
-                                style={{ background: "#ffffff", color: "#000000" }}
-                            >
-                                {content.cta.button}
-                                <span className="flex items-center justify-center w-6 h-6 rounded-full" style={{ background: "rgba(0,0,0,0.1)" }}>
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                                </span>
-                            </a>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-        </>
+                    {/* Mission photo */}
+                    <div
+                        className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
+                        style={{ width: "505px", height: "266px" }}
+                    >
+                        <Image
+                            src="/images/about/mission.png"
+                            alt={content.alts.missionImage}
+                            fill
+                            className="object-cover"
+                        />
+                    </div>
+
+                    {/* Text block */}
+                    <div
+                        className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
+                        style={{ flex: "1" }}
+                    >
+                        <Image
+                            src="/images/about/mission-logo.svg"
+                            alt={content.alts.missionLogo}
+                            width={100}
+                            height={100}
+                            className="w-[100px] h-[100px] object-contain"
+                        />
+                        <h3
+                            className="font-almarai text-[#1A1A1A] m-0"
+                            style={{ fontSize: "40px", fontWeight: 700, lineHeight: "1.116em", textAlign: "center" }}
+                        >
+                            {content.visionMission.mission.title}
+                        </h3>
+                        <p
+                            className="font-almarai text-[#1A1A1A] m-0"
+                            style={{ fontSize: "24px", fontWeight: 400, lineHeight: "1.5em", textAlign: "center", width: "591px", maxWidth: "100%" }}
+                        >
+                            {content.visionMission.mission.description}
+                        </p>
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* 6. Leaders */}
+            <div className="w-full px-6 md:px-[100px] pt-[55px] pb-10 relative overflow-visible">
+                {/* Decorative background element */}
+                <div 
+                    className="absolute pointer-events-none"
+                    style={{
+                        width: "2193.273px",
+                        height: "411.102px",
+                        transform: "translate(-50%, -50%) rotate(12deg)",
+                        padding: "50px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: "32px",
+                        borderRadius: "30px",
+                        background: "#E8EBFA",
+                        zIndex: 0,
+                        left: "50%",
+                        top: "50%",
+                    }}
+                />
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={staggerContainer}
+                    className="flex flex-col items-center w-full gap-[32px] relative z-10"
+                >
+                    <div className="flex flex-col items-center gap-[10px] text-center">
+                        <motion.h2 variants={fadeInUp} className="text-[#0F172A] text-3xl md:text-[40px] font-semibold m-0 leading-[1.21]">
+                            {content.leaders.title}
+                        </motion.h2>
+                        <motion.p variants={fadeInUp} className="text-[#5B647E] text-base md:text-[18px] m-0 leading-[1.56]">
+                            {content.leaders.subtitle}
+                        </motion.p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-[50px] w-full">
+                        {content.leaders.members.map((member: any, idx: number) => {
+                            const imgSrc = idx === 0 ? "/images/about/ahmed.png" : idx === 1 ? "/images/about/amr.png" : "/images/about/abdulrahman.png";
+                            return (
+                                <motion.div
+                                    key={idx}
+                                    variants={fadeInUp}
+                                    className="bg-white border border-[#C7C7C7] rounded-[30px] p-5 flex flex-col items-center shadow-sm hover:shadow-lg transition-all"
+                                    style={{ width: "100%", minHeight: "518px" }}
+                                >
+                                    <div className="w-full h-[300px] mb-4 rounded-[30px] relative overflow-hidden bg-gray-100">
+                                        <Image
+                                            src={imgSrc}
+                                            alt={member.name}
+                                            fill
+                                            className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                                            unoptimized
+                                        />
+                                    </div>
+                                    <div className="bg-[#E8EBFA] rounded-[20px] px-[17px] py-2 mb-2 text-center" style={{ width: "fit-content" }}>
+                                        <span className="text-[#3A4A8A] text-[14px] font-normal leading-[1.71]">
+                                            {member.role}
+                                        </span>
+                                    </div>
+                                    <h4 className="text-[#232323] text-[24px] font-semibold text-center m-0 leading-[1.17]">
+                                        {member.name}
+                                    </h4>
+                                    <div className="mt-4 flex items-center justify-center gap-[16px]">
+                                        {member.social?.facebook && (
+                                            <Link
+                                                href={member.social.facebook}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center transition-all hover:-translate-y-1 shadow-[0px_2px_10px_rgba(0,0,0,0.1)] overflow-hidden border border-black/5"
+                                            >
+                                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M24 16.3077H20.6667V13.3846C20.6667 12.5778 21.264 12.6538 22 12.6538H23.3333V9H20.6667C18.4573 9 16.6667 10.9628 16.6667 13.3846V16.3077H14V19.9615H16.6667V28H20.6667V19.9615H22.6667L24 16.3077Z" fill="#1F2A6B"/>
+                                                </svg>
+                                            </Link>
+                                        )}
+                                        {member.social?.linkedin && (
+                                            <Link
+                                                href={member.social.linkedin}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center transition-all hover:-translate-y-1 shadow-[0px_2px_10px_rgba(0,0,0,0.1)] overflow-hidden border border-black/5"
+                                            >
+                                                <svg width="38" height="38" viewBox="56 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M68.6639 25H71.0503V15.1071H68.6639V25ZM69.8741 13.9286C70.7094 13.9286 71.3401 13.2857 71.3401 12.4643C71.3401 11.6429 70.7094 11 69.8741 11C69.0218 11 68.4082 11.6429 68.4082 12.4643C68.4082 13.2857 69.0218 13.9286 69.8741 13.9286Z" fill="#1F2A6B"/>
+                                                    <path d="M80.0218 25H82.4082V19.1964C82.4082 16.4643 80.84 14.9643 78.6411 14.9643C77.4309 14.9643 76.4081 15.5 75.7945 16.3393V15.1071H73.4081V25H75.7945V19.5357C75.7945 17.9464 76.6297 17.0893 77.9252 17.0893C79.1866 17.0893 80.0218 17.9464 80.0218 19.5357V25Z" fill="#1F2A6B"/>
+                                                </svg>
+                                            </Link>
+                                        )}
+                                        {member.social?.instagram && (
+                                            <Link
+                                                href={member.social.instagram}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-[38px] h-[38px] rounded-full bg-white flex items-center justify-center transition-all hover:-translate-y-1 shadow-[0px_2px_10px_rgba(0,0,0,0.1)] overflow-hidden border border-black/5"
+                                            >
+                                                <svg width="38" height="38" viewBox="112 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M130.619 16.4475C129.989 16.4475 129.385 16.6977 128.939 17.1432C128.494 17.5886 128.244 18.1927 128.244 18.8226C128.244 19.4525 128.494 20.0566 128.939 20.5021C129.385 20.9475 129.989 21.1977 130.619 21.1977C131.249 21.1977 131.853 20.9475 132.298 20.5021C132.744 20.0566 132.994 19.4525 132.994 18.8226C132.994 18.1927 132.744 17.5886 132.298 17.1432C131.853 16.6977 131.249 16.4475 130.619 16.4475Z" fill="#1F2A6B"/>
+                                                    <path fillRule="evenodd" clipRule="evenodd" d="M126.796 12.3052C129.337 12.0236 131.9 12.0236 134.441 12.3052C135.828 12.4601 136.947 13.5527 137.11 14.9456C137.412 17.5214 137.412 20.1236 137.11 22.6994C136.947 24.0923 135.828 25.1848 134.441 25.3406C131.901 25.6222 129.337 25.6222 126.796 25.3406C125.409 25.1848 124.29 24.0923 124.127 22.7002C123.826 20.1241 123.826 17.5216 124.127 14.9456C124.29 13.5527 125.409 12.4601 126.796 12.3052ZM134.273 14.4377C134.079 14.4377 133.893 14.5147 133.756 14.6517C133.619 14.7888 133.542 14.9747 133.542 15.1685C133.542 15.3623 133.619 15.5482 133.756 15.6852C133.893 15.8223 134.079 15.8993 134.273 15.8993C134.466 15.8993 134.652 15.8223 134.789 15.6852C134.926 15.5482 135.003 15.3623 135.003 15.1685C135.003 14.9747 134.926 14.7888 134.789 14.6517C134.652 14.5147 134.466 14.4377 134.273 14.4377ZM127.147 18.8225C127.147 17.9018 127.513 17.0189 128.164 16.3679C128.815 15.7169 129.698 15.3512 130.619 15.3512C131.539 15.3512 132.422 15.7169 133.073 16.3679C133.724 17.0189 134.09 17.9018 134.09 18.8225C134.09 19.7431 133.724 20.6261 133.073 21.2771C132.422 21.9281 131.539 22.2938 130.619 22.2938C129.698 22.2938 128.815 21.9281 128.164 21.2771C127.513 20.6261 127.147 19.7431 127.147 18.8225Z" fill="#1F2A6B"/>
+                                                </svg>
+                                            </Link>
+                                        )}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                </motion.div>
+            </div>
+
+        </div>
     );
 }
