@@ -1,167 +1,107 @@
 "use client";
-
-import { motion, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import CommonCTA from "./CommonCTA";
+import Image from "next/image";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { FeatureIcon } from "./Icons";
 import {
-    Database,
-    Layers,
-    Sparkles,
-    BarChart3,
-    Shield,
-    Globe,
-} from "lucide-react";
+  type CommonCtaContent,
+  type FeatureGridContent,
+} from "../../payload-types";
 
-interface FeatureGridProps {
-    dict: {
-        tag: string;
-        title: string;
-        desc: string;
-        features: Array<{
-            title: string;
-            desc: string;
-        }>;
-    };
-}
+export default function FeatureGrid({
+  dict,
+  commonCTA_Dict,
+}: {
+  dict: Omit<FeatureGridContent, "id">;
+  commonCTA_Dict: Omit<CommonCtaContent, "id">;
+}) {
+  const [activeFeature, setActiveFeature] = useState(0);
+  const features = dict.features;
+  return (
+    <section id="features" className="mx-4 md:mx-16 lg:mx-24 my-12">
+      <div className="max-w-content-section flex flex-col gap-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mx-auto"
+        >
+          <h2 className="font-bold mb-5 text-center text-3xl lg:text-[40px] text-primary-dark">
+            {dict.title}
+          </h2>
+          <p className="text-center text-text-body">{dict.desc}</p>
+        </motion.div>
 
-const icons = [Shield, Layers, Database, Globe, BarChart3, Sparkles];
-
-export default function FeatureGrid({ dict }: FeatureGridProps) {
-    // Show only first 3 features like Vexel's "All-in-one SaaS engine" section
-    const topFeatures = dict.features.slice(0, 3).map((f, i) => ({
-        ...f,
-        icon: icons[i],
-    }));
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.12,
-            },
-        },
-    };
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: "easeOut" as const
-            },
-        },
-    };
-
-    return (
-        <section id="features" className="section">
-            <div className="container">
-                {/* Section Header - Centered, Vexel style */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-col lg:flex-row gap-8 justify-center"
+        >
+          {/* CTA */}
+          <div className="flex flex-col gap-6 items-center w-full">
+            {/* Image */}
+            <div className="w-full h-[450px] rounded-3xl relative overflow-hidden feature-image-container">
+              <AnimatePresence mode="wait">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20 max-w-3xl mx-auto"
+                  key={activeFeature}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 w-full h-full"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-5">{dict.title}</h2>
-                    <p className="text-base md:text-lg" style={{ color: "rgba(255,255,255,0.55)" }}>{dict.desc}</p>
+                  <Image
+                    src={features[activeFeature].image}
+                    alt={features[activeFeature].title}
+                    fill
+                    className="object-cover"
+                  />
                 </motion.div>
-
-                {/* 3-Column Feature Cards — Tall, spacious like Vexel */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6"
-                >
-                    {topFeatures.map((feature) => (
-                        <motion.div
-                            key={feature.title}
-                            variants={itemVariants}
-                            className="group transition-all duration-300"
-                            style={{
-                                background: "rgba(5, 5, 10, 0.6)",
-                                border: "1px solid rgba(255, 255, 255, 0.1)",
-                                borderRadius: "var(--card-radius)",
-                                padding: "48px 36px",
-                                minHeight: "340px",
-                                display: "flex",
-                                flexDirection: "column" as const,
-                            }}
-                        >
-                            {/* Large white circle icon — exactly like Vexel */}
-                            <div
-                                className="flex items-center justify-center mb-12"
-                                style={{
-                                    width: "64px",
-                                    height: "64px",
-                                    borderRadius: "50%",
-                                    background: "#ffffff",
-                                }}
-                            >
-                                <feature.icon size={28} color="#000000" />
-                            </div>
-
-                            <div className="mt-auto">
-                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                                <p className="text-sm leading-relaxed m-0" style={{ color: "rgba(255,255,255,0.55)" }}>
-                                    {feature.desc}
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* Bottom 3 features in a second row */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6"
-                >
-                    {dict.features.slice(3).map((feature, i) => (
-                        <motion.div
-                            key={feature.title}
-                            variants={itemVariants}
-                            className="group transition-all duration-300"
-                            style={{
-                                background: "rgba(5, 5, 10, 0.6)",
-                                border: "1px solid rgba(255, 255, 255, 0.1)",
-                                borderRadius: "var(--card-radius)",
-                                padding: "48px 36px",
-                                minHeight: "340px",
-                                display: "flex",
-                                flexDirection: "column" as const,
-                            }}
-                        >
-                            <div
-                                className="flex items-center justify-center mb-12"
-                                style={{
-                                    width: "64px",
-                                    height: "64px",
-                                    borderRadius: "50%",
-                                    background: "#ffffff",
-                                }}
-                            >
-                                {(() => {
-                                    const Icon = icons[i + 3];
-                                    return <Icon size={28} color="#000000" />;
-                                })()}
-                            </div>
-
-                            <div className="mt-auto">
-                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{feature.title}</h3>
-                                <p className="text-sm leading-relaxed m-0" style={{ color: "rgba(255,255,255,0.55)" }}>
-                                    {feature.desc}
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+              </AnimatePresence>
             </div>
-        </section>
-    );
+            <CommonCTA commonCTA_Dict={commonCTA_Dict} />
+          </div>
+          {/* Features */}
+          <div className="flex flex-col gap-4 w-full">
+            {features.map(({ title, desc }, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "flex flex-col gap-2.5 items-start py-4 px-5 rounded-3xl border cursor-pointer",
+                  activeFeature === index
+                    ? "border-primary-border bg-primary-bg-light"
+                    : "border-primary-border-light feature-gradient"
+                )}
+                onClick={() => setActiveFeature(index)}
+              >
+                <div className="flex flex-row gap-2.5 items-center">
+                  <div
+                    className={cn(
+                      "p-4 rounded-xl",
+                      activeFeature === index
+                        ? "bg-bg-subtle text-primary"
+                        : "bg-primary-light text-primary-variant"
+                    )}
+                  >
+                    <FeatureIcon index={index} width={42} height={42} />
+                  </div>
+                  <h3 className="text-text-heading font-medium text-2xl leading-[110%]">
+                    {title}
+                  </h3>
+                </div>
+                <p className="text-text-body leading-[130%] capitalize">
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

@@ -1,3 +1,4 @@
+import path from "path";
 import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
 
@@ -45,6 +46,31 @@ const nextConfig: NextConfig = {
 
   typescript: {
     ignoreBuildErrors: true,
+  },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"],
+    });
+
+    // Strip source mapping URLs from framer-motion to prevent 404s in dev console and terminal
+    config.module.rules.push({
+      test: /\.(js|mjs|jsx|ts|tsx)$/,
+      include: /node_modules\/framer-motion/,
+      use: [
+        {
+          loader: path.resolve('src/loaders/strip-sourcemap-loader.cjs'),
+        },
+      ],
+    });
+
+    config.ignoreWarnings = [
+      ...(config.ignoreWarnings || []),
+      { module: /node_modules\/framer-motion/ },
+      /Failed to parse source map/
+    ];
+
+    return config;
   },
 };
 

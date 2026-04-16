@@ -2,220 +2,177 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, ArrowUpRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useState } from "react";
+import LinkButton from "./LinkButton";
+import { cn } from "@/lib/utils";
+import TabSelector from "./TabSelector";
 
 interface PricingProps {
-    dict: {
-        tag: string;
-        title: string;
-        desc: string;
-        cta: string;
-        recommended: string;
-        trustNote: string;
-        plans: Array<{
-            name: string;
-            price: string;
-            period: string;
-            desc: string;
-            cta?: string;
-            href?: string;
-            features: string[];
-        }>;
-    };
-    lang?: string;
-}
-
-function genSectionParticles() {
-    return Array.from({ length: 20 }).map(() => ({
-        width: `${(1 + Math.random() * 2).toFixed(2)}px`,
-        height: `${(1 + Math.random() * 2).toFixed(2)}px`,
-        background: `rgba(59, 130, 246, ${(0.2 + Math.random() * 0.3).toFixed(3)})`,
-        top: `${(Math.random() * 60).toFixed(2)}%`,
-        right: `${(Math.random() * 40).toFixed(2)}%`,
-        boxShadow: `0 0 ${(3 + Math.random() * 6).toFixed(2)}px rgba(59, 130, 246, 0.3)`,
-    }));
-}
-
-function genCardParticles() {
-    return Array.from({ length: 15 }).map(() => ({
-        width: `${(1 + Math.random() * 2).toFixed(2)}px`,
-        height: `${(1 + Math.random() * 2).toFixed(2)}px`,
-        background: `rgba(59, 130, 246, ${(0.2 + Math.random() * 0.4).toFixed(3)})`,
-        top: `${(Math.random() * 80).toFixed(2)}%`,
-        right: `${(Math.random() * 80).toFixed(2)}%`,
-        boxShadow: `0 0 ${(2 + Math.random() * 5).toFixed(2)}px rgba(59, 130, 246, 0.3)`,
-    }));
+  dict: {
+    tag: string;
+    title: string;
+    desc: string;
+    cta: string;
+    href: string;
+    recommended: string;
+    monthly: string;
+    yearly: string;
+    plans: Array<{
+      name: string;
+      price: string;
+      period: string;
+      periodLabel: string;
+      href?: string;
+      features: string[];
+      isRecommended?: boolean;
+    }>;
+  };
+  lang?: string;
 }
 
 export default function Pricing({ dict, lang = "en" }: PricingProps) {
-    const [sectionParts, setSectionParts] = useState<React.CSSProperties[]>([]);
-    const [cardParts, setCardParts] = useState<React.CSSProperties[][]>([[], []]);
+  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
+    "monthly"
+  );
+  console.log(dict.plans);
 
-    useEffect(() => {
-        setSectionParts(genSectionParticles());
-        setCardParts([genCardParticles(), genCardParticles()]);
-    }, []);
+  const filteredPlans = dict.plans.filter(
+    (plan) => plan.period === billingPeriod || plan.periodLabel === ""
+  );
 
-    return (
-        <section id="pricing" className="section relative overflow-hidden">
-            {/* Blue particle streaks in background (top right) */}
-            <div className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none z-0">
-                <div
-                    className="absolute top-0 right-0"
-                    style={{
-                        width: "500px",
-                        height: "500px",
-                        background: "radial-gradient(ellipse at 100% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 60%)",
-                    }}
-                />
-                {/* Particle streaks */}
-                {sectionParts.map((p, i) => (
-                    <div
-                        key={i}
-                        className="absolute rounded-full"
-                        style={p}
+  return (
+    <section
+      id="pricing"
+      className="py-12 md:py-16 px-4 md:px-8 lg:px-24 relative overflow-hidden"
+    >
+      <div className="max-w-full flex flex-col items-center mx-auto gap-8 justify-center">
+        <div className="text-center">
+          <h2 className="text-3xl lg:text-[40px] font-bold mb-4 text-primary-dark">
+            {dict.title}
+          </h2>
+          <p className="text-text-body">{dict.desc}</p>
+        </div>
+
+        {/* Period Selector Tabs */}
+        <TabSelector
+          tabs={[dict.monthly, dict.yearly]}
+          activeTab={billingPeriod === "monthly" ? dict.monthly : dict.yearly}
+          onChange={(tab) =>
+            setBillingPeriod(tab === dict.monthly ? "monthly" : "yearly")
+          }
+          layoutId="pricingPeriod"
+          className="mt-4"
+        />
+
+        <div className="flex flex-row max-lg:flex-wrap max-lg:gap-8 -space-x-8 w-full mt-4">
+          {filteredPlans.map((plan, index) => (
+            <motion.div
+              key={`${plan.name}-${index}`}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={cn(
+                "relative group hover:translate-y-[-8px] transition-all duration-500 w-full h-[840px]",
+                plan.isRecommended ? "z-10" : "z-0"
+              )}
+            >
+              {plan.isRecommended && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[324px] h-[50px] flex items-center justify-center z-20 transition-all duration-500">
+                  <div className="absolute inset-0 w-full h-full pointer-events-none">
+                    <Image
+                      src="/popular-box.svg"
+                      alt="Most Popular"
+                      className="w-full h-full object-contain"
+                      width={324}
+                      height={50}
                     />
-                ))}
-            </div>
-
-            <div className="container relative z-10">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16 max-w-3xl mx-auto"
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-5">{dict.title}</h2>
-                    <p className="text-base md:text-lg" style={{ color: "rgba(255,255,255,0.55)" }}>{dict.desc}</p>
-                </motion.div>
-
-                {/* 3-Column Pricing Cards — Vexel exact style */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    {dict.plans.map((plan, index) => {
-                        const isPro = index === 1;
-                        const isEnterprise = index === 2;
-                        const hasParticles = isPro || isEnterprise;
-                        const particleIdx = isPro ? 0 : 1;
-
-                        return (
-                            <motion.div
-                                key={plan.name}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.6, delay: index * 0.15 }}
-                                viewport={{ once: true }}
-                                className="relative overflow-hidden transition-all duration-300"
-                                style={{
-                                    background: "rgba(5, 5, 10, 0.8)",
-                                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                                    borderRadius: "var(--card-radius)",
-                                    padding: "48px 36px",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                {/* Pro card: Blue glow from top — matches Vexel exactly */}
-                                {isPro && (
-                                    <div
-                                        className="absolute pointer-events-none"
-                                        style={{
-                                            top: 0,
-                                            left: 0,
-                                            right: 0,
-                                            height: "200px",
-                                            background: "#0083FF",
-                                            filter: "blur(116px)",
-                                            opacity: 0.35,
-                                        }}
-                                    />
-                                )}
-
-                                {/* Blue particle effect on Pro/Enterprise cards (top right) */}
-                                {hasParticles && (
-                                    <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none">
-                                        <div
-                                            style={{
-                                                position: "absolute",
-                                                top: "-20px",
-                                                right: "-20px",
-                                                width: "200px",
-                                                height: "200px",
-                                                background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 60%)",
-                                            }}
-                                        />
-                                        {cardParts[particleIdx]?.map((p, i) => (
-                                            <div
-                                                key={i}
-                                                className="absolute rounded-full"
-                                                style={p}
-                                            />
-                                        ))}
-                                    </div>
-                                )}
-
-                                {/* Plan Name — Bold, large */}
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                                    {plan.name}
-                                </h3>
-                                <p className="text-sm mb-8" style={{ color: "rgba(255,255,255,0.45)" }}>
-                                    {plan.desc}
-                                </p>
-
-                                {/* Price — Very large */}
-                                <div className="mb-10">
-                                    <span className="text-4xl md:text-5xl font-bold text-white" style={{ letterSpacing: "-0.03em" }}>
-                                        {plan.price}
-                                    </span>
-                                    {plan.period && (
-                                        <span className="text-base" style={{ color: "rgba(255,255,255,0.4)" }}>
-                                            {plan.period}
-                                        </span>
-                                    )}
-                                </div>
-
-                                {/* Features — Blue sparkle icons like Vexel */}
-                                <ul className="space-y-4 mb-10 flex-1" style={{ textAlign: lang === "ar" ? "right" : "left" }}>
-                                    {plan.features.map((feature) => (
-                                        <li key={feature} className="flex items-start gap-3">
-                                            <Sparkles size={16} className="flex-shrink-0 mt-0.5" style={{ color: "#3b82f6" }} />
-                                            <span className="text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                {/* CTA Button — White pill with black circle arrow (exactly like Vexel) */}
-                                <motion.a
-                                    href={plan.href || "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"}
-                                    target={plan.href?.startsWith("/") ? "_self" : "_blank"}
-                                    rel="noopener noreferrer"
-                                    whileHover={{ scale: 1.03 }}
-                                    whileTap={{ scale: 0.97 }}
-                                    className="btn-pill-white w-full justify-center"
-                                >
-                                    {plan.cta || dict.cta}
-                                    <span className="btn-icon">
-                                        <ArrowUpRight size={14} />
-                                    </span>
-                                </motion.a>
-                            </motion.div>
-                        );
-                    })}
+                  </div>
+                  <span className="relative text-white text-[11px] font-bold tracking-[0.25em] -mt-1 uppercase">
+                    {dict.recommended}
+                  </span>
                 </div>
-
-                {/* Trust Note */}
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="text-center mt-10 text-sm"
-                    style={{ color: "rgba(255,255,255,0.3)" }}
+              )}
+              <div
+                className={` rounded-3xl p-8 md:p-12 lg:p-16 h-full flex flex-col justify-between  ${
+                  plan.isRecommended
+                    ? "bg-white pricing-card-shadow"
+                    : "bg-bg-card"
+                }`}
+              >
+                <div className="flex items-center flex-col gap-4">
+                  <h3 className="max-lg:mt-16 text-[40px] font-bold text-text-heading">
+                    {plan.name}
+                  </h3>
+                  <div className="">
+                    <span className="text-5xl font-bold text-text-heading">
+                      {plan.price}
+                    </span>
+                    <span className="text-text-heading leading-[130%] capitalize">
+                      {plan.periodLabel}
+                    </span>
+                  </div>
+                </div>
+                <ul className="flex flex-col gap-4">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <div className="mt-1">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M7.34496 1.87629C7.37353 1.72336 7.45468 1.58524 7.57436 1.48584C7.69404 1.38644 7.84472 1.33203 8.00029 1.33203C8.15587 1.33203 8.30655 1.38644 8.42623 1.48584C8.54591 1.58524 8.62706 1.72336 8.65563 1.87629L9.35629 5.58163C9.40606 5.84506 9.53408 6.08737 9.72365 6.27694C9.91322 6.46651 10.1555 6.59453 10.419 6.64429L14.1243 7.34496C14.2772 7.37353 14.4154 7.45468 14.5147 7.57436C14.6141 7.69404 14.6686 7.84472 14.6686 8.00029C14.6686 8.15587 14.6141 8.30655 14.5147 8.42623C14.4154 8.54591 14.2772 8.62706 14.1243 8.65563L10.419 9.35629C10.1555 9.40606 9.91322 9.53408 9.72365 9.72365C9.53408 9.91322 9.40606 10.1555 9.35629 10.419L8.65563 14.1243C8.62706 14.2772 8.54591 14.4154 8.42623 14.5147C8.30655 14.6141 8.15587 14.6686 8.00029 14.6686C7.84472 14.6686 7.69404 14.6141 7.57436 14.5147C7.45468 14.4154 7.37353 14.2772 7.34496 14.1243L6.64429 10.419C6.59453 10.1555 6.46651 9.91322 6.27694 9.72365C6.08737 9.53408 5.84506 9.40606 5.58163 9.35629L1.87629 8.65563C1.72336 8.62706 1.58524 8.54591 1.48584 8.42623C1.38644 8.30655 1.33203 8.15587 1.33203 8.00029C1.33203 7.84472 1.38644 7.69404 1.48584 7.57436C1.58524 7.45468 1.72336 7.37353 1.87629 7.34496L5.58163 6.64429C5.84506 6.59453 6.08737 6.46651 6.27694 6.27694C6.46651 6.08737 6.59453 5.84506 6.64429 5.58163L7.34496 1.87629Z"
+                            stroke="#3B82F6"
+                            strokeWidth="1.33333"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M13.334 1.33301V3.99967"
+                            stroke="#3B82F6"
+                            strokeWidth="1.33333"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M14.6667 2.66699H12"
+                            stroke="#3B82F6"
+                            strokeWidth="1.33333"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M2.66732 14.6667C3.4037 14.6667 4.00065 14.0697 4.00065 13.3333C4.00065 12.597 3.4037 12 2.66732 12C1.93094 12 1.33398 12.597 1.33398 13.3333C1.33398 14.0697 1.93094 14.6667 2.66732 14.6667Z"
+                            stroke="#3B82F6"
+                            strokeWidth="1.33333"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <span className="text-text-heading leading-normal">
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <LinkButton
+                  href={plan.href || dict.href}
+                  className={`transition-all duration-300 flex items-center justify-center gap-2`}
                 >
-                    {dict.trustNote}
-                </motion.p>
-            </div>
-        </section>
-    );
+                  {dict.cta}
+                </LinkButton>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

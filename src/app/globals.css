@@ -2,64 +2,178 @@
 
 /* ===== VEXEL-STYLE DARK DESIGN TOKENS ===== */
 :root {
-  /* Primary Colors - Keep coral for brand identity */
-  --color-primary: #ff705a;
-  --color-primary-dark: #e65a45;
-  --color-primary-light: #ff8a78;
-  --color-primary-glow: rgba(255, 112, 90, 0.15);
-
-  /* Blue accent (Vexel glow) */
-  --color-accent-blue: #3b82f6;
-  --color-accent-blue-glow: rgba(59, 130, 246, 0.25);
-
-  /* Text Colors */
-  --color-heading: #ffffff;
-  --color-body: rgba(255, 255, 255, 0.7);
-  --color-body-light: rgba(255, 255, 255, 0.4);
-
-  /* Backgrounds - Pure black like Vexel */
-  --color-bg: #000000;
-  --color-bg-alt: #050508;
-  --color-bg-elevated: #0a0a0f;
-  --color-bg-card: rgba(10, 10, 15, 0.8);
-
-  /* Secondary text */
-  --color-body-secondary: rgba(255, 255, 255, 0.55);
-  --color-body-muted: rgba(255, 255, 255, 0.35);
-
-  /* Accent backgrounds */
-  --color-bg-accent: rgba(255, 112, 90, 0.1);
-
-  /* Borders & Shadows */
-  --color-border: rgba(255, 255, 255, 0.1);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
-  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.6);
-
-  /* Glass morphism */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-blur: 20px;
-
+  /* New Theme */
   /* Typography */
-  --font-heading: 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --hero-headline: 56px;
+  --heading-tracking: 0%;
+  --heading-line-height: 130%;
+  --h1-size: 44px;
+  --h2-size: 40px;
+  --h3-size: 36px;
+  --h4-size: 32px;
+  --h5-size: 28px;
+  --h6-size: 24px;
+  --h7-size: 20px;
+  --h8-size: 18px;
+  --h9-size: 16px;
+  --h10-size: 14px;
 
-  /* Spacing */
-  --container-max: 1200px;
-  --section-padding: 120px;
-
-  /* Transitions */
-  --transition-base: all 0.3s ease;
-  --transition-slow: all 0.5s ease;
-
-  /* Vexel signature values */
-  --card-radius: 32px;
-  --btn-radius: 999px;
+  /* Color System */
+  /* Primary */
+  --color-primary: #1f2a6b;
+  --color-primary-hover: #19235a;
+  --color-primary-active: #141c4a;
+  --color-primary-dark: #0f172a;
+  --color-primary-light: #e8ebf8;
+  --color-primary-border: #4f46e5;
+  --color-primary-bg-light: #eef2ff;
+  --color-primary-border-light: #e6e9f5;
+  --color-primary-variant: #8a96c2;
+  --color-primary-300: #5c6aa5;
+  /* Background */
+  --color-bg: #fff;
+  --color-bg-card: #e8ebfa;
+  --color-bg-subtle: #c5cae9;
+  --color-bg-accent: #f7f8fc;
+  /* Text */
+  --color-text-heading: #1a1a1a;
+  --color-text-body: #5b647e;
+  --color-text-secondary: #111;
+  --color-text-muted: #94a3b8;
+  /* Gray */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f2f2f2;
+  --color-gray-200: #e0e0e0;
+  --color-gray-300: #c7c7c7;
+  --color-gray-400: #9e9e9e;
+  --color-gray-500: #6b6b6b;
+  --color-gray-550: #757575;
+  --color-gray-600: #4f4f4f;
+  --color-gray-700: #333333;
+  --color-gray-800: #1f1f1f;
+  --color-gray-900: #111;
+  /* Success */
+  --color-success-50: #e7f7ee;
+  --color-success-100: ##c5ead5;
+  --color-success-200: #9fddbb;
+  --color-success-300: #76d0a1;
+  --color-success-400: #55c58c;
+  --color-success-500: #2ebb78;
+  --color-success-600: #27ab6d;
+  --color-success-700: #1f9860;
+  --color-success-800: #198754;
+  --color-success-900: #10673e;
+  /* Warning */
+  --color-warning-50: #fff8e1;
+  --color-warning-100: #ffecb3;
+  --color-warning-200: #ffe082;
+  --color-warning-300: #ffd54f;
+  --color-warning-400: #ffca28;
+  --color-warning-500: #ffc107;
+  --color-warning-600: #ffb300;
+  --color-warning-700: #ffa000;
+  --color-warning-800: #ff8f00;
+  --color-warning-900: #ff6f00;
+  /* Error */
+  --color-error-50: #ffecf1;
+  --color-error-100: #ffd0d9;
+  --color-error-200: #f19ea6;
+  --color-error-300: #e97984;
+  --color-error-400: #f75965;
+  --color-error-500: #fd464e;
+  --color-error-600: #ef3e4d;
+  --color-error-700: #dc3546;
+  --color-error-800: #cf2e3e;
+  --color-error-900: #c02333;
+  /* Border Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 30px;
+  --radius-4xl: 32px;
+  --radius-5xl: 50px;
+  --radius-full: 9999px;
+  /* Grid & Layout */
+  --page-width: 1200px;
+  --wide-section: 1280px;
+  --full-width: 1440px;
+  --content-section: 1240px;
 }
 
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-heading);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-active: var(--color-primary-active);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-border: var(--color-primary-border);
+  --color-primary-bg-light: var(--color-primary-bg-light);
+  --color-primary-variant: var(--color-primary-variant);
+  --color-bg: var(--color-bg);
+  --color-bg-card: var(--color-bg-card);
+  --color-bg-subtle: var(--color-bg-subtle);
+  --color-bg-accent: var(--color-bg-accent);
+  --color-text-heading: var(--color-text-heading);
+  --color-text-body: var(--color-text-body);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-gray-50: var(--color-gray-50);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-200: var(--color-gray-200);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
+  --color-success-50: var(--color-success-50);
+  --color-success-100: var(--color-success-100);
+  --color-success-200: var(--color-success-200);
+  --color-success-300: var(--color-success-300);
+  --color-success-400: var(--color-success-400);
+  --color-success-500: var(--color-success-500);
+  --color-success-600: var(--color-success-600);
+  --color-success-700: var(--color-success-700);
+  --color-success-800: var(--color-success-800);
+  --color-success-900: var(--color-success-900);
+  --color-warning-50: var(--color-warning-50);
+  --color-warning-100: var(--color-warning-100);
+  --color-warning-200: var(--color-warning-200);
+  --color-warning-300: var(--color-warning-300);
+  --color-warning-400: var(--color-warning-400);
+  --color-warning-500: var(--color-warning-500);
+  --color-warning-600: var(--color-warning-600);
+  --color-warning-700: var(--color-warning-700);
+  --color-warning-800: var(--color-warning-800);
+  --color-warning-900: var(--color-warning-900);
+  --color-error-50: var(--color-error-50);
+  --color-error-100: var(--color-error-100);
+  --color-error-200: var(--color-error-200);
+  --color-error-300: var(--color-error-300);
+  --color-error-400: var(--color-error-400);
+  --color-error-500: var(--color-error-500);
+  --color-error-600: var(--color-error-600);
+  --color-error-700: var(--color-error-700);
+  --color-error-800: var(--color-error-800);
+  --color-error-900: var(--color-error-900);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-4xl: var(--radius-4xl);
+  --radius-5xl: var(--radius-5xl);
+  --radius-full: var(--radius-full);
+  --page-width: var(--page-width);
+  --wide-section: var(--wide-section);
+  --full-width: var(--full-width);
+  --content-section: var(--content-section);
 }
 
 /* ===== BASE STYLES ===== */
@@ -73,223 +187,10 @@ html {
 
 body {
   background: var(--color-bg);
-  color: var(--color-body);
-  font-family: var(--font-body);
+  color: var(--color-text-body);
   font-size: 16px;
-  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-/* ===== BLUE VIEWPORT GLOW (Vexel signature) ===== */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse at 0% 0%, rgba(59, 130, 246, 0.07) 0%, transparent 40%),
-    radial-gradient(ellipse at 100% 0%, rgba(59, 130, 246, 0.07) 0%, transparent 40%),
-    radial-gradient(ellipse at 0% 100%, rgba(59, 130, 246, 0.07) 0%, transparent 40%),
-    radial-gradient(ellipse at 100% 100%, rgba(59, 130, 246, 0.07) 0%, transparent 40%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ===== TYPOGRAPHY ===== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  color: var(--color-heading);
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-}
-
-h1 {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
-  font-weight: 800;
-}
-
-h2 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-p {
-  color: var(--color-body);
-  margin-bottom: 1rem;
-}
-
-/* ===== CONTAINER ===== */
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.section {
-  padding: var(--section-padding) 0;
-  position: relative;
-}
-
-/* ===== SECTION HEADER ===== */
-.section-header {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 80px;
-}
-
-/* ===== BUTTONS — Vexel Pill Buttons ===== */
-
-/* White pill button with black circle arrow (signature Vexel button) */
-.btn-pill-white {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 12px 12px 24px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: var(--btn-radius);
-  cursor: pointer;
-  transition: var(--transition-base);
-  text-decoration: none;
-  border: none;
-  background: #ffffff;
-  color: #000000;
-}
-
-.btn-pill-white:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
-}
-
-.btn-pill-white .btn-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #000000;
-  color: #ffffff;
-}
-
-/* Dark pill button */
-.btn-pill-dark {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 12px 12px 24px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: var(--btn-radius);
-  cursor: pointer;
-  transition: var(--transition-base);
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #000000;
-  color: #ffffff;
-}
-
-.btn-pill-dark:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
-}
-
-.btn-pill-dark .btn-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-}
-
-/* Text link with arrow (e.g. "Get Started ↗") */
-.btn-text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.btn-text-link:hover {
-  opacity: 0.8;
-}
-
-/* ===== GLASS CARD UTILITY ===== */
-.glass-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-}
-
-/* ===== VEXEL CARDS (32px radius, 0.1 opacity border) ===== */
-.vexel-card {
-  background: rgba(5, 5, 10, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--card-radius);
-  padding: 44px 36px;
-  transition: var(--transition-base);
-}
-
-.vexel-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-/* White circle icon container (large, Vexel-style) */
-.vexel-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
-  color: #000000;
-}
-
-/* ===== HERO ===== */
-.hero-gradient {
-  background: #000000;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-gradient::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(to top, #000000 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 5;
 }
 
 /* ===== ANIMATIONS ===== */
@@ -306,7 +207,6 @@ p {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -318,7 +218,6 @@ p {
 }
 
 @keyframes subtle-float {
-
   0%,
   100% {
     transform: translateY(0) rotate(0deg);
@@ -341,65 +240,6 @@ p {
   animation: float 4s ease-in-out infinite;
 }
 
-/* ===== NAVBAR ===== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 16px 0;
-  transition: var(--transition-base);
-}
-
-.navbar.scrolled {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
-  padding: 12px 0;
-}
-
-.navbar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-link {
-  font-size: 15px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  transition: var(--transition-base);
-}
-
-.nav-link:hover {
-  color: #ffffff;
-}
-
-/* ===== FOOTER ===== */
-.footer {
-  background: #000000;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.footer a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  transition: var(--transition-base);
-}
-
-.footer a:hover {
-  color: #ffffff;
-}
-
-/* ===== SECTION DIVIDERS ===== */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-}
-
 /* ===== PRELOADER ===== */
 .preloader {
   position: fixed;
@@ -418,38 +258,8 @@ p {
   transition: opacity 0.8s ease;
 }
 
-/* ===== CUSTOM CURSOR (Desktop only) ===== */
-@media (pointer: fine) {
-  .cursor-enabled {
-    cursor: none;
-  }
-
-  .cursor-enabled a,
-  .cursor-enabled button,
-  .cursor-enabled [role="button"],
-  .cursor-enabled input,
-  .cursor-enabled textarea,
-  .cursor-enabled select {
-    cursor: none;
-  }
-}
-
-/* ===== SELECT OPTIONS (Dark Mode) ===== */
-select option {
-  background: #14141f;
-  color: #ffffff;
-  padding: 8px 12px;
-}
-
-select option:hover,
-select option:checked {
-  background: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
-}
-
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -461,4 +271,61 @@ select option:checked {
   .preloader {
     display: none;
   }
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--gray-50, #fafafa) 0.65%,
+    #f5f5f5 42.51%,
+    #eef1ff 99.86%
+  );
+}
+
+.feature-image-container {
+  border: 0 solid var(--Linear-1, #8a96c2);
+
+  background:
+    url("/screenshot1.jpg") lightgray -0.753px 0px / 100.136% 136.216% no-repeat,
+    #000;
+
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.15);
+}
+
+.feature-gradient {
+  background: linear-gradient(0deg, #fff 0%, #fff 100%), #c2c2c2;
+}
+
+.step-container {
+  box-shadow: 0 0 30px 0 rgba(26, 26, 26, 0.1);
+}
+
+.pricing-tabs {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card-shadow {
+  box-shadow:
+    0 2px 6px 0 rgba(0, 0, 0, 0.04),
+    0 5px 18px 0 rgba(0, 0, 0, 0.06),
+    0 24px 83px 0 rgba(0, 0, 0, 0.1);
+}
+
+input,
+select {
+  height: 59.19px;
+  padding: 19px 20px 20.19px 20px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
 }

@@ -3,110 +3,86 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SceneCard from "./SceneCard";
-
-/* ------------------------------------------------------------------ */
-/*  Scene config per step                                              */
-/* ------------------------------------------------------------------ */
-const scenes = [
-    { src: "/scene2-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Select Tables" },
-    { src: "/scene3-isolated.html", iframeWidth: 1000, iframeHeight: 700, title: "Build Metadata" },
-    { src: "/scene4-isolated.html", iframeWidth: 1200, iframeHeight: 800, title: "AI Context" },
-    { src: "/scene5-isolated.html", iframeWidth: 1100, iframeHeight: 900, title: "Generate Dashboard" },
-];
+import CommonCTA from "./CommonCTA";
+import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
 /*  Main component                                                     */
 /* ------------------------------------------------------------------ */
 interface WorkingProcessProps {
-    dict: {
-        title: string;
-        subtitle: string;
-        step1Title: string;
-        step1Desc: string;
-        step2Title: string;
-        step2Desc: string;
-        step3Title: string;
-        step3Desc: string;
-        step4Title: string;
-        step4Desc: string;
-    };
+  dict: {
+    title: string;
+    step1Title: string;
+    step1Desc: string;
+    step2Title: string;
+    step2Desc: string;
+    step3Title: string;
+    step3Desc: string;
+  };
+  commonCTA_Dict: {
+    getStarted: string;
+    getStartedUrl: string;
+    watchDemo: string;
+    watchDemoUrl: string;
+    disclaimer: string;
+  };
 }
 
-export default function WorkingProcess({ dict }: WorkingProcessProps) {
-    const steps = [
-        { title: dict.step1Title, description: dict.step1Desc },
-        { title: dict.step2Title, description: dict.step2Desc },
-        { title: dict.step3Title, description: dict.step3Desc },
-        { title: dict.step4Title, description: dict.step4Desc },
-    ];
+export default function WorkingProcess({
+  dict,
+  commonCTA_Dict,
+}: WorkingProcessProps) {
+  const steps = [
+    { title: dict.step1Title, description: dict.step1Desc },
+    { title: dict.step2Title, description: dict.step2Desc },
+    { title: dict.step3Title, description: dict.step3Desc },
+  ];
 
-    return (
-        <section className="section">
-            <div className="container">
-                {/* Section Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20 max-w-3xl mx-auto"
-                >
-                    <p className="text-sm uppercase tracking-[0.2em] mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>{dict.title}</p>
-                    <h2 className="text-3xl md:text-5xl font-bold">{dict.subtitle}</h2>
-                </motion.div>
-
-                {/* Alternating Bento-Style Sections */}
-                <div className="flex flex-col gap-32">
-                    {steps.map((step, index) => {
-                        const isReversed = index % 2 !== 0;
-                        const scene = scenes[index];
-
-                        return (
-                            <motion.div
-                                key={step.title}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.7, delay: 0.1 }}
-                                viewport={{ once: true }}
-                                className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-                            >
-                                {/* Text Side */}
-                                <div className={isReversed ? "lg:order-2" : "lg:order-1"}>
-                                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-5 leading-tight">
-                                        {step.title}
-                                    </h2>
-                                    <p className="text-base leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.55)" }}>
-                                        {step.description}
-                                    </p>
-                                    <motion.a
-                                        href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        whileHover={{ scale: 1.03 }}
-                                        whileTap={{ scale: 0.97 }}
-                                        className="btn-pill-white inline-flex"
-                                    >
-                                        Try It Now
-                                        <span className="btn-icon">
-                                            <ArrowUpRight size={14} />
-                                        </span>
-                                    </motion.a>
-                                </div>
-
-                                {/* Visual Side — Scene Card */}
-                                <div className={isReversed ? "lg:order-1" : "lg:order-2"}>
-                                    <SceneCard
-                                        src={scene.src}
-                                        iframeWidth={scene.iframeWidth}
-                                        iframeHeight={scene.iframeHeight}
-                                        title={scene.title}
-                                    />
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+  return (
+    <section className="mx-4 md:mx-16 lg:mx-24 my-12">
+      <div className="max-w-content-section flex flex-col gap-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="flex flex-row w-full justify-between items-center"
+        >
+          <h2 className="text-3xl lg:text-[40px] font-bold text-primary-dark text-center">
+            {dict.title}
+          </h2>
+          <CommonCTA commonCTA_Dict={commonCTA_Dict} />
+        </motion.div>
+        {/* Steps */}
+        <div className="flex flex-col lg:flex-row gap-6 items-center">
+          {steps.map(({ title, description }, index) => (
+            <div
+              className="flex flex-col gap-8 items-center rounded-4xl p-[28px] bg-primary-light step-container transition-all duration-300 hover:scale-105 group"
+              key={index}
+            >
+              <div className="relative max-w-[342px] max-h-[287px]">
+                <Image
+                  src={`/icons/work${index}.svg`}
+                  alt={title}
+                  width={634}
+                  height={532}
+                  className="object-contain aspect-87/73"
+                />
+              </div>
+              {/* Text Block */}
+              <div className="flex flex-col gap-3.5 items-start">
+                <h3 className="text-2xl font-bold leading-[110%] text-text-heading group-hover:text-primary-dark transition-colors duration-300">
+                  {index + 1}- {title}
+                </h3>
+                <p className="text-text-body leading-[130%] capitalize text-lg">
+                  {description}
+                </p>
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -1,0 +1,56 @@
+steps:
+  # 1. Fetch the environment file from Google Secret Manager
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud secrets versions access latest --secret="asklyze-landing-prod" > env.yaml
+    id: "fetch-secrets"
+
+  # 2. Parse the env file for the build argument and build the Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    env:
+      - "DOCKER_BUILDKIT=1"
+    args:
+      - "-c"
+      - |
+        # Helper function to extract specific values from the YAML formatted as KEY: "VALUE"
+        get_val() { grep "^$1:" env.yaml | sed 's/^.*: "\(.*\)"$/\1/'; }
+
+        docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/apex-repo/asklyze-landing:latest \
+          --platform linux/amd64 \
+          --build-arg NEXT_PUBLIC_SERVER_URL="$(get_val NEXT_PUBLIC_SERVER_URL)" \
+          -f ./Dockerfile .
+    id: "build"
+
+  # 3. Push the Docker image to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/apex-repo/asklyze-landing:latest",
+      ]
+    id: "push"
+
+  # 4. Deploy to Google Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        gcloud run deploy asklyze-landing \
+          --image us-central1-docker.pkg.dev/$PROJECT_ID/apex-repo/asklyze-landing:latest \
+          --region us-central1 \
+          --env-vars-file env.yaml \
+          --execution-environment gen2 \
+          --memory 1Gi \
+          --cpu 1 \
+          --port 3076 \
+          --allow-unauthenticated
+    id: "deploy"
+
+timeout: "1800s" # 30 minutes
+options:
+  logging: CLOUD_LOGGING_ONLY
