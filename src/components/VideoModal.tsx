@@ -15,7 +15,6 @@ export default function VideoModal({
   onClose,
   videoSrc,
 }: VideoModalProps) {
-  console.log(videoSrc);
   // Close on escape key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {

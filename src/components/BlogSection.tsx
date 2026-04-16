@@ -2,6 +2,7 @@ import React from "react";
 import LinkButton from "./LinkButton";
 import BlogCarousel from "./BlogCarousel";
 import { getPayload } from "@/lib/payload";
+import { BlogPost } from "@/types/blog";
 import { Post } from "@/payload-types";
 
 type Props = {
@@ -10,20 +11,50 @@ type Props = {
     subtitle: string;
     showAll: string;
   };
+  blogDict: {
+    topics: Record<string, string>;
+  };
   lang: "en" | "ar";
 };
 
-const BlogSection = async ({ dict, lang }: Props) => {
+const BlogSection = async ({ dict, blogDict, lang }: Props) => {
   const { title, subtitle, showAll } = dict;
 
   const payload = await getPayload();
-  const { docs } = await payload.find({
+  const { docs: rawDocs } = await payload.find({
     collection: "posts",
     limit: 9,
     sort: "-publishedDate",
   });
 
-  const posts = (docs as unknown as Post[]).filter((post) => post.slug);
+  const posts: Post[] = rawDocs
+    .filter((post) => post.slug)
+    .map((post) => ({
+      id: post.id,
+      slug: post.slug ?? "",
+      title: lang === "ar" && post.titleAr ? post.titleAr : post.title,
+      titleAr: post.titleAr ?? undefined,
+      excerpt: lang === "ar" && post.excerptAr ? post.excerptAr : post.excerpt,
+      excerptAr: post.excerptAr ?? undefined,
+      category: post.category,
+      author: {
+        name: post.author.name,
+        image: post.author.image ?? "/favicon-light.png",
+        jobTitle:
+          lang === "ar" && post.author.jobTitleAr
+            ? post.author.jobTitleAr
+            : (post.author.jobTitle ?? undefined),
+        jobTitleAr: post.author.jobTitleAr ?? undefined,
+      },
+      date: new Date(post.publishedDate).toLocaleDateString(
+        lang === "ar" ? "ar-EG" : "en-US",
+        { year: "numeric", month: "short", day: "numeric" }
+      ),
+      publishedDate: post.publishedDate,
+      image: post.image,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+    }));
 
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-24">
@@ -39,7 +70,12 @@ const BlogSection = async ({ dict, lang }: Props) => {
         </div>
 
         {/* Blog Cards Carousel */}
-        <BlogCarousel posts={posts} lang={lang} showAll={showAll} />
+        <BlogCarousel
+          posts={posts}
+          lang={lang}
+          showAll={showAll}
+          blogDict={blogDict}
+        />
       </div>
     </section>
   );

@@ -87,8 +87,58 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'ar') | ('en' | 'ar')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'navbar-content': NavbarContent;
+    'hero-content': HeroContent;
+    'working-process-content': WorkingProcessContent;
+    'trusted-by-content': TrustedByContent;
+    'why-choose-content': WhyChooseContent;
+    'contact-content': ContactContent;
+    'contact-hero-content': ContactHeroContent;
+    'feature-grid-content': FeatureGridContent;
+    'common-cta-content': CommonCtaContent;
+    'contact-cta-content': ContactCtaContent;
+    'content-split-content': ContentSplitContent;
+    'tabbed-showcase-content': TabbedShowcaseContent;
+    'testimonials-content': TestimonialsContent;
+    'faq-content': FaqContent;
+    'pricing-content': PricingContent;
+    'gradient-cta-content': GradientCtaContent;
+    'contact-us-content': ContactUsContent;
+    'footer-content': FooterContent;
+    'blog-section-content': BlogSectionContent;
+    'blog-content': BlogContent;
+    'metadata-content': MetadataContent;
+    'privacy-content': PrivacyContent;
+    'terms-content': TermsContent;
+    'security-content': SecurityContent;
+  };
+  globalsSelect: {
+    'navbar-content': NavbarContentSelect<false> | NavbarContentSelect<true>;
+    'hero-content': HeroContentSelect<false> | HeroContentSelect<true>;
+    'working-process-content': WorkingProcessContentSelect<false> | WorkingProcessContentSelect<true>;
+    'trusted-by-content': TrustedByContentSelect<false> | TrustedByContentSelect<true>;
+    'why-choose-content': WhyChooseContentSelect<false> | WhyChooseContentSelect<true>;
+    'contact-content': ContactContentSelect<false> | ContactContentSelect<true>;
+    'contact-hero-content': ContactHeroContentSelect<false> | ContactHeroContentSelect<true>;
+    'feature-grid-content': FeatureGridContentSelect<false> | FeatureGridContentSelect<true>;
+    'common-cta-content': CommonCtaContentSelect<false> | CommonCtaContentSelect<true>;
+    'contact-cta-content': ContactCtaContentSelect<false> | ContactCtaContentSelect<true>;
+    'content-split-content': ContentSplitContentSelect<false> | ContentSplitContentSelect<true>;
+    'tabbed-showcase-content': TabbedShowcaseContentSelect<false> | TabbedShowcaseContentSelect<true>;
+    'testimonials-content': TestimonialsContentSelect<false> | TestimonialsContentSelect<true>;
+    'faq-content': FaqContentSelect<false> | FaqContentSelect<true>;
+    'pricing-content': PricingContentSelect<false> | PricingContentSelect<true>;
+    'gradient-cta-content': GradientCtaContentSelect<false> | GradientCtaContentSelect<true>;
+    'contact-us-content': ContactUsContentSelect<false> | ContactUsContentSelect<true>;
+    'footer-content': FooterContentSelect<false> | FooterContentSelect<true>;
+    'blog-section-content': BlogSectionContentSelect<false> | BlogSectionContentSelect<true>;
+    'blog-content': BlogContentSelect<false> | BlogContentSelect<true>;
+    'metadata-content': MetadataContentSelect<false> | MetadataContentSelect<true>;
+    'privacy-content': PrivacyContentSelect<false> | PrivacyContentSelect<true>;
+    'terms-content': TermsContentSelect<false> | TermsContentSelect<true>;
+    'security-content': SecurityContentSelect<false> | SecurityContentSelect<true>;
+  };
   locale: 'en' | 'ar';
   widgets: {
     collections: CollectionsWidget;
@@ -356,6 +406,1288 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar-content".
+ */
+export interface NavbarContent {
+  id: number;
+  home: string;
+  features: string;
+  pricing: string;
+  blog: string;
+  docs: string;
+  about: string;
+  contact: string;
+  getStarted: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero-content".
+ */
+export interface HeroContent {
+  id: number;
+  badge: string;
+  titleBeforeSpan: string;
+  titleSpan: string;
+  description: string;
+  getStarted: string;
+  watchDemo: string;
+  watchDemoUrl: string;
+  disclaimer: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "working-process-content".
+ */
+export interface WorkingProcessContent {
+  id: number;
+  title: string;
+  step1Title: string;
+  step1Desc: string;
+  step2Title: string;
+  step2Desc: string;
+  step3Title: string;
+  step3Desc: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trusted-by-content".
+ */
+export interface TrustedByContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "why-choose-content".
+ */
+export interface WhyChooseContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  features: {
+    title: string;
+    desc: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-content".
+ */
+export interface ContactContent {
+  id: number;
+  locationTitle: string;
+  locationLines: {
+    text: string;
+    id?: string | null;
+  }[];
+  emailTitle: string;
+  callTitle: string;
+  followTitle: string;
+  followDesc: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-hero-content".
+ */
+export interface ContactHeroContent {
+  id: number;
+  title: string;
+  desc: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-grid-content".
+ */
+export interface FeatureGridContent {
+  id: number;
+  tag: string;
+  title: string;
+  desc: string;
+  features: {
+    title: string;
+    desc: string;
+    image: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "common-cta-content".
+ */
+export interface CommonCtaContent {
+  id: number;
+  getStarted: string;
+  getStartedUrl: string;
+  watchDemo: string;
+  watchDemoUrl: string;
+  disclaimer: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-cta-content".
+ */
+export interface ContactCtaContent {
+  id: number;
+  title: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-split-content".
+ */
+export interface ContentSplitContent {
+  id: number;
+  section1: {
+    title: string;
+    desc: string;
+    cta: string;
+    badgeTitle: string;
+    badgeTime: string;
+  };
+  section2: {
+    title: string;
+    desc: string;
+    cta: string;
+    features: {
+      text: string;
+      id?: string | null;
+    }[];
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tabbed-showcase-content".
+ */
+export interface TabbedShowcaseContent {
+  id: number;
+  tag: string;
+  title: string;
+  tabs: {
+    text: string;
+    id?: string | null;
+  }[];
+  dashboard: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-content".
+ */
+export interface TestimonialsContent {
+  id: number;
+  tag: string;
+  title: string;
+  list: {
+    text: string;
+    name: string;
+    role: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-content".
+ */
+export interface FaqContent {
+  id: number;
+  tag: string;
+  title: string;
+  categories: {
+    text: string;
+    id?: string | null;
+  }[];
+  list: {
+    question: string;
+    answer: string;
+    category: string;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-content".
+ */
+export interface PricingContent {
+  id: number;
+  tag: string;
+  title: string;
+  desc: string;
+  cta: string;
+  href: string;
+  recommended: string;
+  monthly: string;
+  yearly: string;
+  plans: {
+    name: string;
+    price: string;
+    period?: string | null;
+    periodLabel?: string | null;
+    isRecommended?: boolean | null;
+    href?: string | null;
+    features: {
+      text: string;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gradient-cta-content".
+ */
+export interface GradientCtaContent {
+  id: number;
+  title: string;
+  desc: string;
+  cta: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-us-content".
+ */
+export interface ContactUsContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  locationLabel: string;
+  location1: string;
+  location2: string;
+  emailLabel: string;
+  email1: string;
+  email2: string;
+  callLabel: string;
+  phone1: string;
+  phone2: string;
+  callTimes: string;
+  form: {
+    name: {
+      label: string;
+      placeholder: string;
+      required: string;
+    };
+    email: {
+      label: string;
+      placeholder: string;
+      required: string;
+      invalid: string;
+    };
+    country: {
+      label: string;
+      placeholder: string;
+      required: string;
+      countrySelect?: boolean | null;
+    };
+    phone: {
+      label: string;
+      placeholder: string;
+      invalid: string;
+    };
+    companyName: {
+      label: string;
+      placeholder: string;
+      required: string;
+    };
+    companySize: {
+      label: string;
+      placeholder: string;
+      required: string;
+      options: {
+        text: string;
+        id?: string | null;
+      }[];
+    };
+    role: {
+      label: string;
+      placeholder: string;
+      required: string;
+    };
+    subject: {
+      label: string;
+      placeholder: string;
+      required: string;
+    };
+    message: {
+      label: string;
+      placeholder: string;
+      required: string;
+      textarea?: boolean | null;
+    };
+    submit: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-content".
+ */
+export interface FooterContent {
+  id: number;
+  company: string;
+  description: string;
+  services: string;
+  digitalExperience: string;
+  address: string;
+  nycOffice: string;
+  alexOffice: string;
+  legal: string;
+  quickLinks: string;
+  location: string;
+  social: {
+    facebook: string;
+    linkedin: string;
+    instagram: string;
+    twitter: string;
+    youtube: string;
+  };
+  socialLabels: {
+    facebook: string;
+    linkedin: string;
+    instagram: string;
+    twitter: string;
+    youtube: string;
+  };
+  links: {
+    features: string;
+    dashboard: string;
+    portfolio: string;
+    about: string;
+    contact: string;
+    blog: string;
+    docs: string;
+  };
+  rights: string;
+  copyright: string;
+  bottomLinks: {
+    privacy: string;
+    terms: string;
+    security: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-section-content".
+ */
+export interface BlogSectionContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  showAll: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-content".
+ */
+export interface BlogContent {
+  id: number;
+  title: string;
+  description: string;
+  noPosts: string;
+  topics: {
+    All: string;
+    Tutorial: string;
+    'Industry Trends': string;
+    Features: string;
+    Security: string;
+    'Case Study': string;
+    'Product Update': string;
+  };
+  article: {
+    authorLabel: string;
+    readTimeLabel: string;
+    mins: string;
+    dateLabel: string;
+    back: string;
+    relatedArticles: string;
+    unknownAuthor: string;
+    generalCategory: string;
+    postNotFound: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "metadata-content".
+ */
+export interface MetadataContent {
+  id: number;
+  home: {
+    title: string;
+    description: string;
+  };
+  blog: {
+    title: string;
+    description: string;
+  };
+  contact: {
+    title: string;
+    description: string;
+  };
+  privacy: {
+    title: string;
+    description: string;
+  };
+  terms: {
+    title: string;
+    description: string;
+  };
+  security: {
+    title: string;
+    description: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-content".
+ */
+export interface PrivacyContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  lastUpdated: string;
+  intro: string;
+  sections: {
+    iconKey: string;
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  additionalSections: {
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  contact: {
+    title: string;
+    content: string;
+    email: string;
+    address: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-content".
+ */
+export interface TermsContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  lastUpdated: string;
+  intro: string;
+  sections: {
+    iconKey: string;
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  additionalSections: {
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  contact: {
+    title: string;
+    content: string;
+    email: string;
+    address: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "security-content".
+ */
+export interface SecurityContent {
+  id: number;
+  title: string;
+  subtitle: string;
+  lastUpdated: string;
+  intro: string;
+  sections: {
+    iconKey: string;
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  additionalSections: {
+    title: string;
+    content?: string | null;
+    points?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  contact: {
+    title: string;
+    content: string;
+    email: string;
+    address: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navbar-content_select".
+ */
+export interface NavbarContentSelect<T extends boolean = true> {
+  home?: T;
+  features?: T;
+  pricing?: T;
+  blog?: T;
+  docs?: T;
+  about?: T;
+  contact?: T;
+  getStarted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero-content_select".
+ */
+export interface HeroContentSelect<T extends boolean = true> {
+  badge?: T;
+  titleBeforeSpan?: T;
+  titleSpan?: T;
+  description?: T;
+  getStarted?: T;
+  watchDemo?: T;
+  watchDemoUrl?: T;
+  disclaimer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "working-process-content_select".
+ */
+export interface WorkingProcessContentSelect<T extends boolean = true> {
+  title?: T;
+  step1Title?: T;
+  step1Desc?: T;
+  step2Title?: T;
+  step2Desc?: T;
+  step3Title?: T;
+  step3Desc?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trusted-by-content_select".
+ */
+export interface TrustedByContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "why-choose-content_select".
+ */
+export interface WhyChooseContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        desc?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-content_select".
+ */
+export interface ContactContentSelect<T extends boolean = true> {
+  locationTitle?: T;
+  locationLines?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  emailTitle?: T;
+  callTitle?: T;
+  followTitle?: T;
+  followDesc?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-hero-content_select".
+ */
+export interface ContactHeroContentSelect<T extends boolean = true> {
+  title?: T;
+  desc?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-grid-content_select".
+ */
+export interface FeatureGridContentSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  desc?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        desc?: T;
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "common-cta-content_select".
+ */
+export interface CommonCtaContentSelect<T extends boolean = true> {
+  getStarted?: T;
+  getStartedUrl?: T;
+  watchDemo?: T;
+  watchDemoUrl?: T;
+  disclaimer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-cta-content_select".
+ */
+export interface ContactCtaContentSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "content-split-content_select".
+ */
+export interface ContentSplitContentSelect<T extends boolean = true> {
+  section1?:
+    | T
+    | {
+        title?: T;
+        desc?: T;
+        cta?: T;
+        badgeTitle?: T;
+        badgeTime?: T;
+      };
+  section2?:
+    | T
+    | {
+        title?: T;
+        desc?: T;
+        cta?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tabbed-showcase-content_select".
+ */
+export interface TabbedShowcaseContentSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  tabs?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  dashboard?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-content_select".
+ */
+export interface TestimonialsContentSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  list?:
+    | T
+    | {
+        text?: T;
+        name?: T;
+        role?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-content_select".
+ */
+export interface FaqContentSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  categories?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  list?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        category?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pricing-content_select".
+ */
+export interface PricingContentSelect<T extends boolean = true> {
+  tag?: T;
+  title?: T;
+  desc?: T;
+  cta?: T;
+  href?: T;
+  recommended?: T;
+  monthly?: T;
+  yearly?: T;
+  plans?:
+    | T
+    | {
+        name?: T;
+        price?: T;
+        period?: T;
+        periodLabel?: T;
+        isRecommended?: T;
+        href?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gradient-cta-content_select".
+ */
+export interface GradientCtaContentSelect<T extends boolean = true> {
+  title?: T;
+  desc?: T;
+  cta?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-us-content_select".
+ */
+export interface ContactUsContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  locationLabel?: T;
+  location1?: T;
+  location2?: T;
+  emailLabel?: T;
+  email1?: T;
+  email2?: T;
+  callLabel?: T;
+  phone1?: T;
+  phone2?: T;
+  callTimes?: T;
+  form?:
+    | T
+    | {
+        name?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+        email?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+              invalid?: T;
+            };
+        country?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+              countrySelect?: T;
+            };
+        phone?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              invalid?: T;
+            };
+        companyName?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+        companySize?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+              options?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+            };
+        role?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+        subject?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+            };
+        message?:
+          | T
+          | {
+              label?: T;
+              placeholder?: T;
+              required?: T;
+              textarea?: T;
+            };
+        submit?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer-content_select".
+ */
+export interface FooterContentSelect<T extends boolean = true> {
+  company?: T;
+  description?: T;
+  services?: T;
+  digitalExperience?: T;
+  address?: T;
+  nycOffice?: T;
+  alexOffice?: T;
+  legal?: T;
+  quickLinks?: T;
+  location?: T;
+  social?:
+    | T
+    | {
+        facebook?: T;
+        linkedin?: T;
+        instagram?: T;
+        twitter?: T;
+        youtube?: T;
+      };
+  socialLabels?:
+    | T
+    | {
+        facebook?: T;
+        linkedin?: T;
+        instagram?: T;
+        twitter?: T;
+        youtube?: T;
+      };
+  links?:
+    | T
+    | {
+        features?: T;
+        dashboard?: T;
+        portfolio?: T;
+        about?: T;
+        contact?: T;
+        blog?: T;
+        docs?: T;
+      };
+  rights?: T;
+  copyright?: T;
+  bottomLinks?:
+    | T
+    | {
+        privacy?: T;
+        terms?: T;
+        security?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-section-content_select".
+ */
+export interface BlogSectionContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  showAll?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-content_select".
+ */
+export interface BlogContentSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  noPosts?: T;
+  topics?:
+    | T
+    | {
+        All?: T;
+        Tutorial?: T;
+        'Industry Trends'?: T;
+        Features?: T;
+        Security?: T;
+        'Case Study'?: T;
+        'Product Update'?: T;
+      };
+  article?:
+    | T
+    | {
+        authorLabel?: T;
+        readTimeLabel?: T;
+        mins?: T;
+        dateLabel?: T;
+        back?: T;
+        relatedArticles?: T;
+        unknownAuthor?: T;
+        generalCategory?: T;
+        postNotFound?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "metadata-content_select".
+ */
+export interface MetadataContentSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  blog?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  privacy?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  terms?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  security?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-content_select".
+ */
+export interface PrivacyContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  lastUpdated?: T;
+  intro?: T;
+  sections?:
+    | T
+    | {
+        iconKey?: T;
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  additionalSections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        email?: T;
+        address?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "terms-content_select".
+ */
+export interface TermsContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  lastUpdated?: T;
+  intro?: T;
+  sections?:
+    | T
+    | {
+        iconKey?: T;
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  additionalSections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        email?: T;
+        address?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "security-content_select".
+ */
+export interface SecurityContentSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  lastUpdated?: T;
+  intro?: T;
+  sections?:
+    | T
+    | {
+        iconKey?: T;
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  additionalSections?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        points?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  contact?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        email?: T;
+        address?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

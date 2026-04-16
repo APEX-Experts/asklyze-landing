@@ -1,4 +1,4 @@
-export type Country = {
+type Country = {
   name: string;
   arName: string;
   code: string;

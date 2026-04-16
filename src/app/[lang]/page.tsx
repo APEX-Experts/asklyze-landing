@@ -62,7 +62,11 @@ export default async function Home({
         <FAQ dict={dict.faq} />
         <ContactUs dict={dict.contactUs} lang={lang} />
         <ContactCTA dict={dict.contactCTA} commonCTA_Dict={dict.commonCTA} />
-        <BlogSection dict={dict.blogSection} lang={lang} />
+        <BlogSection
+          dict={dict.blogSection}
+          blogDict={dict.blog}
+          lang={lang}
+        />
       </main>
       <Footer dict={dict.footer} />
     </>

@@ -35,9 +35,10 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
     "monthly"
   );
+  console.log(dict.plans);
 
   const filteredPlans = dict.plans.filter(
-    (plan) => plan.period === billingPeriod || plan.period === ""
+    (plan) => plan.period === billingPeriod || plan.periodLabel === ""
   );
 
   return (

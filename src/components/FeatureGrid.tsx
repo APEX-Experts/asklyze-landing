@@ -5,32 +5,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FeatureIcon } from "./Icons";
-
-interface FeatureGridProps {
-  tag: string;
-  title: string;
-  desc: string;
-  features: Array<{
-    title: string;
-    desc: string;
-    image: string;
-  }>;
-}
-
-interface CommonCTAType {
-  getStarted: string;
-  getStartedUrl: string;
-  watchDemo: string;
-  watchDemoUrl: string;
-  disclaimer: string;
-}
+import {
+  type CommonCtaContent,
+  type FeatureGridContent,
+} from "../../payload-types";
 
 export default function FeatureGrid({
   dict,
   commonCTA_Dict,
 }: {
-  dict: FeatureGridProps;
-  commonCTA_Dict: CommonCTAType;
+  dict: Omit<FeatureGridContent, "id">;
+  commonCTA_Dict: Omit<CommonCtaContent, "id">;
 }) {
   const [activeFeature, setActiveFeature] = useState(0);
   const features = dict.features;

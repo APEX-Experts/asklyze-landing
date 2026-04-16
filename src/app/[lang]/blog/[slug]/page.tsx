@@ -9,6 +9,7 @@ import BlogCarousel from "@/components/BlogCarousel";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
 import { Post } from "@/payload-types";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import Separator from "@/components/Separator";
 
 export async function generateMetadata({
@@ -64,52 +65,6 @@ export async function generateMetadata({
   };
 }
 
-/**
- * Naive Lexical-to-HTML serializer for simple blog content.
- * Handles paragraphs, headings, lists, blockquotes, links, and inline styles.
- */
-function serializeLexical(node: any): string {
-  if (!node) return "";
-
-  // Text node
-  if (node.type === "text") {
-    let text = node.text ?? "";
-    if (node.format) {
-      if (node.format & 1) text = `<strong>${text}</strong>`;
-      if (node.format & 2) text = `<em>${text}</em>`;
-      if (node.format & 8) text = `<u>${text}</u>`;
-      if (node.format & 4) text = `<s>${text}</s>`;
-      if (node.format & 16) text = `<sub>${text}</sub>`;
-      if (node.format & 32) text = `<sup>${text}</sup>`;
-    }
-    return text;
-  }
-
-  const children = node.children?.map(serializeLexical).join("") ?? "";
-
-  switch (node.type) {
-    case "root":
-    case "paragraph":
-      return `<p>${children}</p>`;
-    case "heading":
-      return `<h${node.tag}>${children}</h${node.tag}>`;
-    case "list":
-      return node.listType === "bullet"
-        ? `<ul>${children}</ul>`
-        : `<ol>${children}</ol>`;
-    case "listitem":
-      return `<li>${children}</li>`;
-    case "quote":
-      return `<blockquote>${children}</blockquote>`;
-    case "link":
-      return `<a href="${node.fields?.url ?? "#"}" target="_blank" rel="noopener noreferrer">${children}</a>`;
-    case "linebreak":
-      return "<br />";
-    default:
-      return children;
-  }
-}
-
 export default async function BlogPostPage({
   params,
 }: {
@@ -142,9 +97,6 @@ export default async function BlogPostPage({
 
   const richContent =
     lang === "ar" && post.contentAr ? post.contentAr : post.content;
-  const displayContent = richContent?.root
-    ? serializeLexical(richContent.root)
-    : null;
 
   const heroImage = post.image;
 
@@ -264,7 +216,7 @@ export default async function BlogPostPage({
                   />
                 </svg>
                 <span className="text-gray-550 font-medium leading-[150%]">
-                  {Math.max(1, Math.ceil((displayContent?.length || 0) / 1000))}{" "}
+                  {Math.max(1, Math.ceil(JSON.stringify(richContent || {}).length / 3000))}{" "}
                   {dict.blog.article.mins}
                 </span>
               </div>
@@ -315,9 +267,7 @@ export default async function BlogPostPage({
       </section>
 
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-24 prose prose-lg prose-headings:text-primary-dark prose-p:text-text-body prose-p:leading-relaxed prose-li:text-text-body prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-primary-dark prose-blockquote:border-primary prose-blockquote:bg-primary-light prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-img:rounded-2xl">
-        {displayContent ? (
-          <div dangerouslySetInnerHTML={{ __html: displayContent }} />
-        ) : null}
+        {richContent ? <RichText data={richContent} /> : null}
       </article>
 
       {relatedPosts.length > 0 && (
@@ -330,6 +280,7 @@ export default async function BlogPostPage({
               posts={relatedPosts}
               lang={lang}
               showAll={dict.blogSection.showAll}
+              blogDict={dict.blog}
             />
           </div>
         </section>

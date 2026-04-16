@@ -15,12 +15,11 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Logo from "./Logo";
 import LinkButton from "./LinkButton";
+import Logo from "./Logo";
 
 interface NavbarProps {
   dict: {

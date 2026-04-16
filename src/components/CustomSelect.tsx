@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ChevronDown, Search } from "lucide-react";
 
-export type CustomSelectProps = {
+type CustomSelectProps = {
   options: {
     label: string;
     value: string;

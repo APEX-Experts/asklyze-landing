@@ -21,9 +21,9 @@ export default function TabSelector({
   return (
     <div className={cn("flex items-center justify-center", className)}>
       <div className="relative flex rounded-full p-[5px] w-fit pricing-tabs bg-white">
-        {tabs.map((tab) => (
+        {tabs.map((tab, index) => (
           <button
-            key={tab}
+            key={index}
             onClick={() => onChange(tab)}
             className={cn(
               "cursor-pointer relative z-10 px-6 py-2.5 text-sm font-bold rounded-full transition-colors duration-300 min-w-[120px] whitespace-nowrap",

@@ -1,18 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Play } from "lucide-react";
-import dynamic from "next/dynamic";
+import { Play } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
-import VideoModal from "./VideoModal";
 import { SparksIcon } from "./Icons";
 import LinkButton from "./LinkButton";
-import Image from "next/image";
-
-const HeroScene = dynamic(() => import("./three/HeroScene"), {
-  ssr: false,
-  loading: () => null,
-});
+import VideoModal from "./VideoModal";
 
 interface HeroProps {
   dict: {

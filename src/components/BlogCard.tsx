@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { BlogPost } from "../types/blog";
+import { Post } from "@/payload-types";
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: Post;
   lang: "en" | "ar";
   delay?: number;
   dict: {
@@ -36,7 +36,10 @@ export default function BlogCard({
         />
         {/* Date Badge */}
         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-primary text-xs font-semibold px-3 py-1 rounded-5xl shadow-sm">
-          {post.date}
+          {new Date(post.publishedDate).toLocaleDateString(
+            lang === "ar" ? "ar-EG" : "en-US",
+            { year: "numeric", month: "short", day: "numeric" }
+          )}
         </span>
       </div>
 
@@ -47,7 +50,8 @@ export default function BlogCard({
           className="self-start flex items-center justify-center gap-1 rounded-[6px] text-sm font-medium bg-primary-light text-primary"
           style={{ padding: "4px 10px" }}
         >
-          {dict.topics[post.category as keyof typeof dict.topics] || post.category}
+          {dict.topics[post.category as keyof typeof dict.topics] ||
+            post.category}
         </span>
 
         {/* Title */}

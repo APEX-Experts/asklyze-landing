@@ -6,6 +6,16 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { Posts } from "./collections/Posts.ts";
 import { Users } from "./collections/Users.ts";
+
+import {
+  NavbarContent, HeroContent, WorkingProcessContent, TrustedByContent,
+  WhyChooseContent, ContactContent, ContactHeroContent, FeatureGridContent,
+  CommonCtaContent, ContactCtaContent, ContentSplitContent, TabbedShowcaseContent, TestimonialsContent,
+  FaqContent, PricingContent, GradientCtaContent, ContactUsContent,
+  FooterContent, BlogSectionContent, BlogContent, MetadataContent,
+  PrivacyContent, TermsContent, SecurityContent
+} from "./globals";
+
 dotenv.config()
 
 
@@ -14,6 +24,14 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Posts],
+  globals: [
+    NavbarContent, HeroContent, WorkingProcessContent, TrustedByContent,
+    WhyChooseContent, ContactContent, ContactHeroContent, FeatureGridContent,
+    CommonCtaContent, ContactCtaContent, ContentSplitContent, TabbedShowcaseContent, TestimonialsContent,
+    FaqContent, PricingContent, GradientCtaContent, ContactUsContent,
+    FooterContent, BlogSectionContent, BlogContent, MetadataContent,
+    PrivacyContent, TermsContent, SecurityContent
+  ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

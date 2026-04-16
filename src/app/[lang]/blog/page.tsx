@@ -7,6 +7,9 @@ import BlogTopicFilter from "@/components/BlogTopicFilter";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
 import { BlogPost } from "@/types/blog";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Post } from "@/payload-types";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -91,7 +94,7 @@ export default async function BlogPage({
   const pagePosts = allPostDocs.slice(startIndex, startIndex + limit);
 
   // Map Payload Post → BlogPost shape expected by BlogCard
-  const posts: BlogPost[] = pagePosts.map((post) => ({
+  const posts: Post[] = pagePosts.map((post) => ({
     id: post.id,
     slug: post.slug ?? "",
     title: lang === "ar" && post.titleAr ? post.titleAr : post.title,
@@ -114,6 +117,8 @@ export default async function BlogPage({
     ),
     publishedDate: post.publishedDate,
     image: post.image,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
   }));
 
   const getPaginationUrl = (page: number) => {
@@ -148,7 +153,7 @@ export default async function BlogPage({
           </div>
         </div>
       </section>
-      <section className="section py-16 max-w-wide-section mx-auto lg:mx-[130px] flex items-center">
+      <section className="section py-16 max-w-wide-section mx-auto lg:mx-[130px] flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto w-full">
           {posts.map((post, index) => (
             <BlogCard
@@ -165,20 +170,25 @@ export default async function BlogPage({
           <div className="text-center py-20 text-text-muted">
             {dict.blog.noPosts}{" "}
             {selectedTopic
-              ? `${dict.blog.inTopic} "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"`
+              ? ` "${dict.blog.topics[selectedTopic as keyof typeof dict.blog.topics] || selectedTopic}"`
               : ""}
             .
           </div>
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-3 mt-16">
+          <div
+            className={cn(
+              "flex justify-center items-center gap-3 mt-16",
+              lang === "ar" ? "flex-row-reverse" : ""
+            )}
+          >
             {hasPrevPage && (
               <Link
                 href={getPaginationUrl(currentPage - 1)}
                 className="w-10 h-10 rounded-full bg-white text-gray-500 border border-gray-200 font-bold flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
               >
-                {"<"}
+                <ChevronLeft width={24} height={24} />
               </Link>
             )}
 
@@ -203,7 +213,7 @@ export default async function BlogPage({
                 href={getPaginationUrl(currentPage + 1)}
                 className="w-10 h-10 rounded-full bg-white text-gray-500 border border-gray-200 font-bold flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
               >
-                {">"}
+                <ChevronRight width={24} height={24} />
               </Link>
             )}
           </div>
