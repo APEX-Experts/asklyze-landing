@@ -36,7 +36,7 @@ export default async function ContactPage({
     <>
       <Navbar dict={dict.navbar} />
       <main className="mt-16 space-y-12">
-        <ContactUs dict={dict.contactUs} />
+        <ContactUs dict={dict.contactUs} lang={lang} />
       </main>
       <Footer dict={dict.footer} />
     </>

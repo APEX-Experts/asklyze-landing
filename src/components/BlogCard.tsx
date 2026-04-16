@@ -2,79 +2,70 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { BlogPost } from "../types/blog";
-import { User, Calendar } from "lucide-react";
 
 interface BlogCardProps {
-    post: BlogPost;
-    lang: "en" | "ar";
-    delay?: number;
-    dict: {
-        topics: Record<string, string>;
-    };
+  post: BlogPost;
+  lang: "en" | "ar";
+  delay?: number;
+  dict: {
+    topics: Record<string, string>;
+  };
 }
 
-export default function BlogCard({ post, lang, delay = 0, dict }: BlogCardProps) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay }}
-            viewport={{ once: true }}
-            className="group rounded-2xl overflow-hidden border border-white/8 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-[#ff705a]/15"
-            style={{ background: "rgba(20, 20, 35, 0.6)" }}
+export default function BlogCard({
+  post,
+  lang,
+  delay = 0,
+  dict,
+}: BlogCardProps) {
+  return (
+    <Link
+      href={`/${lang}/blog/${post.slug}`}
+      className="flex flex-col items-center gap-4 flex-1 rounded-[30px] border border-primary-light bg-white h-[500px] hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
+      style={{ padding: "10px 16px 16px 16px" }}
+    >
+      {/* Cover Image with Date badge */}
+      <div className="relative w-full rounded-3xl overflow-hidden shrink-0 flex-1 min-h-0">
+        <Image
+          src={post.image}
+          alt={post.title}
+          fill
+          unoptimized
+          className="object-cover transform transition-transform duration-700 group-hover:scale-110"
+        />
+        {/* Date Badge */}
+        <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-primary text-xs font-semibold px-3 py-1 rounded-5xl shadow-sm">
+          {post.date}
+        </span>
+      </div>
+
+      {/* Card Body */}
+      <div className="flex flex-col gap-3 w-full pb-1 shrink-0">
+        {/* Category Badge */}
+        <span
+          className="self-start flex items-center justify-center gap-1 rounded-[6px] text-sm font-medium bg-primary-light text-primary"
+          style={{ padding: "4px 10px" }}
         >
-            {/* Image Container */}
-            <div className="relative overflow-hidden aspect-[16/10]">
-                <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#ff705a] uppercase tracking-wide border border-white/10">
-                    {dict.topics[post.category as keyof typeof dict.topics] || post.category}
-                </div>
-            </div>
+          {dict.topics[post.category as keyof typeof dict.topics] || post.category}
+        </span>
 
-            {/* Content Container */}
-            <div className="p-6">
-                {/* Meta Row */}
-                <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
-                    <div className="flex items-center gap-1">
-                        <User size={14} className="text-[#ff705a]" />
-                        <div className="flex flex-col">
-                            <span className="font-medium">{post.author.name}</span>
-                            {post.author.jobTitle && <span className="text-[10px] opacity-70 leading-none">{post.author.jobTitle}</span>}
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <Calendar size={14} className="text-[#ff705a]" />
-                        <span>{post.date}</span>
-                    </div>
-                </div>
+        {/* Title */}
+        <h3
+          className="font-semibold leading-[28px] line-clamp-2 text-primary-dark group-hover:text-primary transition-colors duration-300"
+          style={{ fontSize: "24px" }}
+        >
+          {post.title}
+        </h3>
 
-                <h3 className="text-xl font-bold text-white mb-3 leading-snug group-hover:text-[#ff705a] transition-colors">
-                    <Link href={`/${lang}/blog/${post.slug}`} className="line-clamp-2">
-                        {post.title}
-                    </Link>
-                </h3>
-
-                <p className="text-gray-400 text-sm mb-6 line-clamp-3">
-                    {post.excerpt}
-                </p>
-
-                {/* Footer/Link */}
-                <div className="border-t border-white/8 pt-4 flex items-center justify-between">
-                    <Link
-                        href={`/${lang}/blog/${post.slug}`}
-                        className="text-sm font-bold text-gray-300 hover:text-[#ff705a] flex items-center gap-1 transition-colors"
-                    >
-                        Read More
-                    </Link>
-                </div>
-            </div>
-        </motion.div>
-    );
+        {/* Summary */}
+        <p
+          className="line-clamp-3 text-text-heading opacity-70 font-normal"
+          style={{ fontSize: "18px", lineHeight: "30px" }}
+        >
+          {post.excerpt}
+        </p>
+      </div>
+    </Link>
+  );
 }

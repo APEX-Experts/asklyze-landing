@@ -8,16 +8,23 @@ import Logo from "./Logo";
 interface FooterProps {
   dict: {
     company: string;
+    description: string;
     services: string;
     digitalExperience: string;
     address: string;
     nycOffice: string;
+    alexOffice: string;
+    legal: string;
+    quickLinks: string;
+    location: string;
     links: {
       features: string;
       dashboard: string;
       portfolio: string;
       about: string;
       contact: string;
+      blog: string;
+      docs: string;
     };
     social: {
       facebook: string;
@@ -26,7 +33,15 @@ interface FooterProps {
       twitter: string;
       youtube: string;
     };
+    socialLabels: {
+      facebook: string;
+      linkedin: string;
+      instagram: string;
+      twitter: string;
+      youtube: string;
+    };
     rights: string;
+    copyright: string;
     bottomLinks: {
       privacy: string;
       terms: string;
@@ -148,35 +163,34 @@ export default function Footer({ dict }: FooterProps) {
               <Logo width={384} height={60} />
             </Link>
             <p className="text-[18px] leading-[1.6] text-[#1A1A1A] opacity-70 font-normal">
-              We’re proud that our law firm offers top-notch legal service for a
-              nationwide affordable price.
+              {dict.description}
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-[18px] mt-2">
               <SocialIcon
                 offset={0}
                 href={dict.social.facebook}
-                label="Facebook"
+                label={dict.socialLabels.facebook}
               />
               <SocialIcon
                 offset={56}
                 href={dict.social.linkedin}
-                label="LinkedIn"
+                label={dict.socialLabels.linkedin}
               />
               <SocialIcon
                 offset={112}
                 href={dict.social.instagram}
-                label="Instagram"
+                label={dict.socialLabels.instagram}
               />
               <SocialIcon
                 offset={168}
                 href={dict.social.twitter}
-                label="X (Twitter)"
+                label={dict.socialLabels.twitter}
               />
               <SocialIcon
                 offset={224}
                 href={dict.social.youtube}
-                label="Youtube"
+                label={dict.socialLabels.youtube}
               />
             </div>
           </div>
@@ -184,7 +198,7 @@ export default function Footer({ dict }: FooterProps) {
           {/* Column 2: Legal */}
           <div className="flex flex-col gap-[16px] w-[190px]">
             <h3 className="text-[24px] font-semibold text-[#1F2A6B] leading-[1.21]">
-              Legal
+              {dict.legal}
             </h3>
             <Link
               href={`/${currentLocale}/privacy`}
@@ -209,7 +223,7 @@ export default function Footer({ dict }: FooterProps) {
           {/* Column 3: Links */}
           <div className="flex flex-col gap-[16px] w-[120px]">
             <h3 className="text-[24px] font-semibold text-[#1F2A6B] leading-[1.21]">
-              Links
+              {dict.quickLinks}
             </h3>
             <Link
               href={`/${currentLocale}/about`}
@@ -221,7 +235,7 @@ export default function Footer({ dict }: FooterProps) {
               href={`/${currentLocale}/blog`}
               className="text-[18px] text-[#1A1A1A] opacity-70 hover:opacity-100 transition-opacity"
             >
-              Blogs
+              {dict.links.blog}
             </Link>
             <a
               href="https://docs.asklyze.ai/"
@@ -229,20 +243,20 @@ export default function Footer({ dict }: FooterProps) {
               rel="noopener noreferrer"
               className="text-[18px] text-[#1A1A1A] opacity-70 hover:opacity-100 transition-opacity"
             >
-              Docs
+              {dict.links.docs}
             </a>
           </div>
 
           {/* Column 4: Location */}
           <div className="flex flex-col gap-[16px] max-w-[280px]">
             <h3 className="text-[24px] font-semibold text-[#1F2A6B] leading-[1.21]">
-              Location
+              {dict.location}
             </h3>
             <p className="text-[18px] text-[#1A1A1A] opacity-70 leading-[1.4]">
               {dict.nycOffice}
             </p>
             <p className="text-[18px] text-[#1A1A1A] opacity-70 leading-[1.4]">
-              75 Al aman st, Al wardian, Alexandria, Egypt
+              {dict.alexOffice}
             </p>
           </div>
         </div>
@@ -250,7 +264,7 @@ export default function Footer({ dict }: FooterProps) {
         {/* Copyright Area */}
         <div className="w-full flex justify-center items-center py-[15px] px-[20px] md:px-[231px] min-h-[66px] mt-4">
           <p className="text-[16px] leading-[1.5] text-[#1A1A1A] font-normal text-center">
-            © 2025 APEX Experts AI Solutions. All Rights Reserved.
+            {dict.copyright}
           </p>
         </div>
       </div>

@@ -410,10 +410,15 @@
   },
   "footer": {
     "company": "الشركة",
+    "description": "منصة تحليلات مدعومة بالذكاء الاصطناعي مصممة لـ Oracle APEX، تمكن الفرق من تحويل البيانات المعقدة إلى رؤى قابلة للتنفيذ فوراً.",
     "services": "الخدمات",
     "digitalExperience": "التجربة الرقمية",
     "address": "عنواننا",
     "nycOffice": "مكتب رقم ٤٣-٤٤ - الفهيدي دبي بر دبي، الإمارات",
+    "alexOffice": "٧٥ شارع الأمان، الورديان، الإسكندرية، مصر",
+    "legal": "قانوني",
+    "quickLinks": "روابط",
+    "location": "الموقع",
     "social": {
       "facebook": "https://facebook.com",
       "linkedin": "https://linkedin.com",
@@ -421,31 +426,39 @@
       "twitter": "https://twitter.com",
       "youtube": "https://youtube.com"
     },
+    "socialLabels": {
+      "facebook": "فيسبوك",
+      "linkedin": "لينكد إن",
+      "instagram": "إنستغرام",
+      "twitter": "إكس (تويتر)",
+      "youtube": "يوتيوب"
+    },
     "links": {
       "features": "المميزات",
       "dashboard": "لوحة التحكم والأدوات",
       "portfolio": "أعمالنا",
       "about": "من نحن",
-      "contact": "تواصل معنا"
+      "contact": "تواصل معنا",
+      "blog": "المدونة",
+      "docs": "الوثائق"
     },
     "rights": "ASKLYZE. تم التطوير بواسطة APEX Experts AI Solutions.",
+    "copyright": "© ٢٠٢٥ APEX Experts AI Solutions. جميع الحقوق محفوظة.",
     "bottomLinks": {
       "privacy": "سياسة الخصوصية",
       "terms": "الشروط والأحكام",
       "security": "أمن البيانات"
     }
   },
+  "blogSection": {
+    "title": "أحدث المدونات",
+    "subtitle": "رؤى ودروس وأفضل الممارسات لتحليلات Oracle APEX المدعومة بالذكاء الاصطناعي.",
+    "showAll": "عرض الكل"
+  },
   "blog": {
-    "title": "أحدث الأخبار",
-    "titleHighlight": "الأخبار",
-    "description": "رؤى وتحديثات وأفكار حول الذكاء الاصطناعي و Oracle APEX ومستقبل تحليل البيانات.",
-    "breadcrumbHome": "الرئيسية",
-    "breadcrumbBlog": "المدونة",
-    "noPosts": "لم يتم العثور على منشورات",
-    "inTopic": "في",
-    "adminLinkText": "انتقل إلى لوحة التحكم",
-    "adminLinkPrefix": "لإنشاء منشور.",
-    "backToBlog": "العودة إلى المدونة",
+    "title": "المقالات",
+    "description": "تستخدم Asklyze الذكاء الاصطناعي لتحليل بياناتك، واكتشاف الأنماط الخفية، ومساعدتك على اتخاذ قرارات أذكى بشكل أسرع — بدون تعقيد.",
+    "noPosts": "لم يتم العثور على مقالات",
     "topics": {
       "All": "الكل",
       "Tutorial": "دروس تعليمية",
@@ -454,6 +467,17 @@
       "Security": "الأمان",
       "Case Study": "دراسة حالة",
       "Product Update": "تحديث المنتج"
+    },
+    "article": {
+      "authorLabel": "الكاتب",
+      "readTimeLabel": "وقت القراءة",
+      "mins": "دقائق للقراءة",
+      "dateLabel": "تاريخ النشر",
+      "back": "العودة إلى المدونة",
+      "relatedArticles": "مقالات ذات صلة",
+      "unknownAuthor": "كاتب غير معروف",
+      "generalCategory": "عام",
+      "postNotFound": "لم يتم العثور على المقال"
     }
   },
   "metadata": {

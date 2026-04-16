@@ -16,6 +16,7 @@ import TrustedSection from "@/components/TrustedSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactUs from "@/components/ContactUs";
 import ContactCTA from "@/components/ContactCTA";
+import BlogSection from "@/components/BlogSection";
 
 export async function generateMetadata({
   params,
@@ -59,8 +60,9 @@ export default async function Home({
         <WhyChooseUs dict={dict.whyChoose} commonCTA_Dict={dict.commonCTA} />
         <Pricing dict={dict.pricing} lang={lang} />
         <FAQ dict={dict.faq} />
-        <ContactUs dict={dict.contactUs} />
+        <ContactUs dict={dict.contactUs} lang={lang} />
         <ContactCTA dict={dict.contactCTA} commonCTA_Dict={dict.commonCTA} />
+        <BlogSection dict={dict.blogSection} lang={lang} />
       </main>
       <Footer dict={dict.footer} />
     </>
