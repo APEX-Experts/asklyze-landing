@@ -52,10 +52,10 @@ export default function TermsAndConditionsContent({
   };
 
   return (
-    <div className="min-h-screen bg-white max-w-wide-section mx-[60px]">
+    <div className="min-h-screen bg-white">
       {/* Hero */}
       <section
-        className="relative mx-4 mt-[35px] rounded-[50px] flex flex-col items-center overflow-hidden"
+        className="relative mx-auto lg:mx-[60px] max-w-wide-section mt-4 rounded-[50px] flex flex-col items-center overflow-hidden"
         style={{
           background:
             "linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(245, 245, 245, 1) 42%, rgba(238, 241, 255, 1) 100%)",

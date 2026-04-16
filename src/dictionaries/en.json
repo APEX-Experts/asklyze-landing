@@ -398,10 +398,15 @@
   },
   "footer": {
     "company": "Company",
+    "description": "AI-powered analytics platform designed for Oracle APEX, enabling teams to transform complex data into actionable insights instantly.",
     "services": "Services",
     "digitalExperience": "Digital Experience",
     "address": "Our Address",
     "nycOffice": "Office No. 43-44 - Al Fahidi Dubai Bur Dubai, UAE",
+    "alexOffice": "75 Al aman st, Al wardian, Alexandria, Egypt",
+    "legal": "Legal",
+    "quickLinks": "Links",
+    "location": "Location",
     "social": {
       "facebook": "https://facebook.com",
       "linkedin": "https://linkedin.com",
@@ -409,14 +414,24 @@
       "twitter": "https://twitter.com",
       "youtube": "https://youtube.com"
     },
+    "socialLabels": {
+      "facebook": "Facebook",
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "twitter": "X (Twitter)",
+      "youtube": "Youtube"
+    },
     "links": {
       "features": "Features",
       "dashboard": "Dashboard & Tool",
       "portfolio": "Our Portfolio",
       "about": "About Us",
-      "contact": "Get In Touch"
+      "contact": "Get In Touch",
+      "blog": "Blog",
+      "docs": "Docs"
     },
     "rights": "ASKLYZE. Developed by APEX Experts AI Solutions.",
+    "copyright": "© 2025 APEX Experts AI Solutions. All Rights Reserved.",
     "bottomLinks": {
       "privacy": "Privacy Policy",
       "terms": "Terms & Conditions",
@@ -440,6 +455,17 @@
       "Security": "Security",
       "Case Study": "Case Study",
       "Product Update": "Product Update"
+    },
+    "article": {
+      "authorLabel": "Author",
+      "readTimeLabel": "Read Time",
+      "mins": "Mins Read",
+      "dateLabel": "Date",
+      "back": "Back to Blog",
+      "relatedArticles": "Related Articles",
+      "unknownAuthor": "Unknown Author",
+      "generalCategory": "General",
+      "postNotFound": "Post Not Found"
     }
   },
   "metadata": {

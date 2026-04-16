@@ -112,7 +112,7 @@ export default function BlogCarousel({ posts, lang, showAll }: Props) {
       {/* Arrow Buttons */}
       <div className="flex flex-row justify-between max-lg:flex-wrap items-center gap-8">
         <LinkButton href={`/${lang}/blog`}>{showAll}</LinkButton>
-        <div className="flex items-center gap-3 self-end">
+        <div className="flex items-center gap-3 self-end" dir="ltr">
           <button
             onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
             disabled={!canGoPrev}

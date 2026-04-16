@@ -74,7 +74,7 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
               className={cn(
-                "relative group hover:translate-y-[-8px] transition-all duration-500 w-full h-[740px]",
+                "relative group hover:translate-y-[-8px] transition-all duration-500 w-full h-[840px]",
                 plan.isRecommended ? "z-10" : "z-0"
               )}
             >

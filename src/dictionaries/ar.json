@@ -398,10 +398,15 @@
   },
   "footer": {
     "company": "الشركة",
+    "description": "منصة تحليلات مدعومة بالذكاء الاصطناعي مصممة لـ Oracle APEX، تمكن الفرق من تحويل البيانات المعقدة إلى رؤى قابلة للتنفيذ فوراً.",
     "services": "الخدمات",
     "digitalExperience": "التجربة الرقمية",
     "address": "عنواننا",
     "nycOffice": "مكتب رقم ٤٣-٤٤ - الفهيدي دبي بر دبي، الإمارات",
+    "alexOffice": "٧٥ شارع الأمان، الورديان، الإسكندرية، مصر",
+    "legal": "قانوني",
+    "quickLinks": "روابط",
+    "location": "الموقع",
     "social": {
       "facebook": "https://facebook.com",
       "linkedin": "https://linkedin.com",
@@ -409,14 +414,24 @@
       "twitter": "https://twitter.com",
       "youtube": "https://youtube.com"
     },
+    "socialLabels": {
+      "facebook": "فيسبوك",
+      "linkedin": "لينكد إن",
+      "instagram": "إنستغرام",
+      "twitter": "إكس (تويتر)",
+      "youtube": "يوتيوب"
+    },
     "links": {
       "features": "المميزات",
       "dashboard": "لوحة التحكم والأدوات",
       "portfolio": "أعمالنا",
       "about": "من نحن",
-      "contact": "تواصل معنا"
+      "contact": "تواصل معنا",
+      "blog": "المدونة",
+      "docs": "الوثائق"
     },
     "rights": "ASKLYZE. تم التطوير بواسطة APEX Experts AI Solutions.",
+    "copyright": "© ٢٠٢٥ APEX Experts AI Solutions. جميع الحقوق محفوظة.",
     "bottomLinks": {
       "privacy": "سياسة الخصوصية",
       "terms": "الشروط والأحكام",
@@ -440,6 +455,17 @@
       "Security": "الأمان",
       "Case Study": "دراسة حالة",
       "Product Update": "تحديث المنتج"
+    },
+    "article": {
+      "authorLabel": "الكاتب",
+      "readTimeLabel": "وقت القراءة",
+      "mins": "دقائق للقراءة",
+      "dateLabel": "تاريخ النشر",
+      "back": "العودة إلى المدونة",
+      "relatedArticles": "مقالات ذات صلة",
+      "unknownAuthor": "كاتب غير معروف",
+      "generalCategory": "عام",
+      "postNotFound": "لم يتم العثور على المقال"
     }
   },
   "metadata": {

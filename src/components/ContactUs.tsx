@@ -46,6 +46,7 @@ type Props = {
       submit: string;
     };
   };
+  lang?: string;
 };
 
 const PIN_SVG = (
@@ -163,7 +164,8 @@ type FormErrors = Partial<Record<keyof FormValues, string>>;
 const inputBase =
   "w-full rounded-sm border border-gray-200 bg-transparent px-4 py-3 text-sm text-text-heading placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200";
 
-const ContactUs = ({ dict }: Props) => {
+const ContactUs = ({ dict, lang }: Props) => {
+  const isArabic = lang === "ar";
   const f = dict.form;
 
   const [values, setValues] = useState<FormValues>({
@@ -202,7 +204,7 @@ const ContactUs = ({ dict }: Props) => {
     if (!values.message.trim() && f.message.required)
       errs.message = f.message.required;
 
-    if (values.phone.trim()) { 
+    if (values.phone.trim()) {
       const cleanPhone = values.phone.replace(/[\s\-()]/g, "");
       if (!/^\d{7,15}$/.test(cleanPhone)) {
         errs.phone = f.phone.invalid ?? "Invalid phone";
@@ -267,9 +269,9 @@ const ContactUs = ({ dict }: Props) => {
   };
 
   const countryOptions = COUNTRIES.map((c) => ({
-    label: c.name,
+    label: isArabic ? c.arName : c.name,
     value: c.name,
-    searchStr: `${c.name} ${c.dial_code}`,
+    searchStr: `${isArabic ? c.arName : c.name} ${c.dial_code}`,
     leftIcon: (
       <span className="text-xl leading-none">{getFlagEmoji(c.code)}</span>
     ),
@@ -338,13 +340,21 @@ const ContactUs = ({ dict }: Props) => {
             <InfoBlock label={dict.callLabel}>
               <div className="flex gap-2.5 items-center">
                 <div className="shrink-0">{PHONE_SVG}</div>
-                <Link href={`tel:${dict.phone1}`} className="text-primary-300">
+                <Link
+                  href={`tel:${dict.phone1}`}
+                  className="text-primary-300"
+                  dir="ltr"
+                >
                   {dict.phone1}
                 </Link>
               </div>
               <div className="flex gap-2.5 items-center">
                 <div className="shrink-0">{PHONE_SVG}</div>
-                <Link href={`tel:${dict.phone2}`} className="text-primary-300">
+                <Link
+                  href={`tel:${dict.phone2}`}
+                  className="text-primary-300"
+                  dir="ltr"
+                >
                   {dict.phone2}
                 </Link>
               </div>
@@ -416,7 +426,7 @@ const ContactUs = ({ dict }: Props) => {
                 error={errors.phone}
                 required={!!f.phone.required}
               >
-                <div className="relative flex items-center w-full">
+                <div className="relative flex items-center w-full" dir="ltr">
                   {countryDialCode && (
                     <div className="absolute left-5 top-1/2 -translate-y-1/2 pb-0.5 text-gray-500 font-medium text-sm select-none pointer-events-none">
                       {countryDialCode}
