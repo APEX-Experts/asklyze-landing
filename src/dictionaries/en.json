@@ -174,7 +174,12 @@
   "faq": {
     "tag": "FAQ",
     "title": "Frequently Asked Questions",
-    "categories": ["All", "General", "Technical", "Security"],
+    "categories": [
+      "All",
+      "General",
+      "Technical",
+      "Security"
+    ],
     "list": [
       {
         "question": "How is ASKLYZE deployed?",
@@ -375,7 +380,14 @@
         "label": "Company Size",
         "placeholder": "Select Company Size",
         "required": "Company Size is required",
-        "options": ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001+"]
+        "options": [
+          "1-10",
+          "11-50",
+          "51-200",
+          "201-500",
+          "501-1000",
+          "1001+"
+        ]
       },
       "role": {
         "label": "Your Role",
@@ -480,6 +492,10 @@
     "contact": {
       "title": "Contact Us | ASKLYZE - Get Expert Help",
       "description": "Get in touch with the ASKLYZE team for expert guidance on AI-powered analytics and data sovereignty."
+    },
+    "about": {
+      "title": "About Us | ASKLYZE",
+      "description": "Meet the team behind ASKLYZE, developed by APEX Experts AI Solutions. Learn about our mission, leadership, and values."
     },
     "privacy": {
       "title": "Privacy Policy | ASKLYZE",
@@ -753,6 +769,140 @@
       "content": "For any privacy-related questions, contact our Data Protection Officer at:",
       "email": "privacy@apexexperts.net",
       "address": "Office No. 43-44 - Al Fahidi, Dubai Bur Dubai, UAE"
+    }
+  },
+  "aboutPage": {
+    "alts": {
+      "apexLogo": "APEX Experts",
+      "feature": "Feature",
+      "visionLogo": "Vision Logo",
+      "visionImage": "Our Vision",
+      "missionLogo": "Mission Logo",
+      "missionImage": "Our Mission"
+    },
+    "header": {
+      "title": "About Asklyze",
+      "intro": "Discover how Asklyze is redefining data analytics for Oracle APEX teams, delivering intelligent insights without compromising data sovereignty."
+    },
+    "hero": {
+      "title": "About Asklyze",
+      "subtitle": "Asklyze is an AI-powered analytics plugin built specifically for Oracle APEX, helping teams access and understand their data faster without changing their architecture."
+    },
+    "trusted": {
+      "title": "Building Trusted AI\\nfor Oracle APEX Analytics",
+      "subtitle": "We help teams turn Oracle data into clear, actionable answers using natural language, without moving data outside their environment or relying on external tools.",
+      "stats": [
+        {
+          "value": "17+  Years",
+          "label": "Oracle APEX Experience"
+        },
+        {
+          "value": "200+  Apps",
+          "label": "Delivered across enterprise environments"
+        },
+        {
+          "value": "10+ Corporates",
+          "label": "Long-term partnerships and deployments"
+        }
+      ],
+      "footer": "ASKLYZE is developed by APEX Experts AI Solutions."
+    },
+    "trustedSC1": {
+      "title": "Building trusted AI\nfor Oracle APEX Analytics",
+      "subtitle": "We help enterprises turn complex Oracle data into clear answers without moving a single byte outside their environment.",
+      "stats": [
+        {
+          "value": "17+ Years",
+          "label": "Oracle APEX Experience"
+        },
+        {
+          "value": "200+ Apps",
+          "label": "Delivered across enterprise teams"
+        },
+        {
+          "value": "10+ Corporates",
+          "label": "Long-term enterprise partnerships"
+        }
+      ],
+      "footer": "ASKLYZE is developed by APEX Experts AI Solutions."
+    },
+    "solutions": {
+      "title": "APEX Experts AI Solutions",
+      "description": "We are a specialized Oracle APEX and enterprise AI team focused on building practical solutions for real business environments. Asklyze was created to reduce the complexity of querying data and to give teams faster, more direct access to insights within their existing systems.",
+      "whatWeBuild": {
+        "title": "What we build",
+        "subtitle": "Asklyze combines performance, security, and simplicity for Oracle-driven teams.",
+        "points": [
+          "Query data in Arabic and English.\\nNo SQL needed.",
+          "Generate visuals that fit directly\\ninto APEX apps.",
+          "Run queries on your Oracle database.\\nNo data movement."
+        ]
+      }
+    },
+    "guides": {
+      "title": "What guides our work",
+      "subtitle": "We build products that prioritize reliability, clarity, and real-world usability.",
+      "cards": [
+        {
+          "title": "Security First",
+          "description": "Your data stays private and fully controlled."
+        },
+        {
+          "title": "Practical AI",
+          "description": "Built for real use cases, not experiments."
+        },
+        {
+          "title": "Clear Experience",
+          "description": "Simple workflows for faster data access."
+        },
+        {
+          "title": "Global Ready",
+          "description": "Bilingual and built for enterprise standards."
+        }
+      ]
+    },
+    "visionMission": {
+      "vision": {
+        "title": "Our Vision",
+        "description": "To simplify how teams interact with data by embedding AI directly into Oracle APEX workflows."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "To enable faster, more secure data access through AI-powered querying built natively for Oracle environments."
+      }
+    },
+    "leaders": {
+      "title": "Meet the leaders",
+      "subtitle": "A team with deep expertise in Oracle APEX, enterprise systems, and applied AI.",
+      "members": [
+        {
+          "name": "Ahmed Alsaied",
+          "role": "Founder & CEO",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          }
+        },
+        {
+          "name": "Amr Mohamed",
+          "role": "Technical Lead",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          }
+        },
+        {
+          "name": "Abdulrahman Ebrahim",
+          "role": "Sr. Software Engineering",
+          "social": {
+            "facebook": "https://facebook.com",
+            "linkedin": "https://linkedin.com",
+            "instagram": "https://instagram.com"
+          }
+        }
+      ]
     }
   }
 }

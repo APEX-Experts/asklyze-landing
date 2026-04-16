@@ -164,8 +164,8 @@ export default function Navbar({ dict }: NavbarProps) {
                             window.location.href = newPath;
                           }}
                           className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${currentLocale === lang.code
-                              ? "text-primary font-bold bg-primary/5"
-                              : "text-text-heading cursor-pointer"
+                            ? "text-primary font-bold bg-primary/5"
+                            : "text-text-heading cursor-pointer"
                             }`}
                         >
                           <span>{lang.label}</span>
@@ -293,8 +293,8 @@ export default function Navbar({ dict }: NavbarProps) {
                         window.location.href = newPath;
                       }}
                       className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/en")
-                          ? "bg-primary border-primary text-white"
-                          : "bg-white border-gray-200 text-text-body hover:border-primary/50"
+                        ? "bg-primary border-primary text-white"
+                        : "bg-white border-gray-200 text-text-body hover:border-primary/50"
                         }`}
                     >
                       EN
@@ -305,8 +305,8 @@ export default function Navbar({ dict }: NavbarProps) {
                         window.location.href = newPath;
                       }}
                       className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${pathname.startsWith("/ar")
-                          ? "bg-primary border-primary text-white"
-                          : "bg-white border-gray-200 text-text-body hover:border-primary/50"
+                        ? "bg-primary border-primary text-white"
+                        : "bg-white border-gray-200 text-text-body hover:border-primary/50"
                         }`}
                     >
                       AR

@@ -151,7 +151,7 @@ export default function Footer({ dict }: FooterProps) {
 
   return (
     <footer className="w-full relative" style={{ backgroundColor: "#E8EBFA" }}>
-      <div className="mx-auto w-full max-w-[1440px] pt-[60px] md:pt-[100px] flex flex-col items-center gap-[32px]">
+      <div className="mx-auto w-full max-w-[1440px] pt-[40px] md:pt-[60px] flex flex-col items-center gap-[32px]">
         {/* Main Content Area */}
         <div className="w-full max-w-[1240px] px-6 mx-auto flex flex-col md:flex-row justify-between items-start gap-12 md:gap-8">
           {/* Column 1: Brand & Socials */}
