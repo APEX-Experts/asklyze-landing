@@ -423,17 +423,15 @@
       "security": "Data Security"
     }
   },
+  "blogSection": {
+    "title": "Latest Articles",
+    "subtitle": "Insights, tutorials, and best practices for Oracle APEX and AI-powered analytics.",
+    "showAll": "Show All"
+  },
   "blog": {
-    "title": "Latest News",
-    "titleHighlight": "News",
-    "description": "Insights, updates, and thoughts on AI, Oracle APEX, and the future of data analytics.",
-    "breadcrumbHome": "Home",
-    "breadcrumbBlog": "Blog",
+    "title": "Blogs",
+    "description": "Insights, guides, and best practices for Oracle APEX and AI-powered analytics.",
     "noPosts": "No posts found",
-    "inTopic": "in",
-    "adminLinkText": "Go to Admin",
-    "adminLinkPrefix": "to create one.",
-    "backToBlog": "Back to Blog",
     "topics": {
       "All": "All",
       "Tutorial": "Tutorial",
