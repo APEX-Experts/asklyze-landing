@@ -12,7 +12,7 @@ interface CommonCTA {
 
 const CommonCTA = ({ commonCTA_Dict }: { commonCTA_Dict: CommonCTA }) => {
   return (
-    <div className="flex flex-col gap-3.5 items-center">
+    <div className="flex flex-col gap-3.5 items-center lg:min-w-[350px]">
       {/* Buttons */}
       <div className="flex flex-row flex-wrap gap-2.5 items-center justify-center">
         <LinkButton href={commonCTA_Dict.watchDemoUrl} variant="outline">

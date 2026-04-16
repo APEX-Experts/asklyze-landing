@@ -117,6 +117,9 @@
     "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4",
     "disclaimer": "14-day free trial. No credit card required."
   },
+  "contactCTA": {
+    "title": "Bring AI-Powered Analytics Into Your APEX Applications"
+  },
   "contentSplit": {
     "section1": {
       "title": "Native APEX Integration.",
