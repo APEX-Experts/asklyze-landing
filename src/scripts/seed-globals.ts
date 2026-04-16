@@ -1,7 +1,7 @@
 import { getPayload } from 'payload';
-import configPromise from '../payload.config';
 import fs from 'fs';
 import path from 'path';
+import config from '../payload.config'
 
 const enDictPath = path.join(process.cwd(), 'src/dictionaries/en.json');
 const arDictPath = path.join(process.cwd(), 'src/dictionaries/ar.json');
@@ -80,7 +80,7 @@ async function runSeed() {
     process.env.SEEDING = 'true';
     console.log('Loading Payload...');
 
-    const payload = await getPayload({ config: configPromise });
+    const payload = await getPayload({ config: await config });
 
     console.log('Starting seed process...');
 
@@ -116,7 +116,7 @@ async function runSeed() {
             if (dict[key]) {
                 try {
                     await payload.updateGlobal({
-                        slug: slug,
+                        slug: slug as unknown as never,
                         data: dict[key],
                         locale: locale,
                     });

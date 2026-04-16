@@ -20,7 +20,6 @@ export default function AboutContent({
 }: AboutContentProps) {
   const textAlign = isArabic ? "text-right" : "text-left";
   const dir = isArabic ? "rtl" : "ltr";
-  console.log(content);
 
   // Reusable animation variants
   const fadeInUp = {

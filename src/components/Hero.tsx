@@ -85,7 +85,6 @@ export default function Hero({ dict }: HeroProps) {
           >
             <LinkButton
               onClick={() => {
-                console.log("CLICKED");
                 setIsVideoModalOpen(true);
               }}
               variant="outline"

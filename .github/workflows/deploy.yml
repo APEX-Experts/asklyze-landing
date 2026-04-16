@@ -51,7 +51,8 @@ jobs:
           cache-to: type=gha,mode=min
           platforms: linux/amd64
           build-args: |
-            NEXT_PUBLIC_SERVER_URL=${{ secrets.NEXT_PUBLIC_SERVER_URL }}
+            DATABASE_URI="${{ secrets.ASKLYZE_DATABASE_URL }}"
+            PAYLOAD_SECRET="${{ secrets.PAYLOAD_SECRET }}"
 
       - name: Create Environment File
         run: |
@@ -59,7 +60,6 @@ jobs:
           NODE_ENV: "production"
           DATABASE_URI: "${{ secrets.ASKLYZE_DATABASE_URL }}"
           PAYLOAD_SECRET: "${{ secrets.PAYLOAD_SECRET }}"
-          NEXT_PUBLIC_SERVER_URL: "${{ secrets.NEXT_PUBLIC_SERVER_URL }}"
           SENDGRID_API_KEY: "${{ secrets.SENDGRID_API_KEY}}"
           MAIL_FROM: "${{ secrets.MAIL_FROM}}"
           EOF

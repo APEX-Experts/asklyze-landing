@@ -11,9 +11,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Pass public URL for static generation during build
-ARG NEXT_PUBLIC_SERVER_URL
-ENV NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-https://asklyze.com}
+ARG DATABASE_URI
+ENV DATABASE_URI=${DATABASE_URI}
+
+ARG PAYLOAD_SECRET
+ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
+
+
 
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production

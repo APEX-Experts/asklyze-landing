@@ -21,7 +21,8 @@ steps:
 
         docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/apex-repo/asklyze-landing:latest \
           --platform linux/amd64 \
-          --build-arg NEXT_PUBLIC_SERVER_URL="$(get_val NEXT_PUBLIC_SERVER_URL)" \
+          --build-arg DATABASE_URI="$(get_val DATABASE_URI)" \
+          --build-arg PAYLOAD_SECRET="$(get_val PAYLOAD_SECRET)" \
           -f ./Dockerfile .
     id: "build"
 
