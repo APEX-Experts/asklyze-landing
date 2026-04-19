@@ -26,7 +26,7 @@ export default function Hero({ dict }: HeroProps) {
 
   return (
     <section
-      className="hero-gradient rounded-5xl max-w-wide-section mx-[60px]"
+      className="hero-gradient rounded-5xl max-w-wide-section lg:mx-[60px] mx-2"
       style={{ minHeight: "100vh", paddingTop: "128px" }}
     >
       <div className="w-full max-w-[1200px] mx-auto px-6 relative z-10">
@@ -58,7 +58,7 @@ export default function Hero({ dict }: HeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
-            className="font-normal text-primary-dark text-center text-[64px] max-w-4xl"
+            className="font-normal text-primary-dark text-center text-3xl md:text-5xl lg:text-[64px] max-w-4xl"
           >
             {dict.titleBeforeSpan}{" "}
             <span className="text-primary font-extrabold">

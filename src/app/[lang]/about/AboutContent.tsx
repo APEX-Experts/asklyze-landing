@@ -439,7 +439,7 @@ export default function AboutContent({
       </div>
 
       {/* 6. Leaders */}
-      <div className="w-full px-6 lg:px-[100px] pt-[55px] pb-10 relative overflow-visible">
+      <div className="w-full px-6 lg:px-[100px] pt-[55px] pb-10 max-md:mb-24 relative overflow-visible">
         {/* Decorative background element */}
         <div
           className="absolute pointer-events-none"

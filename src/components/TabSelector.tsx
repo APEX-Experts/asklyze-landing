@@ -19,14 +19,19 @@ export default function TabSelector({
   layoutId = "activeTab",
 }: TabSelectorProps) {
   return (
-    <div className={cn("flex items-center justify-center", className)}>
-      <div className="relative flex rounded-full p-[5px] w-fit pricing-tabs bg-white">
+    <div
+      className={cn(
+        "flex items-center justify-center w-full md:w-fit min-w-[230px] px-2",
+        className
+      )}
+    >
+      <div className="relative flex w-full md:w-fit rounded-full p-[5px] pricing-tabs bg-white">
         {tabs.map((tab, index) => (
           <button
             key={index}
             onClick={() => onChange(tab)}
             className={cn(
-              "cursor-pointer relative z-10 px-6 py-2.5 text-sm font-bold rounded-full transition-colors duration-300 min-w-[120px] whitespace-nowrap",
+              "flex-1 md:flex-none cursor-pointer relative z-10 px-1 sm:px-2 md:px-6 py-2.5 text-[11px] sm:text-xs md:text-sm font-bold rounded-full transition-colors duration-300 md:min-w-[120px] whitespace-nowrap truncate",
               activeTab === tab ? "text-white" : "text-primary-dark"
             )}
           >

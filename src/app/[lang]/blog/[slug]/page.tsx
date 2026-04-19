@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
-import { Post } from "@/payload-types";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -145,9 +144,8 @@ export default async function BlogPostPage({
 
             {/* Title */}
             <h1
-              className="text-primary-dark m-0"
+              className="text-primary-dark m-0 text-3xl md:text-5xl"
               style={{
-                fontSize: "56px",
                 fontStyle: "normal",
                 fontWeight: 700,
                 lineHeight: "normal",
@@ -181,7 +179,7 @@ export default async function BlogPostPage({
                 </div>
               </div>
 
-              <div className="bg-gray-300 w-px h-[50px]"></div>
+              <div className="bg-gray-300 w-px h-[50px] max-sm:hidden"></div>
 
               {/* Mins Read */}
               <div className="flex flex-row items-center gap-3">
@@ -222,7 +220,7 @@ export default async function BlogPostPage({
                 </span>
               </div>
 
-              <div className="bg-gray-300 w-px h-[50px]"></div>
+              <div className="bg-gray-300 w-px h-[50px] max-sm:hidden"></div>
 
               {/* Date */}
               <div className="flex flex-row items-center gap-3">

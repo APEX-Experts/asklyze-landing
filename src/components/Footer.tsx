@@ -160,9 +160,9 @@ export default function Footer({ dict }: FooterProps) {
               href={`/${currentLocale}`}
               className="inline-block text-primary"
             >
-              <Logo width={384} height={60} />
+              <Logo width={300} height={60} />
             </Link>
-            <p className="text-[18px] leading-[1.6] text-[#1A1A1A] opacity-70 font-normal">
+            <p className="text-[18px] leading-[1.6] text-[#1A1A1A] opacity-70 font-normal max-md:text-center">
               {dict.description}
             </p>
             {/* Social Icons */}
@@ -263,7 +263,7 @@ export default function Footer({ dict }: FooterProps) {
 
         {/* Copyright Area */}
         <div className="w-full flex justify-center items-center py-[15px] px-[20px] md:px-[231px] min-h-[66px] mt-4">
-          <p className="text-[16px] leading-[1.5] text-[#1A1A1A] font-normal text-center">
+          <p className="text-[16px] leading-normal text-[#1A1A1A] font-normal text-center">
             {dict.copyright}
           </p>
         </div>
