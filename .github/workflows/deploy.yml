@@ -62,6 +62,7 @@ jobs:
           PAYLOAD_SECRET: "${{ secrets.PAYLOAD_SECRET }}"
           SENDGRID_API_KEY: "${{ secrets.SENDGRID_API_KEY}}"
           MAIL_FROM: "${{ secrets.MAIL_FROM}}"
+          NEXT_PUBLIC_SITE_URL: "${{ secrets.NEXT_PUBLIC_SITE_URL}}"
           EOF
 
       - name: Deploy to Cloud Run
