@@ -44,11 +44,21 @@ Edit `.env` and add your configuration:
 
 ```env
 PAYLOAD_SECRET=your-strong-random-secret
-DATABASE_URI=file:./payload-sqlite.db
+DATABASE_URI=file:postgresql://[username]:[password]@[host]:[port]/[db_name]
 SENDGRID_API_KEY=your-sendgrid-api-key
 MAIL_FROM=noreply@yourdomain.com
 NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ```
+
+#### How to Generate Payload Secret
+
+Run this command on Linux or Mac
+
+```bash
+openssl rand -base64 32
+```
+
+Then copy the output to the `PAYLOAD_SECRET` variable in the `.env` file.
 
 ### 4. Run the development server
 
@@ -80,84 +90,6 @@ docker build -t asklyze-landing .
 # Run with docker-compose
 docker-compose up -d
 ```
-
-### Production VPS Deployment
-
-Complete guide for deploying to a VPS with Docker, Nginx, and SSL.
-
-#### Prerequisites
-
-- Ubuntu 20.04/22.04 or Debian 11/12 VPS
-- Minimum 2GB RAM, 2 CPU cores, 20GB storage
-- Domain name with DNS access
-- Root or sudo access to VPS
-
-#### Quick Deployment Steps
-
-1. **Prepare VPS**
-
-```bash
-# SSH into your VPS
-ssh root@your-vps-ip
-
-# Clone the repository
-git clone https://github.com/APEX-Experts/asklyze-landing.git
-cd asklyze-landing
-
-# Run VPS setup script (installs Docker, Nginx, Certbot, etc.)
-sudo bash deploy/setup-vps.sh yourdomain.com your@email.com
-```
-
-2. **Configure DNS**
-
-Point your domain's A records to your VPS IP:
-
-```
-A    @       your-vps-ip
-A    www     your-vps-ip
-```
-
-3. **Set up SSL certificates**
-
-```bash
-sudo bash deploy/init-ssl.sh yourdomain.com your@email.com
-```
-
-4. **Configure Nginx**
-
-```bash
-# Copy and configure Nginx
-sudo cp deploy/nginx.conf /etc/nginx/sites-available/asklyze-landing
-sudo sed -i 's/yourdomain.com/your-actual-domain.com/g' /etc/nginx/sites-available/asklyze-landing
-sudo ln -s /etc/nginx/sites-available/asklyze-landing /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx
-```
-
-5. **Configure GitHub Actions Secrets**
-
-In your GitHub repository, go to **Settings → Secrets and variables → Actions**, and add:
-
-```
-VPS_HOST=your-vps-ip
-VPS_USER=deploy
-VPS_PORT=22
-SSH_PRIVATE_KEY=<your-private-ssh-key>
-PAYLOAD_SECRET=<strong-random-secret>
-SENDGRID_API_KEY=<your-sendgrid-api-key>
-MAIL_FROM=noreply@yourdomain.com
-NEXT_PUBLIC_SERVER_URL=https://yourdomain.com
-```
-
-6. **Deploy**
-
-Push to main branch to trigger automatic deployment:
-
-```bash
-git push origin main
-```
-
-For detailed deployment documentation, see [deploy/README.md](deploy/README.md).
 
 ## 📁 Project Structure
 
