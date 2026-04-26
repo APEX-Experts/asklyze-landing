@@ -38,11 +38,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await payload.find({
         collection: "posts",
         limit: 1000, // Note: If you exceed 1000 posts, you'll need to paginate this request
-        where: {
-            _status: {
-                equals: 'published'
-            }
-        }
     })
 
     // 3. Map Dynamic Blog Routes with Multi-language Alternates
