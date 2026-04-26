@@ -1,6 +1,5 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import * as dotenv from 'dotenv';
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -16,7 +15,6 @@ import {
   PrivacyContent, TermsContent, SecurityContent, AboutPageContent
 } from "./globals";
 
-dotenv.config()
 
 
 export default buildConfig({
@@ -33,7 +31,7 @@ export default buildConfig({
     PrivacyContent, TermsContent, SecurityContent, AboutPageContent
   ],
   editor: lexicalEditor({}),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: process.env.PAYLOAD_SECRET || 'fallback-dev-secret-do-not-use-in-prod',
   typescript: {
     outputFile: path.resolve(process.cwd(), "payload-types.ts"),
   },
