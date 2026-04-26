@@ -46,7 +46,7 @@ steps:
           --region us-central1 \
           --env-vars-file env.yaml \
           --execution-environment gen2 \
-          --memory 1Gi \
+          --memory 2Gi \
           --cpu 1 \
           --port 3076 \
           --allow-unauthenticated
