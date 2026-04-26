@@ -1,19 +1,17 @@
-import { revalidateTag } from 'next/cache';
+import { GlobalAfterChangeHook } from 'payload';
 
-export const revalidateHook = (globalSlug: string): any => {
-    return async ({ doc, req: { payload } }: any) => {
+export const revalidateHook = (globalSlug: string): GlobalAfterChangeHook => {
+    return async ({ doc, req }) => {
         if (process.env.SEEDING === 'true') {
             return doc;
         }
 
-        // Payload runs inside the same Next.js process (via withPayload),
-        // so we can call revalidateTag directly — no HTTP self-fetch needed.
-        // This avoids Cloud Run's inability to make requests back to itself.
         try {
+            const { revalidateTag } = await import('next/cache');
             revalidateTag('dictionary');
-            payload.logger.info(`Successfully revalidated tag "dictionary" for ${globalSlug}`);
+            req.payload.logger.info(`Successfully revalidated tag "dictionary" for ${globalSlug}`);
         } catch (err) {
-            payload.logger.error(`Error revalidating ${globalSlug}: ${err}`);
+            req.payload.logger.error(`Error revalidating ${globalSlug}: ${err}`);
         }
         return doc;
     };
