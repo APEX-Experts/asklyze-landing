@@ -1,4 +1,3 @@
-import React from "react";
 import TrustedBy0 from "@/../public/icons/trusted-by0.svg";
 import TrustedBy1 from "@/../public/icons/trusted-by1.svg";
 import TrustedBy2 from "@/../public/icons/trusted-by2.svg";
@@ -162,13 +161,9 @@ export const FeatureIcon = ({
 
 export const TrustedByIcon = ({
   index,
-  width = 120,
-  height = 30,
   className = "",
 }: {
   index: number;
-  width?: number;
-  height?: number;
   className?: string;
 }) => {
   switch (index) {

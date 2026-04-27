@@ -5,26 +5,18 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import TabSelector from "./TabSelector";
+import { Dictionary } from "@/get-dictionary";
 
 interface FAQProps {
-  dict: {
-    tag: string;
-    title: string;
-    categories: string[];
-    list: Array<{
-      question: string;
-      answer: string;
-      category?: string;
-    }>;
-  };
+  dict: Dictionary["faq"];
 }
 
 export default function FAQ({ dict }: FAQProps) {
-  const [activeTab, setActiveTab] = useState(dict.categories[0]);
+  const [activeTab, setActiveTab] = useState(dict.categories[0].text);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const filteredFAQs =
-    activeTab === dict.categories[0]
+    activeTab === dict.categories[0].text
       ? dict.list
       : dict.list.filter((item) => item.category === activeTab);
 
@@ -45,7 +37,7 @@ export default function FAQ({ dict }: FAQProps) {
         </div>
 
         <TabSelector
-          tabs={dict.categories}
+          tabs={dict.categories.map((category) => category.text)}
           activeTab={activeTab}
           onChange={setActiveTab}
           layoutId="faqCategories"

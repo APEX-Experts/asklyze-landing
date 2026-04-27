@@ -8,14 +8,10 @@ const formatPoint = (point: string) =>
   point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
 interface PrivacyPolicyContentProps {
-  lang: "en" | "ar";
-  isArabic: boolean;
   content: Omit<PrivacyContent, "id" | "createdAt" | "updatedAt">;
 }
 
 export default function PrivacyPolicyContent({
-  lang,
-  isArabic,
   content,
 }: PrivacyPolicyContentProps) {
   const [activeSection, setActiveSection] = useState(0);

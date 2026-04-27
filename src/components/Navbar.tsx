@@ -1,30 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ChevronDown,
-  ChevronRight,
-  Globe,
-  Menu,
-  X,
-} from "lucide-react";
+import { ChevronDown, ChevronRight, Globe, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import LinkButton from "./LinkButton";
 import Logo from "./Logo";
+import { NavbarContent } from "../../payload-types";
 
 interface NavbarProps {
-  dict: {
-    links: {
-      label: string;
-      href: string;
-      icon: string;
-      external: boolean;
-    }[];
-    getStarted: string;
-    [key: string]: any;
-  };
+  dict: Omit<NavbarContent, "id" | "createdAt" | "updatedAt">;
 }
 
 export default function Navbar({ dict }: NavbarProps) {

@@ -1,22 +1,17 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import FeatureGrid from "@/components/FeatureGrid";
-import WorkingProcess from "@/components/WorkingProcess";
-import ContentSplit from "@/components/ContentSplit";
-import TabbedShowcase from "@/components/TabbedShowcase";
-import TrustBar from "@/components/TrustBar";
-import Testimonials from "@/components/Testimonials";
+import BlogSection from "@/components/BlogSection";
+import ContactCTA from "@/components/ContactCTA";
+import ContactUs from "@/components/ContactUs";
 import FAQ from "@/components/FAQ";
-import GradientCTA from "@/components/GradientCTA";
-import Pricing from "@/components/Pricing";
+import FeatureGrid from "@/components/FeatureGrid";
 import Footer from "@/components/Footer";
-import { getDictionary } from "@/get-dictionary";
+import Hero from "@/components/Hero";
+import Navbar from "@/components/Navbar";
+import Pricing from "@/components/Pricing";
 import TrustedSection from "@/components/TrustedSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import ContactUs from "@/components/ContactUs";
-import ContactCTA from "@/components/ContactCTA";
-import BlogSection from "@/components/BlogSection";
+import WorkingProcess from "@/components/WorkingProcess";
+import { getDictionary } from "@/get-dictionary";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -58,15 +53,11 @@ export default async function Home({
         />
         <TrustedSection dict={dict.trustedBy} lang={lang} />
         <WhyChooseUs dict={dict.whyChoose} commonCTA_Dict={dict.commonCTA} />
-        <Pricing dict={dict.pricing} lang={lang} />
+        <Pricing dict={dict.pricing} />
         <FAQ dict={dict.faq} />
         <ContactUs dict={dict.contactUs} lang={lang} />
         <ContactCTA dict={dict.contactCTA} commonCTA_Dict={dict.commonCTA} />
-        <BlogSection
-          dict={dict.blogSection}
-          blogDict={dict.blog}
-          lang={lang}
-        />
+        <BlogSection dict={dict.blogSection} blogDict={dict.blog} lang={lang} />
       </main>
       <Footer dict={dict.footer} />
     </>

@@ -1,37 +1,18 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Sparkles, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import LinkButton from "./LinkButton";
-import { cn } from "@/lib/utils";
 import TabSelector from "./TabSelector";
+import { Dictionary } from "@/get-dictionary";
 
 interface PricingProps {
-  dict: {
-    tag: string;
-    title: string;
-    desc: string;
-    cta: string;
-    href: string;
-    recommended: string;
-    monthly: string;
-    yearly: string;
-    plans: Array<{
-      name: string;
-      price: string;
-      period: string;
-      periodLabel: string;
-      href?: string;
-      features: string[];
-      isRecommended?: boolean;
-    }>;
-  };
-  lang?: string;
+  dict: Dictionary["pricing"];
 }
 
-export default function Pricing({ dict, lang = "en" }: PricingProps) {
+export default function Pricing({ dict }: PricingProps) {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">(
     "monthly"
   );
@@ -156,7 +137,7 @@ export default function Pricing({ dict, lang = "en" }: PricingProps) {
                         </svg>
                       </div>
                       <span className="text-text-heading leading-normal">
-                        {feature}
+                        {feature.text}
                       </span>
                     </li>
                   ))}

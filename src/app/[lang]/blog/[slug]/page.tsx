@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import BlogCarousel from "@/components/BlogCarousel";
 import BlogPostSchema from "@/components/BlogPostSchema";
 import Footer from "@/components/Footer";
@@ -84,10 +86,6 @@ export default async function BlogPostPage({
 
   const authorName = post.author?.name || dict.blog.article.unknownAuthor;
   const authorImage = post.author?.image || null;
-  const authorJobTitle =
-    lang === "ar" && post.author?.jobTitleAr
-      ? post.author.jobTitleAr
-      : post.author?.jobTitle || null;
   const category = post.category || dict.blog.article.generalCategory;
   const displayTitle =
     lang === "ar" && post.titleAr ? post.titleAr : post.title;

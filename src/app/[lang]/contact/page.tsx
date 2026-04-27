@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import ContactHero from "@/components/ContactHero";
 import ContactUs from "@/components/ContactUs";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { getDictionary } from "@/get-dictionary";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

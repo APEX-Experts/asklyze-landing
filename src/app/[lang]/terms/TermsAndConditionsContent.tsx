@@ -8,14 +8,10 @@ const formatPoint = (point: string) =>
   point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
 interface TermsAndConditionsContentProps {
-  lang: "en" | "ar";
-  isArabic: boolean;
   content: Omit<TermsContent, "id" | "createdAt" | "updatedAt">;
 }
 
 export default function TermsAndConditionsContent({
-  lang,
-  isArabic,
   content,
 }: TermsAndConditionsContentProps) {
   const [activeSection, setActiveSection] = useState(0);

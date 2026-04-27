@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 interface FooterProps {

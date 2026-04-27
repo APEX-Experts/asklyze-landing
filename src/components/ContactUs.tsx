@@ -8,44 +8,10 @@ import CustomSelect from "./CustomSelect";
 import Field from "./Field";
 import InfoBlock from "./InfoBlock";
 import Separator from "./Separator";
-
-type FormField = {
-  label: string;
-  placeholder: string;
-  required?: string;
-  invalid?: string;
-  countrySelect?: boolean;
-  options?: string[];
-  textarea?: boolean;
-};
+import { Dictionary } from "@/get-dictionary";
 
 type Props = {
-  dict: {
-    title: string;
-    subtitle: string;
-    locationLabel: string;
-    location1: string;
-    location2: string;
-    emailLabel: string;
-    email1: string;
-    email2: string;
-    callLabel: string;
-    phone1: string;
-    phone2: string;
-    callTimes: string;
-    form: {
-      name: FormField;
-      email: FormField;
-      country: FormField;
-      phone: FormField;
-      companyName: FormField;
-      companySize: FormField;
-      role: FormField;
-      subject: FormField;
-      message: FormField;
-      submit: string;
-    };
-  };
+  dict: Dictionary["contactUs"];
   lang?: string;
 };
 
@@ -375,7 +341,7 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.name.label}
                 error={errors.name}
-                required={!!f.name.required}
+                required={Object.hasOwn(f.name, "required")}
               >
                 <input
                   id="contact-name"
@@ -390,7 +356,7 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.email.label}
                 error={errors.email}
-                required={!!f.email.required}
+                required={Object.hasOwn(f.email, "required")}
               >
                 <input
                   id="contact-email"
@@ -409,7 +375,7 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.country.label}
                 error={errors.country}
-                required={!!f.country.required}
+                required={Object.hasOwn(f.country, "required")}
               >
                 <CustomSelect
                   options={countryOptions}
@@ -424,7 +390,7 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.phone.label}
                 error={errors.phone}
-                required={!!f.phone.required}
+                required={Object.hasOwn(f.phone, "required")}
               >
                 <div className="relative flex items-center w-full" dir="ltr">
                   {countryDialCode && (
@@ -457,7 +423,7 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.companyName.label}
                 error={errors.companyName}
-                required={!!f.companyName.required}
+                required={Object.hasOwn(f.companyName, "required")}
               >
                 <input
                   id="contact-company-name"
@@ -472,12 +438,12 @@ const ContactUs = ({ dict, lang }: Props) => {
               <Field
                 label={f.companySize.label}
                 error={errors.companySize}
-                required={!!f.companySize.required}
+                required={Object.hasOwn(f.companySize, "required")}
               >
                 <CustomSelect
                   options={(f.companySize.options ?? []).map((opt) => ({
-                    label: opt,
-                    value: opt,
+                    label: opt.text,
+                    value: opt.text,
                   }))}
                   value={values.companySize}
                   onChange={(val) =>

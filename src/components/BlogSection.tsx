@@ -1,9 +1,6 @@
-import React from "react";
-import LinkButton from "./LinkButton";
-import BlogCarousel from "./BlogCarousel";
 import { getPayload } from "@/lib/payload";
-import { BlogPost } from "@/types/blog";
 import { Post } from "@/payload-types";
+import BlogCarousel from "./BlogCarousel";
 
 type Props = {
   dict: {

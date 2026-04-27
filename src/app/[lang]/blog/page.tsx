@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+export const revalidate = 60;
+
 import BlogCard from "@/components/BlogCard";
-import BlogTopicFilter from "@/components/BlogTopicFilter";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
-import { BlogPost } from "@/types/blog";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Post } from "@/payload-types";
 import { cn } from "@/lib/utils";
+import { Post } from "@/payload-types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -60,38 +60,29 @@ export default async function BlogPage({
       ? topicParam
       : undefined;
   const limit = 6;
+  const initialPage = currentPageParam > 0 ? currentPageParam : 1;
 
   const payload = await getPayload();
 
-  // Fetch with optional category filter
-  const { docs: allPostDocs, totalDocs } = await payload.find({
+  // Fetch with optional category filter using server-side pagination
+  const {
+    docs: pagePosts,
+    totalPages: payloadTotalPages,
+    hasNextPage,
+    hasPrevPage,
+    page: payloadPage,
+  } = await payload.find({
     collection: "posts",
-    limit: 1000,
+    limit: limit,
+    page: initialPage,
     sort: "-publishedDate",
     ...(selectedTopic
       ? { where: { category: { equals: selectedTopic } } }
       : {}),
   });
 
-  // Fetch all posts for topic list (without filter)
-  const { docs: allForTopics } = await payload.find({
-    collection: "posts",
-    limit: 1000,
-    sort: "-publishedDate",
-  });
-
-  const topics = [
-    "All",
-    ...Array.from(new Set(allForTopics.map((p) => p.category))),
-  ];
-
-  const totalPages = Math.max(1, Math.ceil(totalDocs / limit));
-  const currentPage =
-    currentPageParam > 0 ? Math.min(currentPageParam, totalPages) : 1;
-  const hasNextPage = currentPage < totalPages;
-  const hasPrevPage = currentPage > 1;
-  const startIndex = (currentPage - 1) * limit;
-  const pagePosts = allPostDocs.slice(startIndex, startIndex + limit);
+  const totalPages = Math.max(1, payloadTotalPages);
+  const currentPage = payloadPage || initialPage;
 
   // Map Payload Post → BlogPost shape expected by BlogCard
   const posts: Post[] = pagePosts.map((post) => ({
@@ -128,12 +119,6 @@ export default async function BlogPage({
     return `/${lang}/blog?${nextParams.toString()}`;
   };
 
-  const getTopicUrl = (topic: string) => {
-    const nextParams = new URLSearchParams();
-    if (topic !== "All") nextParams.set("topic", topic);
-    return `/${lang}/blog?${nextParams.toString()}`;
-  };
-
   return (
     <main className="min-h-screen w-full">
       <Navbar dict={dict.navbar} />
@@ -160,7 +145,6 @@ export default async function BlogPage({
               key={post.id}
               post={post}
               lang={lang}
-              delay={index * 0.1}
               dict={dict.blog}
             />
           ))}

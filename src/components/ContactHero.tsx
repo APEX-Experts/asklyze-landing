@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparksIcon } from "./Icons";
 
 interface ContactHeroProps {
   dict: {

@@ -2,12 +2,42 @@
   "navbar": {
     "links": [
       { "label": "Home", "href": "/", "icon": "Home", "external": false },
-      { "label": "Features", "href": "#features", "icon": "Zap", "external": false },
-      { "label": "Pricing", "href": "#pricing", "icon": "CreditCard", "external": false },
-      { "label": "Blog", "href": "/blog", "icon": "Newspaper", "external": false },
-      { "label": "Docs", "href": "https://docs.asklyze.ai/", "icon": "FileText", "external": true },
-      { "label": "About", "href": "/about", "icon": "Users", "external": false },
-      { "label": "Contact", "href": "/contact", "icon": "Mail", "external": false }
+      {
+        "label": "Features",
+        "href": "#features",
+        "icon": "Zap" ,
+        "external": false
+      },
+      {
+        "label": "Pricing",
+        "href": "#pricing",
+        "icon": "CreditCard",
+        "external": false
+      },
+      {
+        "label": "Blog",
+        "href": "/blog",
+        "icon": "Newspaper",
+        "external": false
+      },
+      {
+        "label": "Docs",
+        "href": "https://docs.asklyze.ai/",
+        "icon": "FileText",
+        "external": true
+      },
+      {
+        "label": "About",
+        "href": "/about",
+        "icon": "Users",
+        "external": false
+      },
+      {
+        "label": "Contact",
+        "href": "/contact",
+        "icon": "Mail",
+        "external": false
+      }
     ],
     "getStarted": "Start Free Trial"
   },
@@ -113,7 +143,20 @@
   "faq": {
     "tag": "FAQ",
     "title": "Frequently Asked Questions",
-    "categories": ["All", "General", "Technical", "Security"],
+    "categories": [
+      {
+        "text": "All"
+      },
+      {
+        "text": "General"
+      },
+      {
+        "text": "Technical"
+      },
+      {
+        "text": "Security"
+      }
+    ],
     "list": [
       {
         "question": "How is ASKLYZE deployed?",
@@ -183,14 +226,30 @@
         "period": "monthly",
         "periodLabel": "/ Month",
         "features": [
-          "1 Database Instance",
-          "1 Schema",
-          "150 Available Table",
-          "Unlimited AI Report Generation",
-          "Unlimited AI Dashboard Generation",
-          "Unlimited APP_USER access",
-          "Hosted on Oracle Cloud (OCI)",
-          "Shared Infrastructure"
+          {
+            "text": "1 Database Instance"
+          },
+          {
+            "text": "1 Schema"
+          },
+          {
+            "text": "150 Available Table"
+          },
+          {
+            "text": "Unlimited AI Report Generation"
+          },
+          {
+            "text": "Unlimited AI Dashboard Generation"
+          },
+          {
+            "text": "Unlimited APP_USER access"
+          },
+          {
+            "text": "Hosted on Oracle Cloud (OCI)"
+          },
+          {
+            "text": "Shared Infrastructure"
+          }
         ]
       },
       {
@@ -199,14 +258,30 @@
         "period": "yearly",
         "periodLabel": "/ Year",
         "features": [
-          "1 Database Instance",
-          "1 Schema",
-          "150 Available Table",
-          "Unlimited AI Report Generation",
-          "Unlimited AI Dashboard Generation",
-          "Unlimited APP_USER access",
-          "Hosted on Oracle Cloud (OCI)",
-          "Shared Infrastructure"
+          {
+            "text": "1 Database Instance"
+          },
+          {
+            "text": "1 Schema"
+          },
+          {
+            "text": "150 Available Table"
+          },
+          {
+            "text": "Unlimited AI Report Generation"
+          },
+          {
+            "text": "Unlimited AI Dashboard Generation"
+          },
+          {
+            "text": "Unlimited APP_USER access"
+          },
+          {
+            "text": "Hosted on Oracle Cloud (OCI)"
+          },
+          {
+            "text": "Shared Infrastructure"
+          }
         ]
       },
       {
@@ -216,14 +291,30 @@
         "periodLabel": "/ Month",
         "isRecommended": true,
         "features": [
-          "1 Database Instance",
-          "2 Schema",
-          "150 Available Table/each schema",
-          "Unlimited AI Report Generation",
-          "Unlimited AI Dashboard Generation",
-          "Unlimited APP_USER access",
-          "Hosted on Oracle Cloud (OCI)",
-          "Shared Infrastructure"
+          {
+            "text": "1 Database Instance"
+          },
+          {
+            "text": "2 Schema"
+          },
+          {
+            "text": "150 Available Table/each schema"
+          },
+          {
+            "text": "Unlimited AI Report Generation"
+          },
+          {
+            "text": "Unlimited AI Dashboard Generation"
+          },
+          {
+            "text": "Unlimited APP_USER access"
+          },
+          {
+            "text": "Hosted on Oracle Cloud (OCI)"
+          },
+          {
+            "text": "Shared Infrastructure"
+          }
         ]
       },
       {
@@ -233,14 +324,30 @@
         "periodLabel": "/ Year",
         "isRecommended": true,
         "features": [
-          "1 Database Instance",
-          "2 Schema",
-          "150 Available Table/each schema",
-          "Unlimited AI Report Generation",
-          "Unlimited AI Dashboard Generation",
-          "Unlimited APP_USER access",
-          "Hosted on Oracle Cloud (OCI)",
-          "Shared Infrastructure"
+          {
+            "text": "1 Database Instance"
+          },
+          {
+            "text": "2 Schema"
+          },
+          {
+            "text": "150 Available Table/each schema"
+          },
+          {
+            "text": "Unlimited AI Report Generation"
+          },
+          {
+            "text": "Unlimited AI Dashboard Generation"
+          },
+          {
+            "text": "Unlimited APP_USER access"
+          },
+          {
+            "text": "Hosted on Oracle Cloud (OCI)"
+          },
+          {
+            "text": "Shared Infrastructure"
+          }
         ]
       },
       {
@@ -250,16 +357,36 @@
         "periodLabel": "",
         "href": "/contact",
         "features": [
-          "Unlimited Database Instances",
-          "Unlimited Schemas",
-          "Unlimited Tables",
-          "Unlimited AI Report Generation",
-          "Unlimited AI Dashboard Generation",
-          "Unlimited APP_USER access",
-          "Row-Level Security (RLS)",
-          "100% Data Sovereignty",
-          "Priority Support & Account Manage",
-          "On-Premise (Your Servers)"
+          {
+            "text": "Unlimited Database Instances"
+          },
+          {
+            "text": "Unlimited Schemas"
+          },
+          {
+            "text": "Unlimited Tables"
+          },
+          {
+            "text": "Unlimited AI Report Generation"
+          },
+          {
+            "text": "Unlimited AI Dashboard Generation"
+          },
+          {
+            "text": "Unlimited APP_USER access"
+          },
+          {
+            "text": "Row-Level Security (RLS)"
+          },
+          {
+            "text": "100% Data Sovereignty"
+          },
+          {
+            "text": "Priority Support & Account Manage"
+          },
+          {
+            "text": "On-Premise (Your Servers)"
+          }
         ]
       }
     ]
@@ -309,7 +436,26 @@
         "label": "Company Size",
         "placeholder": "Select Company Size",
         "required": "Company Size is required",
-        "options": ["1-10", "11-50", "51-200", "201-500", "501-1000", "1001+"]
+        "options": [
+          {
+            "text": "1-10"
+          },
+          {
+            "text": "11-50"
+          },
+          {
+            "text": "51-200"
+          },
+          {
+            "text": "201-500"
+          },
+          {
+            "text": "501-1000"
+          },
+          {
+            "text": "1001+"
+          }
+        ]
       },
       "role": {
         "label": "Your Role",

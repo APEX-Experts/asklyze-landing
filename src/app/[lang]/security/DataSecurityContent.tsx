@@ -8,14 +8,10 @@ const formatPoint = (point: string) =>
   point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
 interface DataSecurityContentProps {
-  lang: "en" | "ar";
-  isArabic: boolean;
   content: Omit<SecurityContent, "id" | "createdAt" | "updatedAt">;
 }
 
 export default function DataSecurityContent({
-  lang,
-  isArabic,
   content,
 }: DataSecurityContentProps) {
   const [activeSection, setActiveSection] = useState(0);

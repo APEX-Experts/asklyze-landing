@@ -7,7 +7,6 @@ import { Post } from "@/payload-types";
 interface BlogCardProps {
   post: Post;
   lang: "en" | "ar";
-  delay?: number;
   dict: {
     topics: Record<string, string>;
   };
@@ -16,7 +15,6 @@ interface BlogCardProps {
 export default function BlogCard({
   post,
   lang,
-  delay = 0,
   dict,
 }: BlogCardProps) {
   return (

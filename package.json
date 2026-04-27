@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint .",
     "seed": "tsx --env-file=.env src/scripts/seed.ts",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=dist/src/payload.config.js payload"
   },
@@ -34,14 +34,15 @@
     "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/negotiator": "^0.6.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.11",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.15",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
