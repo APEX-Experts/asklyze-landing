@@ -18,7 +18,7 @@ export const PricingContent: GlobalConfig = {
         { name: 'yearly', type: 'text', localized: true, required: true },
         {
             name: 'plans',
-            type: 'array', localized: true,
+            type: 'array',
             required: true,
             fields: [
                 { name: 'name', type: 'text', localized: true, required: true },
@@ -29,7 +29,7 @@ export const PricingContent: GlobalConfig = {
                 { name: 'href', type: 'text' },
                 { 
                     name: 'features', 
-                    type: 'array', localized: true,
+                    type: 'array',
                     required: true,
                     fields: [
                         { name: 'text', type: 'text', localized: true, required: true }

@@ -13,7 +13,7 @@ export const FeatureGridContent: GlobalConfig = {
         { name: 'desc', type: 'textarea', localized: true, required: true },
         {
             name: 'features',
-            type: 'array', localized: true,
+            type: 'array',
             required: true,
             fields: [
                 { name: 'title', type: 'text', localized: true, required: true },

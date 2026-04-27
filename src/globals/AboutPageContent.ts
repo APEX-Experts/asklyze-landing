@@ -44,10 +44,9 @@ export const AboutPageContent: GlobalConfig = {
                 {
                     name: 'stats',
                     type: 'array',
-                    localized: true,
                     fields: [
-                        { name: 'value', type: 'text' },
-                        { name: 'label', type: 'text' },
+                        { name: 'value', type: 'text', localized: true },
+                        { name: 'label', type: 'text', localized: true },
                     ],
                 },
             ],
@@ -62,10 +61,9 @@ export const AboutPageContent: GlobalConfig = {
                 {
                     name: 'stats',
                     type: 'array',
-                    localized: true,
                     fields: [
-                        { name: 'value', type: 'text' },
-                        { name: 'label', type: 'text' },
+                        { name: 'value', type: 'text', localized: true },
+                        { name: 'label', type: 'text', localized: true },
                     ],
                 },
             ],
@@ -85,9 +83,8 @@ export const AboutPageContent: GlobalConfig = {
                         {
                             name: 'points',
                             type: 'array',
-                            localized: true,
                             fields: [
-                                { name: 'text', type: 'text' },
+                                { name: 'text', type: 'text', localized: true },
                             ],
                         },
                     ],
@@ -103,10 +100,9 @@ export const AboutPageContent: GlobalConfig = {
                 {
                     name: 'cards',
                     type: 'array',
-                    localized: true,
                     fields: [
-                        { name: 'title', type: 'text' },
-                        { name: 'description', type: 'text' },
+                        { name: 'title', type: 'text', localized: true },
+                        { name: 'description', type: 'text', localized: true },
                     ],
                 },
             ],
@@ -142,10 +138,9 @@ export const AboutPageContent: GlobalConfig = {
                 {
                     name: 'members',
                     type: 'array',
-                    localized: true,
                     fields: [
-                        { name: 'name', type: 'text' },
-                        { name: 'role', type: 'text' },
+                        { name: 'name', type: 'text', localized: true },
+                        { name: 'role', type: 'text', localized: true },
                         {
                             name: 'social',
                             type: 'group',

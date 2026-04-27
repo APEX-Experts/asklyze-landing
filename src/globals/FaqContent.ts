@@ -12,7 +12,7 @@ export const FaqContent: GlobalConfig = {
         { name: 'title', type: 'text', localized: true, required: true },
         { 
             name: 'categories', 
-            type: 'array', localized: true, 
+            type: 'array',
             required: true,
             fields: [
                 { name: 'text', type: 'text', localized: true, required: true }
@@ -20,7 +20,7 @@ export const FaqContent: GlobalConfig = {
         },
         {
             name: 'list',
-            type: 'array', localized: true,
+            type: 'array',
             required: true,
             fields: [
                 { name: 'question', type: 'text', localized: true, required: true },

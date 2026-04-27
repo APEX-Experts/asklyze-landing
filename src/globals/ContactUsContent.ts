@@ -66,7 +66,7 @@ export const ContactUsContent: GlobalConfig = {
                         { name: 'label', type: 'text', localized: true, required: true },
                         { name: 'placeholder', type: 'text', localized: true, required: true },
                         { name: 'required', type: 'text', localized: true, required: true },
-                        { name: 'options', type: 'array', localized: true, required: true, fields: [{ name: 'text', type: 'text', localized: true, required: true }] }
+                        { name: 'options', type: 'array', required: true, fields: [{ name: 'text', type: 'text', localized: true, required: true }] }
                     ]
                 },
                 {
