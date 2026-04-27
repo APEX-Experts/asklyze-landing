@@ -163,6 +163,9 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
       "Failed to fetch dictionary from Payload, falling back to JSON",
       e
     );
+    if (process.env.NODE_ENV === "development") {
+        throw new Error("Failed to fetch dictionary from Payload: " + e)
+    }
     const fallback = locale === "ar" ? arFallback : enFallback;
     return {
       ...fallback,
