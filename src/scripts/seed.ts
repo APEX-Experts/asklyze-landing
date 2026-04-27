@@ -1,11 +1,12 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 process.env.SEEDING = "true";
-import { getPayload } from 'payload'
+import { BasePayload, getPayload, GlobalSlug } from 'payload'
 import config from '../payload.config'
 import { blogData } from '../data/blogData'
 import en from '../dictionaries/en.json' assert { type: 'json' }
 import ar from '../dictionaries/ar.json' assert { type: 'json' }
+import { Post } from '@/payload-types';
 
 
 /**
@@ -74,7 +75,7 @@ const transformGlobalData = (slug: string, data: any) => {
     return data;
 }
 
-const seedPosts = async (payload: any) => {
+const seedPosts = async (payload: BasePayload) => {
     console.log('Checking for existing posts...')
     const existingPosts = await payload.find({
         collection: 'posts',
@@ -95,7 +96,7 @@ const seedPosts = async (payload: any) => {
                     title: post.title,
                     slug: post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
                     excerpt: post.excerpt,
-                    category: post.category,
+                    category: post.category as Post["category"],
                     publishedDate: new Date(post.date).toISOString(),
                     image: post.image,
                     author: post.author,
@@ -116,6 +117,9 @@ const seedPosts = async (payload: any) => {
                             ],
                             type: 'root',
                             version: 1,
+                            direction: null,
+                            format: "",
+                            indent: 0,
                         },
                     },
                 },
@@ -127,11 +131,34 @@ const seedPosts = async (payload: any) => {
     }
 }
 
-const seedGlobal = async (payload: any, slug: string) => {
+const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false) => {
     const dictKey = SLUG_TO_DICT_KEY[slug];
     if (!dictKey) {
         console.error(`Unknown global slug: ${slug}`);
         return;
+    }
+
+    if (!force) {
+        try {
+            const existing = await payload.findGlobal({ slug, locale: 'en' });
+            // Check if global has any specific content. 
+            // A common pattern is that empty globals only have basic fields or specific defaults.
+            // We check for any field that is not a metadata field and has a truthy value.
+            const hasData = Object.keys(existing).some(key => 
+                !['id', 'createdAt', 'updatedAt', 'globalType'].includes(key) && 
+                existing[key as keyof typeof existing] !== null && 
+                existing[key as keyof typeof existing] !== undefined &&
+                (Array.isArray(existing[key as keyof typeof existing]) ? (existing[key as keyof typeof existing] as unknown as any[])!.length > 0 : true) &&
+                (typeof existing[key as keyof typeof existing] === 'object' ? Object.keys(existing[key as keyof typeof existing]!).length > 0 : true)
+            );
+
+            if (hasData) {
+                console.log(`Skipping Global: ${slug} (already has data). Use --force to overwrite.`);
+                return;
+            }
+        } catch (e) {
+            // If it fails to find, we probably need to seed it
+        }
     }
 
     console.log(`Seeding Global: ${slug}...`);
@@ -159,9 +186,11 @@ const seedGlobal = async (payload: any, slug: string) => {
 
 const seed = async () => {
     const args = process.argv.slice(2);
-    const target = args[0] || 'all';
+    const force = args.includes('--force');
+    const filteredArgs = args.filter(arg => arg !== '--force');
+    const target = filteredArgs[0] || 'all';
 
-    console.log(`--- Seeding Database [Target: ${target}] ---`)
+    console.log(`--- Seeding Database [Target: ${target}${force ? ' (FORCED)' : ''}] ---`)
     const payload = await getPayload({ config: await config })
 
     if (target === 'all' || target === 'posts') {
@@ -170,11 +199,11 @@ const seed = async () => {
 
     if (target === 'all') {
         for (const slug of Object.keys(SLUG_TO_DICT_KEY)) {
-            await seedGlobal(payload, slug);
+            await seedGlobal(payload, slug as GlobalSlug, force);
         }
     } else if (target !== 'posts') {
         // Assume target is a global slug
-        await seedGlobal(payload, target);
+        await seedGlobal(payload, target as GlobalSlug, force);
     }
 
     console.log('--- Seed Action Completed ---')

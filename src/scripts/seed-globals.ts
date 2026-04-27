@@ -78,11 +78,30 @@ const mapDictForPayload = (dict: any): any => {
 
 async function runSeed() {
     process.env.SEEDING = 'true';
-    console.log('Loading Payload...');
+    const args = process.argv.slice(2);
+    const force = args.includes('--force');
+
+    console.log(`Loading Payload...${force ? ' (FORCED MODE)' : ''}`);
 
     const payload = await getPayload({ config: await config });
 
     console.log('Starting seed process...');
+
+    // Helper to check if global has data (same logic as seed.ts)
+    const hasExistingData = async (slug: string): Promise<boolean> => {
+        try {
+            const existing = await payload.findGlobal({ slug: slug as any, locale: 'en' });
+            return Object.keys(existing).some(key => 
+                !['id', 'createdAt', 'updatedAt', 'globalType'].includes(key) && 
+                existing[key] !== null && 
+                existing[key] !== undefined &&
+                (Array.isArray(existing[key]) ? existing[key].length > 0 : true) &&
+                (typeof existing[key] === 'object' ? Object.keys(existing[key]).length > 0 : true)
+            );
+        } catch (e) {
+            return false;
+        }
+    };
 
     for (const locale of ['en', 'ar'] as const) {
         const rawDict = locale === 'en' ? enDict : arDict;
@@ -114,6 +133,11 @@ async function runSeed() {
 
         for (const [key, slug] of Object.entries(slugMap)) {
             if (dict[key]) {
+                if (!force && await hasExistingData(slug)) {
+                    console.log(`⏩ Skipping ${slug} (${locale}) - already has data`);
+                    continue;
+                }
+
                 try {
                     await payload.updateGlobal({
                         slug: slug as unknown as never,
