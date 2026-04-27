@@ -139,6 +139,12 @@ export default function Navbar({ dict }: NavbarProps) {
                               ? "text-primary font-bold bg-primary/5"
                               : "text-text-heading cursor-pointer"
                           }`}
+                          style={{
+                            fontFamily:
+                              lang.code === "ar"
+                                ? "var(--font-almarai), system-ui, sans-serif"
+                                : "var(--font-inter), system-ui, sans-serif",
+                          }}
                         >
                           <span>{lang.label}</span>
                         </button>
