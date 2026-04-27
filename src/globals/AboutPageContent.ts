@@ -1,9 +1,13 @@
 import { GlobalConfig } from "payload";
+import { revalidateHook } from './revalidateHook';
 
 export const AboutPageContent: GlobalConfig = {
     slug: 'about-page-content',
     access: {
         read: () => true,
+    },
+    hooks: {
+        afterChange: [revalidateHook('about-page-content')],
     },
     fields: [
         {
