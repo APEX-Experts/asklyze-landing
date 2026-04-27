@@ -12,7 +12,6 @@
     "payload": "cross-env PAYLOAD_CONFIG_PATH=dist/src/payload.config.js payload"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.8.0",
     "@payloadcms/db-postgres": "^3.78.0",
     "@payloadcms/next": "^3.72.0",
     "@payloadcms/richtext-lexical": "^3.72.0",
@@ -22,7 +21,6 @@
     "framer-motion": "^12.27.1",
     "graphql": "^16.12.0",
     "lucide-react": "^0.562.0",
-    "negotiator": "^1.0.0",
     "next": "15.4.11",
     "payload": "^3.72.0",
     "react": "^19.0.0",
@@ -37,7 +35,6 @@
     "@eslint/eslintrc": "^3.3.5",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
-    "@types/negotiator": "^0.6.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
