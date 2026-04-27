@@ -23,6 +23,7 @@ steps:
           --platform linux/amd64 \
           --build-arg DATABASE_URI="$(get_val DATABASE_URI)" \
           --build-arg PAYLOAD_SECRET="$(get_val PAYLOAD_SECRET)" \
+          --build-arg NEXT_PUBLIC_SITE_URL="$(get_val NEXT_PUBLIC_SITE_URL)" \
           -f ./Dockerfile .
     id: "build"
 

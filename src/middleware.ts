@@ -7,53 +7,59 @@ const locales = ["en", "ar"];
 const defaultLocale = "en";
 
 function getLocale(request: NextRequest): string {
-    const negotiatorHeaders: Record<string, string> = {};
-    request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+  const headers: Record<string, string> = {};
+  request.headers.forEach((value, key) => (headers[key] = value));
 
+  const languages = new Negotiator({ headers }).languages();
 
-    let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-    if (languages.length === 1 && languages[0] === '*') {
-        languages = ['en', 'ar']
-    }
+  if (languages.includes("*")) return defaultLocale;
 
-    return match(languages, locales, defaultLocale);
+  return match(languages, locales, defaultLocale);
 }
 
 export function middleware(request: NextRequest) {
-    const { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl;
 
-    // Skip internal paths and admin/api routes
-    if (
-        pathname.startsWith("/_next") ||
-        pathname.startsWith("/api") ||
-        pathname.startsWith("/admin") || // Payload CMS admin
-        pathname.startsWith("/static") ||
-        pathname.includes(".") // Files (images, etc)
-    ) {
-        return NextResponse.next();
-    }
+  // Skip non-page routes
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.startsWith("/admin") ||
+  pathname.startsWith("/static") ||
+    pathname.includes(".")
+  ) {
+    return NextResponse.next();
+  }
 
-    // Check if pathname already has locale
-    const pathnameIsMissingLocale = locales.every(
-        (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  // Check if locale is missing
+  const isMissingLocale = locales.every(
+    (locale) =>
+      !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+  );
+
+  if (isMissingLocale) {
+    const locale = getLocale(request);
+
+    let newPathname =
+      pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+
+    // Prevent trailing slash issues
+    newPathname = newPathname.replace(/\/+$/, "") || "/";
+
+    const response = NextResponse.redirect(
+      new URL(newPathname, request.url),
+      308
     );
 
-    if (pathnameIsMissingLocale) {
-        const locale = getLocale(request);
+    // Critical for correct caching behavior
+    response.headers.set("Vary", "Accept-Language");
 
-        // Redirect to default locale if missing
-        return NextResponse.redirect(
-            new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url),
-            308
-        );
-    }
+    return response;
+  }
 
-    return NextResponse.next();
+  return NextResponse.next();
 }
 
 export const config = {
-    matcher: [
-        // Skip all internal paths (_next)
-        "/((?!_next|api|admin|favicon.ico).*)",
-    ],
+  matcher: ["/((?!_next|api|admin|favicon.ico).*)"],
 };

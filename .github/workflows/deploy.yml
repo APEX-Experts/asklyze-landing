@@ -53,6 +53,7 @@ jobs:
           build-args: |
             DATABASE_URI="${{ secrets.ASKLYZE_DATABASE_URL }}"
             PAYLOAD_SECRET="${{ secrets.PAYLOAD_SECRET }}"
+            NEXT_PUBLIC_SITE_URL="${{ secrets.NEXT_PUBLIC_SITE_URL }}"
 
       - name: Create Environment File
         run: |

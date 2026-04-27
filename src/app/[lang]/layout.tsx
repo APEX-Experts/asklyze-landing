@@ -24,100 +24,133 @@ const almarai = Almarai({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://asklyze.ai"),
-  title: {
-    default:
-      "ASKLYZE | The First AI-Powered Analytics Platform for Oracle APEX",
-    template: "%s",
-  },
-  description:
-    "Transform Oracle APEX into an intelligent analytics center. Zero data movement, natural language queries (English & Arabic), and enterprise-grade security.",
-  applicationName: "ASKLYZE",
-  authors: [
-    { name: "APEX Experts AI Solutions", url: "https://apexexperts.ai" },
-  ],
-  generator: "Next.js",
-  keywords: [
-    "Oracle APEX AI",
-    "APEX Analytics",
-    "Natural Language to SQL",
-    "Oracle APEX Reporting",
-    "AI Dashboard Generator",
-    "Oracle APEX Plugin",
-    "Data Sovereignty",
-    "Oracle Database AI",
-    "Enterprise BI Tool",
-    "Zero Data Movement",
-  ],
-  referrer: "origin-when-cross-origin",
-  creator: "APEX Experts AI Solutions",
-  publisher: "APEX Experts AI Solutions",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
-    title: "ASKLYZE | AI-Powered Analytics for Oracle APEX",
-    description:
-      "Transform Oracle APEX into an intelligent analytics center. Query your data with natural language in English & Arabic.",
-    url: "https://asklyze.ai",
-    siteName: "ASKLYZE",
-    images: [
-      {
-        url: "/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "ASKLYZE Platform Preview",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ASKLYZE | AI for Oracle APEX",
-    description:
-      "Zero data movement analytics for Oracle APEX. English & Arabic support.",
-    creator: "@apex_experts",
-    images: ["/logo.png"],
-  },
-  other: {
-    "theme-color": "#000000",
-  },
-  icons: {
-    icon: [
-      {
-        url: "/favicon-light.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/favicon-dark.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-    ],
-    shortcut: ["/favicon-light.png"],
-    apple: ["/favicon-light.png"],
-  },
-};
-
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];
 }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL!;
 
-export default async function RootLayout({
+  return {
+    metadataBase: new URL(baseUrl),
+
+    title: {
+      default:
+        lang === "ar"
+          ? "ASKLYZE | منصة تحليلات مدعومة بالذكاء الاصطناعي لـ Oracle APEX"
+          : "ASKLYZE | AI-Powered Analytics for Oracle APEX",
+      template: "%s",
+    },
+
+    description:
+      lang === "ar"
+        ? "حوّل Oracle APEX إلى مركز تحليلات ذكي باستخدام الذكاء الاصطناعي."
+        : "Transform Oracle APEX into an AI-powered analytics hub.",
+
+    alternates: {
+      canonical: `${baseUrl}/${lang}`,
+      languages: {
+        en: `${baseUrl}/en`,
+        ar: `${baseUrl}/ar`,
+        "x-default": `${baseUrl}/en`,
+      },
+    },
+    applicationName: "ASKLYZE",
+    authors: [
+      { name: "APEX Experts AI Solutions", url: "https://apexexperts.net" },
+    ],
+    creator: "APEX Experts AI Solutions",
+    publisher: "APEX Experts AI Solutions",
+    keywords: [
+      "Oracle APEX AI",
+      "APEX Analytics",
+      "Natural Language to SQL",
+      "Oracle APEX Reporting",
+      "AI Dashboard Generator",
+      "Oracle APEX Plugin",
+      "Data Sovereignty",
+      "Oracle Database AI",
+      "Enterprise BI Tool",
+      "Zero Data Movement",
+    ],
+    referrer: "origin-when-cross-origin",
+
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    openGraph: {
+      url: `${baseUrl}/${lang}`,
+      siteName: "ASKLYZE",
+      title: {
+        default:
+          lang === "ar"
+            ? "ASKLYZE | منصة تحليلات مدعومة بالذكاء الاصطناعي لـ Oracle APEX"
+            : "ASKLYZE | AI-Powered Analytics for Oracle APEX",
+        template: "%s",
+      },
+      description:
+        lang === "ar"
+          ? "حوّل Oracle APEX إلى مركز تحليلات ذكي باستخدام الذكاء الاصطناعي."
+          : "Transform Oracle APEX into an AI-powered analytics hub.",
+      locale: lang === "ar" ? "ar_EG" : "en_US",
+      type: "website",
+      images: [
+        {
+          url: "/logo.png",
+          width: 1200,
+          height: 630,
+          alt: "ASKLYZE",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["/logo.png"],
+      title: {
+        default:
+          lang === "ar"
+            ? "ASKLYZE | منصة تحليلات مدعومة بالذكاء الاصطناعي لـ Oracle APEX"
+            : "ASKLYZE | AI-Powered Analytics for Oracle APEX",
+        template: "%s",
+      },
+      description:
+        lang === "ar"
+          ? "حوّل Oracle APEX إلى مركز تحليلات ذكي باستخدام الذكاء الاصطناعي."
+          : "Transform Oracle APEX into an AI-powered analytics hub.",
+    },
+    other: {
+      "theme-color": "#000000",
+    },
+    icons: {
+      icon: [
+        {
+          url: "/favicon-light.png",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          url: "/favicon-dark.png",
+          media: "(prefers-color-scheme: dark)",
+        },
+      ],
+      shortcut: ["/favicon-light.png"],
+      apple: ["/favicon-light.png"],
+    },
+  };
+}
+
+export default async function Layout({
   children,
   params,
 }: {
@@ -126,8 +159,10 @@ export default async function RootLayout({
 }) {
   const { lang } = await params;
   const isArabic = lang === "ar";
+
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const adsId = process.env.NEXT_PUBLIC_ADS_ID;
+
   return (
     <html
       lang={lang}
@@ -135,22 +170,15 @@ export default async function RootLayout({
       className={`${playfair.variable} ${inter.variable} ${almarai.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <SchemaMarkup lang={lang} />
-      </head>
       <body
         style={{
           fontFamily: isArabic
             ? "var(--font-almarai), system-ui, sans-serif"
             : "var(--font-inter), system-ui, sans-serif",
-          // @ts-expect-error - CSS variables in style attribute
-          "--font-heading": isArabic
-            ? "var(--font-almarai)"
-            : "var(--font-inter)",
-          "--font-body": isArabic ? "var(--font-almarai)" : "var(--font-inter)",
         }}
         suppressHydrationWarning
       >
+        <SchemaMarkup lang={lang} />
         <GoogleTag gaId={gaId} adsId={adsId} />
         <Preloader />
         {children}
