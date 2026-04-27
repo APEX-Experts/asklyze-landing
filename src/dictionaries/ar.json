@@ -1,12 +1,14 @@
 {
   "navbar": {
-    "home": "الرئيسية",
-    "features": "المميزات",
-    "pricing": "الأسعار",
-    "blog": "المدونة",
-    "docs": "الوثائق",
-    "about": "من نحن",
-    "contact": "تواصل معنا",
+    "links": [
+      { "label": "الرئيسية", "href": "/", "icon": "Home", "external": false },
+      { "label": "المميزات", "href": "#features", "icon": "Zap", "external": false },
+      { "label": "الأسعار", "href": "#pricing", "icon": "CreditCard", "external": false },
+      { "label": "المدونة", "href": "/blog", "icon": "Newspaper", "external": false },
+      { "label": "الوثائق", "href": "https://docs.asklyze.ai/", "icon": "FileText", "external": true },
+      { "label": "من نحن", "href": "/about", "icon": "Users", "external": false },
+      { "label": "تواصل معنا", "href": "/contact", "icon": "Mail", "external": false }
+    ],
     "getStarted": "ابدأ تجربة مجانية"
   },
   "hero": {

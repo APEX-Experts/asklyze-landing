@@ -36,7 +36,16 @@ const fetchDictionary = async (locale: 'en' | 'ar') => {
         ]);
 
         return {
-            navbar, hero, workingProcess, trustedBy, whyChoose,
+            navbar: {
+                ...navbar,
+                links: navbar.links?.map((link: any) => ({
+                    label: link.label || '',
+                    href: link.href || '',
+                    icon: link.icon || '',
+                    external: !!link.external
+                })) || []
+            },
+            hero, workingProcess, trustedBy, whyChoose,
             contactHero,
             featureGrid, commonCTA, contactCTA,
             pricing: {

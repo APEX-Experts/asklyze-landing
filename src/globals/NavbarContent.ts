@@ -8,13 +8,17 @@ export const NavbarContent: GlobalConfig = {
         afterChange: [revalidateHook('navbar-content')],
     },
     fields: [
-        { name: 'home', type: 'text', localized: true, required: true },
-        { name: 'features', type: 'text', localized: true, required: true },
-        { name: 'pricing', type: 'text', localized: true, required: true },
-        { name: 'blog', type: 'text', localized: true, required: true },
-        { name: 'docs', type: 'text', localized: true, required: true },
-        { name: 'about', type: 'text', localized: true, required: true },
-        { name: 'contact', type: 'text', localized: true, required: true },
+        {
+            name: 'links',
+            type: 'array',
+            label: 'Navbar Links',
+            fields: [
+                { name: 'label', type: 'text', localized: true, required: true },
+                { name: 'href', type: 'text', localized: true, required: true },
+                { name: 'external', type: 'checkbox', defaultValue: false },
+                { name: 'icon', type: 'select', options: ['Home', 'Zap', 'CreditCard', 'Newspaper', 'FileText', 'Users', 'Mail'], required: false },
+            ]
+        },
         { name: 'getStarted', type: 'text', localized: true, required: true },
     ],
 };

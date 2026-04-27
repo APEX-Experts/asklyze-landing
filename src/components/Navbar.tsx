@@ -4,16 +4,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
   ChevronRight,
-  CreditCard,
-  FileText,
   Globe,
-  Home,
-  Mail,
   Menu,
-  Newspaper,
-  Users,
   X,
-  Zap,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -23,13 +16,14 @@ import Logo from "./Logo";
 
 interface NavbarProps {
   dict: {
-    home: string;
-    features: string;
-    pricing: string;
-    blog: string;
-    contact: string;
+    links: {
+      label: string;
+      href: string;
+      icon: string;
+      external: boolean;
+    }[];
     getStarted: string;
-    [key: string]: string;
+    [key: string]: any;
   };
 }
 
@@ -45,20 +39,7 @@ export default function Navbar({ dict }: NavbarProps) {
     return `/${currentLocale}${href}`;
   };
 
-  const navItems = [
-    { key: "home", href: "/", icon: Home },
-    { key: "features", href: "#features", icon: Zap },
-    { key: "pricing", href: "#pricing", icon: CreditCard },
-    { key: "blog", href: "/blog", icon: Newspaper },
-    {
-      key: "docs",
-      href: "https://docs.asklyze.ai/",
-      icon: FileText,
-      external: true,
-    },
-    { key: "about", href: "/about", icon: Users },
-    { key: "contact", href: "/contact", icon: Mail },
-  ];
+  const navItems = dict.links || [];
 
   return (
     <>
@@ -81,7 +62,7 @@ export default function Navbar({ dict }: NavbarProps) {
 
           {/* DESKTOP: Center Nav Links */}
           <div className="hidden lg:flex items-center gap-10">
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const isActive =
                 item.href === "/"
                   ? pathname === `/${currentLocale}` || pathname === "/"
@@ -89,19 +70,19 @@ export default function Navbar({ dict }: NavbarProps) {
                     item.href !== "/";
               return item.external ? (
                 <a
-                  key={item.key}
+                  key={item.label || index}
                   href={item.href}
                   className="text-text-heading hover:text-primary font-medium transition-colors"
                 >
-                  {dict[item.key] || item.key}
+                  {item.label}
                 </a>
               ) : (
                 <Link
-                  key={item.key}
+                  key={item.label || index}
                   href={getLocalizedHref(item.href)}
                   className={`${isActive ? "text-primary " : "text-text-heading"} relative hover:text-primary font-medium transition-colors`}
                 >
-                  <span>{dict[item.key]}</span>
+                  <span>{item.label}</span>
                   <span
                     className={`absolute w-[60%] h-[1.5px] bg-primary -bottom-[2.5px] left-1/2 -translate-x-1/2 ${isActive ? "block" : "hidden"}`}
                   ></span>
@@ -240,7 +221,7 @@ export default function Navbar({ dict }: NavbarProps) {
                     >
                       <div className="flex items-center gap-4">
                         <span className="text-lg font-medium text-text-heading group-hover:text-primary transition-colors">
-                          {dict[item.key]}
+                          {item.label}
                         </span>
                       </div>
                       <ChevronRight
@@ -252,7 +233,7 @@ export default function Navbar({ dict }: NavbarProps) {
 
                   return isExternal ? (
                     <a
-                      key={item.key}
+                      key={item.label || index}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
                     >
@@ -260,7 +241,7 @@ export default function Navbar({ dict }: NavbarProps) {
                     </a>
                   ) : (
                     <Link
-                      key={item.key}
+                      key={item.label || index}
                       href={getLocalizedHref(item.href)}
                       onClick={() => setIsOpen(false)}
                     >

@@ -405,13 +405,15 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface NavbarContent {
   id: number;
-  home: string;
-  features: string;
-  pricing: string;
-  blog: string;
-  docs: string;
-  about: string;
-  contact: string;
+  links?:
+    | {
+        label: string;
+        href: string;
+        external?: boolean | null;
+        icon?: ('Home' | 'Zap' | 'CreditCard' | 'Newspaper' | 'FileText' | 'Users' | 'Mail') | null;
+        id?: string | null;
+      }[]
+    | null;
   getStarted: string;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1018,13 +1020,15 @@ export interface AboutPageContent {
  * via the `definition` "navbar-content_select".
  */
 export interface NavbarContentSelect<T extends boolean = true> {
-  home?: T;
-  features?: T;
-  pricing?: T;
-  blog?: T;
-  docs?: T;
-  about?: T;
-  contact?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        external?: T;
+        icon?: T;
+        id?: T;
+      };
   getStarted?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -4,6 +4,7 @@ import * as migration_20260416_123615_fix_array_localization from './20260416_12
 import * as migration_20260416_145707_about_page_content from './20260416_145707_about_page_content';
 import * as migration_20260416_152858_remove_unused_globals from './20260416_152858_remove_unused_globals';
 import * as migration_20260416_155855_add_imageUrl_to_members from './20260416_155855_add_imageUrl_to_members';
+import * as migration_20260427_074334 from './20260427_074334';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260416_155855_add_imageUrl_to_members.up,
     down: migration_20260416_155855_add_imageUrl_to_members.down,
-    name: '20260416_155855_add_imageUrl_to_members'
+    name: '20260416_155855_add_imageUrl_to_members',
+  },
+  {
+    up: migration_20260427_074334.up,
+    down: migration_20260427_074334.down,
+    name: '20260427_074334'
   },
 ];

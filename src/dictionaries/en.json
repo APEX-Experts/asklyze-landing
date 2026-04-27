@@ -1,12 +1,14 @@
 {
   "navbar": {
-    "home": "Home",
-    "features": "Features",
-    "pricing": "Pricing",
-    "blog": "Blog",
-    "docs": "Docs",
-    "about": "About",
-    "contact": "Contact",
+    "links": [
+      { "label": "Home", "href": "/", "icon": "Home", "external": false },
+      { "label": "Features", "href": "#features", "icon": "Zap", "external": false },
+      { "label": "Pricing", "href": "#pricing", "icon": "CreditCard", "external": false },
+      { "label": "Blog", "href": "/blog", "icon": "Newspaper", "external": false },
+      { "label": "Docs", "href": "https://docs.asklyze.ai/", "icon": "FileText", "external": true },
+      { "label": "About", "href": "/about", "icon": "Users", "external": false },
+      { "label": "Contact", "href": "/contact", "icon": "Mail", "external": false }
+    ],
     "getStarted": "Start Free Trial"
   },
   "hero": {

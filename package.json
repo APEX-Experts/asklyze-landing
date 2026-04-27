@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "npx tsx src/scripts/seed.ts",
+    "seed": "tsx --env-file=.env src/scripts/seed.ts",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=dist/src/payload.config.js payload"
   },
   "dependencies": {
