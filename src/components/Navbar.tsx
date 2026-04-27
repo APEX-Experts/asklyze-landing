@@ -43,6 +43,7 @@ export default function Navbar({ dict }: NavbarProps) {
             className="flex items-center gap-2 text-primary"
             style={{ textDecoration: "none" }}
           >
+            <span className="sr-only">{dict.links?.[0].label}</span>
             <Logo width={120} height={36} />
           </Link>
 
@@ -104,12 +105,10 @@ export default function Navbar({ dict }: NavbarProps) {
               <AnimatePresence>
                 {isLangOpen && (
                   <>
-                    {/* FIXED: Added brackets around z-60 */}
                     <div
                       className="fixed inset-0 z-60"
                       onClick={() => setIsLangOpen(false)}
                     />
-                    {/* FIXED: Added brackets around z-70 */}
                     <motion.div
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
