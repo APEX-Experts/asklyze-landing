@@ -26,6 +26,16 @@ export default function Navbar({ dict }: NavbarProps) {
   };
 
   const navItems = dict.links || [];
+  const switchLanguage = (newLocale: string) => {
+    // 1. Calculate the new path
+    const newPath = pathname.replace(/^\/(en|ar)/, `/${newLocale}`);
+
+    // 2. Set the cookie so middleware remembers the choice
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+
+    // 3. Hard reload to fetch fresh HTML, direction, and translations
+    window.location.href = newPath;
+  };
 
   return (
     <>
@@ -122,11 +132,7 @@ export default function Navbar({ dict }: NavbarProps) {
                         <button
                           key={lang.code}
                           onClick={() => {
-                            const newPath = pathname.replace(
-                              /^\/(en|ar)/,
-                              `/${lang.code}`
-                            );
-                            window.location.href = newPath;
+                            switchLanguage(lang.code);
                           }}
                           className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors hover:bg-gray-50 ${
                             currentLocale === lang.code
@@ -255,10 +261,7 @@ export default function Navbar({ dict }: NavbarProps) {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <button
-                      onClick={() => {
-                        const newPath = pathname.replace(/^\/(en|ar)/, "/en");
-                        window.location.href = newPath;
-                      }}
+                      onClick={() => switchLanguage("en")}
                       className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
                         pathname.startsWith("/en")
                           ? "bg-primary border-primary text-white"
@@ -268,10 +271,7 @@ export default function Navbar({ dict }: NavbarProps) {
                       EN
                     </button>
                     <button
-                      onClick={() => {
-                        const newPath = pathname.replace(/^\/(en|ar)/, "/ar");
-                        window.location.href = newPath;
-                      }}
+                      onClick={() => switchLanguage("ar")}
                       className={`flex items-center justify-center gap-2 font-bold py-3 rounded-xl border transition-all ${
                         pathname.startsWith("/ar")
                           ? "bg-primary border-primary text-white"

@@ -1,21 +1,9 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { match } from "@formatjs/intl-localematcher";
-import Negotiator from "negotiator";
 
 const locales = ["en", "ar"];
 const defaultLocale = "en";
-
-function getLocale(request: NextRequest): string {
-  const headers: Record<string, string> = {};
-  request.headers.forEach((value, key) => (headers[key] = value));
-
-  const languages = new Negotiator({ headers }).languages();
-
-  if (languages.includes("*")) return defaultLocale;
-
-  return match(languages, locales, defaultLocale);
-}
+const cookieName = "NEXT_LOCALE"; // Standard convention
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -25,7 +13,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/admin") ||
-  pathname.startsWith("/static") ||
+    pathname.startsWith("/static") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
@@ -38,23 +26,23 @@ export function middleware(request: NextRequest) {
   );
 
   if (isMissingLocale) {
-    const locale = getLocale(request);
+    // 1. Check if the user has a saved language preference
+    const cookieLocale = request.cookies.get(cookieName)?.value;
+
+    // 2. Validate the cookie (ensure it's actually 'en' or 'ar')
+    const preferredLocale = locales.includes(cookieLocale as string)
+      ? cookieLocale
+      : defaultLocale;
 
     let newPathname =
-      pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+      pathname === "/" ? `/${preferredLocale}` : `/${preferredLocale}${pathname}`;
 
-    // Prevent trailing slash issues
     newPathname = newPathname.replace(/\/+$/, "") || "/";
 
-    const response = NextResponse.redirect(
+    return NextResponse.redirect(
       new URL(newPathname, request.url),
-      308
+      302 
     );
-
-    // Critical for correct caching behavior
-    response.headers.set("Vary", "Accept-Language");
-
-    return response;
   }
 
   return NextResponse.next();
