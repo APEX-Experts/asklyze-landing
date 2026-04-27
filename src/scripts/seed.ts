@@ -36,44 +36,40 @@ const SLUG_TO_DICT_KEY: Record<string, string> = {
     'about-page-content': 'aboutPage',
 };
 
-const transformGlobalData = (slug: string, data: any) => {
-    if (!data) return data;
+/**
+ * Recursively maps Payload-generated IDs from the English result
+ * into the target Arabic data structure to prevent array wiping.
+ */
+const mapIdsRecursively = (enSource: any, arTarget: any) => {
+  // Base check: If either is null/undefined or not an object, stop traversing.
+  if (!enSource || !arTarget || typeof enSource !== 'object' || typeof arTarget !== 'object') {
+    return;
+  }
 
-    // Pricing features transformation: string[] -> { text: string }[]
-    if (slug === 'pricing-content' && data.plans) {
-        return {
-            ...data,
-            plans: data.plans.map((plan: any) => ({
-                ...plan,
-                features: plan.features?.map((f: string) => ({ text: f })) || []
-            }))
-        };
+  // Handle Arrays: Traverse each item in the array
+  if (Array.isArray(enSource) && Array.isArray(arTarget)) {
+    const length = Math.min(enSource.length, arTarget.length);
+    for (let i = 0; i < length; i++) {
+      mapIdsRecursively(enSource[i], arTarget[i]);
+    }
+    return;
+  }
+
+  // Handle Objects: Copy ID and traverse properties
+  if (!Array.isArray(enSource) && !Array.isArray(arTarget)) {
+    // If Payload generated an ID for this object (e.g., an array row or block), map it over
+    if (enSource.id) {
+      arTarget.id = enSource.id;
     }
 
-    // FAQ categories transformation: string[] -> { text: string }[]
-    if (slug === 'faq-content' && data.categories) {
-        return {
-            ...data,
-            categories: data.categories.map((c: string) => ({ text: c }))
-        }
+    // Recursively check all nested properties (Groups, deeper Arrays, etc.)
+    for (const key of Object.keys(enSource)) {
+      if (Object.prototype.hasOwnProperty.call(arTarget, key)) {
+        mapIdsRecursively(enSource[key], arTarget[key]);
+      }
     }
-
-    // Contact Us company size options: string[] -> { text: string }[]
-    if (slug === 'contact-us-content' && data.form?.companySize?.options) {
-        return {
-            ...data,
-            form: {
-                ...data.form,
-                companySize: {
-                    ...data.form.companySize,
-                    options: data.form.companySize.options.map((o: string) => ({ text: o }))
-                }
-            }
-        }
-    }
-
-    return data;
-}
+  }
+};
 
 const seedPosts = async (payload: BasePayload) => {
     console.log('Checking for existing posts...')
@@ -129,7 +125,7 @@ const seedPosts = async (payload: BasePayload) => {
             console.error(`- Failed to create post: ${post.title}`, error)
         }
     }
-}
+  }
 
 const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false) => {
     const dictKey = SLUG_TO_DICT_KEY[slug];
@@ -161,22 +157,30 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
         }
     }
 
-    console.log(`Seeding Global: ${slug}...`);
-    try {
-        const enData = transformGlobalData(slug, (en as any)[dictKey]);
-        const arData = transformGlobalData(slug, (ar as any)[dictKey]);
+  console.log(`Seeding Global: ${slug}...`);
+  try {
+    const enData = (en as any)[dictKey];
+    // Create a deep copy of arData so we don't accidentally mutate the imported JSON module
+    const arData = JSON.parse(JSON.stringify((ar as any)[dictKey]));
 
-        await payload.updateGlobal({
-            slug,
-            data: enData,
-            locale: 'en'
-        });
+    // 1. Update English
+    const enResult = await payload.updateGlobal({
+      slug,
+      data: enData,
+      locale: 'en',
+    });
 
-        await payload.updateGlobal({
-            slug,
-            data: arData,
-            locale: 'ar'
-        });
+    // 2. Map the generated IDs to the Arabic data recursively
+    if (enResult && arData) {
+      mapIdsRecursively(enResult, arData);
+    }
+
+    // 3. Update Arabic
+    await payload.updateGlobal({
+      slug,
+      data: arData,
+      locale: 'ar',
+    });
 
         console.log(`- Success: ${slug}`);
     } catch (error) {
@@ -188,22 +192,24 @@ const seed = async () => {
     const args = process.argv.slice(2);
     const force = args.includes('--force');
     const filteredArgs = args.filter(arg => arg !== '--force');
-    const target = filteredArgs[0] || 'all';
+    const targets = filteredArgs.length > 0 ? filteredArgs : 'all';
 
-    console.log(`--- Seeding Database [Target: ${target}${force ? ' (FORCED)' : ''}] ---`)
+    console.log(`--- Seeding Database [Target: ${targets}${force ? ' (FORCED)' : ''}] ---`)
     const payload = await getPayload({ config: await config })
 
-    if (target === 'all' || target === 'posts') {
+    if (targets === 'all' || targets.includes('posts')) {
         await seedPosts(payload);
     }
 
-    if (target === 'all') {
+    if (targets === 'all') {
         for (const slug of Object.keys(SLUG_TO_DICT_KEY)) {
             await seedGlobal(payload, slug as GlobalSlug, force);
         }
-    } else if (target !== 'posts') {
+    } else if (!targets.includes("posts")) {
         // Assume target is a global slug
-        await seedGlobal(payload, target as GlobalSlug, force);
+        for (const slug of targets) {
+            await seedGlobal(payload, slug as GlobalSlug, force);
+        }
     }
 
     console.log('--- Seed Action Completed ---')
