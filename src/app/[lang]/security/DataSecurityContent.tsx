@@ -3,9 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SecurityContent } from "../../../../payload-types";
-
-const formatPoint = (point: string) =>
-  point.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+import { formatPoint } from "@/lib/utils";
 
 interface DataSecurityContentProps {
   content: Omit<SecurityContent, "id" | "createdAt" | "updatedAt">;
@@ -135,7 +133,7 @@ export default function DataSecurityContent({
                   {section.title}
                 </h2>
                 {section.content && <p className="mb-4">{section.content}</p>}
-                {section.points && (
+                {section.points && section.points.length > 0 && (
                   <ul className="space-y-2 mb-4">
                     {section.points.map(({ text: point }, idx) => (
                       <li key={idx} className="flex items-start gap-3">
