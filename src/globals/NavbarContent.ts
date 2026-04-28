@@ -9,6 +9,14 @@ export const NavbarContent: GlobalConfig = {
     },
     fields: [
         {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
+        {
             name: 'links',
             type: 'array',
             label: 'Navbar Links',

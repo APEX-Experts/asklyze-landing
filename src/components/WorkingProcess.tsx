@@ -3,33 +3,22 @@
 import { motion } from "framer-motion";
 import CommonCTA from "./CommonCTA";
 import Image from "next/image";
+import { Dictionary } from "@/get-dictionary";
 
 /* ------------------------------------------------------------------ */
 /*  Main component                                                     */
 /* ------------------------------------------------------------------ */
 interface WorkingProcessProps {
-  dict: {
-    title: string;
-    step1Title: string;
-    step1Desc: string;
-    step2Title: string;
-    step2Desc: string;
-    step3Title: string;
-    step3Desc: string;
-  };
-  commonCTA_Dict: {
-    getStarted: string;
-    getStartedUrl: string;
-    watchDemo: string;
-    watchDemoUrl: string;
-    disclaimer: string;
-  };
+  dict: Dictionary["workingProcess"];
+  commonCTA_Dict: Dictionary["commonCTA"];
 }
 
 export default function WorkingProcess({
   dict,
   commonCTA_Dict,
 }: WorkingProcessProps) {
+  if (dict.isEnabled === false) return null;
+
   const steps = [
     { title: dict.step1Title, description: dict.step1Desc },
     { title: dict.step2Title, description: dict.step2Desc },

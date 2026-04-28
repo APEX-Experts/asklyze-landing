@@ -407,6 +407,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface NavbarContent {
   id: number;
+  isEnabled?: boolean | null;
   links?:
     | {
         label: string;
@@ -426,6 +427,7 @@ export interface NavbarContent {
  */
 export interface HeroContent {
   id: number;
+  isEnabled?: boolean | null;
   badge: string;
   titleBeforeSpan: string;
   titleSpan: string;
@@ -444,6 +446,7 @@ export interface HeroContent {
  */
 export interface WorkingProcessContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   step1Title: string;
   step1Desc: string;
@@ -460,6 +463,7 @@ export interface WorkingProcessContent {
  */
 export interface TrustedByContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   updatedAt?: string | null;
@@ -471,6 +475,7 @@ export interface TrustedByContent {
  */
 export interface WhyChooseContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   features: {
@@ -487,6 +492,7 @@ export interface WhyChooseContent {
  */
 export interface ContactHeroContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   desc: string;
   updatedAt?: string | null;
@@ -498,6 +504,7 @@ export interface ContactHeroContent {
  */
 export interface FeatureGridContent {
   id: number;
+  isEnabled?: boolean | null;
   tag: string;
   title: string;
   desc: string;
@@ -516,6 +523,7 @@ export interface FeatureGridContent {
  */
 export interface CommonCtaContent {
   id: number;
+  isEnabled?: boolean | null;
   getStarted: string;
   getStartedUrl: string;
   watchDemo: string;
@@ -530,6 +538,7 @@ export interface CommonCtaContent {
  */
 export interface ContactCtaContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -540,6 +549,7 @@ export interface ContactCtaContent {
  */
 export interface FaqContent {
   id: number;
+  isEnabled?: boolean | null;
   tag: string;
   title: string;
   categories: {
@@ -561,6 +571,7 @@ export interface FaqContent {
  */
 export interface PricingContent {
   id: number;
+  isEnabled?: boolean | null;
   tag: string;
   title: string;
   desc: string;
@@ -591,6 +602,7 @@ export interface PricingContent {
  */
 export interface ContactUsContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   locationLabel: string;
@@ -667,6 +679,7 @@ export interface ContactUsContent {
  */
 export interface FooterContent {
   id: number;
+  isEnabled?: boolean | null;
   company: string;
   description: string;
   services: string;
@@ -716,6 +729,7 @@ export interface FooterContent {
  */
 export interface BlogSectionContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   showAll: string;
@@ -728,6 +742,7 @@ export interface BlogSectionContent {
  */
 export interface BlogContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   description: string;
   noPosts: string;
@@ -798,6 +813,7 @@ export interface MetadataContent {
  */
 export interface PrivacyContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   lastUpdated: string;
@@ -840,6 +856,7 @@ export interface PrivacyContent {
  */
 export interface TermsContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   lastUpdated: string;
@@ -882,6 +899,7 @@ export interface TermsContent {
  */
 export interface SecurityContent {
   id: number;
+  isEnabled?: boolean | null;
   title: string;
   subtitle: string;
   lastUpdated: string;
@@ -924,6 +942,7 @@ export interface SecurityContent {
  */
 export interface AboutPageContent {
   id: number;
+  isEnabled?: boolean | null;
   alts?: {
     apexLogo?: string | null;
     feature?: string | null;
@@ -1045,6 +1064,7 @@ export interface SiteSetting {
  * via the `definition` "navbar-content_select".
  */
 export interface NavbarContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   links?:
     | T
     | {
@@ -1064,6 +1084,7 @@ export interface NavbarContentSelect<T extends boolean = true> {
  * via the `definition` "hero-content_select".
  */
 export interface HeroContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   badge?: T;
   titleBeforeSpan?: T;
   titleSpan?: T;
@@ -1082,6 +1103,7 @@ export interface HeroContentSelect<T extends boolean = true> {
  * via the `definition` "working-process-content_select".
  */
 export interface WorkingProcessContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   step1Title?: T;
   step1Desc?: T;
@@ -1098,6 +1120,7 @@ export interface WorkingProcessContentSelect<T extends boolean = true> {
  * via the `definition` "trusted-by-content_select".
  */
 export interface TrustedByContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   updatedAt?: T;
@@ -1109,6 +1132,7 @@ export interface TrustedByContentSelect<T extends boolean = true> {
  * via the `definition` "why-choose-content_select".
  */
 export interface WhyChooseContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   features?:
@@ -1127,6 +1151,7 @@ export interface WhyChooseContentSelect<T extends boolean = true> {
  * via the `definition` "contact-hero-content_select".
  */
 export interface ContactHeroContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   desc?: T;
   updatedAt?: T;
@@ -1138,6 +1163,7 @@ export interface ContactHeroContentSelect<T extends boolean = true> {
  * via the `definition` "feature-grid-content_select".
  */
 export interface FeatureGridContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   tag?: T;
   title?: T;
   desc?: T;
@@ -1158,6 +1184,7 @@ export interface FeatureGridContentSelect<T extends boolean = true> {
  * via the `definition` "common-cta-content_select".
  */
 export interface CommonCtaContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   getStarted?: T;
   getStartedUrl?: T;
   watchDemo?: T;
@@ -1172,6 +1199,7 @@ export interface CommonCtaContentSelect<T extends boolean = true> {
  * via the `definition` "contact-cta-content_select".
  */
 export interface ContactCtaContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1182,6 +1210,7 @@ export interface ContactCtaContentSelect<T extends boolean = true> {
  * via the `definition` "faq-content_select".
  */
 export interface FaqContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   tag?: T;
   title?: T;
   categories?:
@@ -1207,6 +1236,7 @@ export interface FaqContentSelect<T extends boolean = true> {
  * via the `definition` "pricing-content_select".
  */
 export interface PricingContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   tag?: T;
   title?: T;
   desc?: T;
@@ -1241,6 +1271,7 @@ export interface PricingContentSelect<T extends boolean = true> {
  * via the `definition` "contact-us-content_select".
  */
 export interface ContactUsContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   locationLabel?: T;
@@ -1339,6 +1370,7 @@ export interface ContactUsContentSelect<T extends boolean = true> {
  * via the `definition` "footer-content_select".
  */
 export interface FooterContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   company?: T;
   description?: T;
   services?: T;
@@ -1396,6 +1428,7 @@ export interface FooterContentSelect<T extends boolean = true> {
  * via the `definition` "blog-section-content_select".
  */
 export interface BlogSectionContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   showAll?: T;
@@ -1408,6 +1441,7 @@ export interface BlogSectionContentSelect<T extends boolean = true> {
  * via the `definition` "blog-content_select".
  */
 export interface BlogContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   description?: T;
   noPosts?: T;
@@ -1496,6 +1530,7 @@ export interface MetadataContentSelect<T extends boolean = true> {
  * via the `definition` "privacy-content_select".
  */
 export interface PrivacyContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   lastUpdated?: T;
@@ -1544,6 +1579,7 @@ export interface PrivacyContentSelect<T extends boolean = true> {
  * via the `definition` "terms-content_select".
  */
 export interface TermsContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   lastUpdated?: T;
@@ -1592,6 +1628,7 @@ export interface TermsContentSelect<T extends boolean = true> {
  * via the `definition` "security-content_select".
  */
 export interface SecurityContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   title?: T;
   subtitle?: T;
   lastUpdated?: T;
@@ -1640,6 +1677,7 @@ export interface SecurityContentSelect<T extends boolean = true> {
  * via the `definition` "about-page-content_select".
  */
 export interface AboutPageContentSelect<T extends boolean = true> {
+  isEnabled?: T;
   alts?:
     | T
     | {

@@ -1,13 +1,12 @@
 "use client";
 
+import { Dictionary } from "@/get-dictionary";
+import { formatPoint } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { TermsContent } from "../../../../payload-types";
-import { formatPoint } from "@/lib/utils";
-
 
 interface TermsAndConditionsContentProps {
-  content: Omit<TermsContent, "id" | "createdAt" | "updatedAt">;
+  content: Dictionary["terms"];
 }
 
 export default function TermsAndConditionsContent({
@@ -37,6 +36,7 @@ export default function TermsAndConditionsContent({
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  if (content.isEnabled === false) return null;
 
   const scrollToSection = (index: number) => {
     const element = document.getElementById(`section-${index}`);

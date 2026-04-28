@@ -1,25 +1,16 @@
+import { Dictionary } from "@/get-dictionary";
 import CommonCTA from "./CommonCTA";
 
 type Props = {
-  dict: {
-    title: string;
-    subtitle: string;
-    features: {
-      title: string;
-      desc: string;
-    }[];
-  };
-  commonCTA_Dict: {
-    getStarted: string;
-    getStartedUrl: string;
-    watchDemo: string;
-    watchDemoUrl: string;
-    disclaimer: string;
-  };
+  dict: Dictionary["whyChoose"];
+  commonCTA_Dict: Dictionary["commonCTA"];
 };
 
 const WhyChooseUs = (props: Props) => {
   const { dict, commonCTA_Dict } = props;
+
+  if (dict.isEnabled === false) return null;
+
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-24">
       <div className="max-w-full flex flex-col items-center mx-auto bg-bg-card rounded-5xl gap-8 justify-center py-12 md:py-16 lg:py-25 px-4 md:px-8 lg:px-12">

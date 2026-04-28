@@ -1,12 +1,12 @@
 "use client";
 
+import { Dictionary } from "@/get-dictionary";
+import { formatPoint } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { SecurityContent } from "../../../../payload-types";
-import { formatPoint } from "@/lib/utils";
 
 interface DataSecurityContentProps {
-  content: Omit<SecurityContent, "id" | "createdAt" | "updatedAt">;
+  content: Dictionary["security"];
 }
 
 export default function DataSecurityContent({
@@ -36,6 +36,8 @@ export default function DataSecurityContent({
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (content.isEnabled === false) return null;
 
   const scrollToSection = (index: number) => {
     const element = document.getElementById(`section-${index}`);

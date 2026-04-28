@@ -8,6 +8,14 @@ export const ContactHeroContent: GlobalConfig = {
         afterChange: [revalidateHook('contact-hero-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'desc', type: 'textarea', localized: true, required: true },
     ],

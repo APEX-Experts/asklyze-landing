@@ -1,16 +1,16 @@
 "use client";
 
+import Carousel from "@/components/Carousel";
+import { Dictionary } from "@/get-dictionary";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { AboutPageContent } from "../../../../payload-types";
-import { cn } from "@/lib/utils";
-import Carousel from "@/components/Carousel";
 
 interface AboutContentProps {
   lang: "en" | "ar";
   isArabic: boolean;
-  content: Omit<AboutPageContent, "id">;
+  content: Dictionary["aboutPage"];
 }
 
 export default function AboutContent({
@@ -18,6 +18,8 @@ export default function AboutContent({
   isArabic,
   content,
 }: AboutContentProps) {
+  if (content.isEnabled === false) return null;
+
   const textAlign = isArabic ? "text-right" : "text-left";
   const dir = isArabic ? "rtl" : "ltr";
 
@@ -316,7 +318,7 @@ export default function AboutContent({
             className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
             style={{ flex: "1" }}
           >
-             <Image
+            <Image
               src={
                 content.visionMission?.vision?.logoUrl ||
                 "/images/about/vision-logo.svg"
@@ -355,7 +357,7 @@ export default function AboutContent({
             className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
             style={{ width: "500px", height: "266px" }}
           >
-             <Image
+            <Image
               src={
                 content.visionMission?.vision?.imageUrl ||
                 "/images/about/vision.png"
@@ -401,7 +403,7 @@ export default function AboutContent({
             className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
             style={{ width: "505px", height: "266px" }}
           >
-             <Image
+            <Image
               src={
                 content.visionMission?.mission?.imageUrl ||
                 "/images/about/mission.png"
@@ -417,7 +419,7 @@ export default function AboutContent({
             className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
             style={{ flex: "1" }}
           >
-             <Image
+            <Image
               src={
                 content.visionMission?.mission?.logoUrl ||
                 "/images/about/mission-logo.svg"

@@ -8,6 +8,14 @@ export const CommonCtaContent: GlobalConfig = {
         afterChange: [revalidateHook('common-cta-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'getStarted', type: 'text', localized: true, required: true },
         { name: 'getStartedUrl', type: 'text', required: true },
         { name: 'watchDemo', type: 'text', localized: true, required: true },

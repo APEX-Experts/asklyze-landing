@@ -8,6 +8,14 @@ export const FeatureGridContent: GlobalConfig = {
         afterChange: [revalidateHook('feature-grid-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'tag', type: 'text', localized: true, required: true },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'desc', type: 'textarea', localized: true, required: true },

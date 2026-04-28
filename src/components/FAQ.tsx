@@ -15,6 +15,8 @@ export default function FAQ({ dict }: FAQProps) {
   const [activeTab, setActiveTab] = useState(dict.categories[0].text);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  if (dict.isEnabled === false) return null;
+
   const filteredFAQs =
     activeTab === dict.categories[0].text
       ? dict.list

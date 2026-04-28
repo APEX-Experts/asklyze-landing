@@ -57,6 +57,16 @@ export default async function BlogPage({
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
+  if (dict.blog.isEnabled === false) {
+    return (
+      <main className="min-h-screen w-full">
+        <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
+        <div className="flex-1" />
+        <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
+      </main>
+    );
+  }
+
   const currentPageParam =
     typeof pageParam === "string" ? parseInt(pageParam, 10) : 1;
   const selectedTopic =
@@ -145,12 +155,7 @@ export default async function BlogPage({
       <section className="section py-16 max-w-wide-section mx-auto lg:mx-[130px] flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto w-full">
           {posts.map((post) => (
-            <BlogCard
-              key={post.id}
-              post={post}
-              lang={lang}
-              dict={dict.blog}
-            />
+            <BlogCard key={post.id} post={post} lang={lang} dict={dict.blog} />
           ))}
         </div>
 

@@ -7,6 +7,7 @@ import * as migration_20260416_155855_add_imageUrl_to_members from './20260416_1
 import * as migration_20260427_074334 from './20260427_074334';
 import * as migration_20260427_141624 from './20260427_141624';
 import * as migration_20260428_081918 from './20260428_081918';
+import * as migration_20260428_091949 from './20260428_091949';
 
 export const migrations = [
   {
@@ -52,6 +53,11 @@ export const migrations = [
   {
     up: migration_20260428_081918.up,
     down: migration_20260428_081918.down,
-    name: '20260428_081918'
+    name: '20260428_081918',
+  },
+  {
+    up: migration_20260428_091949.up,
+    down: migration_20260428_091949.down,
+    name: '20260428_091949'
   },
 ];

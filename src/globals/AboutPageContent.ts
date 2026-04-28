@@ -11,6 +11,14 @@ export const AboutPageContent: GlobalConfig = {
     },
     fields: [
         {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
+        {
             name: 'alts',
             type: 'group',
             fields: [

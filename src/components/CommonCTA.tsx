@@ -1,16 +1,15 @@
 import React from "react";
 import LinkButton from "./LinkButton";
 import { Radio } from "lucide-react";
+import { Dictionary } from "@/get-dictionary";
 
-interface CommonCTA {
-  getStarted: string;
-  getStartedUrl: string;
-  watchDemo: string;
-  watchDemoUrl: string;
-  disclaimer: string;
-}
+const CommonCTA = ({
+  commonCTA_Dict,
+}: {
+  commonCTA_Dict: Dictionary["commonCTA"];
+}) => {
+  if (commonCTA_Dict.isEnabled === false) return null;
 
-const CommonCTA = ({ commonCTA_Dict }: { commonCTA_Dict: CommonCTA }) => {
   return (
     <div className="flex flex-col gap-3.5 items-center lg:min-w-[350px]">
       {/* Buttons */}

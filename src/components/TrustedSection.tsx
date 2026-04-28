@@ -1,17 +1,17 @@
 import React from "react";
 import { TrustedByIcon } from "./Icons";
 import Marquee from "react-fast-marquee";
+import { Dictionary } from "@/get-dictionary";
 
 type Props = {
-  dict: {
-    title: string;
-    subtitle: string;
-  };
+  dict: Dictionary["trustedBy"];
   lang: "en" | "ar";
 };
 
 const TrustedSection = (props: Props) => {
   const { dict, lang } = props;
+
+  if (dict.isEnabled === false) return null;
 
   return (
     <section className=" lg:py-20">

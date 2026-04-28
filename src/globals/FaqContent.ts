@@ -8,6 +8,14 @@ export const FaqContent: GlobalConfig = {
         afterChange: [revalidateHook('faq-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'tag', type: 'text', localized: true, required: true },
         { name: 'title', type: 'text', localized: true, required: true },
         { 

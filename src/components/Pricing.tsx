@@ -17,6 +17,8 @@ export default function Pricing({ dict }: PricingProps) {
     "monthly"
   );
 
+  if (dict.isEnabled === false) return null;
+
   const filteredPlans = dict.plans.filter(
     (plan) => plan.period === billingPeriod || plan.periodLabel === ""
   );

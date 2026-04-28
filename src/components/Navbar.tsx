@@ -20,6 +20,9 @@ export default function Navbar({ dict, siteSettings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const pathname = usePathname();
+
+  if (dict.isEnabled === false) return null;
+
   const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
 
   const getLocalizedHref = (href: string) => {

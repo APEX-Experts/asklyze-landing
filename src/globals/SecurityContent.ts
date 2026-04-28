@@ -8,6 +8,14 @@ export const SecurityContent: GlobalConfig = {
         afterChange: [revalidateHook('security-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'subtitle', type: 'text', localized: true, required: true },
         { name: 'lastUpdated', type: 'text', localized: true, required: true },

@@ -8,6 +8,14 @@ export const FooterContent: GlobalConfig = {
         afterChange: [revalidateHook('footer-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'company', type: 'text', localized: true, required: true },
         { name: 'description', type: 'textarea', localized: true, required: true },
         { name: 'services', type: 'text', localized: true, required: true },

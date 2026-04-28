@@ -1,22 +1,18 @@
 import React from "react";
 import CommonCTA from "./CommonCTA";
+import { Dictionary } from "@/get-dictionary";
 
 type Props = {
-  dict: {
-    title: string;
-  };
-  commonCTA_Dict: {
-    getStarted: string;
-    getStartedUrl: string;
-    watchDemo: string;
-    watchDemoUrl: string;
-    disclaimer: string;
-  };
+  dict: Dictionary["contactCTA"];
+  commonCTA_Dict: Dictionary["commonCTA"];
 };
 
 const ContactCTA = (props: Props) => {
-  const { title } = props.dict;
-  const { commonCTA_Dict } = props;
+  const { dict, commonCTA_Dict } = props;
+  const { title } = dict;
+
+  if (dict.isEnabled === false) return null;
+
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-24">
       <div className="w-full mx-auto flex flex-row max-lg:flex-wrap gap-8 justify-between items-center">

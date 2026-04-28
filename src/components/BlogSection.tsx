@@ -4,16 +4,14 @@ import BlogCarousel from "./BlogCarousel";
 import { Dictionary } from "@/get-dictionary";
 
 type Props = {
-  dict: {
-    title: string;
-    subtitle: string;
-    showAll: string;
-  };
+  dict: Dictionary["blogSection"];
   blogDict: Dictionary["blog"];
   lang: "en" | "ar";
 };
 
 const BlogSection = async ({ dict, blogDict, lang }: Props) => {
+  if (dict.isEnabled === false) return null;
+
   const { title, subtitle, showAll } = dict;
 
   const payload = await getPayload();

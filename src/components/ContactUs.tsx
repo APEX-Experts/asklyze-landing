@@ -151,6 +151,7 @@ const ContactUs = ({ dict, lang }: Props) => {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [serverMessage, setServerMessage] = useState("");
+  if (dict.isEnabled === false) return null;
 
   const validate = (): FormErrors => {
     const errs: FormErrors = {};

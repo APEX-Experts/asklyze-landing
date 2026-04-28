@@ -8,6 +8,14 @@ export const ContactCtaContent: GlobalConfig = {
         afterChange: [revalidateHook('contact-cta-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
     ],
 };

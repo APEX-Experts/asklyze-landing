@@ -17,6 +17,8 @@ interface HeroProps {
 export default function Hero({ dict, siteSettings }: HeroProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
+  if (dict.isEnabled === false) return null;
+
   return (
     <section
       className="hero-gradient rounded-5xl max-w-wide-section lg:mx-[60px] mx-2"

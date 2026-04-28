@@ -3,53 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
+import { Dictionary } from "@/get-dictionary";
 
 interface FooterProps {
-  dict: {
-    company: string;
-    description: string;
-    services: string;
-    digitalExperience: string;
-    address: string;
-    nycOffice: string;
-    alexOffice: string;
-    legal: string;
-    quickLinks: string;
-    location: string;
-    links: {
-      features: string;
-      dashboard: string;
-      portfolio: string;
-      about: string;
-      contact: string;
-      blog: string;
-      docs: string;
-    };
-    social: {
-      facebook: string;
-      linkedin: string;
-      instagram: string;
-      twitter: string;
-      youtube: string;
-    };
-    socialLabels: {
-      facebook: string;
-      linkedin: string;
-      instagram: string;
-      twitter: string;
-      youtube: string;
-    };
-    rights: string;
-    copyright: string;
-    bottomLinks: {
-      privacy: string;
-      terms: string;
-      security: string;
-    };
-  };
-  siteSettings: {
-    docsUrl: string;
-  };
+  dict: Dictionary["footer"];
+  siteSettings: Dictionary["siteSettings"];
 }
 
 const SocialSprite = ({ offset }: { offset: number }) => (
@@ -149,6 +107,8 @@ const SocialIcon = ({
 
 export default function Footer({ dict, siteSettings }: FooterProps) {
   const pathname = usePathname();
+  if (dict.isEnabled === false) return null;
+
   const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
 
   return (

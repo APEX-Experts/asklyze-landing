@@ -8,6 +8,14 @@ export const WorkingProcessContent: GlobalConfig = {
         afterChange: [revalidateHook('working-process-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'step1Title', type: 'text', localized: true, required: true },
         { name: 'step1Desc', type: 'textarea', localized: true, required: true },

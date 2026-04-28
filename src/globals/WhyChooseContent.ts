@@ -8,6 +8,14 @@ export const WhyChooseContent: GlobalConfig = {
         afterChange: [revalidateHook('why-choose-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'subtitle', type: 'text', localized: true, required: true },
         {

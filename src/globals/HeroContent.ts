@@ -8,6 +8,14 @@ export const HeroContent: GlobalConfig = {
         afterChange: [revalidateHook('hero-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'badge', type: 'text', localized: true, required: true },
         { name: 'titleBeforeSpan', type: 'text', localized: true, required: true },
         { name: 'titleSpan', type: 'text', localized: true, required: true },

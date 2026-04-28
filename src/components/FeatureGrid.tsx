@@ -18,6 +18,9 @@ export default function FeatureGrid({
   commonCTA_Dict: Omit<CommonCtaContent, "id">;
 }) {
   const [activeFeature, setActiveFeature] = useState(0);
+
+  if (dict.isEnabled === false) return null;
+
   const features = dict.features;
   return (
     <section id="features" className="mx-4 md:mx-16 lg:mx-24 my-12">

@@ -1,12 +1,12 @@
 "use client";
 
+import { Dictionary } from "@/get-dictionary";
+import { formatPoint } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { PrivacyContent } from "../../../../payload-types";
-import { formatPoint } from "@/lib/utils";
 
 interface PrivacyPolicyContentProps {
-  content: Omit<PrivacyContent, "id" | "createdAt" | "updatedAt">;
+  content: Dictionary["privacy"];
 }
 
 export default function PrivacyPolicyContent({
@@ -36,6 +36,8 @@ export default function PrivacyPolicyContent({
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (content.isEnabled === false) return null;
 
   const scrollToSection = (index: number) => {
     const element = document.getElementById(`section-${index}`);

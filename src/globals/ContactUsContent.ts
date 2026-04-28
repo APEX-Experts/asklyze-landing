@@ -8,6 +8,14 @@ export const ContactUsContent: GlobalConfig = {
         afterChange: [revalidateHook('contact-us-content')],
     },
     fields: [
+        {
+            name: 'isEnabled',
+            type: 'checkbox',
+            defaultValue: true,
+            admin: {
+                position: 'sidebar',
+            },
+        },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'subtitle', type: 'textarea', localized: true, required: true },
         { name: 'locationLabel', type: 'text', localized: true, required: true },
