@@ -11,6 +11,7 @@ export const BlogContent: GlobalConfig = {
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'description', type: 'textarea', localized: true, required: true },
         { name: 'noPosts', type: 'text', localized: true, required: true },
+        { name: 'emptyMessage', type: 'text', localized: true, required: true },
         {
             name: 'topics', type: 'group', fields: [
                 { name: 'All', type: 'text', localized: true, required: true },

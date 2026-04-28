@@ -4,14 +4,13 @@ import BlogCard from "./BlogCard";
 import LinkButton from "./LinkButton";
 import { Post } from "@/payload-types";
 import Carousel from "./Carousel";
+import { Dictionary } from "@/get-dictionary";
 
 type Props = {
   posts: Post[];
   lang: "en" | "ar";
   showAll: string;
-  blogDict: {
-    topics: Record<string, string>;
-  };
+  blogDict: Dictionary["blog"];
 };
 
 export default function BlogCarousel({
@@ -25,7 +24,7 @@ export default function BlogCarousel({
       items={posts}
       lang={lang}
       itemsPerPage={3}
-      emptyMessage="No articles yet."
+      emptyMessage={blogDict.emptyMessage}
       renderItem={(post) => (
         <BlogCard key={post.id} post={post} lang={lang} dict={blogDict} />
       )}

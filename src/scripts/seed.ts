@@ -1,12 +1,10 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
+import { BasePayload, getPayload, GlobalSlug } from 'payload';
+import ar from '../dictionaries/ar.json' assert { type: 'json' };
+import en from '../dictionaries/en.json' assert { type: 'json' };
+import config from '../payload.config';
 dotenv.config()
 process.env.SEEDING = "true";
-import { BasePayload, getPayload, GlobalSlug } from 'payload'
-import config from '../payload.config'
-import { blogData } from '../data/blogData'
-import en from '../dictionaries/en.json' assert { type: 'json' }
-import ar from '../dictionaries/ar.json' assert { type: 'json' }
-import { Post } from '@/payload-types';
 
 
 /**
@@ -34,6 +32,7 @@ const SLUG_TO_DICT_KEY: Record<string, string> = {
     'terms-content': 'terms',
     'security-content': 'security',
     'about-page-content': 'aboutPage',
+    'site-settings': 'siteSettings',
 };
 
 /**
@@ -70,62 +69,6 @@ const mapIdsRecursively = (enSource: any, arTarget: any) => {
     }
   }
 };
-
-const seedPosts = async (payload: BasePayload) => {
-    console.log('Checking for existing posts...')
-    const existingPosts = await payload.find({
-        collection: 'posts',
-        limit: 1,
-    })
-
-    if (existingPosts.docs.length > 0) {
-        console.log('Database already contains posts. Skipping posts seed.')
-        return
-    }
-
-    console.log(`Seeding ${blogData.length} posts...`)
-    for (const post of blogData) {
-        try {
-            await payload.create({
-                collection: 'posts',
-                data: {
-                    title: post.title,
-                    slug: post.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''),
-                    excerpt: post.excerpt,
-                    category: post.category as Post["category"],
-                    publishedDate: new Date(post.date).toISOString(),
-                    image: post.image,
-                    author: post.author,
-                    content: {
-                        root: {
-                            children: [
-                                {
-                                    children: [
-                                        {
-                                            text: post.excerpt,
-                                            type: 'text',
-                                            version: 1,
-                                        },
-                                    ],
-                                    type: 'paragraph',
-                                    version: 1,
-                                },
-                            ],
-                            type: 'root',
-                            version: 1,
-                            direction: null,
-                            format: "",
-                            indent: 0,
-                        },
-                    },
-                },
-            })
-            console.log(`- Created post: ${post.title}`)
-        } catch (error) {
-            console.error(`- Failed to create post: ${post.title}`, error)
-        }
-    }
-  }
 
 const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false) => {
     const dictKey = SLUG_TO_DICT_KEY[slug];
@@ -197,15 +140,11 @@ const seed = async () => {
     console.log(`--- Seeding Database [Target: ${targets}${force ? ' (FORCED)' : ''}] ---`)
     const payload = await getPayload({ config: await config })
 
-    if (targets === 'all' || targets.includes('posts')) {
-        await seedPosts(payload);
-    }
-
     if (targets === 'all') {
         for (const slug of Object.keys(SLUG_TO_DICT_KEY)) {
             await seedGlobal(payload, slug as GlobalSlug, force);
         }
-    } else if (!targets.includes("posts")) {
+    } else {
         // Assume target is a global slug
         for (const slug of targets) {
             await seedGlobal(payload, slug as GlobalSlug, force);

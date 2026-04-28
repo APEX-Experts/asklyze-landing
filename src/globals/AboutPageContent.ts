@@ -22,6 +22,7 @@ export const AboutPageContent: GlobalConfig = {
                 { name: 'missionImage', type: 'text', localized: true },
             ],
         },
+        { name: 'apexLogoUrl', type: 'text' },
         {
             name: 'header',
             type: 'group',
@@ -89,6 +90,7 @@ export const AboutPageContent: GlobalConfig = {
                             type: 'array',
                             fields: [
                                 { name: 'text', type: 'text', localized: true },
+                                { name: 'iconUrl', type: 'text' },
                             ],
                         },
                     ],
@@ -107,6 +109,7 @@ export const AboutPageContent: GlobalConfig = {
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
+                        { name: 'iconUrl', type: 'text' },
                     ],
                 },
             ],
@@ -115,12 +118,15 @@ export const AboutPageContent: GlobalConfig = {
             name: 'visionMission',
             type: 'group',
             fields: [
+                { name: 'visionBackgroundPatternUrl', type: 'text' },
                 {
                     name: 'vision',
                     type: 'group',
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
+                        { name: 'logoUrl', type: 'text' },
+                        { name: 'imageUrl', type: 'text' },
                     ],
                 },
                 {
@@ -129,6 +135,8 @@ export const AboutPageContent: GlobalConfig = {
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
+                        { name: 'logoUrl', type: 'text' },
+                        { name: 'imageUrl', type: 'text' },
                     ],
                 },
             ],

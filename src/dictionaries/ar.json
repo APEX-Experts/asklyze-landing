@@ -49,7 +49,8 @@
     "getStarted": "ابدأ تجربة مجانية",
     "watchDemo": "عرض توضيحي",
     "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_ar.mp4",
-    "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان."
+    "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان.",
+    "heroImageUrl": "/hero_images.png"
   },
   "workingProcess": {
     "title": "كيف يعمل Asklyze",
@@ -527,6 +528,7 @@
     "title": "المقالات",
     "description": "تستخدم Asklyze الذكاء الاصطناعي لتحليل بياناتك، واكتشاف الأنماط الخفية، ومساعدتك على اتخاذ قرارات أذكى بشكل أسرع — بدون تعقيد.",
     "noPosts": "لم يتم العثور على مقالات",
+    "emptyMessage": "لا توجد مقالات بعد.",
     "topics": {
       "All": "الكل",
       "Tutorial": "دروس تعليمية",
@@ -968,6 +970,7 @@
       "missionLogo": "شعار الرسالة",
       "missionImage": "رسالتنا"
     },
+    "apexLogoUrl": "/images/about/apex-logo.svg",
     "header": {
       "title": "عن Asklyze",
       "intro": "اكتشف كيف تعيد Asklyze تشكيل تحليلات البيانات لفرق Oracle APEX، لتقديم رؤى ذكية دون المساومة على سيادة البيانات."
@@ -1022,13 +1025,16 @@
         "subtitle": "تجمع Asklyze بين الأداء والأمان والبساطة للفرق التي تعتمد على Oracle.",
         "points": [
           {
-            "text": "الاستعلام عن البيانات بالعربية والإنجليزية.\\nلا حاجة لمعرفة SQL."
+            "text": "الاستعلام عن البيانات بالعربية والإنجليزية.\\nلا حاجة لمعرفة SQL.",
+            "iconUrl": "/images/about/solution-icon-1.svg"
           },
           {
-            "text": "إنشاء مرئيات تتكامل مباشرة\\nفي تطبيقات APEX."
+            "text": "إنشاء مرئيات تتكامل مباشرة\\nفي تطبيقات APEX.",
+            "iconUrl": "/images/about/solution-icon-2.svg"
           },
           {
-            "text": "تشغيل الاستعلامات على قاعدة بياناتك.\\nلا يوجد نقل للبيانات."
+            "text": "تشغيل الاستعلامات على قاعدة بياناتك.\\nلا يوجد نقل للبيانات.",
+            "iconUrl": "/images/about/solution-icon-3.svg"
           }
         ]
       }
@@ -1039,30 +1045,39 @@
       "cards": [
         {
           "title": "الأمان أولاً",
-          "description": "تظل بياناتك خاصة وخاضعة للتحكم الكامل."
+          "description": "تظل بياناتك خاصة وخاضعة للتحكم الكامل.",
+          "iconUrl": "/images/about/guide-icon-1.svg"
         },
         {
           "title": "ذكاء اصطناعي عملي",
-          "description": "مصمم لحالات الاستخدام الحقيقية، وليس للتجارب."
+          "description": "مصمم لحالات الاستخدام الحقيقية، وليس للتجارب.",
+          "iconUrl": "/images/about/guide-icon-2.svg"
         },
         {
           "title": "تجربة واضحة",
-          "description": "سير عمل بسيط للوصول الأسرع إلى البيانات."
+          "description": "سير عمل بسيط للوصول الأسرع إلى البيانات.",
+          "iconUrl": "/images/about/guide-icon-3.svg"
         },
         {
           "title": "جاهز عالمياً",
-          "description": "ثنائي اللغة ومصمم لمعايير الشركات."
+          "description": "ثنائي اللغة ومصمم لمعايير الشركات.",
+          "iconUrl": "/images/about/guide-icon-4.svg"
         }
       ]
     },
     "visionMission": {
+      "visionBackgroundPatternUrl": "/images/about/vm-bg-pattern-v2.png",
       "vision": {
         "title": "رؤيتنا",
-        "description": "جعل بيانات المؤسسات مفهومة بشكل فوري لكل فريق، وبأي لغة."
+        "description": "جعل بيانات المؤسسات مفهومة بشكل فوري لكل فريق، وبأي لغة.",
+        "logoUrl": "/images/about/vision-logo.svg",
+        "imageUrl": "/images/about/vision.png"
       },
       "mission": {
         "title": "مهمتنا",
-        "description": "تمكين الجميع من الوصول إلى تحليلات الذكاء الاصطناعي في Oracle APEX، مع الحفاظ على سيادة البيانات والثقة."
+        "description": "تمكين الجميع من الوصول إلى تحليلات الذكاء الاصطناعي في Oracle APEX، مع الحفاظ على سيادة البيانات والثقة.",
+        "logoUrl": "/images/about/mission-logo.svg",
+        "imageUrl": "/images/about/mission.png"
       }
     },
     "leaders": {
@@ -1131,5 +1146,11 @@
         }
       ]
     }
+  },
+  "siteSettings": {
+    "siteUrl": "https://asklyze.ai/",
+    "getStartedUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "customerPortalUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "docsUrl": "https://docs.asklyze.ai/"
   }
 }

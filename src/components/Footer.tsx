@@ -47,6 +47,9 @@ interface FooterProps {
       security: string;
     };
   };
+  siteSettings: {
+    docsUrl: string;
+  };
 }
 
 const SocialSprite = ({ offset }: { offset: number }) => (
@@ -144,7 +147,7 @@ const SocialIcon = ({
   </a>
 );
 
-export default function Footer({ dict }: FooterProps) {
+export default function Footer({ dict, siteSettings }: FooterProps) {
   const pathname = usePathname();
   const currentLocale = pathname.startsWith("/ar") ? "ar" : "en";
 
@@ -237,7 +240,7 @@ export default function Footer({ dict }: FooterProps) {
               {dict.links.blog}
             </Link>
             <a
-              href="https://docs.asklyze.ai/"
+              href={siteSettings.docsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[18px] text-[#1A1A1A] opacity-70 hover:opacity-100 transition-opacity"

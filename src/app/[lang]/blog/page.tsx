@@ -29,14 +29,18 @@ export async function generateMetadata({
     title = `${localizedTopic} | ${dict.metadata.blog.title}`;
   }
 
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
+
   return {
     title,
     description: dict.metadata.blog.description,
     alternates: {
-      canonical: `https://asklyze.ai/${lang}/blog`,
+      canonical: `${siteUrl}${lang}/blog`,
       languages: {
-        en: "https://asklyze.ai/en/blog",
-        ar: "https://asklyze.ai/ar/blog",
+        en: `${siteUrl}en/blog`,
+        ar: `${siteUrl}ar/blog`,
       },
     },
   };
@@ -121,7 +125,7 @@ export default async function BlogPage({
 
   return (
     <main className="min-h-screen w-full">
-      <Navbar dict={dict.navbar} />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
 
       <section
         className="hero-gradient rounded-5xl max-w-wide-section mx-auto lg:mx-[60px] pb-16 relative mt-4"
@@ -140,7 +144,7 @@ export default async function BlogPage({
       </section>
       <section className="section py-16 max-w-wide-section mx-auto lg:mx-[130px] flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto w-full">
-          {posts.map((post, index) => (
+          {posts.map((post) => (
             <BlogCard
               key={post.id}
               post={post}
@@ -204,7 +208,7 @@ export default async function BlogPage({
         )}
       </section>
 
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </main>
   );
 }

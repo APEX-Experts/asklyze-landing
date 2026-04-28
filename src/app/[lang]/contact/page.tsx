@@ -11,14 +11,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
+
   return {
     title: dict.metadata.contact.title,
     description: dict.metadata.contact.description,
     alternates: {
-      canonical: `https://asklyze.ai/${lang}/contact`,
+      canonical: `${siteUrl}${lang}/contact`,
       languages: {
-        en: "https://asklyze.ai/en/contact",
-        ar: "https://asklyze.ai/ar/contact",
+        en: `${siteUrl}en/contact`,
+        ar: `${siteUrl}ar/contact`,
       },
     },
   };
@@ -33,11 +37,11 @@ export default async function ContactPage({
   const dict = await getDictionary(lang);
   return (
     <>
-      <Navbar dict={dict.navbar} />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
       <main className="mt-16 space-y-12">
         <ContactUs dict={dict.contactUs} lang={lang} />
       </main>
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </>
   );
 }

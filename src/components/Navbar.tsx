@@ -11,9 +11,12 @@ import { NavbarContent } from "../../payload-types";
 
 interface NavbarProps {
   dict: Omit<NavbarContent, "id" | "createdAt" | "updatedAt">;
+  siteSettings: {
+    customerPortalUrl: string;
+  };
 }
 
-export default function Navbar({ dict }: NavbarProps) {
+export default function Navbar({ dict, siteSettings }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const pathname = usePathname();
@@ -92,7 +95,7 @@ export default function Navbar({ dict }: NavbarProps) {
           <div className="hidden lg:flex items-center gap-4">
             {/* CTA: White pill button with arrow */}
             <LinkButton
-              href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
+              href={siteSettings.customerPortalUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -251,7 +254,7 @@ export default function Navbar({ dict }: NavbarProps) {
               <div className="mt-8 pt-8 border-t border-gray-100 flex flex-col gap-8">
                 <div className="px-3">
                   <a
-                    href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
+                    href={siteSettings.customerPortalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsOpen(false)}

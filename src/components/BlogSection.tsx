@@ -1,6 +1,7 @@
 import { getPayload } from "@/lib/payload";
 import { Post } from "@/payload-types";
 import BlogCarousel from "./BlogCarousel";
+import { Dictionary } from "@/get-dictionary";
 
 type Props = {
   dict: {
@@ -8,9 +9,7 @@ type Props = {
     subtitle: string;
     showAll: string;
   };
-  blogDict: {
-    topics: Record<string, string>;
-  };
+  blogDict: Dictionary["blog"];
   lang: "en" | "ar";
 };
 

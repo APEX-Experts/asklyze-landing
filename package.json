@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "seed": "tsx --env-file=.env src/scripts/seed.ts",
+    "sync-dictionaries": "tsx --env-file=.env src/scripts/sync-dictionaries.ts",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=dist/src/payload.config.js payload"
   },
   "dependencies": {

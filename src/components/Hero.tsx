@@ -1,5 +1,6 @@
 "use client";
 
+import { Dictionary } from "@/get-dictionary";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import Image from "next/image";
@@ -9,19 +10,11 @@ import LinkButton from "./LinkButton";
 import VideoModal from "./VideoModal";
 
 interface HeroProps {
-  dict: {
-    badge: string;
-    titleBeforeSpan: string;
-    titleSpan: string;
-    description: string;
-    getStarted: string;
-    watchDemo: string;
-    watchDemoUrl: string;
-    disclaimer: string;
-  };
+  dict: Dictionary["hero"];
+  siteSettings: Dictionary["siteSettings"];
 }
 
-export default function Hero({ dict }: HeroProps) {
+export default function Hero({ dict, siteSettings }: HeroProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   return (
@@ -93,7 +86,7 @@ export default function Hero({ dict }: HeroProps) {
               <Play />
             </LinkButton>
             <LinkButton
-              href="https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login"
+              href={siteSettings.getStartedUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="p-4"
@@ -106,7 +99,7 @@ export default function Hero({ dict }: HeroProps) {
           </p>
           <div className="w-full absolute bottom-0 left-1/2 -translate-x-1/2">
             <Image
-              src="/hero_images.png"
+              src={dict.heroImageUrl || "/hero_images.png"}
               alt="Hero Image"
               width={1440}
               height={1080}

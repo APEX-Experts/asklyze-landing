@@ -12,7 +12,7 @@ import {
   CommonCtaContent, ContactCtaContent,
   FaqContent, PricingContent, ContactUsContent,
   FooterContent, BlogSectionContent, BlogContent, MetadataContent,
-  PrivacyContent, TermsContent, SecurityContent, AboutPageContent
+  PrivacyContent, TermsContent, SecurityContent, AboutPageContent, SiteSettings
 } from "./globals";
 
 
@@ -28,7 +28,7 @@ export default buildConfig({
     CommonCtaContent, ContactCtaContent,
     FaqContent, PricingContent, ContactUsContent,
     FooterContent, BlogSectionContent, BlogContent, MetadataContent,
-    PrivacyContent, TermsContent, SecurityContent, AboutPageContent
+    PrivacyContent, TermsContent, SecurityContent, AboutPageContent, SiteSettings
   ],
   editor: lexicalEditor({}),
   secret: process.env.PAYLOAD_SECRET || 'fallback-dev-secret-do-not-use-in-prod',

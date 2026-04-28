@@ -11,14 +11,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
+
   return {
     title: dict.metadata.terms.title,
     description: dict.metadata.terms.description,
     alternates: {
-      canonical: `https://asklyze.ai/${lang}/terms`,
+      canonical: `${siteUrl}${lang}/terms`,
       languages: {
-        en: "https://asklyze.ai/en/terms",
-        ar: "https://asklyze.ai/ar/terms",
+        en: `${siteUrl}en/terms`,
+        ar: `${siteUrl}ar/terms`,
       },
     },
   };
@@ -35,9 +39,9 @@ export default async function TermsAndConditions({
 
   return (
     <>
-      <Navbar dict={dict.navbar} />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
       <TermsAndConditionsContent content={content} />
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </>
   );
 }

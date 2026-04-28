@@ -145,7 +145,7 @@ export default function AboutContent({
 
           <div className="bg-[#E8EBFA] rounded-[30px] p-[30px] lg:p-[50px] w-full flex flex-col items-center gap-[32px]">
             <Image
-              src="/images/about/apex-logo.svg"
+              src={content.apexLogoUrl || "/images/about/apex-logo.svg"}
               alt={content.alts?.apexLogo || "Apex Logo"}
               width={480}
               height={93}
@@ -170,11 +170,12 @@ export default function AboutContent({
                 {content.solutions?.whatWeBuild?.points?.map(
                   ({ text: point }, idx) => {
                     const iconSrc =
-                      idx === 0
+                      content.solutions?.whatWeBuild?.points?.[idx]?.iconUrl ||
+                      (idx === 0
                         ? "/images/about/solution-icon-1.svg"
                         : idx === 1
                           ? "/images/about/solution-icon-2.svg"
-                          : "/images/about/solution-icon-3.svg";
+                          : "/images/about/solution-icon-3.svg");
                     return (
                       <div
                         key={idx}
@@ -251,7 +252,9 @@ export default function AboutContent({
                   className="bg-[#E8EBFA] rounded-[30px] p-[25px] flex flex-col items-center gap-[20px] flex-1 transform transition-transform hover:-translate-y-2"
                 >
                   <Image
-                    src={`/images/about/guide-icon-${idx + 1}.svg`}
+                    src={
+                      card.iconUrl || `/images/about/guide-icon-${idx + 1}.svg`
+                    }
                     alt={card.title || "Guide Icon"}
                     width={100}
                     height={100}
@@ -295,7 +298,7 @@ export default function AboutContent({
           <div
             className="absolute inset-0 rounded-[30px] z-0"
             style={{
-              backgroundImage: "url(/images/about/vm-bg-pattern-v2.png)",
+              backgroundImage: `url(${content.visionMission?.visionBackgroundPatternUrl || "/images/about/vm-bg-pattern-v2.png"})`,
               backgroundRepeat: "repeat",
               backgroundSize: "100px 100px",
               border: "1px solid #F6FBFF",
@@ -313,8 +316,11 @@ export default function AboutContent({
             className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
             style={{ flex: "1" }}
           >
-            <Image
-              src="/images/about/vision-logo.svg"
+             <Image
+              src={
+                content.visionMission?.vision?.logoUrl ||
+                "/images/about/vision-logo.svg"
+              }
               alt={content.alts?.visionLogo || "Vision Logo"}
               width={100}
               height={100}
@@ -349,8 +355,11 @@ export default function AboutContent({
             className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
             style={{ width: "500px", height: "266px" }}
           >
-            <Image
-              src="/images/about/vision.png"
+             <Image
+              src={
+                content.visionMission?.vision?.imageUrl ||
+                "/images/about/vision.png"
+              }
               alt={content.alts?.visionImage || "Vision Image"}
               fill
               className="object-cover"
@@ -374,7 +383,7 @@ export default function AboutContent({
           <div
             className="absolute inset-0 rounded-[30px] z-0"
             style={{
-              backgroundImage: "url(/images/about/vm-bg-pattern-v2.png)",
+              backgroundImage: `url(${content.visionMission?.visionBackgroundPatternUrl || "/images/about/vm-bg-pattern-v2.png"})`,
               backgroundRepeat: "repeat",
               backgroundSize: "100px 100px",
               border: "1px solid #F6FBFF",
@@ -392,8 +401,11 @@ export default function AboutContent({
             className="relative z-10 shrink-0 rounded-[30px] overflow-hidden"
             style={{ width: "505px", height: "266px" }}
           >
-            <Image
-              src="/images/about/mission.png"
+             <Image
+              src={
+                content.visionMission?.mission?.imageUrl ||
+                "/images/about/mission.png"
+              }
               alt={content.alts?.missionImage || "Mission Image"}
               fill
               className="object-cover"
@@ -405,8 +417,11 @@ export default function AboutContent({
             className="relative z-10 flex flex-col items-center justify-center gap-[16px]"
             style={{ flex: "1" }}
           >
-            <Image
-              src="/images/about/mission-logo.svg"
+             <Image
+              src={
+                content.visionMission?.mission?.logoUrl ||
+                "/images/about/mission-logo.svg"
+              }
               alt={content.alts?.missionLogo || "Mission Logo"}
               width={100}
               height={100}

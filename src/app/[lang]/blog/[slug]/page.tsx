@@ -33,10 +33,13 @@ export async function generateMetadata({
     };
   }
 
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
   const title = lang === "ar" && post.titleAr ? post.titleAr : post.title;
   const description =
     lang === "ar" && post.excerptAr ? post.excerptAr : post.excerpt;
-  const canonicalUrl = `https://asklyze.ai/${lang}/blog/${slug}`;
+  const canonicalUrl = `${siteUrl}${lang}/blog/${slug}`;
 
   return {
     title: `${title} | ASKLYZE Blog`,
@@ -44,8 +47,8 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: `https://asklyze.ai/en/blog/${slug}`,
-        ar: `https://asklyze.ai/ar/blog/${slug}`,
+        en: `${siteUrl}en/blog/${slug}`,
+        ar: `${siteUrl}ar/blog/${slug}`,
       },
     },
     openGraph: {
@@ -108,8 +111,13 @@ export default async function BlogPostPage({
 
   return (
     <main className="min-h-screen w-full bg-bg">
-      <BlogPostSchema post={post} lang={lang} slug={slug} />
-      <Navbar dict={dict.navbar} />
+      <BlogPostSchema
+        post={post}
+        lang={lang}
+        slug={slug}
+        siteUrl={dict.siteSettings.siteUrl}
+      />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
 
       <section className="max-w-wide-section mx-auto lg:mx-[60px] relative mt-4 rounded-[50px] overflow-hidden hero-gradient">
         <div className="flex flex-col lg:flex-row items-center w-full gap-10 p-6 md:p-12 lg:px-24 lg:py-8 lg:pt-32">
@@ -283,7 +291,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </main>
   );
 }

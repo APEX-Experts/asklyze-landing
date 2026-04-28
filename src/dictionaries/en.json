@@ -49,7 +49,8 @@
     "getStarted": "Start Free 14-Day Trial",
     "watchDemo": "Watch A Demo",
     "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4",
-    "disclaimer": "14-day free trial. No credit card required."
+    "disclaimer": "14-day free trial. No credit card required.",
+    "heroImageUrl": "/hero_images.png"
   },
   "workingProcess": {
     "title": "How Asklyze Works",
@@ -527,6 +528,7 @@
     "title": "Blogs",
     "description": "Insights, guides, and best practices for Oracle APEX and AI-powered analytics.",
     "noPosts": "No posts found",
+    "emptyMessage": "No articles yet.",
     "topics": {
       "All": "All",
       "Tutorial": "Tutorial",
@@ -968,6 +970,7 @@
       "missionLogo": "Mission Logo",
       "missionImage": "Our Mission"
     },
+    "apexLogoUrl": "/images/about/apex-logo.svg",
     "header": {
       "title": "About Asklyze",
       "intro": "Discover how Asklyze is redefining data analytics for Oracle APEX teams, delivering intelligent insights without compromising data sovereignty."
@@ -1022,13 +1025,16 @@
         "subtitle": "Asklyze combines performance, security, and simplicity for Oracle-driven teams.",
         "points": [
           {
-            "text": "Query data in Arabic and English.\\nNo SQL needed."
+            "text": "Query data in Arabic and English.\\nNo SQL needed.",
+            "iconUrl": "/images/about/solution-icon-1.svg"
           },
           {
-            "text": "Generate visuals that fit directly\\ninto APEX apps."
+            "text": "Generate visuals that fit directly\\ninto APEX apps.",
+            "iconUrl": "/images/about/solution-icon-2.svg"
           },
           {
-            "text": "Run queries on your Oracle database.\\nNo data movement."
+            "text": "Run queries on your Oracle database.\\nNo data movement.",
+            "iconUrl": "/images/about/solution-icon-3.svg"
           }
         ]
       }
@@ -1039,30 +1045,39 @@
       "cards": [
         {
           "title": "Security First",
-          "description": "Your data stays private and fully controlled."
+          "description": "Your data stays private and fully controlled.",
+          "iconUrl": "/images/about/guide-icon-1.svg"
         },
         {
           "title": "Practical AI",
-          "description": "Built for real use cases, not experiments."
+          "description": "Built for real use cases, not experiments.",
+          "iconUrl": "/images/about/guide-icon-2.svg"
         },
         {
           "title": "Clear Experience",
-          "description": "Simple workflows for faster data access."
+          "description": "Simple workflows for faster data access.",
+          "iconUrl": "/images/about/guide-icon-3.svg"
         },
         {
           "title": "Global Ready",
-          "description": "Bilingual and built for enterprise standards."
+          "description": "Bilingual and built for enterprise standards.",
+          "iconUrl": "/images/about/guide-icon-4.svg"
         }
       ]
     },
     "visionMission": {
+      "visionBackgroundPatternUrl": "/images/about/vm-bg-pattern-v2.png",
       "vision": {
         "title": "Our Vision",
-        "description": "To simplify how teams interact with data by embedding AI directly into Oracle APEX workflows."
+        "description": "To simplify how teams interact with data by embedding AI directly into Oracle APEX workflows.",
+        "logoUrl": "/images/about/vision-logo.svg",
+        "imageUrl": "/images/about/vision.png"
       },
       "mission": {
         "title": "Our Mission",
-        "description": "To enable faster, more secure data access through AI-powered querying built natively for Oracle environments."
+        "description": "To enable faster, more secure data access through AI-powered querying built natively for Oracle environments.",
+        "logoUrl": "/images/about/mission-logo.svg",
+        "imageUrl": "/images/about/mission.png"
       }
     },
     "leaders": {
@@ -1131,5 +1146,11 @@
         }
       ]
     }
+  },
+  "siteSettings": {
+    "siteUrl": "https://asklyze.ai/",
+    "getStartedUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "customerPortalUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
+    "docsUrl": "https://docs.asklyze.ai/"
   }
 }

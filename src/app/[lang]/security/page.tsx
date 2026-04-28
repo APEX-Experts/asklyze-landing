@@ -11,14 +11,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
+
   return {
     title: dict.metadata.security.title,
     description: dict.metadata.security.description,
     alternates: {
-      canonical: `https://asklyze.ai/${lang}/security`,
+      canonical: `${siteUrl}${lang}/security`,
       languages: {
-        en: "https://asklyze.ai/en/security",
-        ar: "https://asklyze.ai/ar/security",
+        en: `${siteUrl}en/security`,
+        ar: `${siteUrl}ar/security`,
       },
     },
   };
@@ -35,9 +39,9 @@ export default async function DataSecurity({
 
   return (
     <>
-      <Navbar dict={dict.navbar} />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
       <DataSecurityContent content={content} />
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </>
   );
 }

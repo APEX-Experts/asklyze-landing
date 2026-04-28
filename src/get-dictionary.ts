@@ -21,6 +21,7 @@ import {
   TrustedByContent,
   WhyChooseContent,
   WorkingProcessContent,
+  SiteSetting as SiteSettingsType,
 } from "../payload-types";
 import arFallback from "./dictionaries/ar.json";
 import enFallback from "./dictionaries/en.json";
@@ -47,6 +48,7 @@ export type Dictionary = {
   terms: Omit<TermsContent, "id" | "createdAt" | "updatedAt">;
   security: Omit<SecurityContent, "id" | "createdAt" | "updatedAt">;
   aboutPage: Omit<AboutPageContent, "id" | "createdAt" | "updatedAt">;
+  siteSettings: Omit<SiteSettingsType, "id" | "createdAt" | "updatedAt">;
 };
 
 const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
@@ -74,6 +76,7 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
       terms,
       security,
       aboutPage,
+      siteSettings,
     ] = await Promise.all([
       payload.findGlobal({ slug: "navbar-content", locale }),
       payload.findGlobal({ slug: "hero-content", locale }),
@@ -95,6 +98,7 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
       payload.findGlobal({ slug: "terms-content", locale }),
       payload.findGlobal({ slug: "security-content", locale }),
       payload.findGlobal({ slug: "about-page-content", locale }),
+      payload.findGlobal({ slug: "site-settings", locale }),
     ]);
 
     return {
@@ -153,6 +157,7 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
       terms,
       security,
       aboutPage,
+      siteSettings,
       faq: {
         ...faq,
         categories: faq.categories,

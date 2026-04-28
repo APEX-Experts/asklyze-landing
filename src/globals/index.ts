@@ -18,3 +18,4 @@ export * from './PrivacyContent';
 export * from './TermsContent';
 export * from './SecurityContent';
 export * from './AboutPageContent';
+export * from './SiteSettings';

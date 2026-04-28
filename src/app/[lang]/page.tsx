@@ -20,14 +20,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+  const siteUrl = dict.siteSettings.siteUrl.endsWith("/")
+    ? dict.siteSettings.siteUrl
+    : `${dict.siteSettings.siteUrl}/`;
+
   return {
     title: dict.metadata.home.title,
     description: dict.metadata.home.description,
     alternates: {
-      canonical: `https://asklyze.ai/${lang}`,
+      canonical: `${siteUrl}${lang}`,
       languages: {
-        en: "https://asklyze.ai/en",
-        ar: "https://asklyze.ai/ar",
+        en: `${siteUrl}en`,
+        ar: `${siteUrl}ar`,
       },
     },
   };
@@ -43,9 +47,9 @@ export default async function Home({
 
   return (
     <>
-      <Navbar dict={dict.navbar} />
+      <Navbar dict={dict.navbar} siteSettings={dict.siteSettings} />
       <main className="mt-4">
-        <Hero dict={dict.hero} />
+        <Hero dict={dict.hero} siteSettings={dict.siteSettings} />
         <FeatureGrid dict={dict.featureGrid} commonCTA_Dict={dict.commonCTA} />
         <WorkingProcess
           dict={dict.workingProcess}
@@ -59,7 +63,7 @@ export default async function Home({
         <ContactCTA dict={dict.contactCTA} commonCTA_Dict={dict.commonCTA} />
         <BlogSection dict={dict.blogSection} blogDict={dict.blog} lang={lang} />
       </main>
-      <Footer dict={dict.footer} />
+      <Footer dict={dict.footer} siteSettings={dict.siteSettings} />
     </>
   );
 }

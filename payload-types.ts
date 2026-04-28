@@ -108,6 +108,7 @@ export interface Config {
     'terms-content': TermsContent;
     'security-content': SecurityContent;
     'about-page-content': AboutPageContent;
+    'site-settings': SiteSetting;
   };
   globalsSelect: {
     'navbar-content': NavbarContentSelect<false> | NavbarContentSelect<true>;
@@ -130,6 +131,7 @@ export interface Config {
     'terms-content': TermsContentSelect<false> | TermsContentSelect<true>;
     'security-content': SecurityContentSelect<false> | SecurityContentSelect<true>;
     'about-page-content': AboutPageContentSelect<false> | AboutPageContentSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: 'en' | 'ar';
   widgets: {
@@ -432,6 +434,7 @@ export interface HeroContent {
   watchDemo: string;
   watchDemoUrl: string;
   disclaimer: string;
+  heroImageUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -728,6 +731,7 @@ export interface BlogContent {
   title: string;
   description: string;
   noPosts: string;
+  emptyMessage: string;
   topics: {
     All: string;
     Tutorial: string;
@@ -928,6 +932,7 @@ export interface AboutPageContent {
     missionLogo?: string | null;
     missionImage?: string | null;
   };
+  apexLogoUrl?: string | null;
   header?: {
     title?: string | null;
     intro?: string | null;
@@ -969,6 +974,7 @@ export interface AboutPageContent {
       points?:
         | {
             text?: string | null;
+            iconUrl?: string | null;
             id?: string | null;
           }[]
         | null;
@@ -981,18 +987,24 @@ export interface AboutPageContent {
       | {
           title?: string | null;
           description?: string | null;
+          iconUrl?: string | null;
           id?: string | null;
         }[]
       | null;
   };
   visionMission?: {
+    visionBackgroundPatternUrl?: string | null;
     vision?: {
       title?: string | null;
       description?: string | null;
+      logoUrl?: string | null;
+      imageUrl?: string | null;
     };
     mission?: {
       title?: string | null;
       description?: string | null;
+      logoUrl?: string | null;
+      imageUrl?: string | null;
     };
   };
   leaders?: {
@@ -1012,6 +1024,19 @@ export interface AboutPageContent {
         }[]
       | null;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  siteUrl: string;
+  getStartedUrl: string;
+  customerPortalUrl: string;
+  docsUrl: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1047,6 +1072,7 @@ export interface HeroContentSelect<T extends boolean = true> {
   watchDemo?: T;
   watchDemoUrl?: T;
   disclaimer?: T;
+  heroImageUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1385,6 +1411,7 @@ export interface BlogContentSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   noPosts?: T;
+  emptyMessage?: T;
   topics?:
     | T
     | {
@@ -1623,6 +1650,7 @@ export interface AboutPageContentSelect<T extends boolean = true> {
         missionLogo?: T;
         missionImage?: T;
       };
+  apexLogoUrl?: T;
   header?:
     | T
     | {
@@ -1677,6 +1705,7 @@ export interface AboutPageContentSelect<T extends boolean = true> {
                 | T
                 | {
                     text?: T;
+                    iconUrl?: T;
                     id?: T;
                   };
             };
@@ -1691,23 +1720,29 @@ export interface AboutPageContentSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
+              iconUrl?: T;
               id?: T;
             };
       };
   visionMission?:
     | T
     | {
+        visionBackgroundPatternUrl?: T;
         vision?:
           | T
           | {
               title?: T;
               description?: T;
+              logoUrl?: T;
+              imageUrl?: T;
             };
         mission?:
           | T
           | {
               title?: T;
               description?: T;
+              logoUrl?: T;
+              imageUrl?: T;
             };
       };
   leaders?:
@@ -1731,6 +1766,19 @@ export interface AboutPageContentSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteUrl?: T;
+  getStartedUrl?: T;
+  customerPortalUrl?: T;
+  docsUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

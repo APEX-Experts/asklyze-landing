@@ -5,14 +5,16 @@ interface BlogPostSchemaProps {
   post: Post;
   lang: string;
   slug: string;
+  siteUrl: string;
 }
 
 export default function BlogPostSchema({
   post,
   lang,
   slug,
+  siteUrl,
 }: BlogPostSchemaProps) {
-  const baseUrl = "https://asklyze.ai";
+  const baseUrl = siteUrl.endsWith("/") ? siteUrl.slice(0, -1) : siteUrl;
   const url = `${baseUrl}/${lang}/blog/${slug}`;
   const imageUrl = post.image || `${baseUrl}/logo.png`;
 

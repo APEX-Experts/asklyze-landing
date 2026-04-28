@@ -16,5 +16,6 @@ export const HeroContent: GlobalConfig = {
         { name: 'watchDemo', type: 'text', localized: true, required: true },
         { name: 'watchDemoUrl', type: 'text', required: true },
         { name: 'disclaimer', type: 'text', localized: true, required: true },
+        { name: 'heroImageUrl', type: 'text' },
     ],
 };
