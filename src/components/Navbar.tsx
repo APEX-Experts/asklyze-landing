@@ -60,7 +60,7 @@ export default function Navbar({ dict, siteSettings }: NavbarProps) {
             style={{ textDecoration: "none" }}
           >
             <span className="sr-only">{dict.links?.[0].label}</span>
-            <Logo width={120} height={36} />
+            <Logo width={170} height={48} />
           </Link>
 
           {/* DESKTOP: Center Nav Links */}
@@ -96,7 +96,6 @@ export default function Navbar({ dict, siteSettings }: NavbarProps) {
 
           {/* DESKTOP: Right Side CTA + Lang */}
           <div className="hidden lg:flex items-center gap-4">
-            {/* CTA: White pill button with arrow */}
             <LinkButton
               href={siteSettings.customerPortalUrl}
               target="_blank"
