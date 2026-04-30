@@ -182,11 +182,12 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
   }
 };
 
-export const getDictionary = async (locale: string): Promise<Dictionary> => {
-  const cachedFetchDictionary = unstable_cache(
-    fetchDictionary,
-    ["dictionary", locale],
-    { tags: ["dictionary"] }
-  );
-  return await cachedFetchDictionary(locale === "ar" ? "ar" : "en");
+const cachedFetchDictionary = unstable_cache(
+  fetchDictionary,
+  ["dictionary"],
+  { tags: ["dictionary"], revalidate: 60 }
+);
+
+export const getDictionary = async (locale: string) => {
+  return cachedFetchDictionary(locale === "ar" ? "ar" : "en");
 };
