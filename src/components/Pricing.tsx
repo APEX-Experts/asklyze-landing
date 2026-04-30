@@ -146,6 +146,8 @@ export default function Pricing({ dict }: PricingProps) {
                 </ul>
                 <LinkButton
                   href={plan.href || dict.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`transition-all duration-300 flex items-center justify-center gap-2`}
                 >
                   {dict.cta}

@@ -14,11 +14,21 @@ const CommonCTA = ({
     <div className="flex flex-col gap-3.5 items-center lg:min-w-[350px]">
       {/* Buttons */}
       <div className="flex flex-row flex-wrap gap-2.5 items-center justify-center">
-        <LinkButton href={commonCTA_Dict.watchDemoUrl} variant="outline">
+        <LinkButton
+          href={commonCTA_Dict.watchDemoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="outline"
+        >
           <Radio width={18} height={18} />
           <span>{commonCTA_Dict.watchDemo}</span>
         </LinkButton>
-        <LinkButton href={commonCTA_Dict.getStartedUrl} variant="primary">
+        <LinkButton
+          href={commonCTA_Dict.getStartedUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="primary"
+        >
           <span>{commonCTA_Dict.getStarted}</span>
         </LinkButton>
       </div>

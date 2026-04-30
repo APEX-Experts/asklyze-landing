@@ -98,6 +98,8 @@ const SocialIcon = ({
 }) => (
   <a
     href={href}
+    target="_blank"
+    rel="noopener noreferrer"
     aria-label={label}
     className="w-[38px] h-[38px] rounded-full bg-[#FAFAFA] flex items-center justify-center transition-all hover:-translate-y-1 shadow-sm overflow-hidden border border-black/5"
   >
