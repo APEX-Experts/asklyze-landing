@@ -436,6 +436,12 @@ export interface HeroContent {
   watchDemo: string;
   watchDemoUrl: string;
   disclaimer: string;
+  mockupImages?:
+    | {
+        image?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   heroImageUrl?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -1093,6 +1099,12 @@ export interface HeroContentSelect<T extends boolean = true> {
   watchDemo?: T;
   watchDemoUrl?: T;
   disclaimer?: T;
+  mockupImages?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   heroImageUrl?: T;
   updatedAt?: T;
   createdAt?: T;
