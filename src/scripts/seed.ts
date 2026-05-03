@@ -7,6 +7,9 @@ dotenv.config()
 process.env.SEEDING = "true";
 
 
+import * as fs from 'fs';
+import * as path from 'path';
+
 /**
  * Mapping between Payload global slugs and dictionary keys.
  * If a custom transformation is needed, it can be handled in seedGlobal.
@@ -33,6 +36,144 @@ const SLUG_TO_DICT_KEY: Record<string, string> = {
     'security-content': 'security',
     'about-page-content': 'aboutPage',
     'site-settings': 'siteSettings',
+};
+
+/**
+ * Mapping to store uploaded media IDs to avoid redundant uploads
+ */
+const MEDIA_MAP: Record<string, string | number> = {};
+
+/**
+ * Uploads a file from public directory or external URL to Payload Media collection
+ */
+const ensureMedia = async (payload: BasePayload, filePath: string) => {
+    if (MEDIA_MAP[filePath]) return MEDIA_MAP[filePath];
+
+    let fileData: Buffer;
+    let fileName: string;
+    let mimeType: string;
+
+    if (filePath.startsWith('http')) {
+        try {
+            console.log(`- Downloading external media: ${filePath}...`);
+            const response = await fetch(filePath);
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            const arrayBuffer = await response.arrayBuffer();
+            fileData = Buffer.from(arrayBuffer);
+            fileName = path.basename(new URL(filePath).pathname);
+            mimeType = response.headers.get('content-type') || 'application/octet-stream';
+        } catch (error) {
+            console.error(`- Failed to download external media: ${filePath}`, error);
+            return null;
+        }
+    } else {
+        const publicPath = path.resolve(process.cwd(), 'public', filePath.startsWith('/') ? filePath.slice(1) : filePath);
+        
+        if (!fs.existsSync(publicPath)) {
+            console.warn(`- Media not found: ${publicPath}`);
+            return null;
+        }
+        fileData = fs.readFileSync(publicPath);
+        fileName = path.basename(filePath);
+        mimeType = filePath.endsWith('.png') ? 'image/png' : 
+                   filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') ? 'image/jpeg' :
+                   filePath.endsWith('.svg') ? 'image/svg+xml' :
+                   filePath.endsWith('.mp4') ? 'video/mp4' : 'application/octet-stream';
+    }
+
+    try {
+        console.log(`- Uploading media: ${fileName}...`);
+        const result = await payload.create({
+            collection: 'media',
+            data: {
+                alt: fileName,
+            },
+            file: {
+                data: fileData,
+                name: fileName,
+                mimetype: mimeType,
+                size: fileData.length,
+            },
+        });
+        MEDIA_MAP[filePath] = result.id;
+        return result.id;
+    } catch (error) {
+        console.error(`- Failed to upload media: ${filePath}`, error);
+        return null;
+    }
+};
+
+/**
+ * Recursively scans data for media paths and uploads/replaces them
+ */
+const processMediaFields = async (payload: BasePayload, data: any) => {
+    if (!data || typeof data !== 'object') return data;
+
+    if (Array.isArray(data)) {
+        for (let i = 0; i < data.length; i++) {
+            data[i] = await processMediaFields(payload, data[i]);
+        }
+        return data;
+    }
+
+    for (const key of Object.keys(data)) {
+        const value = data[key];
+        
+        // Check if field should be media based on value pattern or key name
+        // Pattern: starts with / or http and has extension
+        const isMediaPath = typeof value === 'string' && (
+            (value.startsWith('/') || value.startsWith('http')) && 
+            (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.svg') || value.endsWith('.mp4') || value.endsWith('.gif'))
+        );
+
+        if (isMediaPath) {
+            const mediaId = await ensureMedia(payload, value);
+            if (mediaId) {
+                data[key] = mediaId;
+            }
+        } else if (typeof value === 'object') {
+            data[key] = await processMediaFields(payload, value);
+        }
+    }
+    return data;
+};
+
+/**
+ * Recursively scans dictionary data for media paths and updates ONLY those fields in existing data
+ */
+const syncMedia = async (payload: BasePayload, existingData: any, dictData: any) => {
+    if (!dictData || typeof dictData !== 'object') return existingData;
+
+    let result = existingData;
+    if (result === null || result === undefined) {
+        result = Array.isArray(dictData) ? [] : {};
+    }
+
+    if (Array.isArray(dictData)) {
+        for (let i = 0; i < dictData.length; i++) {
+            result[i] = await syncMedia(payload, result[i], dictData[i]);
+        }
+        return result;
+    }
+
+    for (const key of Object.keys(dictData)) {
+        const value = dictData[key];
+        
+        const isMediaPath = typeof value === 'string' && (
+            (value.startsWith('/') || value.startsWith('http')) && 
+            (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.svg') || value.endsWith('.mp4') || value.endsWith('.gif'))
+        );
+
+        if (isMediaPath) {
+            const mediaId = await ensureMedia(payload, value);
+            if (mediaId) {
+                result[key] = mediaId;
+            }
+        } else if (typeof value === 'object' && value !== null) {
+            result[key] = await syncMedia(payload, result[key], value);
+        }
+    }
+    return result;
 };
 
 /**
@@ -70,7 +211,7 @@ const mapIdsRecursively = (enSource: any, arTarget: any) => {
   }
 };
 
-const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false) => {
+const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false, mediaOnly: boolean = false) => {
     const dictKey = SLUG_TO_DICT_KEY[slug];
     if (!dictKey) {
         console.error(`Unknown global slug: ${slug}`);
@@ -81,8 +222,6 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
         try {
             const existing = await payload.findGlobal({ slug, locale: 'en' });
             // Check if global has any specific content. 
-            // A common pattern is that empty globals only have basic fields or specific defaults.
-            // We check for any field that is not a metadata field and has a truthy value.
             const hasData = Object.keys(existing).some(key => 
                 !['id', 'createdAt', 'updatedAt', 'globalType'].includes(key) && 
                 existing[key as keyof typeof existing] !== null && 
@@ -100,11 +239,33 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
         }
     }
 
-  console.log(`Seeding Global: ${slug}...`);
+    let existingEn: any = null;
+    let existingAr: any = null;
+
+    if (mediaOnly) {
+        try {
+            existingEn = await payload.findGlobal({ slug, locale: 'en' });
+            existingAr = await payload.findGlobal({ slug, locale: 'ar' });
+        } catch (e) {
+            console.warn(`- Warning: Could not fetch existing data for ${slug}. Will perform partial seed.`);
+        }
+    }
+
+  console.log(`Seeding Global: ${slug}${mediaOnly ? ' (MEDIA ONLY)' : ''}...`);
   try {
-    const enData = (en as any)[dictKey];
-    // Create a deep copy of arData so we don't accidentally mutate the imported JSON module
-    const arData = JSON.parse(JSON.stringify((ar as any)[dictKey]));
+    const enDataRaw = (en as any)[dictKey];
+    const arDataRaw = (ar as any)[dictKey];
+
+    let enData, arData;
+
+    if (mediaOnly) {
+        enData = await syncMedia(payload, existingEn, JSON.parse(JSON.stringify(enDataRaw)));
+        arData = await syncMedia(payload, existingAr, JSON.parse(JSON.stringify(arDataRaw)));
+    } else {
+        // Process media fields
+        enData = await processMediaFields(payload, JSON.parse(JSON.stringify(enDataRaw)));
+        arData = await processMediaFields(payload, JSON.parse(JSON.stringify(arDataRaw)));
+    }
 
     // 1. Update English
     const enResult = await payload.updateGlobal({
@@ -127,27 +288,28 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
 
         console.log(`- Success: ${slug}`);
     } catch (error) {
-        console.error(`- Failed: ${slug}`, error);
+        console.error(`- Failed: ${slug}`, JSON.stringify(error, null, 2));
     }
 }
 
 const seed = async () => {
     const args = process.argv.slice(2);
     const force = args.includes('--force');
-    const filteredArgs = args.filter(arg => arg !== '--force');
+    const mediaOnly = args.includes('--media');
+    const filteredArgs = args.filter(arg => arg !== '--force' && arg !== '--media');
     const targets = filteredArgs.length > 0 ? filteredArgs : 'all';
 
-    console.log(`--- Seeding Database [Target: ${targets}${force ? ' (FORCED)' : ''}] ---`)
+    console.log(`--- Seeding Database [Target: ${targets}${force ? ' (FORCED)' : ''}${mediaOnly ? ' (MEDIA ONLY)' : ''}] ---`)
     const payload = await getPayload({ config: await config })
 
     if (targets === 'all') {
         for (const slug of Object.keys(SLUG_TO_DICT_KEY)) {
-            await seedGlobal(payload, slug as GlobalSlug, force);
+            await seedGlobal(payload, slug as GlobalSlug, force, mediaOnly);
         }
     } else {
         // Assume target is a global slug
         for (const slug of targets) {
-            await seedGlobal(payload, slug as GlobalSlug, force);
+            await seedGlobal(payload, slug as GlobalSlug, force, mediaOnly);
         }
     }
 
