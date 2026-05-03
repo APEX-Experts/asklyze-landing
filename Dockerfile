@@ -1,10 +1,13 @@
 FROM node:22.17.0-alpine AS base
 
+# Install pnpm using corepack
+RUN corepack enable pnpm
+
 FROM base AS deps
 RUN apk add --no-cache libc6-compat python3 make g++
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
@@ -20,11 +23,9 @@ ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
 ARG NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 
-
-
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-RUN npm run build
+RUN pnpm run build
 
 FROM base AS runner
 WORKDIR /app
@@ -38,7 +39,7 @@ RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/package-lock.json ./package-lock.json
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY --from=builder /app/src ./src
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
@@ -47,4 +48,4 @@ COPY --from=builder /app/node_modules ./node_modules
 USER nextjs
 EXPOSE 3076
 
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]

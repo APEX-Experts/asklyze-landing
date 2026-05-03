@@ -16,7 +16,7 @@ A modern, bilingual (English/Arabic) landing page built with Next.js 15 and Payl
 ## 📋 Prerequisites
 
 - Node.js 20 or higher
-- pnpm (recommended) or npm
+- pnpm
 - SendGrid account with API key (for email functionality)
 
 ## 🛠️ Development Setup
