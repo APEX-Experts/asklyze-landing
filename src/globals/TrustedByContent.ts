@@ -1,5 +1,6 @@
 import { GlobalConfig } from 'payload';
 import { revalidateHook } from './revalidateHook';
+import { MediaField } from '../fields/MediaField';
 
 export const TrustedByContent: GlobalConfig = {
     slug: 'trusted-by-content',
@@ -18,5 +19,16 @@ export const TrustedByContent: GlobalConfig = {
         },
         { name: 'title', type: 'text', localized: true, required: true },
         { name: 'subtitle', type: 'text', localized: true, required: true },
+        {
+            name: 'partners',
+            type: 'array',
+            fields: [
+                { name: 'name', type: 'text' },
+                MediaField({
+                    name: 'logo',
+                    label: 'Partner Logo',
+                }),
+            ],
+        },
     ],
 };

@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { getDictionary } from "@/get-dictionary";
 import { getPayload } from "@/lib/payload";
 import { cn } from "@/lib/utils";
-import { Post } from "@/payload-types";
+import { Post } from "@/../payload-types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";

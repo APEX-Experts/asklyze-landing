@@ -1,4 +1,5 @@
-import type { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload'
+import { MediaField } from '../fields/MediaField';
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
@@ -44,11 +45,10 @@ export const Posts: CollectionConfig = {
                     type: 'text',
                     required: true,
                 },
-                {
+                MediaField({
                     name: 'image',
-                    type: 'text', // Simple URL for now to match current mock data style
-                    label: 'Author Avatar URL',
-                },
+                    label: 'Author Avatar',
+                }),
                 {
                     name: 'jobTitle',
                     type: 'text',
@@ -74,12 +74,11 @@ export const Posts: CollectionConfig = {
             type: 'date',
             required: true,
         },
-        {
+        MediaField({
             name: 'image',
-            type: 'text', // Using text URL for simplicity to match mock data
-            label: 'Featured Image URL',
+            label: 'Featured Media',
             required: true,
-        },
+        }),
         {
             name: 'excerpt',
             type: 'textarea',

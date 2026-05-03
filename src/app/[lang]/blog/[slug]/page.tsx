@@ -10,6 +10,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Media } from "../../../../../payload-types";
 
 export async function generateMetadata({
   params,
@@ -56,13 +57,23 @@ export async function generateMetadata({
       title,
       description: description || `Read ${post.title} on the ASKLYZE blog.`,
       url: canonicalUrl,
-      images: [{ url: post.image || "/logo.png", alt: title }],
+      images: [
+        {
+          url: (post.image as Media)?.url || "/logo.png",
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: description || `Read ${post.title} on the ASKLYZE blog.`,
-      images: [post.image || "/logo.png"],
+      images: [
+        {
+          url: (post.image as Media)?.url || "/logo.png",
+          alt: title,
+        },
+      ],
     },
   };
 }
@@ -125,7 +136,7 @@ export default async function BlogPostPage({
             <div className="w-full lg:w-[570px] lg:h-[320px]">
               <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl border border-white/50">
                 <Image
-                  src={heroImage}
+                  src={(heroImage as Media).url || ""}
                   alt={displayTitle}
                   fill
                   unoptimized
@@ -167,7 +178,7 @@ export default async function BlogPostPage({
                 {authorImage && (
                   <div className="relative w-[56px] h-[56px] rounded-full overflow-hidden shadow-sm">
                     <Image
-                      src={authorImage}
+                      src={(authorImage as Media).url || ""}
                       alt={authorName}
                       unoptimized
                       fill

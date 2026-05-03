@@ -1,5 +1,6 @@
 import { GlobalConfig } from 'payload';
 import { revalidateHook } from './revalidateHook';
+import { MediaField } from '../fields/MediaField';
 
 export const HeroContent: GlobalConfig = {
     slug: 'hero-content',
@@ -28,12 +29,15 @@ export const HeroContent: GlobalConfig = {
             name: 'mockupImages',
             type: 'array',
             fields: [
-                {
+                MediaField({
                     name: 'image',
-                    type: 'text',
-                }
+                    label: 'Mockup Media',
+                })
             ]
         },
-        { name: 'heroImageUrl', type: 'text' },
+        MediaField({
+            name: 'heroImageUrl',
+            label: 'Hero Media',
+        }),
     ],
 };

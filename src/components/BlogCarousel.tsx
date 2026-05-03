@@ -2,7 +2,7 @@
 
 import BlogCard from "./BlogCard";
 import LinkButton from "./LinkButton";
-import { Post } from "@/payload-types";
+import { Post } from "@/../payload-types";
 import Carousel from "./Carousel";
 import { Dictionary } from "@/get-dictionary";
 

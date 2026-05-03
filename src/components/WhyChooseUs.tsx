@@ -24,9 +24,9 @@ const WhyChooseUs = (props: Props) => {
           {dict.features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center bg-white/65 rounded-3xl gap-2.5 justify-end p-6"
+              className="flex flex-col items-center bg-white/65 rounded-3xl gap-2.5 justify-between p-6 h-full"
             >
-              <h3 className="text-xl lg:text-[24px] font-bold text-text-heading">
+              <h3 className="text-xl lg:text-[24px] font-bold text-text-heading text-center">
                 {feature.title}
               </h3>
               <p className="text-text-body text-center leading-[130%]">

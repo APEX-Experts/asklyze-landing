@@ -1,5 +1,6 @@
 import { GlobalConfig } from "payload";
 import { revalidateHook } from './revalidateHook';
+import { MediaField } from "../fields/MediaField";
 
 export const AboutPageContent: GlobalConfig = {
     slug: 'about-page-content',
@@ -30,7 +31,10 @@ export const AboutPageContent: GlobalConfig = {
                 { name: 'missionImage', type: 'text', localized: true },
             ],
         },
-        { name: 'apexLogoUrl', type: 'text' },
+        MediaField({
+            name: 'apexLogoUrl',
+            label: 'Apex Logo',
+        }),
         {
             name: 'header',
             type: 'group',
@@ -98,7 +102,10 @@ export const AboutPageContent: GlobalConfig = {
                             type: 'array',
                             fields: [
                                 { name: 'text', type: 'text', localized: true },
-                                { name: 'iconUrl', type: 'text' },
+                                MediaField({
+                                    name: 'iconUrl',
+                                    label: 'Icon',
+                                }),
                             ],
                         },
                     ],
@@ -117,7 +124,10 @@ export const AboutPageContent: GlobalConfig = {
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
-                        { name: 'iconUrl', type: 'text' },
+                        MediaField({
+                            name: 'iconUrl',
+                            label: 'Icon',
+                        }),
                     ],
                 },
             ],
@@ -126,15 +136,24 @@ export const AboutPageContent: GlobalConfig = {
             name: 'visionMission',
             type: 'group',
             fields: [
-                { name: 'visionBackgroundPatternUrl', type: 'text' },
+                MediaField({
+                    name: 'visionBackgroundPatternUrl',
+                    label: 'Vision Background Pattern',
+                }),
                 {
                     name: 'vision',
                     type: 'group',
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
-                        { name: 'logoUrl', type: 'text' },
-                        { name: 'imageUrl', type: 'text' },
+                        MediaField({
+                            name: 'logoUrl',
+                            label: 'Logo',
+                        }),
+                        MediaField({
+                            name: 'imageUrl',
+                            label: 'Image',
+                        }),
                     ],
                 },
                 {
@@ -143,8 +162,14 @@ export const AboutPageContent: GlobalConfig = {
                     fields: [
                         { name: 'title', type: 'text', localized: true },
                         { name: 'description', type: 'text', localized: true },
-                        { name: 'logoUrl', type: 'text' },
-                        { name: 'imageUrl', type: 'text' },
+                        MediaField({
+                            name: 'logoUrl',
+                            label: 'Logo',
+                        }),
+                        MediaField({
+                            name: 'imageUrl',
+                            label: 'Image',
+                        }),
                     ],
                 },
             ],
@@ -170,7 +195,10 @@ export const AboutPageContent: GlobalConfig = {
                                 { name: 'instagram', type: 'text' },
                             ],
                         },
-                        { name: 'imageUrl', type: 'text' }
+                        MediaField({
+                            name: 'imageUrl',
+                            label: 'Member Image',
+                        })
                     ],
                 },
             ],

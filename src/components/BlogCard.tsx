@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { Post } from "@/payload-types";
+import { Media as MediaType, Post } from "@/../payload-types";
+import { Media } from "./Media";
 
 interface BlogCardProps {
   post: Post;
@@ -12,24 +12,19 @@ interface BlogCardProps {
   };
 }
 
-export default function BlogCard({
-  post,
-  lang,
-  dict,
-}: BlogCardProps) {
+export default function BlogCard({ post, lang, dict }: BlogCardProps) {
   return (
     <Link
       href={`/${lang}/blog/${post.slug}`}
       className="flex flex-col items-center gap-4 flex-1 rounded-[30px] border border-primary-light bg-white h-[500px] hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
       style={{ padding: "10px 16px 16px 16px" }}
     >
-      {/* Cover Image with Date badge */}
+      {/* Cover Media with Date badge */}
       <div className="relative w-full rounded-3xl overflow-hidden shrink-0 flex-1 min-h-0">
-        <Image
-          src={post.image}
+        <Media
+          resource={post.image as MediaType}
           alt={post.title}
           fill
-          unoptimized
           className="object-cover transform transition-transform duration-700 group-hover:scale-110"
         />
         {/* Date Badge */}

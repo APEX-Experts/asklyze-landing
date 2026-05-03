@@ -1,5 +1,5 @@
 import { getPayload } from "@/lib/payload";
-import { Post } from "@/payload-types";
+import { Post } from "@/../payload-types";
 import BlogCarousel from "./BlogCarousel";
 import { Dictionary } from "@/get-dictionary";
 

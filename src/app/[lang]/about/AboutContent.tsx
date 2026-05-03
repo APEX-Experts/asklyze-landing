@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Media } from "../../../../payload-types";
 
 interface AboutContentProps {
   lang: "en" | "ar";
@@ -147,11 +148,15 @@ export default function AboutContent({
 
           <div className="bg-[#E8EBFA] rounded-[30px] p-[30px] lg:p-[50px] w-full flex flex-col items-center gap-[32px]">
             <Image
-              src={content.apexLogoUrl || "/images/about/apex-logo.svg"}
+              src={
+                (content.apexLogoUrl as Media)?.url ||
+                "/images/about/apex-logo.svg"
+              }
               alt={content.alts?.apexLogo || "Apex Logo"}
               width={480}
               height={93}
               className="w-full max-w-[480px] h-auto object-contain"
+              priority
             />
 
             <p className="text-[#1A1A1A] text-[20px] lg:text-[28px] leading-[1.5em] font-normal max-w-[1151px] text-center m-0">
@@ -190,7 +195,7 @@ export default function AboutContent({
                           className={`flex ${isArabic ? "flex-row-reverse" : ""}`}
                         >
                           <Image
-                            src={iconSrc}
+                            src={(iconSrc as Media).url || iconSrc as string || "/images/about/solution-icon-1.svg"}
                             alt={`${content.alts?.feature} ${idx + 1}`}
                             width={90}
                             height={90}
@@ -255,7 +260,8 @@ export default function AboutContent({
                 >
                   <Image
                     src={
-                      card.iconUrl || `/images/about/guide-icon-${idx + 1}.svg`
+                      (card.iconUrl as Media)?.url ||
+                      (typeof card.iconUrl === 'string' ? card.iconUrl : `/images/about/guide-icon-${idx + 1}.svg`)
                     }
                     alt={card.title || "Guide Icon"}
                     width={100}
@@ -320,8 +326,8 @@ export default function AboutContent({
           >
             <Image
               src={
-                content.visionMission?.vision?.logoUrl ||
-                "/images/about/vision-logo.svg"
+                (content.visionMission?.vision?.logoUrl as Media)?.url ||
+                (typeof content.visionMission?.vision?.logoUrl === 'string' ? content.visionMission?.vision?.logoUrl : "/images/about/vision-logo.svg")
               }
               alt={content.alts?.visionLogo || "Vision Logo"}
               width={100}
@@ -359,7 +365,7 @@ export default function AboutContent({
           >
             <Image
               src={
-                content.visionMission?.vision?.imageUrl ||
+                (content.visionMission?.vision?.imageUrl as Media)?.url ||
                 "/images/about/vision.png"
               }
               alt={content.alts?.visionImage || "Vision Image"}
@@ -405,7 +411,7 @@ export default function AboutContent({
           >
             <Image
               src={
-                content.visionMission?.mission?.imageUrl ||
+                (content.visionMission?.mission?.imageUrl as Media)?.url ||
                 "/images/about/mission.png"
               }
               alt={content.alts?.missionImage || "Mission Image"}
@@ -421,8 +427,8 @@ export default function AboutContent({
           >
             <Image
               src={
-                content.visionMission?.mission?.logoUrl ||
-                "/images/about/mission-logo.svg"
+                (content.visionMission?.mission?.logoUrl as Media)?.url ||
+                (typeof content.visionMission?.mission?.logoUrl === 'string' ? content.visionMission?.mission?.logoUrl : "/images/about/mission-logo.svg")
               }
               alt={content.alts?.missionLogo || "Mission Logo"}
               width={100}
@@ -519,7 +525,7 @@ export default function AboutContent({
                 >
                   <div className="w-full h-[300px] mb-4 rounded-[30px] relative overflow-hidden bg-gray-100">
                     <Image
-                      src={member.imageUrl ?? imgSrc}
+                      src={(member.imageUrl as Media)?.url || (typeof member.imageUrl === 'string' ? member.imageUrl : imgSrc)}
                       alt={member.name ?? ""}
                       fill
                       className=" object-cover object-top hover:scale-105 transition-transform duration-500"

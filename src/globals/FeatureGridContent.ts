@@ -1,5 +1,6 @@
 import { GlobalConfig } from 'payload';
 import { revalidateHook } from './revalidateHook';
+import { MediaField } from '../fields/MediaField';
 
 export const FeatureGridContent: GlobalConfig = {
     slug: 'feature-grid-content',
@@ -26,7 +27,11 @@ export const FeatureGridContent: GlobalConfig = {
             fields: [
                 { name: 'title', type: 'text', localized: true, required: true },
                 { name: 'desc', type: 'textarea', localized: true, required: true },
-                { name: 'image', type: 'text', required: true }
+                MediaField({
+                    name: 'image',
+                    label: 'Feature Media',
+                    required: true,
+                })
             ]
         }
     ],

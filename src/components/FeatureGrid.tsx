@@ -1,14 +1,15 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import CommonCTA from "./CommonCTA";
-import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FeatureIcon } from "./Icons";
 import {
+  Media as MediaType,
   type CommonCtaContent,
   type FeatureGridContent,
 } from "../../payload-types";
+import { Media } from "./Media";
 
 export default function FeatureGrid({
   dict,
@@ -47,7 +48,7 @@ export default function FeatureGrid({
         >
           {/* CTA */}
           <div className="flex flex-col gap-6 items-center w-full">
-            {/* Image */}
+            {/* Media */}
             <div className="w-full h-[450px] rounded-3xl relative overflow-hidden feature-image-container">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -58,8 +59,8 @@ export default function FeatureGrid({
                   transition={{ duration: 0.3 }}
                   className="absolute inset-0 w-full h-full"
                 >
-                  <Image
-                    src={features[activeFeature].image}
+                  <Media
+                    resource={features[activeFeature].image as MediaType}
                     alt={features[activeFeature].title}
                     fill
                     className="object-cover"

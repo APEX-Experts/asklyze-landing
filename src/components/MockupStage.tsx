@@ -1,16 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import "@/../public/mockup.css";
+import { Dictionary } from "@/get-dictionary";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Media } from "./Media";
+import { Media as MediaType } from "@/../payload-types";
 
 // ----------------------------------------------------------------------
 // Mockup Stage Component (Ported animations to Framer Motion)
 // ----------------------------------------------------------------------
 
 interface MockupStageProps {
-  images?: { image?: string | null }[] | null;
+  images?: Dictionary["hero"]["mockupImages"];
 }
 
 export default function MockupStage({ images }: MockupStageProps) {
@@ -158,8 +160,8 @@ export default function MockupStage({ images }: MockupStageProps) {
                     position: "relative",
                   }}
                 >
-                  <Image
-                    src={imgSrc}
+                  <Media
+                    resource={imgSrc as MediaType}
                     alt={`Mockup ${id}`}
                     className="mockup-card-image"
                     width={620}
