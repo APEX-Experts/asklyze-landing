@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     posts: Post;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +79,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -197,13 +199,13 @@ export interface Post {
   slug: string;
   author: {
     name: string;
-    image?: string | null;
+    image: number | Media;
     jobTitle?: string | null;
     jobTitleAr?: string | null;
   };
   category: 'Tutorial' | 'Industry Trends' | 'Features' | 'Security' | 'Case Study' | 'Product Update';
   publishedDate: string;
-  image: string;
+  image: number | Media;
   excerpt: string;
   excerptAr?: string | null;
   content?: {
@@ -241,6 +243,51 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -270,6 +317,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -363,6 +414,58 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -438,11 +541,11 @@ export interface HeroContent {
   disclaimer: string;
   mockupImages?:
     | {
-        image?: string | null;
+        image: number | Media;
         id?: string | null;
       }[]
     | null;
-  heroImageUrl?: string | null;
+  heroImageUrl: number | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -472,6 +575,13 @@ export interface TrustedByContent {
   isEnabled?: boolean | null;
   title: string;
   subtitle: string;
+  partners?:
+    | {
+        name?: string | null;
+        logo: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -517,7 +627,7 @@ export interface FeatureGridContent {
   features: {
     title: string;
     desc: string;
-    image: string;
+    image: number | Media;
     id?: string | null;
   }[];
   updatedAt?: string | null;
@@ -957,7 +1067,7 @@ export interface AboutPageContent {
     missionLogo?: string | null;
     missionImage?: string | null;
   };
-  apexLogoUrl?: string | null;
+  apexLogoUrl: number | Media;
   header?: {
     title?: string | null;
     intro?: string | null;
@@ -999,7 +1109,7 @@ export interface AboutPageContent {
       points?:
         | {
             text?: string | null;
-            iconUrl?: string | null;
+            iconUrl: number | Media;
             id?: string | null;
           }[]
         | null;
@@ -1012,24 +1122,24 @@ export interface AboutPageContent {
       | {
           title?: string | null;
           description?: string | null;
-          iconUrl?: string | null;
+          iconUrl: number | Media;
           id?: string | null;
         }[]
       | null;
   };
-  visionMission?: {
-    visionBackgroundPatternUrl?: string | null;
-    vision?: {
+  visionMission: {
+    visionBackgroundPatternUrl: number | Media;
+    vision: {
       title?: string | null;
       description?: string | null;
-      logoUrl?: string | null;
-      imageUrl?: string | null;
+      logoUrl: number | Media;
+      imageUrl: number | Media;
     };
-    mission?: {
+    mission: {
       title?: string | null;
       description?: string | null;
-      logoUrl?: string | null;
-      imageUrl?: string | null;
+      logoUrl: number | Media;
+      imageUrl: number | Media;
     };
   };
   leaders?: {
@@ -1044,7 +1154,7 @@ export interface AboutPageContent {
             linkedin?: string | null;
             instagram?: string | null;
           };
-          imageUrl?: string | null;
+          imageUrl: number | Media;
           id?: string | null;
         }[]
       | null;
@@ -1135,6 +1245,13 @@ export interface TrustedByContentSelect<T extends boolean = true> {
   isEnabled?: T;
   title?: T;
   subtitle?: T;
+  partners?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
