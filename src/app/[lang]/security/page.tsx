@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import DataSecurityContent from "./DataSecurityContent";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

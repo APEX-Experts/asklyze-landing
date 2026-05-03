@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
 import "server-only";
 import {
   AboutPageContent,
@@ -17,11 +17,11 @@ import {
   PricingContent,
   PrivacyContent,
   SecurityContent,
+  SiteSetting as SiteSettingsType,
   TermsContent,
   TrustedByContent,
   WhyChooseContent,
   WorkingProcessContent,
-  SiteSetting as SiteSettingsType,
 } from "../payload-types";
 import arFallback from "./dictionaries/ar.json";
 import enFallback from "./dictionaries/en.json";
@@ -182,12 +182,7 @@ const fetchDictionary = async (locale: "en" | "ar"): Promise<Dictionary> => {
   }
 };
 
-const cachedFetchDictionary = unstable_cache(
-  fetchDictionary,
-  ["dictionary"],
-  { tags: ["dictionary"], revalidate: 60 }
-);
-
-export const getDictionary = async (locale: string) => {
-  return cachedFetchDictionary(locale === "ar" ? "ar" : "en");
-};
+// Wrap fetchDictionary in React's cache so it only deduplicates per-request
+export const getDictionary = cache(async (locale: string) => {
+  return fetchDictionary(locale === "ar" ? "ar" : "en");
+});

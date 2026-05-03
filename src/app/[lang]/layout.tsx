@@ -5,6 +5,8 @@ import SchemaMarkup from "@/components/SchemaMarkup";
 import Preloader from "@/components/Preloader";
 import GoogleTag from "@/components/GoogleTag";
 
+export const dynamic = "force-dynamic";
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -24,9 +26,6 @@ const almarai = Almarai({
   display: "swap",
 });
 
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "ar" }];
-}
 export async function generateMetadata({
   params,
 }: {

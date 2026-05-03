@@ -13,6 +13,8 @@ import WorkingProcess from "@/components/WorkingProcess";
 import { getDictionary } from "@/get-dictionary";
 import type { Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

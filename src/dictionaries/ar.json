@@ -27,18 +27,6 @@
         "href": "/blog"
       },
       {
-        "external": true,
-        "icon": "FileText",
-        "label": "الوثائق",
-        "href": "https://docs.asklyze.ai/"
-      },
-      {
-        "external": false,
-        "icon": "Users",
-        "label": "من نحن",
-        "href": "/about"
-      },
-      {
         "external": false,
         "icon": "Mail",
         "label": "تواصل معنا",
@@ -57,13 +45,7 @@
     "watchDemo": "عرض توضيحي",
     "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان.",
-    "mockupImages": [
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" }
-    ],
+    "mockupImages": [],
     "heroImageUrl": "/hero_images.png"
   },
   "workingProcess": {
@@ -155,7 +137,7 @@
     "getStarted": "ابدأ تجربة مجانية",
     "getStartedUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
     "watchDemo": "عرض مباشر",
-    "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4",
+    "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان."
   },
   "contactCTA": {

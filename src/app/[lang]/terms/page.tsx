@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import { getDictionary } from "@/get-dictionary";
 import TermsAndConditionsContent from "./TermsAndConditionsContent";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

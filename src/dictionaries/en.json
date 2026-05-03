@@ -27,18 +27,6 @@
         "href": "/blog"
       },
       {
-        "external": true,
-        "icon": "FileText",
-        "label": "Docs",
-        "href": "https://docs.asklyze.ai/"
-      },
-      {
-        "external": false,
-        "icon": "Users",
-        "label": "About",
-        "href": "/about"
-      },
-      {
         "external": false,
         "icon": "Mail",
         "label": "Contact",
@@ -49,7 +37,7 @@
   },
   "hero": {
     "isEnabled": true,
-    "badge": "AI-Powered Analytics Platform for Oracle ā'pěks",
+    "badge": "AI-Powered Analytics Platform for Oracle apiks",
     "titleBeforeSpan": "  ",
     "titleSpan": "Oracle APEX plugin for AI-powered business insights",
     "description": "Turn natural-language questions into reports, charts, and dashboards inside Oracle APEX. Zero data movement. ",
@@ -57,13 +45,7 @@
     "watchDemo": "Try live demo",
     "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "14-day free trial. No credit card required.",
-    "mockupImages": [
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" },
-      { "image": "/screenshot1.jpg" }
-    ],
+    "mockupImages": [],
     "heroImageUrl": "/hero_images.png"
   },
   "workingProcess": {
@@ -155,7 +137,7 @@
     "getStarted": "Start Free Trial",
     "getStartedUrl": "https://g64534a1113c35c-asklyze.adb.me-riyadh-1.oraclecloudapps.com/ords/r/asklyze_cloud/asklyze-customer-portal/login",
     "watchDemo": "Live Demo",
-    "watchDemoUrl": "https://pub-676e1cb87e8247329da59049363213c6.r2.dev/ASKLYZE-Intelligent_APEX_Analytics_2026_en.mp4",
+    "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "14-day free trial. No credit card required."
   },
   "contactCTA": {
