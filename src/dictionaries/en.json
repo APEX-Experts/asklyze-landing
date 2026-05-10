@@ -37,7 +37,7 @@
   },
   "hero": {
     "isEnabled": true,
-    "badge": "AI-Powered Analytics Platform for Oracle apiks",
+    "badge": "AI-Powered Analytics Platform for Oracle ā'pěks",
     "titleBeforeSpan": "  ",
     "titleSpan": "Oracle APEX plugin for AI-powered business insights",
     "description": "Turn natural-language questions into reports, charts, and dashboards inside Oracle APEX. Zero data movement. ",
@@ -45,19 +45,12 @@
     "watchDemo": "Try live demo",
     "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "14-day free trial. No credit card required.",
-    "mockupImages": [],
-    "heroImageUrl": {
-      "id": 1,
-      "url": "/hero_images.png",
-      "alt": "Hero Image",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z"
-    }
+    "mockupImages": []
   },
   "workingProcess": {
     "isEnabled": true,
     "title": "How Asklyze Works",
-    "step1Title": "Install the Plugin",
+    "step1Title": "Install the Plugin ",
     "step1Desc": "Add Asklyze to your Oracle APEX application in minutes with a drag-and-drop plugin and no custom AI integration work.",
     "step2Title": "Define Your Data Scope",
     "step2Desc": "Choose the tables and data Asklyze can access so every answer stays relevant, secure, and aligned with your application.",
@@ -113,57 +106,27 @@
     "desc": "Asklyze adds natural-language querying, reports, charts, and dashboards to your Oracle APEX applications without changing your architecture.",
     "features": [
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "Feature Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "Drag-and-Drop APEX Plugin",
         "desc": "Add Asklyze to your Oracle APEX application and start generating analytics from natural-language questions in seconds, with no AI integrations required."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "Feature Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "Table-Level Access Control",
         "desc": "Select the tables available to Asklyze and keep every answer grounded in the right business data."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "Feature Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "Zero Data Movement",
         "desc": "Asklyze analyzes your data where it already lives, so you can deliver AI-powered analytics without copying, syncing, or moving data outside Oracle APEX."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "Feature Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "Ask in Natural Language",
         "desc": "Ask questions in plain language and let Asklyze turn them into insights, reports, pivot tables, and 20+ chart types in seconds."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "Feature Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "Build Dashboards Instantly",
         "desc": "Turn natural-language questions into interactive dashboards that users can edit, rearrange with drag-and-drop, and customize with the chart types they need."
       }
@@ -1057,13 +1020,7 @@
       "missionLogo": "Mission Logo",
       "missionImage": "Our Mission"
     },
-    "apexLogoUrl": {
-      "id": 1,
-      "url": "/images/about/apex-logo.svg",
-      "alt": "APEX Experts",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z"
-    },
+    "apexLogoUrl": "/images/about/apex-logo.svg",
     "header": {
       "title": "About Asklyze",
       "intro": "Discover how Asklyze is redefining data analytics for Oracle APEX teams, delivering intelligent insights without compromising data sovereignty."
@@ -1118,33 +1075,15 @@
         "subtitle": "Asklyze combines performance, security, and simplicity for Oracle-driven teams.",
         "points": [
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-1.svg",
-              "alt": "Solution Icon 1",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-1.svg",
             "text": "Query data in Arabic and English.\\nNo SQL needed."
           },
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-2.svg",
-              "alt": "Solution Icon 2",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-2.svg",
             "text": "Generate visuals that fit directly\\ninto APEX apps."
           },
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-3.svg",
-              "alt": "Solution Icon 3",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-3.svg",
             "text": "Run queries on your Oracle database.\\nNo data movement."
           }
         ]
@@ -1155,94 +1094,40 @@
       "subtitle": "We build products that prioritize reliability, clarity, and real-world usability.",
       "cards": [
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-1.svg",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-1.svg",
           "title": "Security First",
           "description": "Your data stays private and fully controlled."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-2.svg",
-            "alt": "Solution Icon 2",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-2.svg",
           "title": "Practical AI",
           "description": "Built for real use cases, not experiments."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-3.svg",
-            "alt": "Solution Icon 3",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-3.svg",
           "title": "Clear Experience",
           "description": "Simple workflows for faster data access."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-4.svg",
-            "alt": "Solution Icon 4",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-4.svg",
           "title": "Global Ready",
           "description": "Bilingual and built for enterprise standards."
         }
       ]
     },
     "visionMission": {
-      "visionBackgroundPatternUrl": {
-        "id": 1,
-        "url": "/images/about/vm-bg-pattern-v2.png",
-        "alt": "Background Pattern",
-        "createdAt": "",
-        "updatedAt": ""
-      },
+      "visionBackgroundPatternUrl": "/images/about/vm-bg-pattern-v2.png",
       "vision": {
         "title": "Our Vision",
         "description": "To simplify how teams interact with data by embedding AI directly into Oracle APEX workflows.",
-        "logoUrl": {
-          "id": 1,
-          "url": "/images/about/vision-logo.svg",
-          "alt": "Vision Logo",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
-        "imageUrl": {
-          "id": 1,
-          "url": "/images/about/vision.png",
-          "alt": "Vision Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        }
+        "logoUrl": "/images/about/vision-logo.svg",
+        "imageUrl": "/images/about/vision.png"
       },
       "mission": {
         "title": "Our Mission",
         "description": "To enable faster, more secure data access through AI-powered querying built natively for Oracle environments.",
-        "logoUrl": {
-          "id": 1,
-          "url": "/images/about/mission-logo.svg",
-          "alt": "Mission Logo",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
-        "imageUrl": {
-          "id": 1,
-          "url": "/images/about/mission.png",
-          "alt": "Mission Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        }
+        "logoUrl": "/images/about/mission-logo.svg",
+        "imageUrl": "/images/about/mission.png"
       }
     },
     "leaders": {
@@ -1250,13 +1135,7 @@
       "subtitle": "A team with deep expertise in Oracle APEX, enterprise systems, and applied AI.",
       "members": [
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/ahmed.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "imageUrl": "/ahmed.png",
           "name": "Ahmed Alsaied",
           "role": "Founder & CEO",
           "social": {
@@ -1266,13 +1145,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/amr.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "imageUrl": "/Amr.png",
           "name": "Amr Mohamed",
           "role": "Technical Lead",
           "social": {
@@ -1282,29 +1155,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/ahmed.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
-          "name": "Michael Magdy",
-          "role": "Sr. Software Engineer",
-          "social": {
-            "facebook": "https://facebook.com",
-            "linkedin": "https://linkedin.com",
-            "instagram": "https://instagram.com"
-          }
-        },
-        {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/abdulrahman.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "imageUrl": "/abd.png",
           "name": "Abdulrahman Ebrahim",
           "role": "Sr. Software Engineering",
           "social": {
@@ -1314,13 +1165,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/amr.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "imageUrl": "/images/about/ahmed.png",
           "name": "Mario Milad",
           "role": "UI/UX Engineer",
           "social": {
@@ -1330,13 +1175,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/abdulrahman.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "imageUrl": "/images/about/ahmed.png",
           "name": "Reham Samer",
           "role": "QA Engineer",
           "social": {

@@ -50,7 +50,8 @@ steps:
           --memory 2Gi \
           --cpu 1 \
           --port 3076 \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --vpc-connector asklyze \
     id: "deploy"
 
 timeout: "1800s" # 30 minutes

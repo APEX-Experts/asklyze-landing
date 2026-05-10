@@ -545,7 +545,6 @@ export interface HeroContent {
         id?: string | null;
       }[]
     | null;
-  heroImageUrl: number | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1215,7 +1214,6 @@ export interface HeroContentSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
-  heroImageUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

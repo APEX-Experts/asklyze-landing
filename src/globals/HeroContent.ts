@@ -35,9 +35,5 @@ export const HeroContent: GlobalConfig = {
                 })
             ]
         },
-        MediaField({
-            name: 'heroImageUrl',
-            label: 'Hero Media',
-        }),
     ],
 };

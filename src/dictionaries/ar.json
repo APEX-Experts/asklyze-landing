@@ -45,14 +45,7 @@
     "watchDemo": "عرض توضيحي",
     "watchDemoUrl": "https://g64534a1113c35c-customer.adb.me-riyadh-1.oraclecloudapps.com/ords/r/customer/asklyze-demo/login",
     "disclaimer": "تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان.",
-    "mockupImages": [],
-    "heroImageUrl": {
-      "id": 1,
-      "url": "/hero_images.png",
-      "alt": "Hero Image",
-      "createdAt": "",
-      "updatedAt": ""
-    }
+    "mockupImages": []
   },
   "workingProcess": {
     "isEnabled": true,
@@ -113,57 +106,27 @@
     "desc": "يضيف ASKLYZE طبقة ذكية داخل Oracle APEX تسهّل الاستعلام عن البيانات وتحليلها واتخاذ القرار بدون تعقيد.",
     "features": [
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "ميزة",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "رؤى مدعومة بالذكاء الاصطناعي",
         "desc": "حلّل بياناتك فورًا واستخرج رؤى واضحة تساعدك تتخذ قرارات أسرع."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "ميزة",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "استعلامات ذكية للبيانات",
         "desc": "احصل على نتائج مباشرة من قاعدة البيانات بدون انتظار أو تجهيز مسبق."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "ميزة",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "لوحات تحكم تفاعلية",
         "desc": "حوّل النتائج إلى رسوم ولوحات جاهزة للاستخدام داخل تطبيقك."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "ميزة",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "تقارير تلقائية",
         "desc": "أنشئ تقارير كاملة خلال ثواني بدون مجهود يدوي."
       },
       {
-        "image": {
-          "id": 1,
-          "url": "/screenshot1.jpg",
-          "alt": "ميزة",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
+        "image": "/screenshot1.jpg",
         "title": "توصيات ذكية للبيانات",
         "desc": "اكتشف أنماط واتجاهات تساعدك تفهم بياناتك بشكل أعمق."
       }
@@ -1057,13 +1020,7 @@
       "missionLogo": "شعار الرسالة",
       "missionImage": "رسالتنا"
     },
-    "apexLogoUrl": {
-      "id": 1,
-      "url": "/images/about/apex-logo.svg",
-      "alt": "أبيكس إكسبرتس",
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z"
-    },
+    "apexLogoUrl": "/images/about/apex-logo.svg",
     "header": {
       "title": "عن Asklyze",
       "intro": "اكتشف كيف تعيد Asklyze تشكيل تحليلات البيانات لفرق Oracle APEX، لتقديم رؤى ذكية دون المساومة على سيادة البيانات."
@@ -1118,33 +1075,15 @@
         "subtitle": "تجمع Asklyze بين الأداء والأمان والبساطة للفرق التي تعتمد على Oracle.",
         "points": [
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-1.svg",
-              "alt": "Solution Icon 1",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-1.svg",
             "text": "الاستعلام عن البيانات بالعربية والإنجليزية.\\nلا حاجة لمعرفة SQL."
           },
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-2.svg",
-              "alt": "Solution Icon 1",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-2.svg",
             "text": "إنشاء مرئيات تتكامل مباشرة\\nفي تطبيقات APEX."
           },
           {
-            "iconUrl": {
-              "id": 1,
-              "url": "/images/about/solution-icon-3.svg",
-              "alt": "Solution Icon 1",
-              "createdAt": "",
-              "updatedAt": ""
-            },
+            "iconUrl": "/images/about/solution-icon-3.svg",
             "text": "تشغيل الاستعلامات على قاعدة بياناتك.\\nلا يوجد نقل للبيانات."
           }
         ]
@@ -1155,94 +1094,40 @@
       "subtitle": "نحن نبني منتجات تعطي الأولوية للموثوقية والوضوح وقابلية الاستخدام في العالم الحقيقي.",
       "cards": [
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-1.svg",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-1.svg",
           "title": "الأمان أولاً",
           "description": "تظل بياناتك خاصة وخاضعة للتحكم الكامل."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-2.svg",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-2.svg",
           "title": "ذكاء اصطناعي عملي",
           "description": "مصمم لحالات الاستخدام الحقيقية، وليس للتجارب."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-3.svg",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-3.svg",
           "title": "تجربة واضحة",
           "description": "سير عمل بسيط للوصول الأسرع إلى البيانات."
         },
         {
-          "iconUrl": {
-            "id": 1,
-            "url": "/images/about/guide-icon-4.svg",
-            "alt": "Solution Icon 1",
-            "createdAt": "",
-            "updatedAt": ""
-          },
+          "iconUrl": "/images/about/guide-icon-4.svg",
           "title": "جاهز عالمياً",
           "description": "ثنائي اللغة ومصمم لمعايير الشركات."
         }
       ]
     },
     "visionMission": {
-      "visionBackgroundPatternUrl": {
-        "id": 1,
-        "url": "/images/about/vm-bg-pattern-v2.png",
-        "alt": "Background Pattern",
-        "createdAt": "2024-01-01T00:00:00.000Z",
-        "updatedAt": "2024-01-01T00:00:00.000Z"
-      },
+      "visionBackgroundPatternUrl": "/images/about/vm-bg-pattern-v2.png",
       "vision": {
         "title": "رؤيتنا",
         "description": "جعل بيانات المؤسسات مفهومة بشكل فوري لكل فريق، وبأي لغة.",
-        "logoUrl": {
-          "id": 1,
-          "url": "/images/about/vision-logo.svg",
-          "alt": "Vision Logo",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
-        "imageUrl": {
-          "id": 1,
-          "url": "/images/about/vision.png",
-          "alt": "Vision Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        }
+        "logoUrl": "/images/about/vision-logo.svg",
+        "imageUrl": "/images/about/vision.png"
       },
       "mission": {
         "title": "مهمتنا",
         "description": "تمكين الجميع من الوصول إلى تحليلات الذكاء الاصطناعي في Oracle APEX، مع الحفاظ على سيادة البيانات والثقة.",
-        "logoUrl": {
-          "id": 1,
-          "url": "/images/about/mission-logo.svg",
-          "alt": "Mission Logo",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        },
-        "imageUrl": {
-          "id": 1,
-          "url": "/images/about/mission.png",
-          "alt": "Mission Image",
-          "createdAt": "2024-01-01T00:00:00.000Z",
-          "updatedAt": "2024-01-01T00:00:00.000Z"
-        }
+        "logoUrl": "/images/about/mission-logo.svg",
+        "imageUrl": "/images/about/mission.png"
       }
     },
     "leaders": {
@@ -1250,13 +1135,7 @@
       "subtitle": "فريق يتمتع بخبرة عميقة في Oracle APEX، وأنظمة الشركات، والذكاء الاصطناعي التطبيقي.",
       "members": [
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/ahmed.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
+          "imageUrl": "/ahmed.png",
           "name": "أحمد السعيد",
           "role": "المؤسس والرئيس التنفيذي",
           "social": {
@@ -1266,13 +1145,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/amr.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
+          "imageUrl": "/Amr.png",
           "name": "عمرو محمد",
           "role": "قائد الفريق التقني",
           "social": {
@@ -1282,29 +1155,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/ahmed.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
-          "name": "مايكل مجدي",
-          "role": "مهندس برمجيات",
-          "social": {
-            "facebook": "https://facebook.com",
-            "linkedin": "https://linkedin.com",
-            "instagram": "https://instagram.com"
-          }
-        },
-        {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/abdulrahman.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
+          "imageUrl": "/abd.png",
           "name": "عبدالرحمن إبراهيم",
           "role": "مهندس برمجيات",
           "social": {
@@ -1314,13 +1165,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/amr.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
+          "imageUrl": "/images/about/ahmed.png",
           "name": "ماريو ميلاد",
           "role": "مهندس واجهة المستخدم/تجربة المستخدم",
           "social": {
@@ -1330,13 +1175,7 @@
           }
         },
         {
-          "imageUrl": {
-            "id": 1,
-            "url": "/images/about/abdulrahman.png",
-            "alt": "Solution Icon 1",
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-          },
+          "imageUrl": "/images/about/ahmed.png",
           "name": "ريهام سمير",
           "role": "مهندسة ضمان الجودة",
           "social": {

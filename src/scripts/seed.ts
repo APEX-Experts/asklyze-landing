@@ -1,10 +1,18 @@
 import * as dotenv from 'dotenv';
 import { BasePayload, getPayload, GlobalSlug } from 'payload';
-import ar from '../dictionaries/ar.json' assert { type: 'json' };
-import en from '../dictionaries/en.json' assert { type: 'json' };
+import ar from '../dictionaries/ar.json' with { type: 'json' };
+import en from '../dictionaries/en.json' with { type: 'json' };
 import config from '../payload.config';
 dotenv.config()
 process.env.SEEDING = "true";
+
+console.log({
+    "S3_BUCKET": process.env.S3_BUCKET,
+    "S3_ACCESS_KEY_ID": process.env.S3_ACCESS_KEY_ID ? "****" : undefined,
+    "S3_SECRET_ACCESS_KEY": process.env.S3_SECRET_ACCESS_KEY ? "****" : undefined,
+    "S3_REGION": process.env.S3_REGION,
+    "S3_ENDPOINT": process.env.S3_ENDPOINT
+})
 
 
 import * as fs from 'fs';
@@ -68,17 +76,17 @@ const ensureMedia = async (payload: BasePayload, filePath: string) => {
         }
     } else {
         const publicPath = path.resolve(process.cwd(), 'public', filePath.startsWith('/') ? filePath.slice(1) : filePath);
-        
+
         if (!fs.existsSync(publicPath)) {
             console.warn(`- Media not found: ${publicPath}`);
             return null;
         }
         fileData = fs.readFileSync(publicPath);
         fileName = path.basename(filePath);
-        mimeType = filePath.endsWith('.png') ? 'image/png' : 
-                   filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') ? 'image/jpeg' :
-                   filePath.endsWith('.svg') ? 'image/svg+xml' :
-                   filePath.endsWith('.mp4') ? 'video/mp4' : 'application/octet-stream';
+        mimeType = filePath.endsWith('.png') ? 'image/png' :
+            filePath.endsWith('.jpg') || filePath.endsWith('.jpeg') ? 'image/jpeg' :
+                filePath.endsWith('.svg') ? 'image/svg+xml' :
+                    filePath.endsWith('.mp4') ? 'video/mp4' : 'application/octet-stream';
     }
 
     try {
@@ -118,11 +126,11 @@ const processMediaFields = async (payload: BasePayload, data: any) => {
 
     for (const key of Object.keys(data)) {
         const value = data[key];
-        
+
         // Check if field should be media based on value pattern or key name
         // Pattern: starts with / or http and has extension
         const isMediaPath = typeof value === 'string' && (
-            (value.startsWith('/') || value.startsWith('http')) && 
+            (value.startsWith('/') || value.startsWith('http')) &&
             (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.svg') || value.endsWith('.mp4') || value.endsWith('.gif'))
         );
 
@@ -158,9 +166,9 @@ const syncMedia = async (payload: BasePayload, existingData: any, dictData: any)
 
     for (const key of Object.keys(dictData)) {
         const value = dictData[key];
-        
+
         const isMediaPath = typeof value === 'string' && (
-            (value.startsWith('/') || value.startsWith('http')) && 
+            (value.startsWith('/') || value.startsWith('http')) &&
             (value.endsWith('.png') || value.endsWith('.jpg') || value.endsWith('.jpeg') || value.endsWith('.svg') || value.endsWith('.mp4') || value.endsWith('.gif'))
         );
 
@@ -181,34 +189,34 @@ const syncMedia = async (payload: BasePayload, existingData: any, dictData: any)
  * into the target Arabic data structure to prevent array wiping.
  */
 const mapIdsRecursively = (enSource: any, arTarget: any) => {
-  // Base check: If either is null/undefined or not an object, stop traversing.
-  if (!enSource || !arTarget || typeof enSource !== 'object' || typeof arTarget !== 'object') {
-    return;
-  }
-
-  // Handle Arrays: Traverse each item in the array
-  if (Array.isArray(enSource) && Array.isArray(arTarget)) {
-    const length = Math.min(enSource.length, arTarget.length);
-    for (let i = 0; i < length; i++) {
-      mapIdsRecursively(enSource[i], arTarget[i]);
-    }
-    return;
-  }
-
-  // Handle Objects: Copy ID and traverse properties
-  if (!Array.isArray(enSource) && !Array.isArray(arTarget)) {
-    // If Payload generated an ID for this object (e.g., an array row or block), map it over
-    if (enSource.id) {
-      arTarget.id = enSource.id;
+    // Base check: If either is null/undefined or not an object, stop traversing.
+    if (!enSource || !arTarget || typeof enSource !== 'object' || typeof arTarget !== 'object') {
+        return;
     }
 
-    // Recursively check all nested properties (Groups, deeper Arrays, etc.)
-    for (const key of Object.keys(enSource)) {
-      if (Object.prototype.hasOwnProperty.call(arTarget, key)) {
-        mapIdsRecursively(enSource[key], arTarget[key]);
-      }
+    // Handle Arrays: Traverse each item in the array
+    if (Array.isArray(enSource) && Array.isArray(arTarget)) {
+        const length = Math.min(enSource.length, arTarget.length);
+        for (let i = 0; i < length; i++) {
+            mapIdsRecursively(enSource[i], arTarget[i]);
+        }
+        return;
     }
-  }
+
+    // Handle Objects: Copy ID and traverse properties
+    if (!Array.isArray(enSource) && !Array.isArray(arTarget)) {
+        // If Payload generated an ID for this object (e.g., an array row or block), map it over
+        if (enSource.id) {
+            arTarget.id = enSource.id;
+        }
+
+        // Recursively check all nested properties (Groups, deeper Arrays, etc.)
+        for (const key of Object.keys(enSource)) {
+            if (Object.prototype.hasOwnProperty.call(arTarget, key)) {
+                mapIdsRecursively(enSource[key], arTarget[key]);
+            }
+        }
+    }
 };
 
 const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean = false, mediaOnly: boolean = false) => {
@@ -222,9 +230,9 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
         try {
             const existing = await payload.findGlobal({ slug, locale: 'en' });
             // Check if global has any specific content. 
-            const hasData = Object.keys(existing).some(key => 
-                !['id', 'createdAt', 'updatedAt', 'globalType'].includes(key) && 
-                existing[key as keyof typeof existing] !== null && 
+            const hasData = Object.keys(existing).some(key =>
+                !['id', 'createdAt', 'updatedAt', 'globalType'].includes(key) &&
+                existing[key as keyof typeof existing] !== null &&
                 existing[key as keyof typeof existing] !== undefined &&
                 (Array.isArray(existing[key as keyof typeof existing]) ? (existing[key as keyof typeof existing] as unknown as any[])!.length > 0 : true) &&
                 (typeof existing[key as keyof typeof existing] === 'object' ? Object.keys(existing[key as keyof typeof existing]!).length > 0 : true)
@@ -251,40 +259,40 @@ const seedGlobal = async (payload: BasePayload, slug: GlobalSlug, force: boolean
         }
     }
 
-  console.log(`Seeding Global: ${slug}${mediaOnly ? ' (MEDIA ONLY)' : ''}...`);
-  try {
-    const enDataRaw = (en as any)[dictKey];
-    const arDataRaw = (ar as any)[dictKey];
+    console.log(`Seeding Global: ${slug}${mediaOnly ? ' (MEDIA ONLY)' : ''}...`);
+    try {
+        const enDataRaw = (en as any)[dictKey];
+        const arDataRaw = (ar as any)[dictKey];
 
-    let enData, arData;
+        let enData, arData;
 
-    if (mediaOnly) {
-        enData = await syncMedia(payload, existingEn, JSON.parse(JSON.stringify(enDataRaw)));
-        arData = await syncMedia(payload, existingAr, JSON.parse(JSON.stringify(arDataRaw)));
-    } else {
-        // Process media fields
-        enData = await processMediaFields(payload, JSON.parse(JSON.stringify(enDataRaw)));
-        arData = await processMediaFields(payload, JSON.parse(JSON.stringify(arDataRaw)));
-    }
+        if (mediaOnly) {
+            enData = await syncMedia(payload, existingEn, JSON.parse(JSON.stringify(enDataRaw)));
+            arData = await syncMedia(payload, existingAr, JSON.parse(JSON.stringify(arDataRaw)));
+        } else {
+            // Process media fields
+            enData = await processMediaFields(payload, JSON.parse(JSON.stringify(enDataRaw)));
+            arData = await processMediaFields(payload, JSON.parse(JSON.stringify(arDataRaw)));
+        }
 
-    // 1. Update English
-    const enResult = await payload.updateGlobal({
-      slug,
-      data: enData,
-      locale: 'en',
-    });
+        // 1. Update English
+        const enResult = await payload.updateGlobal({
+            slug,
+            data: enData,
+            locale: 'en',
+        });
 
-    // 2. Map the generated IDs to the Arabic data recursively
-    if (enResult && arData) {
-      mapIdsRecursively(enResult, arData);
-    }
+        // 2. Map the generated IDs to the Arabic data recursively
+        if (enResult && arData) {
+            mapIdsRecursively(enResult, arData);
+        }
 
-    // 3. Update Arabic
-    await payload.updateGlobal({
-      slug,
-      data: arData,
-      locale: 'ar',
-    });
+        // 3. Update Arabic
+        await payload.updateGlobal({
+            slug,
+            data: arData,
+            locale: 'ar',
+        });
 
         console.log(`- Success: ${slug}`);
     } catch (error) {

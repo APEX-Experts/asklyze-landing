@@ -58,7 +58,7 @@ const BlogSection = async ({ dict, blogDict, lang }: Props) => {
           <h2 className="text-3xl lg:text-[40px] font-bold text-center text-primary-dark">
             {title}
           </h2>
-          <p className="text-text-body text-lg leading-[28px] text-center">
+          <p className="text-text-body text-lg leading-7 text-center">
             {subtitle}
           </p>
         </div>

@@ -49,7 +49,7 @@ export default function FeatureGrid({
           {/* CTA */}
           <div className="flex flex-col gap-6 items-center w-full">
             {/* Media */}
-            <div className="w-full h-[450px] rounded-3xl relative overflow-hidden feature-image-container">
+            <div className="w-full h-112.5 rounded-3xl relative overflow-hidden feature-image-container">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFeature}
@@ -60,8 +60,11 @@ export default function FeatureGrid({
                   className="absolute inset-0 w-full h-full"
                 >
                   <Media
-                    resource={features[activeFeature].image as MediaType}
-                    alt={features[activeFeature].title}
+                    resource={
+                      (features[activeFeature]?.image as MediaType) ??
+                      "/screenshot1.jpg"
+                    }
+                    alt={features[activeFeature]?.title}
                     fill
                     className="object-cover"
                   />
